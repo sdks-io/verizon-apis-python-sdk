@@ -10,22 +10,23 @@ software_management_licenses_v2_controller = client.software_management_licenses
 
 ## Methods
 
-* [Get Account License Status](../../doc/controllers/software-management-licenses-v2.md#get-account-license-status)
+* [Delete List of Licenses to Remove](../../doc/controllers/software-management-licenses-v2.md#delete-list-of-licenses-to-remove)
 * [Assign Licenses to Devices](../../doc/controllers/software-management-licenses-v2.md#assign-licenses-to-devices)
+* [Get Account License Status](../../doc/controllers/software-management-licenses-v2.md#get-account-license-status)
 * [Remove Licenses From Devices](../../doc/controllers/software-management-licenses-v2.md#remove-licenses-from-devices)
 * [List Licenses to Remove](../../doc/controllers/software-management-licenses-v2.md#list-licenses-to-remove)
 * [Create List of Licenses to Remove](../../doc/controllers/software-management-licenses-v2.md#create-list-of-licenses-to-remove)
-* [Delete List of Licenses to Remove](../../doc/controllers/software-management-licenses-v2.md#delete-list-of-licenses-to-remove)
 
 
-# Get Account License Status
+# Delete List of Licenses to Remove
 
-The endpoint allows user to list license usage.
+**This endpoint is deprecated.**
+
+This endpoint allows user to delete a created cancel candidate device list.
 
 ```python
-def get_account_license_status(self,
-                              account,
-                              last_seen_device_id=None)
+def delete_list_of_licenses_to_remove(self,
+                                     account)
 ```
 
 ## Parameters
@@ -33,23 +34,17 @@ def get_account_license_status(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `account` | `string` | Template, Required | Account identifier. |
-| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
 
 ## Response Type
 
-[`V2LicenseSummary`](../../doc/models/v2-license-summary.md)
+[`FotaV2SuccessResult`](../../doc/models/fota-v2-success-result.md)
 
 ## Example Usage
 
 ```python
-account = '0000123456-00001'
+account = '0242078689-00001'
 
-last_seen_device_id = '15-digit IMEI'
-
-result = software_management_licenses_v2_controller.get_account_license_status(
-    account,
-    last_seen_device_id
-)
+result = software_management_licenses_v2_controller.delete_list_of_licenses_to_remove(account)
 print(result)
 ```
 
@@ -57,30 +52,7 @@ print(result)
 
 ```json
 {
-  "accountName": "0402196254-00001",
-  "totalLicense": 5000,
-  "assignedLicenses": 4319,
-  "hasMoreData": true,
-  "lastSeenDeviceId": "1000",
-  "maxPageSize": 10,
-  "deviceList": [
-    {
-      "deviceId": "990003425730535",
-      "assignmentTime": "2017-11-29T16:03:42.000Z"
-    },
-    {
-      "deviceId": "990000473475989",
-      "assignmentTime": "2017-11-29T16:03:42.000Z"
-    },
-    {
-      "deviceId": "990000347475989",
-      "assignmentTime": "2017-11-29T16:03:42.000Z"
-    },
-    {
-      "deviceId": "990007303425535",
-      "assignmentTime": "2017-11-29T16:03:42.000Z"
-    }
-  ]
+  "success": true
 }
 ```
 
@@ -150,6 +122,79 @@ print(result)
       "deviceId": "990000473475967",
       "status": "Failure",
       "resultReason": "Device does not exist."
+    }
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
+
+
+# Get Account License Status
+
+The endpoint allows user to list license usage.
+
+```python
+def get_account_license_status(self,
+                              account,
+                              last_seen_device_id=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account` | `string` | Template, Required | Account identifier. |
+| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
+
+## Response Type
+
+[`V2LicenseSummary`](../../doc/models/v2-license-summary.md)
+
+## Example Usage
+
+```python
+account = '0000123456-00001'
+
+last_seen_device_id = '15-digit IMEI'
+
+result = software_management_licenses_v2_controller.get_account_license_status(
+    account,
+    last_seen_device_id
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "accountName": "0402196254-00001",
+  "totalLicense": 5000,
+  "assignedLicenses": 4319,
+  "hasMoreData": true,
+  "lastSeenDeviceId": "1000",
+  "maxPageSize": 10,
+  "deviceList": [
+    {
+      "deviceId": "990003425730535",
+      "assignmentTime": "2017-11-29T16:03:42.000Z"
+    },
+    {
+      "deviceId": "990000473475989",
+      "assignmentTime": "2017-11-29T16:03:42.000Z"
+    },
+    {
+      "deviceId": "990000347475989",
+      "assignmentTime": "2017-11-29T16:03:42.000Z"
+    },
+    {
+      "deviceId": "990007303425535",
+      "assignmentTime": "2017-11-29T16:03:42.000Z"
     }
   ]
 }
@@ -349,51 +394,6 @@ print(result)
     "990003425730535",
     "990000473475989"
   ]
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
-
-
-# Delete List of Licenses to Remove
-
-**This endpoint is deprecated.**
-
-This endpoint allows user to delete a created cancel candidate device list.
-
-```python
-def delete_list_of_licenses_to_remove(self,
-                                     account)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-
-## Response Type
-
-[`FotaV2SuccessResult`](../../doc/models/fota-v2-success-result.md)
-
-## Example Usage
-
-```python
-account = '0242078689-00001'
-
-result = software_management_licenses_v2_controller.delete_list_of_licenses_to_remove(account)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "success": true
 }
 ```
 

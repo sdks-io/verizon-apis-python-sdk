@@ -10,45 +10,8 @@ mec_sites_controller = client.mec_sites
 
 ## Methods
 
-* [List MEC Site Locations](../../doc/controllers/mec-sites.md#list-mec-site-locations)
 * [List ERN Cluster Namespaces](../../doc/controllers/mec-sites.md#list-ern-cluster-namespaces)
-
-
-# List MEC Site Locations
-
-Supports fetching MEC locations so the user can view the city.
-
-```python
-def list_mec_site_locations(self,
-                           account_name=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account_name` | `string` | Header, Optional | User account name.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[A-Za-z0-9]` |
-
-## Response Type
-
-[`MECSiteLocationsResult`](../../doc/models/mec-site-locations-result.md)
-
-## Example Usage
-
-```python
-account_name = 'test_account1'
-
-result = mec_sites_controller.list_mec_site_locations(
-    account_name
-)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Error Response. | [`EdgeServiceLaunchResultException`](../../doc/models/edge-service-launch-result-exception.md) |
+* [List MEC Site Locations](../../doc/controllers/mec-sites.md#list-mec-site-locations)
 
 
 # List ERN Cluster Namespaces
@@ -116,4 +79,41 @@ print(result)
 | 404 | Not found. | [`EdgeServiceLaunchResultException`](../../doc/models/edge-service-launch-result-exception.md) |
 | 500 | Internal Server Error. | [`EdgeServiceLaunchResultException`](../../doc/models/edge-service-launch-result-exception.md) |
 | Default | Unexpected error. | [`EdgeServiceLaunchResultException`](../../doc/models/edge-service-launch-result-exception.md) |
+
+
+# List MEC Site Locations
+
+Supports fetching MEC locations so the user can view the city.
+
+```python
+def list_mec_site_locations(self,
+                           account_name=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `string` | Header, Optional | User account name.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[A-Za-z0-9]` |
+
+## Response Type
+
+[`MECSiteLocationsResult`](../../doc/models/mec-site-locations-result.md)
+
+## Example Usage
+
+```python
+account_name = 'test_account1'
+
+result = mec_sites_controller.list_mec_site_locations(
+    account_name
+)
+print(result)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Error Response. | [`EdgeServiceLaunchResultException`](../../doc/models/edge-service-launch-result-exception.md) |
 

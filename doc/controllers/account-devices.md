@@ -10,55 +10,8 @@ account_devices_controller = client.account_devices
 
 ## Methods
 
-* [Get Account Device Information](../../doc/controllers/account-devices.md#get-account-device-information)
 * [List Account Devices Information](../../doc/controllers/account-devices.md#list-account-devices-information)
-
-
-# Get Account Device Information
-
-Retrieve account device information such as reported firmware on the devices.
-
-```python
-def get_account_device_information(self,
-                                  acc,
-                                  last_seen_device_id=None,
-                                  protocol='LWM2M')
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
-| `protocol` | [`DevicesProtocolEnum`](../../doc/models/devices-protocol-enum.md) | Query, Optional | Filter to retrieve a specific protocol type used.<br>**Default**: `'LWM2M'` |
-
-## Response Type
-
-[`V3AccountDeviceList`](../../doc/models/v3-account-device-list.md)
-
-## Example Usage
-
-```python
-acc = '0000123456-00001'
-
-last_seen_device_id = '0'
-
-protocol = DevicesProtocolEnum.LW_M2M
-
-result = account_devices_controller.get_account_device_information(
-    acc,
-    last_seen_device_id,
-    protocol
-)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
+* [Get Account Device Information](../../doc/controllers/account-devices.md#get-account-device-information)
 
 
 # List Account Devices Information
@@ -124,6 +77,53 @@ print(result)
     }
   ]
 }
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
+
+
+# Get Account Device Information
+
+Retrieve account device information such as reported firmware on the devices.
+
+```python
+def get_account_device_information(self,
+                                  acc,
+                                  last_seen_device_id=None,
+                                  protocol='LWM2M')
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `acc` | `string` | Template, Required | Account identifier. |
+| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
+| `protocol` | [`DevicesProtocolEnum`](../../doc/models/devices-protocol-enum.md) | Query, Optional | Filter to retrieve a specific protocol type used.<br>**Default**: `'LWM2M'` |
+
+## Response Type
+
+[`V3AccountDeviceList`](../../doc/models/v3-account-device-list.md)
+
+## Example Usage
+
+```python
+acc = '0000123456-00001'
+
+last_seen_device_id = '0'
+
+protocol = DevicesProtocolEnum.LW_M2M
+
+result = account_devices_controller.get_account_device_information(
+    acc,
+    last_seen_device_id,
+    protocol
+)
+print(result)
 ```
 
 ## Errors

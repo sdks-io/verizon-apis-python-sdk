@@ -10,46 +10,44 @@ billing_controller = client.billing
 
 ## Methods
 
-* [Add Account](../../doc/controllers/billing.md#add-account)
+* [List Managed Account](../../doc/controllers/billing.md#list-managed-account)
 * [Managed Account Action](../../doc/controllers/billing.md#managed-account-action)
 * [Cancel Managed Account Action](../../doc/controllers/billing.md#cancel-managed-account-action)
-* [List Managed Account](../../doc/controllers/billing.md#list-managed-account)
+* [Add Account](../../doc/controllers/billing.md#add-account)
 
 
-# Add Account
+# List Managed Account
 
-This endpoint allows user to add managed accounts to a primary account.
+This endpoint allows user to retrieve the list of all accounts managed by a primary account.
 
 ```python
-def add_account(self,
-               body)
+def list_managed_account(self,
+                        account_name,
+                        service_name)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`ManagedAccountsAddRequest`](../../doc/models/managed-accounts-add-request.md) | Body, Required | Service name and list of accounts to add |
+| `account_name` | `string` | Template, Required | Primary account identifier |
+| `service_name` | `string` | Template, Required | Service name |
 
 ## Response Type
 
-[`ManagedAccountsAddResponse`](../../doc/models/managed-accounts-add-response.md)
+[`ManagedAccountsGetAllResponse`](../../doc/models/managed-accounts-get-all-response.md)
 
 ## Example Usage
 
 ```python
-body = ManagedAccountsAddRequest(
-    account_name='1234567890-00001',
-    service_name=ServiceNameEnum.LOCATION,
-    mtype='TS-LOC-COARSE-CellID-Aggr',
-    managed_acc_list=[
-        '1223334444-00001',
-        '2334445555-00001',
-        '3445556666-00001'
-    ]
-)
+account_name = '1223334444-00001'
 
-result = billing_controller.add_account(body)
+service_name = 'serviceName8'
+
+result = billing_controller.list_managed_account(
+    account_name,
+    service_name
+)
 print(result)
 ```
 
@@ -57,22 +55,15 @@ print(result)
 
 ```json
 {
-  "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33",
-  "statusList": [
+  "accountName": "2024009649-00001",
+  "ManagedAccAddedList": [
     {
       "id": "1223334444-00001",
-      "status": "Success",
-      "reason": "Success"
+      "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33"
     },
     {
       "id": "2334445555-00001",
-      "status": "Success",
-      "reason": "Success"
-    },
-    {
-      "id": "3445556666-00001",
-      "status": "Success",
-      "reason": "Success"
+      "txid": "d4fbff33-ece4-9f02-42ef-2c90bd287e3b"
     }
   ]
 }
@@ -193,38 +184,40 @@ print(result)
 | 400 | Unexpected error | [`DeviceLocationResultException`](../../doc/models/device-location-result-exception.md) |
 
 
-# List Managed Account
+# Add Account
 
-This endpoint allows user to retrieve the list of all accounts managed by a primary account.
+This endpoint allows user to add managed accounts to a primary account.
 
 ```python
-def list_managed_account(self,
-                        account_name,
-                        service_name)
+def add_account(self,
+               body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Template, Required | Primary account identifier |
-| `service_name` | `string` | Template, Required | Service name |
+| `body` | [`ManagedAccountsAddRequest`](../../doc/models/managed-accounts-add-request.md) | Body, Required | Service name and list of accounts to add |
 
 ## Response Type
 
-[`ManagedAccountsGetAllResponse`](../../doc/models/managed-accounts-get-all-response.md)
+[`ManagedAccountsAddResponse`](../../doc/models/managed-accounts-add-response.md)
 
 ## Example Usage
 
 ```python
-account_name = '1223334444-00001'
-
-service_name = 'serviceName8'
-
-result = billing_controller.list_managed_account(
-    account_name,
-    service_name
+body = ManagedAccountsAddRequest(
+    account_name='1234567890-00001',
+    service_name=ServiceNameEnum.LOCATION,
+    mtype='TS-LOC-COARSE-CellID-Aggr',
+    managed_acc_list=[
+        '1223334444-00001',
+        '2334445555-00001',
+        '3445556666-00001'
+    ]
 )
+
+result = billing_controller.add_account(body)
 print(result)
 ```
 
@@ -232,15 +225,22 @@ print(result)
 
 ```json
 {
-  "accountName": "2024009649-00001",
-  "ManagedAccAddedList": [
+  "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33",
+  "statusList": [
     {
       "id": "1223334444-00001",
-      "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33"
+      "status": "Success",
+      "reason": "Success"
     },
     {
       "id": "2334445555-00001",
-      "txid": "d4fbff33-ece4-9f02-42ef-2c90bd287e3b"
+      "status": "Success",
+      "reason": "Success"
+    },
+    {
+      "id": "3445556666-00001",
+      "status": "Success",
+      "reason": "Success"
     }
   ]
 }

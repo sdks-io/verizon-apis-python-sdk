@@ -11,10 +11,10 @@ targets_controller = client.targets
 ## Methods
 
 * [Query Target](../../doc/controllers/targets.md#query-target)
-* [Delete Target](../../doc/controllers/targets.md#delete-target)
-* [Create Target](../../doc/controllers/targets.md#create-target)
 * [Generate Target External ID](../../doc/controllers/targets.md#generate-target-external-id)
 * [Create Azure Central Io T Application](../../doc/controllers/targets.md#create-azure-central-io-t-application)
+* [Create Target](../../doc/controllers/targets.md#create-target)
+* [Delete Target](../../doc/controllers/targets.md#delete-target)
 
 
 # Query Target
@@ -81,109 +81,6 @@ print(result)
     "versionid": "caf85ff7-200e-11e9-a85b-02420a621e0a"
   }
 ]
-```
-
-
-# Delete Target
-
-Remove a target from a ThingSpace account.
-
-```python
-def delete_target(self,
-                 body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`DeleteTargetRequest`](../../doc/models/delete-target-request.md) | Body, Required | The request body identifies the target to delete. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-body = DeleteTargetRequest(
-    accountidentifier=AccountIdentifier(
-        billingaccountid='0000000000-00001'
-    ),
-    resourceidentifier=ResourceIdentifier(
-        id='2e61a17d-8fd1-6816-e995-e4c2528bf535'
-    )
-)
-
-result = targets_controller.delete_target(body)
-print(result)
-```
-
-
-# Create Target
-
-Define a target to receive data streams, alerts, or callbacks. After creating the target resource, use its ID in a subscription to set up a data stream.
-
-```python
-def create_target(self,
-                 body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`CreateTargetRequest`](../../doc/models/create-target-request.md) | Body, Required | The request body provides the details of the target that you want to create. |
-
-## Response Type
-
-[`Target`](../../doc/models/target.md)
-
-## Example Usage
-
-```python
-body = CreateTargetRequest(
-    accountidentifier=AccountIdentifier(
-        billingaccountid='0000000000-00001'
-    ),
-    billingaccountid='0000000000-00001',
-    kind='ts.target',
-    address='https://your_IoT_Central_Application.azureiotcentral.com',
-    addressscheme='streamazureiot',
-    fields=CreateTargetRequestFields(
-        httpheaders=FieldsHttpHeaders(
-            authorization='SharedAccessSignature sr=d1f9b6bf-1380-41f6-b757-d9805e48392b&sig=EF5tnXClw3MWkb84OkIOUhMH%2FaS1DRD2nXT69QR8RD8%3D&skn=TSCCtoken&se=1648827260410'
-        ),
-        devicetypes=[
-            'cHeAssetTracker',
-            'cHeAssetTrackerV2',
-            'tgAssetTracker',
-            'tgAssetTrackerV2'
-        ]
-    )
-)
-
-result = targets_controller.create_target(body)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "address": "arn:aws:iam::252156542978:role/ThingSpace",
-  "addressscheme": "streamawsiot",
-  "billingaccountid": "1223334444-00001",
-  "createdon": "2018-12-21T04:37:42.651Z",
-  "externalid": "lJZnih8BfqsosZrEEkfPuR3aGOk2i-HIr6tXN275ioJF6bezIrQB9EbzpTRep8J7RmV7QH==",
-  "id": "0e411230-c3eb-64dc-f5f4-1020364aa81f",
-  "kind": "ts.target",
-  "lastupdated": "2018-12-21T04:37:42.651Z",
-  "name": "AWS Target",
-  "region": "us-east-1",
-  "version": "1.0",
-  "versionid": "27aca5a4-04da-11e9-bff3-02420a5e1b0b"
-}
 ```
 
 
@@ -283,5 +180,108 @@ print(result)
   "sharedSecret": "SharedAccessSignaturesr={client secret}",
   "url": "https://newarmapp1.azureiotcentral.com"
 }
+```
+
+
+# Create Target
+
+Define a target to receive data streams, alerts, or callbacks. After creating the target resource, use its ID in a subscription to set up a data stream.
+
+```python
+def create_target(self,
+                 body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateTargetRequest`](../../doc/models/create-target-request.md) | Body, Required | The request body provides the details of the target that you want to create. |
+
+## Response Type
+
+[`Target`](../../doc/models/target.md)
+
+## Example Usage
+
+```python
+body = CreateTargetRequest(
+    accountidentifier=AccountIdentifier(
+        billingaccountid='0000000000-00001'
+    ),
+    billingaccountid='0000000000-00001',
+    kind='ts.target',
+    address='https://your_IoT_Central_Application.azureiotcentral.com',
+    addressscheme='streamazureiot',
+    fields=CreateTargetRequestFields(
+        httpheaders=FieldsHttpHeaders(
+            authorization='SharedAccessSignature sr=d1f9b6bf-1380-41f6-b757-d9805e48392b&sig=EF5tnXClw3MWkb84OkIOUhMH%2FaS1DRD2nXT69QR8RD8%3D&skn=TSCCtoken&se=1648827260410'
+        ),
+        devicetypes=[
+            'cHeAssetTracker',
+            'cHeAssetTrackerV2',
+            'tgAssetTracker',
+            'tgAssetTrackerV2'
+        ]
+    )
+)
+
+result = targets_controller.create_target(body)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "address": "arn:aws:iam::252156542978:role/ThingSpace",
+  "addressscheme": "streamawsiot",
+  "billingaccountid": "1223334444-00001",
+  "createdon": "2018-12-21T04:37:42.651Z",
+  "externalid": "lJZnih8BfqsosZrEEkfPuR3aGOk2i-HIr6tXN275ioJF6bezIrQB9EbzpTRep8J7RmV7QH==",
+  "id": "0e411230-c3eb-64dc-f5f4-1020364aa81f",
+  "kind": "ts.target",
+  "lastupdated": "2018-12-21T04:37:42.651Z",
+  "name": "AWS Target",
+  "region": "us-east-1",
+  "version": "1.0",
+  "versionid": "27aca5a4-04da-11e9-bff3-02420a5e1b0b"
+}
+```
+
+
+# Delete Target
+
+Remove a target from a ThingSpace account.
+
+```python
+def delete_target(self,
+                 body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`DeleteTargetRequest`](../../doc/models/delete-target-request.md) | Body, Required | The request body identifies the target to delete. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+body = DeleteTargetRequest(
+    accountidentifier=AccountIdentifier(
+        billingaccountid='0000000000-00001'
+    ),
+    resourceidentifier=ResourceIdentifier(
+        id='2e61a17d-8fd1-6816-e995-e4c2528bf535'
+    )
+)
+
+result = targets_controller.delete_target(body)
+print(result)
 ```
 

@@ -18,8 +18,8 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.device_list_query_result import DeviceListQueryResult
 from verizon.models.upgrade_list_query_result import UpgradeListQueryResult
+from verizon.models.device_list_query_result import DeviceListQueryResult
 from verizon.models.device_upgrade_history import DeviceUpgradeHistory
 from verizon.exceptions.fota_v1_result_exception import FotaV1ResultException
 
@@ -29,60 +29,6 @@ class SoftwareManagementReportsV1Controller(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(SoftwareManagementReportsV1Controller, self).__init__(config)
-
-    def list_account_devices(self,
-                             account,
-                             start_index):
-        """Does a GET request to /devices/{account}/index/{startIndex}.
-
-        Returns an array of all devices in the specified account. Each device
-        object includes information needed for managing firmware, including
-        the device make and model, MDN and IMEI, and current firmware
-        version.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-            start_index (string): Only return devices with IMEIs larger than
-                this value. Use 0 for the first request. If `hasMoreData`=true
-                in the response, use the `lastSeenDeviceId` value from the
-                response as the startIndex in the next request.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                all devices in the specified account.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/devices/{account}/index/{startIndex}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('startIndex')
-                            .value(start_index)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceListQueryResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
 
     def list_upgrades_for_specified_status(self,
                                            account,
@@ -139,6 +85,60 @@ class SoftwareManagementReportsV1Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UpgradeListQueryResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
+    def list_account_devices(self,
+                             account,
+                             start_index):
+        """Does a GET request to /devices/{account}/index/{startIndex}.
+
+        Returns an array of all devices in the specified account. Each device
+        object includes information needed for managing firmware, including
+        the device make and model, MDN and IMEI, and current firmware
+        version.
+
+        Args:
+            account (string): Account identifier in "##########-#####".
+            start_index (string): Only return devices with IMEIs larger than
+                this value. Use 0 for the first request. If `hasMoreData`=true
+                in the response, use the `lastSeenDeviceId` value from the
+                response as the startIndex in the next request.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                all devices in the specified account.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/devices/{account}/index/{startIndex}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('startIndex')
+                            .value(start_index)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceListQueryResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()

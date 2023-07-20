@@ -18,10 +18,10 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.managed_accounts_add_response import ManagedAccountsAddResponse
+from verizon.models.managed_accounts_get_all_response import ManagedAccountsGetAllResponse
 from verizon.models.managed_accounts_provision_response import ManagedAccountsProvisionResponse
 from verizon.models.managed_account_cancel_response import ManagedAccountCancelResponse
-from verizon.models.managed_accounts_get_all_response import ManagedAccountsGetAllResponse
+from verizon.models.managed_accounts_add_response import ManagedAccountsAddResponse
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
 
 
@@ -31,21 +31,22 @@ class BillingController(BaseController):
     def __init__(self, config):
         super(BillingController, self).__init__(config)
 
-    def add_account(self,
-                    body):
-        """Does a POST request to /managedaccounts/actions/add.
+    def list_managed_account(self,
+                             account_name,
+                             service_name):
+        """Does a GET request to /managedaccounts/{accountName}/service/{serviceName}.
 
-        This endpoint allows user to add managed accounts to a primary
-        account.
+        This endpoint allows user to retrieve the list of all accounts managed
+        by a primary account.
 
         Args:
-            body (ManagedAccountsAddRequest): Service name and list of
-                accounts to add
+            account_name (string): Primary account identifier
+            service_name (string): Service name
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Add
-                managed accounts response
+                useful information such as status codes and headers. List of
+                managed accounts
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -57,22 +58,24 @@ class BillingController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SUBSCRIPTION_SERVER)
-            .path('/managedaccounts/actions/add')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
+            .path('/managedaccounts/{accountName}/service/{serviceName}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('accountName')
+                            .value(account_name)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('serviceName')
+                            .value(service_name)
+                            .should_encode(True))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ManagedAccountsAddResponse.from_dictionary)
+            .deserialize_into(ManagedAccountsGetAllResponse.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error', DeviceLocationResultException)
         ).execute()
@@ -169,22 +172,21 @@ class BillingController(BaseController):
             .local_error('400', 'Unexpected error', DeviceLocationResultException)
         ).execute()
 
-    def list_managed_account(self,
-                             account_name,
-                             service_name):
-        """Does a GET request to /managedaccounts/{accountName}/service/{serviceName}.
+    def add_account(self,
+                    body):
+        """Does a POST request to /managedaccounts/actions/add.
 
-        This endpoint allows user to retrieve the list of all accounts managed
-        by a primary account.
+        This endpoint allows user to add managed accounts to a primary
+        account.
 
         Args:
-            account_name (string): Primary account identifier
-            service_name (string): Service name
+            body (ManagedAccountsAddRequest): Service name and list of
+                accounts to add
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                managed accounts
+                useful information such as status codes and headers. Add
+                managed accounts response
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -196,24 +198,22 @@ class BillingController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SUBSCRIPTION_SERVER)
-            .path('/managedaccounts/{accountName}/service/{serviceName}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('accountName')
-                            .value(account_name)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('serviceName')
-                            .value(service_name)
-                            .should_encode(True))
+            .path('/managedaccounts/actions/add')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ManagedAccountsGetAllResponse.from_dictionary)
+            .deserialize_into(ManagedAccountsAddResponse.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error', DeviceLocationResultException)
         ).execute()

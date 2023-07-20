@@ -28,80 +28,6 @@ class ServiceInstanceOperationsController(BaseController):
     def __init__(self, config):
         super(ServiceInstanceOperationsController, self).__init__(config)
 
-    def service_resume(self,
-                       service_instance_id,
-                       user_id,
-                       request_id,
-                       user_role,
-                       customer_id,
-                       correlation_id=None):
-        """Does a POST request to /v1/service/instances/{serviceInstanceId}/resume.
-
-        Resumes a suspended Service Instance
-
-        Args:
-            service_instance_id (string): TODO: type description here.
-            user_id (string): TODO: type description here.
-            request_id (string): TODO: type description here.
-            user_role (UserRoleEnum): TODO: type description here.
-            customer_id (string): TODO: type description here.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Service
-                instances.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/service/instances/{serviceInstanceId}/resume')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('serviceInstanceId')
-                            .value(service_instance_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('userId')
-                          .value(user_id))
-            .header_param(Parameter()
-                          .key('requestId')
-                          .value(request_id))
-            .header_param(Parameter()
-                          .key('user_role')
-                          .value(user_role))
-            .header_param(Parameter()
-                          .key('customerId')
-                          .value(customer_id))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ServiceResumeResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad Request.', EdgeServiceLaunchResultException)
-            .local_error('401', 'Unauthorized.', EdgeServiceLaunchResultException)
-            .local_error('403', 'Forbidden.', EdgeServiceLaunchResultException)
-            .local_error('404', 'Not found.', EdgeServiceLaunchResultException)
-            .local_error('415', 'Unsupported media type.', EdgeServiceLaunchResultException)
-            .local_error('429', 'Too many requests.', EdgeServiceLaunchResultException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceLaunchResultException)
-            .local_error('default', 'Unexpected error.', EdgeServiceLaunchResultException)
-        ).execute()
-
     def service_suspend(self,
                         service_instance_id,
                         user_id,
@@ -212,6 +138,80 @@ class ServiceInstanceOperationsController(BaseController):
             RequestBuilder().server(Server.SERVICES)
             .path('/v1/service/instances/{serviceInstanceId}/remove')
             .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('serviceInstanceId')
+                            .value(service_instance_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('userId')
+                          .value(user_id))
+            .header_param(Parameter()
+                          .key('requestId')
+                          .value(request_id))
+            .header_param(Parameter()
+                          .key('user_role')
+                          .value(user_role))
+            .header_param(Parameter()
+                          .key('customerId')
+                          .value(customer_id))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ServiceResumeResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad Request.', EdgeServiceLaunchResultException)
+            .local_error('401', 'Unauthorized.', EdgeServiceLaunchResultException)
+            .local_error('403', 'Forbidden.', EdgeServiceLaunchResultException)
+            .local_error('404', 'Not found.', EdgeServiceLaunchResultException)
+            .local_error('415', 'Unsupported media type.', EdgeServiceLaunchResultException)
+            .local_error('429', 'Too many requests.', EdgeServiceLaunchResultException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceLaunchResultException)
+            .local_error('default', 'Unexpected error.', EdgeServiceLaunchResultException)
+        ).execute()
+
+    def service_resume(self,
+                       service_instance_id,
+                       user_id,
+                       request_id,
+                       user_role,
+                       customer_id,
+                       correlation_id=None):
+        """Does a POST request to /v1/service/instances/{serviceInstanceId}/resume.
+
+        Resumes a suspended Service Instance
+
+        Args:
+            service_instance_id (string): TODO: type description here.
+            user_id (string): TODO: type description here.
+            request_id (string): TODO: type description here.
+            user_role (UserRoleEnum): TODO: type description here.
+            customer_id (string): TODO: type description here.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Service
+                instances.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/service/instances/{serviceInstanceId}/resume')
+            .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
                             .key('serviceInstanceId')
                             .value(service_instance_id)

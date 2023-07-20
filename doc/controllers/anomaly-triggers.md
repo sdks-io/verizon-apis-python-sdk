@@ -10,83 +10,9 @@ anomaly_triggers_controller = client.anomaly_triggers
 
 ## Methods
 
-* [Create Anomaly Detection Trigger](../../doc/controllers/anomaly-triggers.md#create-anomaly-detection-trigger)
 * [Update Anomaly Detection Trigger](../../doc/controllers/anomaly-triggers.md#update-anomaly-detection-trigger)
 * [List Anomaly Detection Trigger Settings](../../doc/controllers/anomaly-triggers.md#list-anomaly-detection-trigger-settings)
-
-
-# Create Anomaly Detection Trigger
-
-Creates the trigger to identify an anomaly.
-
-```python
-def create_anomaly_detection_trigger(self,
-                                    body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`List of CreateTriggerRequestOptions`](../../doc/models/create-trigger-request-options.md) | Body, Required | Request to create an anomaly trigger. |
-
-## Response Type
-
-[`AnomalyDetectionTrigger`](../../doc/models/anomaly-detection-trigger.md)
-
-## Example Usage
-
-```python
-body = [
-    CreateTriggerRequestOptions(
-        name='Anomaly Daily Usage REST Test-Patch 1',
-        trigger_category='UsageAnomaly',
-        account_name='0000123456-00001',
-        anomaly_trigger_request=AnomalyTriggerRequest(
-            account_names='0000123456-00001',
-            include_abnormal=True,
-            include_very_abnormal=True,
-            include_under_expected_usage=True,
-            include_over_expected_usage=True
-        ),
-        notification=Notification(
-            notification_type='DailySummary',
-            callback=True,
-            email_notification=False,
-            notification_group_name='Anomaly Test API',
-            notification_frequency_factor=3,
-            notification_frequency_interval='Hourly',
-            external_email_recipients='placeholder@verizon.com',
-            sms_notification=True,
-            sms_numbers=[
-                SMSNumber(
-                    carrier='US Cellular',
-                    number='9299280711'
-                )
-            ],
-            reminder=True,
-            severity='Critical'
-        )
-    )
-]
-
-result = anomaly_triggers_controller.create_anomaly_detection_trigger(body)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "triggerId": "595f5c44-c31c-4552-8670-020a1545a84d"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| Default | An error occurred. | [`IntelligenceResultException`](../../doc/models/intelligence-result-exception.md) |
+* [Create Anomaly Detection Trigger](../../doc/controllers/anomaly-triggers.md#create-anomaly-detection-trigger)
 
 
 # Update Anomaly Detection Trigger
@@ -229,6 +155,80 @@ print(result)
       }
     }
   ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | An error occurred. | [`IntelligenceResultException`](../../doc/models/intelligence-result-exception.md) |
+
+
+# Create Anomaly Detection Trigger
+
+Creates the trigger to identify an anomaly.
+
+```python
+def create_anomaly_detection_trigger(self,
+                                    body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`List of CreateTriggerRequestOptions`](../../doc/models/create-trigger-request-options.md) | Body, Required | Request to create an anomaly trigger. |
+
+## Response Type
+
+[`AnomalyDetectionTrigger`](../../doc/models/anomaly-detection-trigger.md)
+
+## Example Usage
+
+```python
+body = [
+    CreateTriggerRequestOptions(
+        name='Anomaly Daily Usage REST Test-Patch 1',
+        trigger_category='UsageAnomaly',
+        account_name='0000123456-00001',
+        anomaly_trigger_request=AnomalyTriggerRequest(
+            account_names='0000123456-00001',
+            include_abnormal=True,
+            include_very_abnormal=True,
+            include_under_expected_usage=True,
+            include_over_expected_usage=True
+        ),
+        notification=Notification(
+            notification_type='DailySummary',
+            callback=True,
+            email_notification=False,
+            notification_group_name='Anomaly Test API',
+            notification_frequency_factor=3,
+            notification_frequency_interval='Hourly',
+            external_email_recipients='placeholder@verizon.com',
+            sms_notification=True,
+            sms_numbers=[
+                SMSNumber(
+                    carrier='US Cellular',
+                    number='9299280711'
+                )
+            ],
+            reminder=True,
+            severity='Critical'
+        )
+    )
+]
+
+result = anomaly_triggers_controller.create_anomaly_detection_trigger(body)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "triggerId": "595f5c44-c31c-4552-8670-020a1545a84d"
 }
 ```
 

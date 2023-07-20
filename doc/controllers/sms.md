@@ -12,55 +12,9 @@ sms_controller = client.sms
 
 ## Methods
 
-* [Send SMS to Device](../../doc/controllers/sms.md#send-sms-to-device)
 * [List Devices SMS Messages](../../doc/controllers/sms.md#list-devices-sms-messages)
+* [Send SMS to Device](../../doc/controllers/sms.md#send-sms-to-device)
 * [Start Queued SMS Delivery](../../doc/controllers/sms.md#start-queued-sms-delivery)
-
-
-# Send SMS to Device
-
-The messages are queued on the ThingSpace Platform and sent as soon as possible, but they may be delayed due to traffic and routing considerations.
-
-```python
-def send_sms_to_device(self,
-                      body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`SMSSendRequest`](../../doc/models/sms-send-request.md) | Body, Required | Request to send SMS. |
-
-## Response Type
-
-[`DeviceManagementResult`](../../doc/models/device-management-result.md)
-
-## Example Usage
-
-```python
-body = SMSSendRequest(
-    service_plan='T Plan 2',
-    sms_message='The rain in Spain stays mainly in the plain.'
-)
-
-result = sms_controller.send_sms_to_device(body)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "requestId": "595f5c44-c31c-4552-8670-020a1545a84d"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
 
 
 # List Devices SMS Messages
@@ -120,6 +74,52 @@ print(result)
     }
   ],
   "hasMoreData": false
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
+
+
+# Send SMS to Device
+
+The messages are queued on the ThingSpace Platform and sent as soon as possible, but they may be delayed due to traffic and routing considerations.
+
+```python
+def send_sms_to_device(self,
+                      body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`SMSSendRequest`](../../doc/models/sms-send-request.md) | Body, Required | Request to send SMS. |
+
+## Response Type
+
+[`DeviceManagementResult`](../../doc/models/device-management-result.md)
+
+## Example Usage
+
+```python
+body = SMSSendRequest(
+    service_plan='T Plan 2',
+    sms_message='The rain in Spain stays mainly in the plain.'
+)
+
+result = sms_controller.send_sms_to_device(body)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "requestId": "595f5c44-c31c-4552-8670-020a1545a84d"
 }
 ```
 

@@ -10,50 +10,8 @@ configuration_files_controller = client.configuration_files
 
 ## Methods
 
-* [Get List of Files](../../doc/controllers/configuration-files.md#get-list-of-files)
 * [Upload Config File](../../doc/controllers/configuration-files.md#upload-config-file)
-
-
-# Get List of Files
-
-You can retrieve a list of configuration or supplementary of files for an account.
-
-```python
-def get_list_of_files(self,
-                     acc,
-                     distribution_type)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `distribution_type` | `string` | Query, Required | Filter the distributionType to only retrieve files for a specific distribution type. |
-
-## Response Type
-
-[`RetrievesAvailableFilesResponseList`](../../doc/models/retrieves-available-files-response-list.md)
-
-## Example Usage
-
-```python
-acc = '0402196254-00001'
-
-distribution_type = 'HTTP'
-
-result = configuration_files_controller.get_list_of_files(
-    acc,
-    distribution_type
-)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
+* [Get List of Files](../../doc/controllers/configuration-files.md#get-list-of-files)
 
 
 # Upload Config File
@@ -104,6 +62,48 @@ result = configuration_files_controller.upload_config_file(
     make,
     model,
     local_target_path
+)
+print(result)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
+
+
+# Get List of Files
+
+You can retrieve a list of configuration or supplementary of files for an account.
+
+```python
+def get_list_of_files(self,
+                     acc,
+                     distribution_type)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `acc` | `string` | Template, Required | Account identifier. |
+| `distribution_type` | `string` | Query, Required | Filter the distributionType to only retrieve files for a specific distribution type. |
+
+## Response Type
+
+[`RetrievesAvailableFilesResponseList`](../../doc/models/retrieves-available-files-response-list.md)
+
+## Example Usage
+
+```python
+acc = '0402196254-00001'
+
+distribution_type = 'HTTP'
+
+result = configuration_files_controller.get_list_of_files(
+    acc,
+    distribution_type
 )
 print(result)
 ```

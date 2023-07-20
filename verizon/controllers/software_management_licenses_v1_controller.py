@@ -20,8 +20,8 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.v1_licenses_assigned_removed_result import V1LicensesAssignedRemovedResult
-from verizon.models.v1_list_of_licenses_to_remove_result import V1ListOfLicensesToRemoveResult
 from verizon.models.fota_v1_success_result import FotaV1SuccessResult
+from verizon.models.v1_list_of_licenses_to_remove_result import V1ListOfLicensesToRemoveResult
 from verizon.models.v1_list_of_licenses_to_remove import V1ListOfLicensesToRemove
 from verizon.exceptions.fota_v1_result_exception import FotaV1ResultException
 
@@ -31,6 +31,101 @@ class SoftwareManagementLicensesV1Controller(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(SoftwareManagementLicensesV1Controller, self).__init__(config)
+
+    @deprecated()
+    def remove_licenses_from_devices(self,
+                                     account,
+                                     body):
+        """Does a POST request to /licenses/{account}/remove.
+
+        Remove unused licenses from device.
+
+        Args:
+            account (string): Account identifier in "##########-#####".
+            body (V1LicensesAssignedRemovedRequest): IMEIs of the devices to
+                remove licenses from.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                devices with license removal status.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/licenses/{account}/remove')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(V1LicensesAssignedRemovedResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
+    @deprecated()
+    def delete_list_of_licenses_to_remove(self,
+                                          account):
+        """Does a DELETE request to /licenses/{account}/cancel.
+
+        Deletes the entire list of cancellation candidate devices.
+
+        Args:
+            account (string): Account identifier in "##########-#####".
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Upgrade
+                canceled.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/licenses/{account}/cancel')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FotaV1SuccessResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
 
     @deprecated()
     def assign_licenses_to_devices(self,
@@ -62,58 +157,6 @@ class SoftwareManagementLicensesV1Controller(BaseController):
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
             .path('/licenses/{account}/assign')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(V1LicensesAssignedRemovedResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
-
-    @deprecated()
-    def remove_licenses_from_devices(self,
-                                     account,
-                                     body):
-        """Does a POST request to /licenses/{account}/remove.
-
-        Remove unused licenses from device.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-            body (V1LicensesAssignedRemovedRequest): IMEIs of the devices to
-                remove licenses from.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                devices with license removal status.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/licenses/{account}/remove')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
                             .key('account')
@@ -187,49 +230,6 @@ class SoftwareManagementLicensesV1Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(V1ListOfLicensesToRemoveResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
-
-    @deprecated()
-    def delete_list_of_licenses_to_remove(self,
-                                          account):
-        """Does a DELETE request to /licenses/{account}/cancel.
-
-        Deletes the entire list of cancellation candidate devices.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Upgrade
-                canceled.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/licenses/{account}/cancel')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FotaV1SuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()

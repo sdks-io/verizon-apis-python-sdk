@@ -21,9 +21,9 @@ from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.location import Location
 from verizon.models.synchronous_location_request_result import SynchronousLocationRequestResult
 from verizon.models.transaction_id import TransactionID
-from verizon.models.asynchronous_location_request_result import AsynchronousLocationRequestResult
 from verizon.models.location_report import LocationReport
 from verizon.models.location_report_status import LocationReportStatus
+from verizon.models.asynchronous_location_request_result import AsynchronousLocationRequestResult
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
 
 
@@ -176,50 +176,6 @@ class DevicesLocationsController(BaseController):
             .local_error('default', 'Unexpected error.', DeviceLocationResultException)
         ).execute()
 
-    def create_location_report(self,
-                               body):
-        """Does a POST request to /locationreports.
-
-        Request an asynchronous device location report.
-
-        Args:
-            body (LocationRequest): Request for device location report.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                accepted; location report in progress.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/locationreports')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('*/*'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(AsynchronousLocationRequestResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
-        ).execute()
-
     def retrieve_location_report(self,
                                  account,
                                  txid,
@@ -320,6 +276,50 @@ class DevicesLocationsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(LocationReportStatus.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
+    def create_location_report(self,
+                               body):
+        """Does a POST request to /locationreports.
+
+        Request an asynchronous device location report.
+
+        Args:
+            body (LocationRequest): Request for device location report.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request
+                accepted; location report in progress.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/locationreports')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('*/*'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(AsynchronousLocationRequestResult.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'Unexpected error.', DeviceLocationResultException)
         ).execute()

@@ -10,11 +10,54 @@ service_profiles_controller = client.service_profiles
 
 ## Methods
 
-* [Create Service Profile](../../doc/controllers/service-profiles.md#create-service-profile)
 * [List Service Profiles](../../doc/controllers/service-profiles.md#list-service-profiles)
-* [Get Service Profile](../../doc/controllers/service-profiles.md#get-service-profile)
+* [Create Service Profile](../../doc/controllers/service-profiles.md#create-service-profile)
 * [Update Service Profile](../../doc/controllers/service-profiles.md#update-service-profile)
+* [Get Service Profile](../../doc/controllers/service-profiles.md#get-service-profile)
 * [Delete Service Profile](../../doc/controllers/service-profiles.md#delete-service-profile)
+
+
+# List Service Profiles
+
+List all service profiles registered under your API key.
+
+```python
+def list_service_profiles(self)
+```
+
+## Requires scope
+
+`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
+
+## Response Type
+
+[`ListServiceProfilesResult`](../../doc/models/list-service-profiles-result.md)
+
+## Example Usage
+
+```python
+result = service_profiles_controller.list_service_profiles()
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "status": "Success",
+  "data": [
+    "serviceProfileId"
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | HTTP 400 Bad Request. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+| 401 | HTTP 401 Unauthorized. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+| Default | HTTP 500 Internal Server Error. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
 
 
 # Create Service Profile
@@ -69,119 +112,6 @@ body = ResourcesServiceProfile(
 
 result = service_profiles_controller.create_service_profile(body)
 print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | HTTP 400 Bad Request. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-| 401 | HTTP 401 Unauthorized. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-| Default | HTTP 500 Internal Server Error. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-
-
-# List Service Profiles
-
-List all service profiles registered under your API key.
-
-```python
-def list_service_profiles(self)
-```
-
-## Requires scope
-
-`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
-
-## Response Type
-
-[`ListServiceProfilesResult`](../../doc/models/list-service-profiles-result.md)
-
-## Example Usage
-
-```python
-result = service_profiles_controller.list_service_profiles()
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "status": "Success",
-  "data": [
-    "serviceProfileId"
-  ]
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | HTTP 400 Bad Request. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-| 401 | HTTP 401 Unauthorized. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-| Default | HTTP 500 Internal Server Error. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-
-
-# Get Service Profile
-
-Returns a specified service profile.
-
-```python
-def get_service_profile(self,
-                       service_profile_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `service_profile_id` | `string` | Template, Required | **Constraints**: *Maximum Length*: `36`, *Pattern*: `^[a-zA-Z0-9!@#$&()\-`.+,/"]{3,36}$` |
-
-## Requires scope
-
-`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
-
-## Response Type
-
-[`ResourcesServiceProfileWithId`](../../doc/models/resources-service-profile-with-id.md)
-
-## Example Usage
-
-```python
-service_profile_id = 'serviceProfileId2'
-
-result = service_profiles_controller.get_service_profile(service_profile_id)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "serviceProfileId": "4054ea9a-593e-4776-b488-697b1bfa4f3b",
-  "ecspFilter": "Verizon",
-  "clientSchedule": "time windows",
-  "clientServiceArea": "BAY AREA",
-  "clientType": "V2X",
-  "networkResources": {
-    "minBandwidthKbits": 1,
-    "serviceContinuitySupport": true,
-    "maxRequestRate": 15,
-    "maxLatencyMs": 20,
-    "minAvailability": 1
-  },
-  "computeResources": {
-    "GPU": {
-      "minCoreClockMHz": 1,
-      "minMemoryClockMHz": 35740,
-      "minBandwidthGBs": 588,
-      "minTFLOPS": 33
-    },
-    "minRAMGB": 1,
-    "minStorageGB": 1
-  }
-}
 ```
 
 ## Errors
@@ -257,6 +187,76 @@ print(result)
 {
   "status": "Success",
   "message": "Service Profile Updated"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | HTTP 400 Bad Request. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+| 401 | HTTP 401 Unauthorized. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+| Default | HTTP 500 Internal Server Error. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+
+
+# Get Service Profile
+
+Returns a specified service profile.
+
+```python
+def get_service_profile(self,
+                       service_profile_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `service_profile_id` | `string` | Template, Required | **Constraints**: *Maximum Length*: `36`, *Pattern*: `^[a-zA-Z0-9!@#$&()\-`.+,/"]{3,36}$` |
+
+## Requires scope
+
+`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
+
+## Response Type
+
+[`ResourcesServiceProfileWithId`](../../doc/models/resources-service-profile-with-id.md)
+
+## Example Usage
+
+```python
+service_profile_id = 'serviceProfileId2'
+
+result = service_profiles_controller.get_service_profile(service_profile_id)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "serviceProfileId": "4054ea9a-593e-4776-b488-697b1bfa4f3b",
+  "ecspFilter": "Verizon",
+  "clientSchedule": "time windows",
+  "clientServiceArea": "BAY AREA",
+  "clientType": "V2X",
+  "networkResources": {
+    "minBandwidthKbits": 1,
+    "serviceContinuitySupport": true,
+    "maxRequestRate": 15,
+    "maxLatencyMs": 20,
+    "minAvailability": 1
+  },
+  "computeResources": {
+    "GPU": {
+      "minCoreClockMHz": 1,
+      "minMemoryClockMHz": 35740,
+      "minBandwidthGBs": 588,
+      "minTFLOPS": 33
+    },
+    "minRAMGB": 1,
+    "minStorageGB": 1
+  }
 }
 ```
 

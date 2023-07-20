@@ -13,11 +13,11 @@ The package is compatible with Python versions `3 >=3.7, <= 3.11`.
 Install the package from PyPi using the following pip command:
 
 ```python
-pip install verizon-ap-is-sdk==1.0.0
+pip install sdksio-verizon-apis-sdk==1.0.0
 ```
 
 You can also view the package at:
-https://pypi.python.org/pypi/verizon-ap-is-sdk/1.0.0
+https://pypi.python.org/pypi/sdksio-verizon-apis-sdk/1.0.0
 
 ## Initialize the API Client
 

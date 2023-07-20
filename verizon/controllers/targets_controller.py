@@ -74,91 +74,6 @@ class TargetsController(BaseController):
             .is_api_response(True)
         ).execute()
 
-    def delete_target(self,
-                      body):
-        """Does a POST request to /targets/actions/delete.
-
-        Remove a target from a ThingSpace account.
-
-        Args:
-            body (DeleteTargetRequest): The request body identifies the target
-                to delete.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Target
-                deleted successfully.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.CLOUD_CONNECTOR)
-            .path('/targets/actions/delete')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_api_response(True)
-        ).execute()
-
-    def create_target(self,
-                      body):
-        """Does a POST request to /targets.
-
-        Define a target to receive data streams, alerts, or callbacks. After
-        creating the target resource, use its ID in a subscription to set up a
-        data stream.
-
-        Args:
-            body (CreateTargetRequest): The request body provides the details
-                of the target that you want to create.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. A success
-                response includes the full target resource definition.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.CLOUD_CONNECTOR)
-            .path('/targets')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Target.from_dictionary)
-            .is_api_response(True)
-        ).execute()
-
     def generate_target_external_id(self,
                                     body):
         """Does a POST request to /targets/actions/newextid.
@@ -252,5 +167,90 @@ class TargetsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreateIoTApplicationResponse.from_dictionary)
+            .is_api_response(True)
+        ).execute()
+
+    def create_target(self,
+                      body):
+        """Does a POST request to /targets.
+
+        Define a target to receive data streams, alerts, or callbacks. After
+        creating the target resource, use its ID in a subscription to set up a
+        data stream.
+
+        Args:
+            body (CreateTargetRequest): The request body provides the details
+                of the target that you want to create.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. A success
+                response includes the full target resource definition.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.CLOUD_CONNECTOR)
+            .path('/targets')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Target.from_dictionary)
+            .is_api_response(True)
+        ).execute()
+
+    def delete_target(self,
+                      body):
+        """Does a POST request to /targets/actions/delete.
+
+        Remove a target from a ThingSpace account.
+
+        Args:
+            body (DeleteTargetRequest): The request body identifies the target
+                to delete.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Target
+                deleted successfully.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.CLOUD_CONNECTOR)
+            .path('/targets/actions/delete')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
             .is_api_response(True)
         ).execute()

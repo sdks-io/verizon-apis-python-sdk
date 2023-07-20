@@ -29,6 +29,48 @@ class ClientLoggingController(BaseController):
     def __init__(self, config):
         super(ClientLoggingController, self).__init__(config)
 
+    def disable_device_logging(self,
+                               account,
+                               device_id):
+        """Does a DELETE request to /logging/{account}/devices/{deviceId}.
+
+        Disables logging for a specific device.
+
+        Args:
+            account (string): Account identifier.
+            device_id (string): Device IMEI identifier.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Success.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/logging/{account}/devices/{deviceId}')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('deviceId')
+                            .value(device_id)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
     def list_devices_with_logging_enabled(self,
                                           account):
         """Does a GET request to /logging/{account}/devices.
@@ -122,6 +164,54 @@ class ClientLoggingController(BaseController):
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()
 
+    def list_device_logs(self,
+                         account,
+                         device_id):
+        """Does a GET request to /logging/{account}/devices/{deviceId}/logs.
+
+        Gets logs for a specific device.
+
+        Args:
+            account (string): Account identifier.
+            device_id (string): Device IMEI identifier.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                device logs.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/logging/{account}/devices/{deviceId}/logs')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('deviceId')
+                            .value(device_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceLog.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
     def disable_logging_for_devices(self,
                                     account,
                                     device_ids):
@@ -207,96 +297,6 @@ class ClientLoggingController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(DeviceLoggingStatus.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def disable_device_logging(self,
-                               account,
-                               device_id):
-        """Does a DELETE request to /logging/{account}/devices/{deviceId}.
-
-        Disables logging for a specific device.
-
-        Args:
-            account (string): Account identifier.
-            device_id (string): Device IMEI identifier.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Success.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/logging/{account}/devices/{deviceId}')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('deviceId')
-                            .value(device_id)
-                            .should_encode(True))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def list_device_logs(self,
-                         account,
-                         device_id):
-        """Does a GET request to /logging/{account}/devices/{deviceId}/logs.
-
-        Gets logs for a specific device.
-
-        Args:
-            account (string): Account identifier.
-            device_id (string): Device IMEI identifier.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                device logs.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/logging/{account}/devices/{deviceId}/logs')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('deviceId')
-                            .value(device_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceLog.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()

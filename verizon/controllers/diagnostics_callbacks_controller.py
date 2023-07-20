@@ -28,6 +28,53 @@ class DiagnosticsCallbacksController(BaseController):
     def __init__(self, config):
         super(DiagnosticsCallbacksController, self).__init__(config)
 
+    def unregister_diagnostics_callback(self,
+                                        account_name,
+                                        service_name):
+        """Does a DELETE request to /callbacks.
+
+        This endpoint allows user to delete a registered callback URL and
+        credential.
+
+        Args:
+            account_name (string): Account identifier.
+            service_name (string): Service name for callback notification.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Device
+                diagnostics callback registration.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_DIAGNOSTICS)
+            .path('/callbacks')
+            .http_method(HttpMethodEnum.DELETE)
+            .query_param(Parameter()
+                         .key('accountName')
+                         .value(account_name))
+            .query_param(Parameter()
+                         .key('serviceName')
+                         .value(service_name))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceDiagnosticsCallback.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', DeviceDiagnosticsResultException)
+        ).execute()
+
     def get_diagnostics_subscription_callback_info(self,
                                                    account_name):
         """Does a GET request to /callbacks.
@@ -107,53 +154,6 @@ class DiagnosticsCallbacksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceDiagnosticsCallback.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', DeviceDiagnosticsResultException)
-        ).execute()
-
-    def unregister_diagnostics_callback(self,
-                                        account_name,
-                                        service_name):
-        """Does a DELETE request to /callbacks.
-
-        This endpoint allows user to delete a registered callback URL and
-        credential.
-
-        Args:
-            account_name (string): Account identifier.
-            service_name (string): Service name for callback notification.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Device
-                diagnostics callback registration.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEVICE_DIAGNOSTICS)
-            .path('/callbacks')
-            .http_method(HttpMethodEnum.DELETE)
-            .query_param(Parameter()
-                         .key('accountName')
-                         .value(account_name))
-            .query_param(Parameter()
-                         .key('serviceName')
-                         .value(service_name))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
             .auth(Single('global'))
         ).response(
             ResponseHandler()

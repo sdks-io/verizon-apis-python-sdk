@@ -19,9 +19,9 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.campaign_software import CampaignSoftware
+from verizon.models.upload_and_schedule_file_response import UploadAndScheduleFileResponse
 from verizon.models.v2_add_or_remove_device_result import V2AddOrRemoveDeviceResult
 from verizon.models.fota_v2_success_result import FotaV2SuccessResult
-from verizon.models.upload_and_schedule_file_response import UploadAndScheduleFileResponse
 from verizon.exceptions.fota_v2_result_exception import FotaV2ResultException
 
 
@@ -30,56 +30,6 @@ class CampaignsV2Controller(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(CampaignsV2Controller, self).__init__(config)
-
-    def schedule_campaign_firmware_upgrade(self,
-                                           account,
-                                           body):
-        """Does a POST request to /campaigns/{account}.
-
-        This endpoint allows user to schedule a software upgrade.
-
-        Args:
-            account (string): Account identifier.
-            body (CampaignSoftwareUpgrade): Software upgrade information.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Return
-                software upgrade information.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/campaigns/{account}')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('*/*'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CampaignSoftware.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
 
     def get_campaign_information(self,
                                  account,
@@ -125,114 +75,6 @@ class CampaignsV2Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CampaignSoftware.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def update_campaign_firmware_devices(self,
-                                         account,
-                                         campaign_id,
-                                         body):
-        """Does a PUT request to /campaigns/{account}/{campaignId}.
-
-        This endpoint allows user to Add or Remove devices to an existing
-        software upgrade.
-
-        Args:
-            account (string): Account identifier.
-            campaign_id (string): Software upgrade information.
-            body (V2AddOrRemoveDeviceRequest): Request to add or remove device
-                to existing software upgrade information.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Result of
-                adding or removing devices to existing software upgrade
-                information.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/campaigns/{account}/{campaignId}')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('campaignId')
-                            .value(campaign_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('*/*'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(V2AddOrRemoveDeviceResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def cancel_campaign(self,
-                        account,
-                        campaign_id):
-        """Does a DELETE request to /campaigns/{account}/{campaignId}.
-
-        This endpoint allows user to cancel software upgrade. A software
-        upgrade already started can not be cancelled.
-
-        Args:
-            account (string): Account identifier.
-            campaign_id (string): Unique identifier of campaign.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Return
-                cancellation status.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/campaigns/{account}/{campaignId}')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('campaignId')
-                            .value(campaign_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FotaV2SuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()
@@ -341,6 +183,164 @@ class CampaignsV2Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UploadAndScheduleFileResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
+    def update_campaign_firmware_devices(self,
+                                         account,
+                                         campaign_id,
+                                         body):
+        """Does a PUT request to /campaigns/{account}/{campaignId}.
+
+        This endpoint allows user to Add or Remove devices to an existing
+        software upgrade.
+
+        Args:
+            account (string): Account identifier.
+            campaign_id (string): Software upgrade information.
+            body (V2AddOrRemoveDeviceRequest): Request to add or remove device
+                to existing software upgrade information.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Result of
+                adding or removing devices to existing software upgrade
+                information.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/campaigns/{account}/{campaignId}')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('campaignId')
+                            .value(campaign_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('*/*'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(V2AddOrRemoveDeviceResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
+    def schedule_campaign_firmware_upgrade(self,
+                                           account,
+                                           body):
+        """Does a POST request to /campaigns/{account}.
+
+        This endpoint allows user to schedule a software upgrade.
+
+        Args:
+            account (string): Account identifier.
+            body (CampaignSoftwareUpgrade): Software upgrade information.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Return
+                software upgrade information.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/campaigns/{account}')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('*/*'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CampaignSoftware.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
+    def cancel_campaign(self,
+                        account,
+                        campaign_id):
+        """Does a DELETE request to /campaigns/{account}/{campaignId}.
+
+        This endpoint allows user to cancel software upgrade. A software
+        upgrade already started can not be cancelled.
+
+        Args:
+            account (string): Account identifier.
+            campaign_id (string): Unique identifier of campaign.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Return
+                cancellation status.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/campaigns/{account}/{campaignId}')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('campaignId')
+                            .value(campaign_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FotaV2SuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()

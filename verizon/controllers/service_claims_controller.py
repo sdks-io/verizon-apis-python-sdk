@@ -18,8 +18,8 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.service_claims import ServiceClaims
 from verizon.models.associate_cloud_credential_result import AssociateCloudCredentialResult
+from verizon.models.service_claims import ServiceClaims
 from verizon.exceptions.edge_service_onboarding_result_error_exception import EdgeServiceOnboardingResultErrorException
 
 
@@ -28,6 +28,77 @@ class ServiceClaimsController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(ServiceClaimsController, self).__init__(config)
+
+    def associate_cloud_credential_with_service_claim(self,
+                                                      account_name,
+                                                      service_id,
+                                                      claim_id,
+                                                      body,
+                                                      correlation_id=None):
+        """Does a POST request to /v1/services/{serviceId}/claims/{claimId}/associateCspProfile.
+
+        Associate an existing cloud credential with a service's claim which
+        will be used to connect to user's cloud provider.
+
+        Args:
+            account_name (string): User account name.
+            service_id (string): System generated unique identifier of the
+                service which user is using.
+            claim_id (string): System generated unique identifier for the
+                claim which user is using.
+            body (CSPProfileIdRequest): TODO: type description here.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/services/{serviceId}/claims/{claimId}/associateCspProfile')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('serviceId')
+                            .value(service_id)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('claimId')
+                            .value(claim_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(AssociateCloudCredentialResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('404', 'Not Found.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
 
     def list_service_claims(self,
                             account_name,
@@ -129,135 +200,6 @@ class ServiceClaimsController(BaseController):
             .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
         ).execute()
 
-    def associate_cloud_credential_with_service_claim(self,
-                                                      account_name,
-                                                      service_id,
-                                                      claim_id,
-                                                      body,
-                                                      correlation_id=None):
-        """Does a POST request to /v1/services/{serviceId}/claims/{claimId}/associateCspProfile.
-
-        Associate an existing cloud credential with a service's claim which
-        will be used to connect to user's cloud provider.
-
-        Args:
-            account_name (string): User account name.
-            service_id (string): System generated unique identifier of the
-                service which user is using.
-            claim_id (string): System generated unique identifier for the
-                claim which user is using.
-            body (CSPProfileIdRequest): TODO: type description here.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/services/{serviceId}/claims/{claimId}/associateCspProfile')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('serviceId')
-                            .value(service_id)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('claimId')
-                            .value(claim_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(AssociateCloudCredentialResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('404', 'Not Found.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
-
-    def mark_service_claim_status_as_completed(self,
-                                               account_name,
-                                               service_id,
-                                               claim_id,
-                                               correlation_id=None):
-        """Does a POST request to /v1/services/{serviceId}/claims/{claimId}/claimStatusCompleted.
-
-        Mark a service's claim status as complete post successful verification
-        of sandbox testing in the respective sandbox environment.
-
-        Args:
-            account_name (string): User account name.
-            service_id (string): System generated unique identifier of the
-                service which user is using.
-            claim_id (string): System generated unique identifier of the claim
-                which user is using.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/services/{serviceId}/claims/{claimId}/claimStatusCompleted')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('serviceId')
-                            .value(service_id)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('claimId')
-                            .value(claim_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_api_response(True)
-            .local_error('400', 'Bad request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('404', 'Not Found.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
-
     def update_service_claim_status(self,
                                     account_name,
                                     service_id,
@@ -314,6 +256,64 @@ class ServiceClaimsController(BaseController):
                           .key('correlationId')
                           .value(correlation_id))
             .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .is_api_response(True)
+            .local_error('400', 'Bad request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('404', 'Not Found.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
+
+    def mark_service_claim_status_as_completed(self,
+                                               account_name,
+                                               service_id,
+                                               claim_id,
+                                               correlation_id=None):
+        """Does a POST request to /v1/services/{serviceId}/claims/{claimId}/claimStatusCompleted.
+
+        Mark a service's claim status as complete post successful verification
+        of sandbox testing in the respective sandbox environment.
+
+        Args:
+            account_name (string): User account name.
+            service_id (string): System generated unique identifier of the
+                service which user is using.
+            claim_id (string): System generated unique identifier of the claim
+                which user is using.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/services/{serviceId}/claims/{claimId}/claimStatusCompleted')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('serviceId')
+                            .value(service_id)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('claimId')
+                            .value(claim_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
             .auth(Single('global'))
         ).response(
             ResponseHandler()

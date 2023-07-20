@@ -10,11 +10,143 @@ device_groups_controller = client.device_groups
 
 ## Methods
 
+* [Update Device Group](../../doc/controllers/device-groups.md#update-device-group)
+* [Get Device Group Information](../../doc/controllers/device-groups.md#get-device-group-information)
 * [Create Device Group](../../doc/controllers/device-groups.md#create-device-group)
 * [List Device Groups](../../doc/controllers/device-groups.md#list-device-groups)
-* [Get Device Group Information](../../doc/controllers/device-groups.md#get-device-group-information)
-* [Update Device Group](../../doc/controllers/device-groups.md#update-device-group)
 * [Delete Device Group](../../doc/controllers/device-groups.md#delete-device-group)
+
+
+# Update Device Group
+
+Make changes to a device group, including changing the name and description, and adding or removing devices.
+
+```python
+def update_device_group(self,
+                       aname,
+                       gname,
+                       body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `aname` | `string` | Template, Required | Account name. |
+| `gname` | `string` | Template, Required | Group name. |
+| `body` | [`DeviceGroupUpdateRequest`](../../doc/models/device-group-update-request.md) | Body, Required | Request to update device group. |
+
+## Response Type
+
+[`ConnectivityManagementSuccessResult`](../../doc/models/connectivity-management-success-result.md)
+
+## Example Usage
+
+```python
+aname = '0252012345-00001'
+
+gname = 'gname2'
+
+body = DeviceGroupUpdateRequest(
+    devices_to_add=[
+        DeviceId(
+            id='990003420535537',
+            kind='imei'
+        )
+    ],
+    new_group_description='All western region tank level monitors.',
+    new_group_name='Western region tanks'
+)
+
+result = device_groups_controller.update_device_group(
+    aname,
+    gname,
+    body
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "success": true
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
+
+
+# Get Device Group Information
+
+When HTTP status is 202, a URL will be returned in the Location header of the form /groups/{aname}/name/{gname}/?next={token}. This URL can be used to request the next set of groups.
+
+```python
+def get_device_group_information(self,
+                                aname,
+                                gname,
+                                next=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `aname` | `string` | Template, Required | Account name. |
+| `gname` | `string` | Template, Required | Group name. |
+| `next` | `long\|int` | Query, Optional | Continue the previous query from the pageUrl pagetoken. |
+
+## Response Type
+
+[`DeviceGroupDevicesData`](../../doc/models/device-group-devices-data.md)
+
+## Example Usage
+
+```python
+aname = '0252012345-00001'
+
+gname = 'gname2'
+
+result = device_groups_controller.get_device_group_information(
+    aname,
+    gname
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "name": "Nebraska Trucks",
+  "description": "All service trucks in Nebraska.",
+  "hasMoreData": false,
+  "devices": [
+    {
+      "deviceIds": [
+        {
+          "id": "12345",
+          "kind": "meid"
+        },
+        {
+          "id": "54321",
+          "kind": "mdn"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
 
 
 # Create Device Group
@@ -115,138 +247,6 @@ print(result)
     "extendedAttributes": []
   }
 ]
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
-
-
-# Get Device Group Information
-
-When HTTP status is 202, a URL will be returned in the Location header of the form /groups/{aname}/name/{gname}/?next={token}. This URL can be used to request the next set of groups.
-
-```python
-def get_device_group_information(self,
-                                aname,
-                                gname,
-                                next=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `aname` | `string` | Template, Required | Account name. |
-| `gname` | `string` | Template, Required | Group name. |
-| `next` | `long\|int` | Query, Optional | Continue the previous query from the pageUrl pagetoken. |
-
-## Response Type
-
-[`DeviceGroupDevicesData`](../../doc/models/device-group-devices-data.md)
-
-## Example Usage
-
-```python
-aname = '0252012345-00001'
-
-gname = 'gname2'
-
-result = device_groups_controller.get_device_group_information(
-    aname,
-    gname
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "name": "Nebraska Trucks",
-  "description": "All service trucks in Nebraska.",
-  "hasMoreData": false,
-  "devices": [
-    {
-      "deviceIds": [
-        {
-          "id": "12345",
-          "kind": "meid"
-        },
-        {
-          "id": "54321",
-          "kind": "mdn"
-        }
-      ]
-    }
-  ]
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
-
-
-# Update Device Group
-
-Make changes to a device group, including changing the name and description, and adding or removing devices.
-
-```python
-def update_device_group(self,
-                       aname,
-                       gname,
-                       body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `aname` | `string` | Template, Required | Account name. |
-| `gname` | `string` | Template, Required | Group name. |
-| `body` | [`DeviceGroupUpdateRequest`](../../doc/models/device-group-update-request.md) | Body, Required | Request to update device group. |
-
-## Response Type
-
-[`ConnectivityManagementSuccessResult`](../../doc/models/connectivity-management-success-result.md)
-
-## Example Usage
-
-```python
-aname = '0252012345-00001'
-
-gname = 'gname2'
-
-body = DeviceGroupUpdateRequest(
-    devices_to_add=[
-        DeviceId(
-            id='990003420535537',
-            kind='imei'
-        )
-    ],
-    new_group_description='All western region tank level monitors.',
-    new_group_name='Western region tanks'
-)
-
-result = device_groups_controller.update_device_group(
-    aname,
-    gname,
-    body
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "success": true
-}
 ```
 
 ## Errors

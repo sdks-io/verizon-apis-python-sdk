@@ -18,9 +18,9 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.csp_profile_data import CSPProfileData
 from verizon.models.csp_profile import CSPProfile
 from verizon.models.edge_service_onboarding_delete_result import EdgeServiceOnboardingDeleteResult
+from verizon.models.csp_profile_data import CSPProfileData
 from verizon.exceptions.edge_service_onboarding_result_error_exception import EdgeServiceOnboardingResultErrorException
 
 
@@ -29,75 +29,6 @@ class CSPProfilesController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(CSPProfilesController, self).__init__(config)
-
-    def fetch_cloud_credential_details(self,
-                                       account_name,
-                                       correlation_id=None,
-                                       q=None,
-                                       limit=None,
-                                       off_set=None):
-        """Does a GET request to /v1/cspProfiles/.
-
-        Fetch available cloud credentials within user's organization.
-
-        Args:
-            account_name (string): User account name.
-            correlation_id (string, optional): TODO: type description here.
-            q (string, optional): Use the coloumn (:) character to separate
-                multiple query params eg
-                type=AWS:awsCspProfile.credType=ACCESS_KEY,ROLE_ARN:state=UNVER
-                IFIED,VERIFIED.
-            limit (long|int, optional): Number of items to return.
-            off_set (long|int, optional): Id of the last respose value in the
-                previous list.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/cspProfiles/')
-            .http_method(HttpMethodEnum.GET)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .query_param(Parameter()
-                         .key('q')
-                         .value(q))
-            .query_param(Parameter()
-                         .key('limit')
-                         .value(limit))
-            .query_param(Parameter()
-                         .key('offSet')
-                         .value(off_set))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CSPProfileData.from_dictionary)
-            .is_api_response(True)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('403', 'Forbidden.', EdgeServiceOnboardingResultErrorException)
-            .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
-            .local_error('429', 'Too many requests.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-            .local_error('default', 'Forbidden.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
 
     def create_cloud_credential(self,
                                 account_name,
@@ -208,4 +139,73 @@ class CSPProfilesController(BaseController):
             .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
             .local_error('404', 'Not Found.', EdgeServiceOnboardingResultErrorException)
             .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
+
+    def fetch_cloud_credential_details(self,
+                                       account_name,
+                                       correlation_id=None,
+                                       q=None,
+                                       limit=None,
+                                       off_set=None):
+        """Does a GET request to /v1/cspProfiles/.
+
+        Fetch available cloud credentials within user's organization.
+
+        Args:
+            account_name (string): User account name.
+            correlation_id (string, optional): TODO: type description here.
+            q (string, optional): Use the coloumn (:) character to separate
+                multiple query params eg
+                type=AWS:awsCspProfile.credType=ACCESS_KEY,ROLE_ARN:state=UNVER
+                IFIED,VERIFIED.
+            limit (long|int, optional): Number of items to return.
+            off_set (long|int, optional): Id of the last respose value in the
+                previous list.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/cspProfiles/')
+            .http_method(HttpMethodEnum.GET)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .query_param(Parameter()
+                         .key('q')
+                         .value(q))
+            .query_param(Parameter()
+                         .key('limit')
+                         .value(limit))
+            .query_param(Parameter()
+                         .key('offSet')
+                         .value(off_set))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CSPProfileData.from_dictionary)
+            .is_api_response(True)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('403', 'Forbidden.', EdgeServiceOnboardingResultErrorException)
+            .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
+            .local_error('429', 'Too many requests.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+            .local_error('default', 'Forbidden.', EdgeServiceOnboardingResultErrorException)
         ).execute()

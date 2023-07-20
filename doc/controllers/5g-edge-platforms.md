@@ -10,8 +10,56 @@ m_5g_edge_platforms_controller = client.m_5g_edge_platforms
 
 ## Methods
 
-* [List MEC Platforms](../../doc/controllers/5g-edge-platforms.md#list-mec-platforms)
 * [List Regions](../../doc/controllers/5g-edge-platforms.md#list-regions)
+* [List MEC Platforms](../../doc/controllers/5g-edge-platforms.md#list-mec-platforms)
+
+
+# List Regions
+
+List the geographical regions available, based on the user's bearer token. **Note:** Country code, Metropolitan area, Area and Zone are future functionality and will currently return a "null" value.
+
+```python
+def list_regions(self)
+```
+
+## Requires scope
+
+`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
+
+## Response Type
+
+[`ListRegionsResult`](../../doc/models/list-regions-result.md)
+
+## Example Usage
+
+```python
+result = m_5g_edge_platforms_controller.list_regions()
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "regions": [
+    {
+      "regionId": "consectetur",
+      "name": "US_EAST_1",
+      "countryCode": "nr",
+      "metro": "e1D",
+      "area": "IdUESF"
+    }
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | HTTP 400 Bad Request. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+| 401 | HTTP 401 Unauthorized. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
+| Default | HTTP 500 Internal Server Error. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
 
 
 # List MEC Platforms
@@ -72,54 +120,6 @@ print(result)
       "zone": "e5oV52kMGjDLhnJSsLJZL",
       "region": "US_WEST_2",
       "status": "unknown"
-    }
-  ]
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | HTTP 400 Bad Request. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-| 401 | HTTP 401 Unauthorized. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-| Default | HTTP 500 Internal Server Error. | [`EdgeDiscoveryResultException`](../../doc/models/edge-discovery-result-exception.md) |
-
-
-# List Regions
-
-List the geographical regions available, based on the user's bearer token. **Note:** Country code, Metropolitan area, Area and Zone are future functionality and will currently return a "null" value.
-
-```python
-def list_regions(self)
-```
-
-## Requires scope
-
-`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
-
-## Response Type
-
-[`ListRegionsResult`](../../doc/models/list-regions-result.md)
-
-## Example Usage
-
-```python
-result = m_5g_edge_platforms_controller.list_regions()
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "regions": [
-    {
-      "regionId": "consectetur",
-      "name": "US_EAST_1",
-      "countryCode": "nr",
-      "metro": "e1D",
-      "area": "IdUESF"
     }
   ]
 }

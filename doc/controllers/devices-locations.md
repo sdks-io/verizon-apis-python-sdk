@@ -13,9 +13,9 @@ devices_locations_controller = client.devices_locations
 * [List Devices Locations Synchronous](../../doc/controllers/devices-locations.md#list-devices-locations-synchronous)
 * [List Devices Locations Asynchronous](../../doc/controllers/devices-locations.md#list-devices-locations-asynchronous)
 * [Cancel Device Location Request](../../doc/controllers/devices-locations.md#cancel-device-location-request)
-* [Create Location Report](../../doc/controllers/devices-locations.md#create-location-report)
 * [Retrieve Location Report](../../doc/controllers/devices-locations.md#retrieve-location-report)
 * [Get Location Report Status](../../doc/controllers/devices-locations.md#get-location-report-status)
+* [Create Location Report](../../doc/controllers/devices-locations.md#create-location-report)
 * [Cancel Queued Location Report Generation](../../doc/controllers/devices-locations.md#cancel-queued-location-report-generation)
 
 
@@ -218,71 +218,6 @@ print(result)
 | Default | Unexpected error. | [`DeviceLocationResultException`](../../doc/models/device-location-result-exception.md) |
 
 
-# Create Location Report
-
-Request an asynchronous device location report.
-
-```python
-def create_location_report(self,
-                          body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`LocationRequest`](../../doc/models/location-request.md) | Body, Required | Request for device location report. |
-
-## Response Type
-
-[`AsynchronousLocationRequestResult`](../../doc/models/asynchronous-location-request-result.md)
-
-## Example Usage
-
-```python
-body = LocationRequest(
-    account_name='1234567890-00001',
-    accuracy_mode=0,
-    cache_mode=CacheModeEnum.ENUM_1,
-    device_list=[
-        DeviceInfo(
-            id='980003420535573',
-            kind='imei',
-            mdn='7892345678'
-        ),
-        DeviceInfo(
-            id='375535024300089',
-            kind='imei',
-            mdn='7897654321'
-        ),
-        DeviceInfo(
-            id='A100003861E585',
-            kind='meid',
-            mdn='7897650914'
-        )
-    ]
-)
-
-result = devices_locations_controller.create_location_report(body)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33",
-  "status": "QUEUED"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| Default | Unexpected error. | [`DeviceLocationResultException`](../../doc/models/device-location-result-exception.md) |
-
-
 # Retrieve Location Report
 
 Download a completed asynchronous device location report.
@@ -415,6 +350,71 @@ print(result)
 {
   "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33",
   "status": "INPROGRESS"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | Unexpected error. | [`DeviceLocationResultException`](../../doc/models/device-location-result-exception.md) |
+
+
+# Create Location Report
+
+Request an asynchronous device location report.
+
+```python
+def create_location_report(self,
+                          body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`LocationRequest`](../../doc/models/location-request.md) | Body, Required | Request for device location report. |
+
+## Response Type
+
+[`AsynchronousLocationRequestResult`](../../doc/models/asynchronous-location-request-result.md)
+
+## Example Usage
+
+```python
+body = LocationRequest(
+    account_name='1234567890-00001',
+    accuracy_mode=0,
+    cache_mode=CacheModeEnum.ENUM_1,
+    device_list=[
+        DeviceInfo(
+            id='980003420535573',
+            kind='imei',
+            mdn='7892345678'
+        ),
+        DeviceInfo(
+            id='375535024300089',
+            kind='imei',
+            mdn='7897654321'
+        ),
+        DeviceInfo(
+            id='A100003861E585',
+            kind='meid',
+            mdn='7897650914'
+        )
+    ]
+)
+
+result = devices_locations_controller.create_location_report(body)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33",
+  "status": "QUEUED"
 }
 ```
 

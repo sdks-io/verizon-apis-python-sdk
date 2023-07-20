@@ -72,57 +72,6 @@ class SoftwareManagementCallbacksV3Controller(BaseController):
             .local_error('400', 'Unexpected error.', FotaV3ResultException)
         ).execute()
 
-    def update_callback(self,
-                        acc,
-                        body):
-        """Does a PUT request to /callbacks/{acc}.
-
-        This endpoint allows the user to update the HTTPS callback address.
-
-        Args:
-            acc (string): Account identifier.
-            body (FotaV3CallbackRegistrationRequest): Callback URL
-                registration.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Return
-                callback registration.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
-            .path('/callbacks/{acc}')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FotaV3CallbackRegistrationResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV3ResultException)
-        ).execute()
-
     def register_callback(self,
                           acc,
                           body):
@@ -213,6 +162,57 @@ class SoftwareManagementCallbacksV3Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FotaV3SuccessResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV3ResultException)
+        ).execute()
+
+    def update_callback(self,
+                        acc,
+                        body):
+        """Does a PUT request to /callbacks/{acc}.
+
+        This endpoint allows the user to update the HTTPS callback address.
+
+        Args:
+            acc (string): Account identifier.
+            body (FotaV3CallbackRegistrationRequest): Callback URL
+                registration.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Return
+                callback registration.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
+            .path('/callbacks/{acc}')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('acc')
+                            .value(acc)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FotaV3CallbackRegistrationResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV3ResultException)
         ).execute()

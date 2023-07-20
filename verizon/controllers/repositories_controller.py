@@ -18,8 +18,8 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.repository import Repository
 from verizon.models.edge_service_onboarding_delete_result import EdgeServiceOnboardingDeleteResult
+from verizon.models.repository import Repository
 from verizon.exceptions.edge_service_onboarding_result_error_exception import EdgeServiceOnboardingResultErrorException
 
 
@@ -28,6 +28,61 @@ class RepositoriesController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(RepositoriesController, self).__init__(config)
+
+    def delete_repository(self,
+                          account_name,
+                          repository_name,
+                          correlation_id=None):
+        """Does a DELETE request to /v1/config/repository/{repositoryName}.
+
+        Delete the repository.
+
+        Args:
+            account_name (string): User account name.
+            repository_name (string): Name of the repository which is about to
+                be deleted.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/config/repository/{repositoryName}')
+            .http_method(HttpMethodEnum.DELETE)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('repositoryName')
+                            .value(repository_name)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(EdgeServiceOnboardingDeleteResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
 
     def list_repositories(self,
                           account_name,
@@ -133,60 +188,5 @@ class RepositoriesController(BaseController):
             .is_api_response(True)
             .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
             .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
-
-    def delete_repository(self,
-                          account_name,
-                          repository_name,
-                          correlation_id=None):
-        """Does a DELETE request to /v1/config/repository/{repositoryName}.
-
-        Delete the repository.
-
-        Args:
-            account_name (string): User account name.
-            repository_name (string): Name of the repository which is about to
-                be deleted.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/config/repository/{repositoryName}')
-            .http_method(HttpMethodEnum.DELETE)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('repositoryName')
-                            .value(repository_name)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(EdgeServiceOnboardingDeleteResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
             .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
         ).execute()

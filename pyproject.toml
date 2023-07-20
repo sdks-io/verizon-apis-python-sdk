@@ -2,7 +2,7 @@
 build-backend = "setuptools.build_meta"
 requires = ["setuptools>=61.0"]
 [project]
-name = "verizon-ap-is-sdk"
+name = "sdksio-verizon-apis-sdk"
 description = "Use the Verizon API for connectivity management, device diagnostics, device location, edge discovery service, edge performance, software management and much more."
 version = "1.0.0"
 readme = "README.md"

@@ -28,49 +28,6 @@ class DevicesLocationSubscriptionsController(BaseController):
     def __init__(self, config):
         super(DevicesLocationSubscriptionsController, self).__init__(config)
 
-    def get_location_service_subscription_status(self,
-                                                 account):
-        """Does a GET request to /subscriptions/{account}.
-
-        This subscriptions endpoint retrieves an account's current location
-        subscription status.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Device
-                location subscription information.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/subscriptions/{account}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceLocationSubscription.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', DeviceLocationResultException)
-        ).execute()
-
     def get_location_service_usage(self,
                                    body):
         """Does a POST request to /usage.
@@ -112,6 +69,49 @@ class DevicesLocationSubscriptionsController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
+    def get_location_service_subscription_status(self,
+                                                 account):
+        """Does a GET request to /subscriptions/{account}.
+
+        This subscriptions endpoint retrieves an account's current location
+        subscription status.
+
+        Args:
+            account (string): Account identifier in "##########-#####".
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Device
+                location subscription information.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/subscriptions/{account}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceLocationSubscription.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', DeviceLocationResultException)
         ).execute()

@@ -18,9 +18,9 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.anomaly_detection_trigger import AnomalyDetectionTrigger
 from verizon.models.intelligence_success_result import IntelligenceSuccessResult
 from verizon.models.anomaly_trigger_result import AnomalyTriggerResult
+from verizon.models.anomaly_detection_trigger import AnomalyDetectionTrigger
 from verizon.exceptions.intelligence_result_exception import IntelligenceResultException
 
 
@@ -29,51 +29,6 @@ class AnomalyTriggersController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(AnomalyTriggersController, self).__init__(config)
-
-    def create_anomaly_detection_trigger(self,
-                                         body):
-        """Does a POST request to /v2/triggers.
-
-        Creates the trigger to identify an anomaly.
-
-        Args:
-            body (list of CreateTriggerRequestOptions): Request to create an
-                anomaly trigger.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Result of
-                request to create a trigger for anomaly detection.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v2/triggers')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(AnomalyDetectionTrigger.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'An error occurred.', IntelligenceResultException)
-        ).execute()
 
     def update_anomaly_detection_trigger(self,
                                          body):
@@ -158,6 +113,51 @@ class AnomalyTriggersController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AnomalyTriggerResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'An error occurred.', IntelligenceResultException)
+        ).execute()
+
+    def create_anomaly_detection_trigger(self,
+                                         body):
+        """Does a POST request to /v2/triggers.
+
+        Creates the trigger to identify an anomaly.
+
+        Args:
+            body (list of CreateTriggerRequestOptions): Request to create an
+                anomaly trigger.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Result of
+                request to create a trigger for anomaly detection.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v2/triggers')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(AnomalyDetectionTrigger.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'An error occurred.', IntelligenceResultException)
         ).execute()

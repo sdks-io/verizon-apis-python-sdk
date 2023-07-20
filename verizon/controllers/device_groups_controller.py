@@ -19,8 +19,8 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.connectivity_management_success_result import ConnectivityManagementSuccessResult
-from verizon.models.device_group import DeviceGroup
 from verizon.models.device_group_devices_data import DeviceGroupDevicesData
+from verizon.models.device_group import DeviceGroup
 from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
 
@@ -29,6 +29,119 @@ class DeviceGroupsController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(DeviceGroupsController, self).__init__(config)
+
+    def update_device_group(self,
+                            aname,
+                            gname,
+                            body):
+        """Does a PUT request to /v1/groups/{aname}/name/{gname}.
+
+        Make changes to a device group, including changing the name and
+        description, and adding or removing devices.
+
+        Args:
+            aname (string): Account name.
+            gname (string): Group name.
+            body (DeviceGroupUpdateRequest): Request to update device group.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers.
+                Successful response.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v1/groups/{aname}/name/{gname}')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('aname')
+                            .value(aname)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('gname')
+                            .value(gname)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ConnectivityManagementSuccessResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
+
+    def get_device_group_information(self,
+                                     aname,
+                                     gname,
+                                     next=None):
+        """Does a GET request to /v1/groups/{aname}/name/{gname}.
+
+        When HTTP status is 202, a URL will be returned in the Location header
+        of the form /groups/{aname}/name/{gname}/?next={token}. This URL can
+        be used to request the next set of groups.
+
+        Args:
+            aname (string): Account name.
+            gname (string): Group name.
+            next (long|int, optional): Continue the previous query from the
+                pageUrl pagetoken.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers.
+                Successful response.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v1/groups/{aname}/name/{gname}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('aname')
+                            .value(aname)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('gname')
+                            .value(gname)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('next')
+                         .value(next))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceGroupDevicesData.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
 
     def create_device_group(self,
                             body):
@@ -115,119 +228,6 @@ class DeviceGroupsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(DeviceGroup.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
-        ).execute()
-
-    def get_device_group_information(self,
-                                     aname,
-                                     gname,
-                                     next=None):
-        """Does a GET request to /v1/groups/{aname}/name/{gname}.
-
-        When HTTP status is 202, a URL will be returned in the Location header
-        of the form /groups/{aname}/name/{gname}/?next={token}. This URL can
-        be used to request the next set of groups.
-
-        Args:
-            aname (string): Account name.
-            gname (string): Group name.
-            next (long|int, optional): Continue the previous query from the
-                pageUrl pagetoken.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers.
-                Successful response.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/groups/{aname}/name/{gname}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('aname')
-                            .value(aname)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('gname')
-                            .value(gname)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('next')
-                         .value(next))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceGroupDevicesData.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
-        ).execute()
-
-    def update_device_group(self,
-                            aname,
-                            gname,
-                            body):
-        """Does a PUT request to /v1/groups/{aname}/name/{gname}.
-
-        Make changes to a device group, including changing the name and
-        description, and adding or removing devices.
-
-        Args:
-            aname (string): Account name.
-            gname (string): Group name.
-            body (DeviceGroupUpdateRequest): Request to update device group.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers.
-                Successful response.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/groups/{aname}/name/{gname}')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('aname')
-                            .value(aname)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('gname')
-                            .value(gname)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ConnectivityManagementSuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Error response.', ConnectivityManagementResultException)
         ).execute()

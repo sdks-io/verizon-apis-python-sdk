@@ -10,111 +10,17 @@ service_onboarding_controller = client.service_onboarding
 
 ## Methods
 
-* [Upload Service Workload File](../../doc/controllers/service-onboarding.md#upload-service-workload-file)
 * [List Services](../../doc/controllers/service-onboarding.md#list-services)
 * [Register Service](../../doc/controllers/service-onboarding.md#register-service)
+* [Upload Service Workload File](../../doc/controllers/service-onboarding.md#upload-service-workload-file)
 * [List Service Details](../../doc/controllers/service-onboarding.md#list-service-details)
-* [Remove Service](../../doc/controllers/service-onboarding.md#remove-service)
-* [Start Service Onboarding](../../doc/controllers/service-onboarding.md#start-service-onboarding)
-* [Get Service Job Status](../../doc/controllers/service-onboarding.md#get-service-job-status)
 * [Start Service Claim Sand Box Testing](../../doc/controllers/service-onboarding.md#start-service-claim-sand-box-testing)
-* [Start Service Publishing](../../doc/controllers/service-onboarding.md#start-service-publishing)
+* [Remove Service](../../doc/controllers/service-onboarding.md#remove-service)
 * [Stop Service Testing](../../doc/controllers/service-onboarding.md#stop-service-testing)
 * [Mark Service as Ready for Public Use](../../doc/controllers/service-onboarding.md#mark-service-as-ready-for-public-use)
-
-
-# Upload Service Workload File
-
-Upload workload payload/package in the MEC platform.
-
-```python
-def upload_service_workload_file(self,
-                                account_name,
-                                service_name,
-                                version,
-                                category_type,
-                                category_name,
-                                payload,
-                                correlation_id=None,
-                                category_version=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `service_name` | `string` | Template, Required | Service name to which the file is going to be associated.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `version` | `string` | Template, Required | Version of the service being used.<br>**Constraints**: *Maximum Length*: `10`, *Pattern*: `^[0-9\.]+$` |
-| `category_type` | [`CategoryTypeEnum`](../../doc/models/category-type-enum.md) | Query, Required | Type of the file being uploaded.<br>**Constraints**: *Maximum Length*: `100`, *Pattern*: `^[a-zA-Z0-9-_.]+$` |
-| `category_name` | `string` | Query, Required | `workloadName` used in the service while creation.<br>**Constraints**: *Maximum Length*: `100`, *Pattern*: `^[a-zA-Z0-9-_.]+$` |
-| `payload` | `typing.BinaryIO` | Form, Required | Payload/file which is to be uploaded should be provided in formData. |
-| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
-| `category_version` | `string` | Query, Optional | It is mandatory for only service file, not mandatory for workload and workflow file.<br>**Constraints**: *Maximum Length*: `100`, *Pattern*: `^[0-9\.]+$` |
-
-## Response Type
-
-[`ServiceFile`](../../doc/models/service-file.md)
-
-## Example Usage
-
-```python
-account_name = 'test_account1'
-
-service_name = 'doccheck'
-
-version = '1.0.0'
-
-category_type = CategoryTypeEnum.GENERAL_VALIDATION
-
-category_name = 'gst-server-workload'
-
-payload = FileWrapper(Path('dummy_file').open('rb'), 'optional-content-type')
-
-correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
-
-category_version = '1.0.0'
-
-result = service_onboarding_controller.upload_service_workload_file(
-    account_name,
-    service_name,
-    version,
-    category_type,
-    category_name,
-    payload,
-    correlation_id,
-    category_version
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "id": "uuid",
-  "serviceName": "gst-server",
-  "serviceVersion": "1.0.0",
-  "file": "values.yaml",
-  "categoryName": "gst-server-workload",
-  "categoryVersion": "1.0.0",
-  "categoryType": "WORKLOAD_VALUES",
-  "validationStatus": "Validation Success",
-  "createdDate": "2006-01-02T15:04:05Z",
-  "lastModifiedDate": "2006-01-02T15:04:05Z",
-  "createdBy": "User",
-  "updatedBy": "User"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 404 | Not found. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+* [Start Service Onboarding](../../doc/controllers/service-onboarding.md#start-service-onboarding)
+* [Get Service Job Status](../../doc/controllers/service-onboarding.md#get-service-job-status)
+* [Start Service Publishing](../../doc/controllers/service-onboarding.md#start-service-publishing)
 
 
 # List Services
@@ -388,6 +294,100 @@ print(result)
 | 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
 
 
+# Upload Service Workload File
+
+Upload workload payload/package in the MEC platform.
+
+```python
+def upload_service_workload_file(self,
+                                account_name,
+                                service_name,
+                                version,
+                                category_type,
+                                category_name,
+                                payload,
+                                correlation_id=None,
+                                category_version=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `service_name` | `string` | Template, Required | Service name to which the file is going to be associated.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `version` | `string` | Template, Required | Version of the service being used.<br>**Constraints**: *Maximum Length*: `10`, *Pattern*: `^[0-9\.]+$` |
+| `category_type` | [`CategoryTypeEnum`](../../doc/models/category-type-enum.md) | Query, Required | Type of the file being uploaded.<br>**Constraints**: *Maximum Length*: `100`, *Pattern*: `^[a-zA-Z0-9-_.]+$` |
+| `category_name` | `string` | Query, Required | `workloadName` used in the service while creation.<br>**Constraints**: *Maximum Length*: `100`, *Pattern*: `^[a-zA-Z0-9-_.]+$` |
+| `payload` | `typing.BinaryIO` | Form, Required | Payload/file which is to be uploaded should be provided in formData. |
+| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
+| `category_version` | `string` | Query, Optional | It is mandatory for only service file, not mandatory for workload and workflow file.<br>**Constraints**: *Maximum Length*: `100`, *Pattern*: `^[0-9\.]+$` |
+
+## Response Type
+
+[`ServiceFile`](../../doc/models/service-file.md)
+
+## Example Usage
+
+```python
+account_name = 'test_account1'
+
+service_name = 'doccheck'
+
+version = '1.0.0'
+
+category_type = CategoryTypeEnum.GENERAL_VALIDATION
+
+category_name = 'gst-server-workload'
+
+payload = FileWrapper(Path('dummy_file').open('rb'), 'optional-content-type')
+
+correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
+
+category_version = '1.0.0'
+
+result = service_onboarding_controller.upload_service_workload_file(
+    account_name,
+    service_name,
+    version,
+    category_type,
+    category_name,
+    payload,
+    correlation_id,
+    category_version
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "id": "uuid",
+  "serviceName": "gst-server",
+  "serviceVersion": "1.0.0",
+  "file": "values.yaml",
+  "categoryName": "gst-server-workload",
+  "categoryVersion": "1.0.0",
+  "categoryType": "WORKLOAD_VALUES",
+  "validationStatus": "Validation Success",
+  "createdDate": "2006-01-02T15:04:05Z",
+  "lastModifiedDate": "2006-01-02T15:04:05Z",
+  "createdBy": "User",
+  "updatedBy": "User"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 404 | Not found. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+
+
 # List Service Details
 
 Fetch a service details within user's organization using service name and version.
@@ -493,6 +493,79 @@ print(result)
 | Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
 
 
+# Start Service Claim Sand Box Testing
+
+Initiate testing of a service in sandbox environment per claim based on service's compatibility(s).
+
+```python
+def start_service_claim_sand_box_testing(self,
+                                        account_name,
+                                        service_id,
+                                        claim_id,
+                                        body,
+                                        correlation_id=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `service_id` | `string` | Template, Required | An id of the service created e.g. UUID.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `claim_id` | `string` | Template, Required | Id of the claim created e.g. UUID.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `body` | [`ClusterInfoDetails`](../../doc/models/cluster-info-details.md) | Body, Required | - |
+| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
+
+## Response Type
+
+[`ServiceManagementResult`](../../doc/models/service-management-result.md)
+
+## Example Usage
+
+```python
+account_name = 'test_account1'
+
+service_id = 'b32321d2-4ee3-458b-a70b-e956525d46c9'
+
+claim_id = '58296746-57ee-44f8-8107-399b61d58356'
+
+body = ClusterInfoDetails(
+    cluster_name='ctc-1',
+    namespace='default'
+)
+
+correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
+
+result = service_onboarding_controller.start_service_claim_sand_box_testing(
+    account_name,
+    service_id,
+    claim_id,
+    body,
+    correlation_id
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "jobId": "0c6e8560-e154-40f9-961e-28da3698436d",
+  "status": "Inprogress",
+  "state": "DRAFT"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+
+
 # Remove Service
 
 Remove a service from user's organization.
@@ -554,6 +627,136 @@ print(result)
 | 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
 | 404 | Not found. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
 | 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+
+
+# Stop Service Testing
+
+Start service certification process. On successful completion of this process, service's status will change to certified.
+
+```python
+def stop_service_testing(self,
+                        account_name,
+                        service_name,
+                        version,
+                        correlation_id=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `service_name` | `string` | Template, Required | Name of the service e.g. any sub string of serviceName.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `version` | `string` | Template, Required | Version of service which is to be certified.<br>**Constraints**: *Maximum Length*: `10`, *Pattern*: `^[0-9\.]+$` |
+| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
+
+## Response Type
+
+[`ServiceManagementResult`](../../doc/models/service-management-result.md)
+
+## Example Usage
+
+```python
+account_name = 'test_account1'
+
+service_name = 'dev-api-test-service-mdp-1'
+
+version = '1.0.0'
+
+correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
+
+result = service_onboarding_controller.stop_service_testing(
+    account_name,
+    service_name,
+    version,
+    correlation_id
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "jobId": "0c6e8560-e154-40f9-961e-28da3698436d",
+  "status": "Inprogress",
+  "state": "DRAFT"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+
+
+# Mark Service as Ready for Public Use
+
+Start the process to change a service's status to "Ready to Use". On success, service's status will be changed to "Ready to Use". Only a ready to use service can be deployed in production environment.
+
+```python
+def mark_service_as_ready_for_public_use(self,
+                                        account_name,
+                                        service_name,
+                                        version,
+                                        correlation_id=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `service_name` | `string` | Template, Required | Name of the service e.g. any sub string of serviceName.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
+| `version` | `string` | Template, Required | Version of the service which is already certified and is ready for public use.<br>**Constraints**: *Maximum Length*: `10`, *Pattern*: `^[0-9\.]+$` |
+| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
+
+## Response Type
+
+[`ServiceManagementResult`](../../doc/models/service-management-result.md)
+
+## Example Usage
+
+```python
+account_name = 'test_account1'
+
+service_name = 'dev-api-test-service-mdp-1'
+
+version = '1.0.0'
+
+correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
+
+result = service_onboarding_controller.mark_service_as_ready_for_public_use(
+    account_name,
+    service_name,
+    version,
+    correlation_id
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "jobId": "0c6e8560-e154-40f9-961e-28da3698436d",
+  "status": "Inprogress",
+  "state": "DRAFT"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
+| Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
 
 
 # Start Service Onboarding
@@ -681,79 +884,6 @@ print(result)
 | 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
 
 
-# Start Service Claim Sand Box Testing
-
-Initiate testing of a service in sandbox environment per claim based on service's compatibility(s).
-
-```python
-def start_service_claim_sand_box_testing(self,
-                                        account_name,
-                                        service_id,
-                                        claim_id,
-                                        body,
-                                        correlation_id=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `service_id` | `string` | Template, Required | An id of the service created e.g. UUID.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `claim_id` | `string` | Template, Required | Id of the claim created e.g. UUID.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `body` | [`ClusterInfoDetails`](../../doc/models/cluster-info-details.md) | Body, Required | - |
-| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
-
-## Response Type
-
-[`ServiceManagementResult`](../../doc/models/service-management-result.md)
-
-## Example Usage
-
-```python
-account_name = 'test_account1'
-
-service_id = 'b32321d2-4ee3-458b-a70b-e956525d46c9'
-
-claim_id = '58296746-57ee-44f8-8107-399b61d58356'
-
-body = ClusterInfoDetails(
-    cluster_name='ctc-1',
-    namespace='default'
-)
-
-correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
-
-result = service_onboarding_controller.start_service_claim_sand_box_testing(
-    account_name,
-    service_id,
-    claim_id,
-    body,
-    correlation_id
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "jobId": "0c6e8560-e154-40f9-961e-28da3698436d",
-  "status": "Inprogress",
-  "state": "DRAFT"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-
-
 # Start Service Publishing
 
 Start publishing a service. On successful completion, service's status can be marked as Publish.
@@ -791,136 +921,6 @@ version = '1.0.0'
 correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
 
 result = service_onboarding_controller.start_service_publishing(
-    account_name,
-    service_name,
-    version,
-    correlation_id
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "jobId": "0c6e8560-e154-40f9-961e-28da3698436d",
-  "status": "Inprogress",
-  "state": "DRAFT"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-
-
-# Stop Service Testing
-
-Start service certification process. On successful completion of this process, service's status will change to certified.
-
-```python
-def stop_service_testing(self,
-                        account_name,
-                        service_name,
-                        version,
-                        correlation_id=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `service_name` | `string` | Template, Required | Name of the service e.g. any sub string of serviceName.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `version` | `string` | Template, Required | Version of service which is to be certified.<br>**Constraints**: *Maximum Length*: `10`, *Pattern*: `^[0-9\.]+$` |
-| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
-
-## Response Type
-
-[`ServiceManagementResult`](../../doc/models/service-management-result.md)
-
-## Example Usage
-
-```python
-account_name = 'test_account1'
-
-service_name = 'dev-api-test-service-mdp-1'
-
-version = '1.0.0'
-
-correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
-
-result = service_onboarding_controller.stop_service_testing(
-    account_name,
-    service_name,
-    version,
-    correlation_id
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "jobId": "0c6e8560-e154-40f9-961e-28da3698436d",
-  "status": "Inprogress",
-  "state": "DRAFT"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Bad Request. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 401 | Unauthorized. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| 500 | Internal Server Error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-| Default | Unexpected error. | [`EdgeServiceOnboardingResultErrorException`](../../doc/models/edge-service-onboarding-result-error-exception.md) |
-
-
-# Mark Service as Ready for Public Use
-
-Start the process to change a service's status to "Ready to Use". On success, service's status will be changed to "Ready to Use". Only a ready to use service can be deployed in production environment.
-
-```python
-def mark_service_as_ready_for_public_use(self,
-                                        account_name,
-                                        service_name,
-                                        version,
-                                        correlation_id=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account_name` | `string` | Header, Required | User account name.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `service_name` | `string` | Template, Required | Name of the service e.g. any sub string of serviceName.<br>**Constraints**: *Maximum Length*: `64`, *Pattern*: `^[a-zA-Z0-9\-_]+$` |
-| `version` | `string` | Template, Required | Version of the service which is already certified and is ready for public use.<br>**Constraints**: *Maximum Length*: `10`, *Pattern*: `^[0-9\.]+$` |
-| `correlation_id` | `string` | Header, Optional | **Constraints**: *Maximum Length*: `50`, *Pattern*: `^[a-zA-Z0-9-]+$` |
-
-## Response Type
-
-[`ServiceManagementResult`](../../doc/models/service-management-result.md)
-
-## Example Usage
-
-```python
-account_name = 'test_account1'
-
-service_name = 'dev-api-test-service-mdp-1'
-
-version = '1.0.0'
-
-correlation_id = '9958f2f8-c4e3-46e0-8982-356de6515ae9'
-
-result = service_onboarding_controller.mark_service_as_ready_for_public_use(
     account_name,
     service_name,
     version,

@@ -18,8 +18,8 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.device_management_result import DeviceManagementResult
 from verizon.models.sms_messages_query_result import SMSMessagesQueryResult
+from verizon.models.device_management_result import DeviceManagementResult
 from verizon.models.connectivity_management_success_result import ConnectivityManagementSuccessResult
 from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
@@ -29,52 +29,6 @@ class SMSController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(SMSController, self).__init__(config)
-
-    def send_sms_to_device(self,
-                           body):
-        """Does a POST request to /v1/sms.
-
-        The messages are queued on the ThingSpace Platform and sent as soon as
-        possible, but they may be delayed due to traffic and routing
-        considerations.
-
-        Args:
-            body (SMSSendRequest): Request to send SMS.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID received on a successful response.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/sms')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceManagementResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
-        ).execute()
 
     def list_devices_sms_messages(self,
                                   aname,
@@ -122,6 +76,52 @@ class SMSController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SMSMessagesQueryResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
+
+    def send_sms_to_device(self,
+                           body):
+        """Does a POST request to /v1/sms.
+
+        The messages are queued on the ThingSpace Platform and sent as soon as
+        possible, but they may be delayed due to traffic and routing
+        considerations.
+
+        Args:
+            body (SMSSendRequest): Request to send SMS.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request
+                ID received on a successful response.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v1/sms')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceManagementResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Error response.', ConnectivityManagementResultException)
         ).execute()

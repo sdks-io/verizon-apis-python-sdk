@@ -19,9 +19,9 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.software_package import SoftwarePackage
+from verizon.models.v2_campaign_history import V2CampaignHistory
 from verizon.models.v2_account_device_list import V2AccountDeviceList
 from verizon.models.device_software_upgrade import DeviceSoftwareUpgrade
-from verizon.models.v2_campaign_history import V2CampaignHistory
 from verizon.models.v2_campaign_device import V2CampaignDevice
 from verizon.exceptions.fota_v2_result_exception import FotaV2ResultException
 
@@ -78,6 +78,59 @@ class SoftwareManagementReportsV2Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SoftwarePackage.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
+    def get_campaign_history_by_status(self,
+                                       account,
+                                       campaign_status,
+                                       last_seen_campaign_id=None):
+        """Does a GET request to /reports/{account}/campaigns.
+
+        The report endpoint allows user to get campaign history of an account
+        for specified status.
+
+        Args:
+            account (string): Account identifier.
+            campaign_status (string): Status of the campaign.
+            last_seen_campaign_id (string, optional): Last seen campaign Id.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Return
+                list of campaign history.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/reports/{account}/campaigns')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('campaignStatus')
+                         .value(campaign_status))
+            .query_param(Parameter()
+                         .key('lastSeenCampaignId')
+                         .value(last_seen_campaign_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(V2CampaignHistory.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()
@@ -182,59 +235,6 @@ class SoftwareManagementReportsV2Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(DeviceSoftwareUpgrade.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def get_campaign_history_by_status(self,
-                                       account,
-                                       campaign_status,
-                                       last_seen_campaign_id=None):
-        """Does a GET request to /reports/{account}/campaigns.
-
-        The report endpoint allows user to get campaign history of an account
-        for specified status.
-
-        Args:
-            account (string): Account identifier.
-            campaign_status (string): Status of the campaign.
-            last_seen_campaign_id (string, optional): Last seen campaign Id.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Return
-                list of campaign history.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/reports/{account}/campaigns')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('campaignStatus')
-                         .value(campaign_status))
-            .query_param(Parameter()
-                         .key('lastSeenCampaignId')
-                         .value(last_seen_campaign_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(V2CampaignHistory.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()

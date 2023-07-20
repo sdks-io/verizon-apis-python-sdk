@@ -19,11 +19,11 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.service_file import ServiceFile
 from verizon.models.services import Services
 from verizon.models.service import Service
-from verizon.models.edge_service_onboarding_delete_result import EdgeServiceOnboardingDeleteResult
+from verizon.models.service_file import ServiceFile
 from verizon.models.service_management_result import ServiceManagementResult
+from verizon.models.edge_service_onboarding_delete_result import EdgeServiceOnboardingDeleteResult
 from verizon.models.current_status import CurrentStatus
 from verizon.exceptions.edge_service_onboarding_result_error_exception import EdgeServiceOnboardingResultErrorException
 
@@ -33,93 +33,6 @@ class ServiceOnboardingController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(ServiceOnboardingController, self).__init__(config)
-
-    def upload_service_workload_file(self,
-                                     account_name,
-                                     service_name,
-                                     version,
-                                     category_type,
-                                     category_name,
-                                     payload,
-                                     correlation_id=None,
-                                     category_version=None):
-        """Does a POST request to /v1/files/{serviceName}/{version}/uploadAndValidate.
-
-        Upload workload payload/package in the MEC platform.
-
-        Args:
-            account_name (string): User account name.
-            service_name (string): Service name to which the file is going to
-                be associated.
-            version (string): Version of the service being used.
-            category_type (CategoryTypeEnum): Type of the file being
-                uploaded.
-            category_name (string): `workloadName` used in the service while
-                creation.
-            payload (typing.BinaryIO): Payload/file which is to be uploaded
-                should be provided in formData.
-            correlation_id (string, optional): TODO: type description here.
-            category_version (string, optional): It is mandatory for only
-                service file, not mandatory for workload and workflow file.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Upload
-                success.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/files/{serviceName}/{version}/uploadAndValidate')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('serviceName')
-                            .value(service_name)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('version')
-                            .value(version)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('categoryType')
-                         .value(category_type))
-            .query_param(Parameter()
-                         .key('categoryName')
-                         .value(category_name))
-            .multipart_param(Parameter()
-                             .key('payload')
-                             .value(payload)
-                             .default_content_type('application/octet-stream'))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .query_param(Parameter()
-                         .key('categoryVersion')
-                         .value(category_version))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ServiceFile.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
 
     def list_services(self,
                       account_name,
@@ -272,6 +185,93 @@ class ServiceOnboardingController(BaseController):
             .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
         ).execute()
 
+    def upload_service_workload_file(self,
+                                     account_name,
+                                     service_name,
+                                     version,
+                                     category_type,
+                                     category_name,
+                                     payload,
+                                     correlation_id=None,
+                                     category_version=None):
+        """Does a POST request to /v1/files/{serviceName}/{version}/uploadAndValidate.
+
+        Upload workload payload/package in the MEC platform.
+
+        Args:
+            account_name (string): User account name.
+            service_name (string): Service name to which the file is going to
+                be associated.
+            version (string): Version of the service being used.
+            category_type (CategoryTypeEnum): Type of the file being
+                uploaded.
+            category_name (string): `workloadName` used in the service while
+                creation.
+            payload (typing.BinaryIO): Payload/file which is to be uploaded
+                should be provided in formData.
+            correlation_id (string, optional): TODO: type description here.
+            category_version (string, optional): It is mandatory for only
+                service file, not mandatory for workload and workflow file.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Upload
+                success.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/files/{serviceName}/{version}/uploadAndValidate')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('serviceName')
+                            .value(service_name)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('version')
+                            .value(version)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('categoryType')
+                         .value(category_type))
+            .query_param(Parameter()
+                         .key('categoryName')
+                         .value(category_name))
+            .multipart_param(Parameter()
+                             .key('payload')
+                             .value(payload)
+                             .default_content_type('application/octet-stream'))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .query_param(Parameter()
+                         .key('categoryVersion')
+                         .value(category_version))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ServiceFile.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
+
     def list_service_details(self,
                              account_name,
                              service_name,
@@ -336,6 +336,75 @@ class ServiceOnboardingController(BaseController):
             .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
         ).execute()
 
+    def start_service_claim_sand_box_testing(self,
+                                             account_name,
+                                             service_id,
+                                             claim_id,
+                                             body,
+                                             correlation_id=None):
+        """Does a PUT request to /v1/services/{serviceId}/claims/{claimId}/sandBoxStart.
+
+        Initiate testing of a service in sandbox environment per claim based
+        on service's compatibility(s).
+
+        Args:
+            account_name (string): User account name.
+            service_id (string): An id of the service created e.g. UUID.
+            claim_id (string): Id of the claim created e.g. UUID.
+            body (ClusterInfoDetails): TODO: type description here.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/services/{serviceId}/claims/{claimId}/sandBoxStart')
+            .http_method(HttpMethodEnum.PUT)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('serviceId')
+                            .value(service_id)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('claimId')
+                            .value(claim_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ServiceManagementResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+            .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
+
     def remove_service(self,
                        account_name,
                        service_name,
@@ -395,6 +464,132 @@ class ServiceOnboardingController(BaseController):
             .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
             .local_error('404', 'Not found.', EdgeServiceOnboardingResultErrorException)
             .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
+
+    def stop_service_testing(self,
+                             account_name,
+                             service_name,
+                             version,
+                             correlation_id=None):
+        """Does a PUT request to /v1/services/{serviceName}/{version}/certify.
+
+        Start service certification process. On successful completion of this
+        process, service's status will change to certified.
+
+        Args:
+            account_name (string): User account name.
+            service_name (string): Name of the service e.g. any sub string of
+                serviceName.
+            version (string): Version of service which is to be certified.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/services/{serviceName}/{version}/certify')
+            .http_method(HttpMethodEnum.PUT)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('serviceName')
+                            .value(service_name)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('version')
+                            .value(version)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ServiceManagementResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+            .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
+        ).execute()
+
+    def mark_service_as_ready_for_public_use(self,
+                                             account_name,
+                                             service_name,
+                                             version,
+                                             correlation_id=None):
+        """Does a PUT request to /v1/services/{serviceName}/{version}/readyToPublicUse.
+
+        Start the process to change a service's status to "Ready to Use". On
+        success, service's status will be changed to "Ready to Use". Only a
+        ready to use service can be deployed in production environment.
+
+        Args:
+            account_name (string): User account name.
+            service_name (string): Name of the service e.g. any sub string of
+                serviceName.
+            version (string): Version of the service which is already
+                certified and is ready for public use.
+            correlation_id (string, optional): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. OK.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SERVICES)
+            .path('/v1/services/{serviceName}/{version}/readyToPublicUse')
+            .http_method(HttpMethodEnum.PUT)
+            .header_param(Parameter()
+                          .key('AccountName')
+                          .value(account_name))
+            .template_param(Parameter()
+                            .key('serviceName')
+                            .value(service_name)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('version')
+                            .value(version)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('correlationId')
+                          .value(correlation_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ServiceManagementResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
+            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
+            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
+            .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
         ).execute()
 
     def start_service_onboarding(self,
@@ -518,75 +713,6 @@ class ServiceOnboardingController(BaseController):
             .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
         ).execute()
 
-    def start_service_claim_sand_box_testing(self,
-                                             account_name,
-                                             service_id,
-                                             claim_id,
-                                             body,
-                                             correlation_id=None):
-        """Does a PUT request to /v1/services/{serviceId}/claims/{claimId}/sandBoxStart.
-
-        Initiate testing of a service in sandbox environment per claim based
-        on service's compatibility(s).
-
-        Args:
-            account_name (string): User account name.
-            service_id (string): An id of the service created e.g. UUID.
-            claim_id (string): Id of the claim created e.g. UUID.
-            body (ClusterInfoDetails): TODO: type description here.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/services/{serviceId}/claims/{claimId}/sandBoxStart')
-            .http_method(HttpMethodEnum.PUT)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('serviceId')
-                            .value(service_id)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('claimId')
-                            .value(claim_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ServiceManagementResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-            .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
-
     def start_service_publishing(self,
                                  account_name,
                                  service_name,
@@ -619,132 +745,6 @@ class ServiceOnboardingController(BaseController):
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SERVICES)
             .path('/v1/services/{serviceName}/{version}/publish')
-            .http_method(HttpMethodEnum.PUT)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('serviceName')
-                            .value(service_name)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('version')
-                            .value(version)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ServiceManagementResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-            .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
-
-    def stop_service_testing(self,
-                             account_name,
-                             service_name,
-                             version,
-                             correlation_id=None):
-        """Does a PUT request to /v1/services/{serviceName}/{version}/certify.
-
-        Start service certification process. On successful completion of this
-        process, service's status will change to certified.
-
-        Args:
-            account_name (string): User account name.
-            service_name (string): Name of the service e.g. any sub string of
-                serviceName.
-            version (string): Version of service which is to be certified.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/services/{serviceName}/{version}/certify')
-            .http_method(HttpMethodEnum.PUT)
-            .header_param(Parameter()
-                          .key('AccountName')
-                          .value(account_name))
-            .template_param(Parameter()
-                            .key('serviceName')
-                            .value(service_name)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('version')
-                            .value(version)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('correlationId')
-                          .value(correlation_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ServiceManagementResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad Request.', EdgeServiceOnboardingResultErrorException)
-            .local_error('401', 'Unauthorized.', EdgeServiceOnboardingResultErrorException)
-            .local_error('500', 'Internal Server Error.', EdgeServiceOnboardingResultErrorException)
-            .local_error('default', 'Unexpected error.', EdgeServiceOnboardingResultErrorException)
-        ).execute()
-
-    def mark_service_as_ready_for_public_use(self,
-                                             account_name,
-                                             service_name,
-                                             version,
-                                             correlation_id=None):
-        """Does a PUT request to /v1/services/{serviceName}/{version}/readyToPublicUse.
-
-        Start the process to change a service's status to "Ready to Use". On
-        success, service's status will be changed to "Ready to Use". Only a
-        ready to use service can be deployed in production environment.
-
-        Args:
-            account_name (string): User account name.
-            service_name (string): Name of the service e.g. any sub string of
-                serviceName.
-            version (string): Version of the service which is already
-                certified and is ready for public use.
-            correlation_id (string, optional): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. OK.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SERVICES)
-            .path('/v1/services/{serviceName}/{version}/readyToPublicUse')
             .http_method(HttpMethodEnum.PUT)
             .header_param(Parameter()
                           .key('AccountName')

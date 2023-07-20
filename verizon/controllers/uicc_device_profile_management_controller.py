@@ -18,10 +18,10 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.device_management_result import DeviceManagementResult
 from verizon.models.request_response import RequestResponse
-from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
+from verizon.models.device_management_result import DeviceManagementResult
 from verizon.exceptions.rest_error_response_exception import RestErrorResponseException
+from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
 
 class UICCDeviceProfileManagementController(BaseController):
@@ -30,19 +30,20 @@ class UICCDeviceProfileManagementController(BaseController):
     def __init__(self, config):
         super(UICCDeviceProfileManagementController, self).__init__(config)
 
-    def download_local_profile_to_enable(self,
-                                         body):
-        """Does a POST request to /v1/devices/profile/actions/download_enable.
+    def disable_local_profile(self,
+                              body):
+        """Does a POST request to /v1/devices/profile/actions/disable.
 
-        Downloads an eUICC local profile to devices and enables the profile.
+        Disable a local profile on eUICC devices. The default or boot profile
+        will become the enabled profile.
 
         Args:
-            body (ProfileChangeStateRequest): Device Profile Query
+            body (ProfileChangeStateRequest): Update state
 
         Returns:
             ApiResponse: An object with the response value as well as other
                 useful information such as status codes and headers. Request
-                ID received on a successful response.
+                ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -54,7 +55,7 @@ class UICCDeviceProfileManagementController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.M2M)
-            .path('/v1/devices/profile/actions/download_enable')
+            .path('/v1/devices/profile/actions/disable')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
                           .key('Content-Type')
@@ -69,9 +70,9 @@ class UICCDeviceProfileManagementController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceManagementResult.from_dictionary)
+            .deserialize_into(RequestResponse.from_dictionary)
             .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+            .local_error('400', 'Error Response', RestErrorResponseException)
         ).execute()
 
     def download_local_profile_to_disable(self,
@@ -119,95 +120,6 @@ class UICCDeviceProfileManagementController(BaseController):
             .local_error('400', 'Error response.', ConnectivityManagementResultException)
         ).execute()
 
-    def enable_local_profile(self,
-                             body):
-        """Does a POST request to /v1/devices/profile/actions/enable.
-
-        Enable a local profile that has been downloaded to eUICC devices.
-
-        Args:
-            body (ProfileChangeStateRequest): Update state
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/devices/profile/actions/enable')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(RequestResponse.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error Response', RestErrorResponseException)
-        ).execute()
-
-    def disable_local_profile(self,
-                              body):
-        """Does a POST request to /v1/devices/profile/actions/disable.
-
-        Disable a local profile on eUICC devices. The default or boot profile
-        will become the enabled profile.
-
-        Args:
-            body (ProfileChangeStateRequest): Update state
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/devices/profile/actions/disable')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(RequestResponse.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error Response', RestErrorResponseException)
-        ).execute()
-
     def delete_local_profile(self,
                              body):
         """Does a POST request to /v1/devices/profile/actions/delete.
@@ -235,6 +147,94 @@ class UICCDeviceProfileManagementController(BaseController):
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.M2M)
             .path('/v1/devices/profile/actions/delete')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(RequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error Response', RestErrorResponseException)
+        ).execute()
+
+    def download_local_profile_to_enable(self,
+                                         body):
+        """Does a POST request to /v1/devices/profile/actions/download_enable.
+
+        Downloads an eUICC local profile to devices and enables the profile.
+
+        Args:
+            body (ProfileChangeStateRequest): Device Profile Query
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request
+                ID received on a successful response.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v1/devices/profile/actions/download_enable')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceManagementResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
+
+    def enable_local_profile(self,
+                             body):
+        """Does a POST request to /v1/devices/profile/actions/enable.
+
+        Enable a local profile that has been downloaded to eUICC devices.
+
+        Args:
+            body (ProfileChangeStateRequest): Update state
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request
+                ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v1/devices/profile/actions/enable')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
                           .key('Content-Type')

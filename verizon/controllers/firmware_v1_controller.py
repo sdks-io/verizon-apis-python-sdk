@@ -18,10 +18,10 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.firmware import Firmware
-from verizon.models.firmware_upgrade import FirmwareUpgrade
 from verizon.models.firmware_upgrade_change_result import FirmwareUpgradeChangeResult
+from verizon.models.firmware_upgrade import FirmwareUpgrade
 from verizon.models.fota_v1_success_result import FotaV1SuccessResult
+from verizon.models.firmware import Firmware
 from verizon.exceptions.fota_v1_result_exception import FotaV1ResultException
 
 
@@ -30,145 +30,6 @@ class FirmwareV1Controller(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(FirmwareV1Controller, self).__init__(config)
-
-    def list_available_firmware(self,
-                                account):
-        """Does a GET request to /firmware/{account}.
-
-        Lists all device firmware images available for an account, based on
-        the devices registered to that account.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                available firmware.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/firmware/{account}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Firmware.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
-
-    def schedule_firmware_upgrade(self,
-                                  body):
-        """Does a POST request to /upgrades.
-
-        Schedules a firmware upgrade for devices.
-
-        Args:
-            body (FirmwareUpgradeRequest): Details of the firmware upgrade
-                request.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers.
-                Confirmation of successful firmware upgrade.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FirmwareUpgrade.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
-
-    def list_firmware_upgrade_details(self,
-                                      account,
-                                      upgrade_id):
-        """Does a GET request to /upgrades/{account}/upgrade/{upgradeId}.
-
-        Returns information about a specified upgrade, include the target date
-        of the upgrade, the list of devices in the upgrade, and the status of
-        the upgrade for each device.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-            upgrade_id (string): The UUID of the upgrade, returned by POST
-                /upgrades when the upgrade was scheduled.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Firmware
-                upgrade information.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades/{account}/upgrade/{upgradeId}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('upgradeId')
-                            .value(upgrade_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FirmwareUpgrade.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
 
     def update_firmware_upgrade_devices(self,
                                         account,
@@ -228,6 +89,51 @@ class FirmwareV1Controller(BaseController):
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()
 
+    def schedule_firmware_upgrade(self,
+                                  body):
+        """Does a POST request to /upgrades.
+
+        Schedules a firmware upgrade for devices.
+
+        Args:
+            body (FirmwareUpgradeRequest): Details of the firmware upgrade
+                request.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers.
+                Confirmation of successful firmware upgrade.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/upgrades')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FirmwareUpgrade.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
     def cancel_scheduled_firmware_upgrade(self,
                                           account,
                                           upgrade_id):
@@ -273,6 +179,100 @@ class FirmwareV1Controller(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FotaV1SuccessResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
+    def list_available_firmware(self,
+                                account):
+        """Does a GET request to /firmware/{account}.
+
+        Lists all device firmware images available for an account, based on
+        the devices registered to that account.
+
+        Args:
+            account (string): Account identifier in "##########-#####".
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                available firmware.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/firmware/{account}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Firmware.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
+    def list_firmware_upgrade_details(self,
+                                      account,
+                                      upgrade_id):
+        """Does a GET request to /upgrades/{account}/upgrade/{upgradeId}.
+
+        Returns information about a specified upgrade, include the target date
+        of the upgrade, the list of devices in the upgrade, and the status of
+        the upgrade for each device.
+
+        Args:
+            account (string): Account identifier in "##########-#####".
+            upgrade_id (string): The UUID of the upgrade, returned by POST
+                /upgrades when the upgrade was scheduled.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Firmware
+                upgrade information.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/upgrades/{account}/upgrade/{upgradeId}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('upgradeId')
+                            .value(upgrade_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FirmwareUpgrade.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()

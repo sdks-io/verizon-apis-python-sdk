@@ -10,9 +10,60 @@ connectivity_callbacks_controller = client.connectivity_callbacks
 
 ## Methods
 
+* [Deregister Callback](../../doc/controllers/connectivity-callbacks.md#deregister-callback)
 * [List Registered Callbacks](../../doc/controllers/connectivity-callbacks.md#list-registered-callbacks)
 * [Register Callback](../../doc/controllers/connectivity-callbacks.md#register-callback)
-* [Deregister Callback](../../doc/controllers/connectivity-callbacks.md#deregister-callback)
+
+
+# Deregister Callback
+
+Stops ThingSpace from sending callback messages for the specified account and service.
+
+```python
+def deregister_callback(self,
+                       aname,
+                       sname)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `aname` | `string` | Template, Required | Account name. |
+| `sname` | `string` | Template, Required | Service name. |
+
+## Response Type
+
+[`CallbackActionResult`](../../doc/models/callback-action-result.md)
+
+## Example Usage
+
+```python
+aname = '1223334444-00001'
+
+sname = 'CarrierService'
+
+result = connectivity_callbacks_controller.deregister_callback(
+    aname,
+    sname
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "accountName": "1223334444-00001",
+  "serviceName": "CarrierService"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
 
 
 # List Registered Callbacks
@@ -112,57 +163,6 @@ print(result)
 ```json
 {
   "accountName": "122333444-00002",
-  "serviceName": "CarrierService"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Error response. | [`ConnectivityManagementResultException`](../../doc/models/connectivity-management-result-exception.md) |
-
-
-# Deregister Callback
-
-Stops ThingSpace from sending callback messages for the specified account and service.
-
-```python
-def deregister_callback(self,
-                       aname,
-                       sname)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `aname` | `string` | Template, Required | Account name. |
-| `sname` | `string` | Template, Required | Service name. |
-
-## Response Type
-
-[`CallbackActionResult`](../../doc/models/callback-action-result.md)
-
-## Example Usage
-
-```python
-aname = '1223334444-00001'
-
-sname = 'CarrierService'
-
-result = connectivity_callbacks_controller.deregister_callback(
-    aname,
-    sname
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "accountName": "1223334444-00001",
   "serviceName": "CarrierService"
 }
 ```

@@ -75,48 +75,6 @@ class AnomalySettingsController(BaseController):
             .local_error('default', 'An error occurred.', IntelligenceResultException)
         ).execute()
 
-    def list_anomaly_detection_settings(self,
-                                        account_name):
-        """Does a GET request to /v1/intelligence/{accountName}/anomaly/settings.
-
-        Retrieves the current anomaly detection settings for an account.
-
-        Args:
-            account_name (string): The name of the subscribed account.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Retrieve
-                the settings for anomaly detection.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/intelligence/{accountName}/anomaly/settings')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('accountName')
-                            .value(account_name)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(AnomalyDetectionSettings.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'An error occurred.', IntelligenceResultException)
-        ).execute()
-
     def reset_anomaly_detection_parameters(self,
                                            account_name):
         """Does a PUT request to /v1/intelligence/{accountName}/anomaly/settings/reset.
@@ -155,6 +113,48 @@ class AnomalySettingsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(IntelligenceSuccessResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'An error occurred.', IntelligenceResultException)
+        ).execute()
+
+    def list_anomaly_detection_settings(self,
+                                        account_name):
+        """Does a GET request to /v1/intelligence/{accountName}/anomaly/settings.
+
+        Retrieves the current anomaly detection settings for an account.
+
+        Args:
+            account_name (string): The name of the subscribed account.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Retrieve
+                the settings for anomaly detection.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.M2M)
+            .path('/v1/intelligence/{accountName}/anomaly/settings')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('accountName')
+                            .value(account_name)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(AnomalyDetectionSettings.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'An error occurred.', IntelligenceResultException)
         ).execute()
