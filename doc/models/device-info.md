@@ -11,9 +11,9 @@ The devices that you want to locate. The array cannot contain more than 20 devic
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Required | Device identifier. |
-| `kind` | `string` | Required | Device identifier kind. |
-| `mdn` | `string` | Required | Device MDN. |
+| `id` | `str` | Required | Device identifier. |
+| `kind` | `str` | Required | Device identifier kind. |
+| `mdn` | `str` | Required | Device MDN. |
 
 ## Example (as JSON)
 

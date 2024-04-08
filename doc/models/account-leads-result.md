@@ -12,7 +12,7 @@ Returns information for all leads associated with an account.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `has_more_data` | `bool` | Optional | False if no more leads.True if there is more data to be retrieved. |
-| `leads` | [`List of AccountLead`](../../doc/models/account-lead.md) | Optional | The leads associated with an account. |
+| `leads` | [`List[AccountLead]`](../../doc/models/account-lead.md) | Optional | The leads associated with an account. |
 
 ## Example (as JSON)
 
@@ -29,10 +29,10 @@ Returns information for all leads associated with an account.
         "state": "DC",
         "zip": "20500",
         "country": "USA",
-        "zip4": "zip47",
-        "phone": "phone3",
-        "phoneType": "phoneType7",
-        "emailAddress": "emailAddress3"
+        "zip4": "zip40",
+        "phone": "phone4",
+        "phoneType": "phoneType0",
+        "emailAddress": "emailAddress6"
       }
     }
   ],

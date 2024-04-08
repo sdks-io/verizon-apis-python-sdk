@@ -10,61 +10,11 @@ campaigns_v3_controller = client.campaigns_v3
 
 ## Methods
 
-* [Cancel Campaign](../../doc/controllers/campaigns-v3.md#cancel-campaign)
 * [Schedule Campaign Firmware Upgrade](../../doc/controllers/campaigns-v3.md#schedule-campaign-firmware-upgrade)
 * [Update Campaign Firmware Devices](../../doc/controllers/campaigns-v3.md#update-campaign-firmware-devices)
 * [Update Campaign Dates](../../doc/controllers/campaigns-v3.md#update-campaign-dates)
 * [Get Campaign Information](../../doc/controllers/campaigns-v3.md#get-campaign-information)
-
-
-# Cancel Campaign
-
-This endpoint allows user to cancel a firmware campaign. A firmware campaign already started can not be cancelled.
-
-```python
-def cancel_campaign(self,
-                   acc,
-                   campaign_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `campaign_id` | `string` | Template, Required | Firmware upgrade information. |
-
-## Response Type
-
-[`FotaV3SuccessResult`](../../doc/models/fota-v3-success-result.md)
-
-## Example Usage
-
-```python
-acc = '0000123456-00001'
-
-campaign_id = 'f858b8c4-2153-11ec-8c44-aeb16d1aa652'
-
-result = campaigns_v3_controller.cancel_campaign(
-    acc,
-    campaign_id
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "success": true
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
+* [Cancel Campaign](../../doc/controllers/campaigns-v3.md#cancel-campaign)
 
 
 # Schedule Campaign Firmware Upgrade
@@ -81,12 +31,12 @@ def schedule_campaign_firmware_upgrade(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
 | `body` | [`CampaignFirmwareUpgrade`](../../doc/models/campaign-firmware-upgrade.md) | Body, Required | Firmware upgrade information. |
 
 ## Response Type
 
-[`FirmwareCampaign`](../../doc/models/firmware-campaign.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`FirmwareCampaign`](../../doc/models/firmware-campaign.md).
 
 ## Example Usage
 
@@ -166,13 +116,13 @@ def update_campaign_firmware_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `campaign_id` | `string` | Template, Required | Unique identifier of a campaign. |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `campaign_id` | `str` | Template, Required | Unique identifier of a campaign. |
 | `body` | [`V3AddOrRemoveDeviceRequest`](../../doc/models/v3-add-or-remove-device-request.md) | Body, Required | Add or remove device to existing upgrade information. |
 
 ## Response Type
 
-[`V3AddOrRemoveDeviceResult`](../../doc/models/v3-add-or-remove-device-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V3AddOrRemoveDeviceResult`](../../doc/models/v3-add-or-remove-device-result.md).
 
 ## Example Usage
 
@@ -234,13 +184,13 @@ def update_campaign_dates(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `campaign_id` | `string` | Template, Required | Firmware upgrade information. |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `campaign_id` | `str` | Template, Required | Firmware upgrade information. |
 | `body` | [`V3ChangeCampaignDatesRequest`](../../doc/models/v3-change-campaign-dates-request.md) | Body, Required | New dates and time windows. |
 
 ## Response Type
 
-[`FirmwareCampaign`](../../doc/models/firmware-campaign.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`FirmwareCampaign`](../../doc/models/firmware-campaign.md).
 
 ## Example Usage
 
@@ -314,12 +264,12 @@ def get_campaign_information(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `campaign_id` | `string` | Template, Required | Firmware upgrade identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `campaign_id` | `str` | Template, Required | Firmware upgrade identifier. |
 
 ## Response Type
 
-[`Campaign`](../../doc/models/campaign.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`Campaign`](../../doc/models/campaign.md).
 
 ## Example Usage
 
@@ -357,6 +307,56 @@ print(result)
       "endTime": 22
     }
   ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
+
+
+# Cancel Campaign
+
+This endpoint allows user to cancel a firmware campaign. A firmware campaign already started can not be cancelled.
+
+```python
+def cancel_campaign(self,
+                   acc,
+                   campaign_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `campaign_id` | `str` | Template, Required | Firmware upgrade information. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`FotaV3SuccessResult`](../../doc/models/fota-v3-success-result.md).
+
+## Example Usage
+
+```python
+acc = '0000123456-00001'
+
+campaign_id = 'f858b8c4-2153-11ec-8c44-aeb16d1aa652'
+
+result = campaigns_v3_controller.cancel_campaign(
+    acc,
+    campaign_id
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "success": true
 }
 ```
 

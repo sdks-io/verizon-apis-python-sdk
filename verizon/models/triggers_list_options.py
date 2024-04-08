@@ -19,19 +19,19 @@ class TriggersListOptions(object):
     TODO: type model description here.
 
     Attributes:
-        trigger_id (string): The system assigned name of the trigger being
+        trigger_id (str): The system assigned name of the trigger being
             updated.
-        trigger_name (string): The user defined name of the trigger.
-        organization_name (string): The user assigned name of the organization
+        trigger_name (str): The user defined name of the trigger.
+        organization_name (str): The user assigned name of the organization
             associated with the trigger.
-        trigger_category (string): This is the value to use in the request
-            body to detect anomalous behaivior. The values in this table will
-            only be relevant when this parameter is set to this value.
-        trigger_attributes (list of TriggerAttributesOptions): Additional
+        trigger_category (str): This is the value to use in the request body
+            to detect anomalous behaivior. The values in this table will only
+            be relevant when this parameter is set to this value.
+        trigger_attributes (List[TriggerAttributesOptions]): Additional
             details and keys for the trigger.
-        created_at (string): Timestamp for whe the trigger was created.
-        modified_at (string): Timestamp for the most recent time the trigger
-            was modified.
+        created_at (str): Timestamp for whe the trigger was created.
+        modified_at (str): Timestamp for the most recent time the trigger was
+            modified.
         anomalyattributes (UsageAnomalyAttributes): The details of the
             UsageAnomaly trigger.
         notification (Notification): The notification details of the trigger.
@@ -109,11 +109,11 @@ class TriggersListOptions(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         trigger_id = dictionary.get("triggerId") if dictionary.get("triggerId") else APIHelper.SKIP
         trigger_name = dictionary.get("triggerName") if dictionary.get("triggerName") else APIHelper.SKIP
         organization_name = dictionary.get("organizationName") if dictionary.get("organizationName") else APIHelper.SKIP

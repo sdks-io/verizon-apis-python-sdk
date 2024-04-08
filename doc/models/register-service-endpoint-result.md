@@ -11,7 +11,7 @@ Response to register Service Endpoints of a deployed application to specified Mu
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `service_endpoints_id` | `string` | Optional | A system-defined string identifier representing one or more registered Service Endpoints. |
+| `service_endpoints_id` | `str` | Optional | A system-defined string identifier representing one or more registered Service Endpoints. |
 
 ## Example (as JSON)
 

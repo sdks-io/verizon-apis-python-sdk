@@ -30,13 +30,13 @@ def get_campaign_history_by_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
 | `campaign_status` | [`CampaignStatusEnum`](../../doc/models/campaign-status-enum.md) | Query, Required | Campaign status. |
-| `last_seen_campaign_id` | `string` | Query, Optional | Last seen campaign Id. |
+| `last_seen_campaign_id` | `str` | Query, Optional | Last seen campaign Id. |
 
 ## Response Type
 
-[`V3CampaignHistory`](../../doc/models/v3-campaign-history.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V3CampaignHistory`](../../doc/models/v3-campaign-history.md).
 
 ## Example Usage
 
@@ -50,7 +50,7 @@ last_seen_campaign_id = '60b5d639-ccdc-4db8-8824-069bd94c95bf'
 result = software_management_reports_v3_controller.get_campaign_history_by_status(
     acc,
     campaign_status,
-    last_seen_campaign_id
+    last_seen_campaign_id=last_seen_campaign_id
 )
 print(result)
 ```
@@ -106,12 +106,12 @@ def get_device_firmware_upgrade_history(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `device_id` | `string` | Template, Required | Device IMEI identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `device_id` | `str` | Template, Required | Device IMEI identifier. |
 
 ## Response Type
 
-[`List of DeviceFirmwareUpgrade`](../../doc/models/device-firmware-upgrade.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[DeviceFirmwareUpgrade]`](../../doc/models/device-firmware-upgrade.md).
 
 ## Example Usage
 
@@ -180,13 +180,13 @@ def get_campaign_device_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `campaign_id` | `string` | Template, Required | Campaign identifier. |
-| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `campaign_id` | `str` | Template, Required | Campaign identifier. |
+| `last_seen_device_id` | `str` | Query, Optional | Last seen device identifier. |
 
 ## Response Type
 
-[`V3CampaignDevice`](../../doc/models/v3-campaign-device.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V3CampaignDevice`](../../doc/models/v3-campaign-device.md).
 
 ## Example Usage
 
@@ -200,7 +200,7 @@ last_seen_device_id = '15-digit IMEI'
 result = software_management_reports_v3_controller.get_campaign_device_status(
     acc,
     campaign_id,
-    last_seen_device_id
+    last_seen_device_id=last_seen_device_id
 )
 print(result)
 ```

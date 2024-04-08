@@ -16,9 +16,9 @@ class V3DeviceListItem(object):
     Device changed.
 
     Attributes:
-        device_id (string): Device IMEI.
-        status (string): Success or failure.
-        reason (string): Result reason.
+        device_id (str): Device IMEI.
+        status (str): Success or failure.
+        reason (str): Result reason.
 
     """
 
@@ -63,11 +63,11 @@ class V3DeviceListItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         reason = dictionary.get("Reason") if dictionary.get("Reason") else APIHelper.SKIP

@@ -19,16 +19,16 @@ class CampaignFirmwareUpgrade(object):
     Firmware upgrade for devices.
 
     Attributes:
-        campaign_name (string): Campaign name.
-        firmware_name (string): Firmware name to upgrade to.
-        firmware_from (string): Old firmware version.
-        firmware_to (string): New firmware version.
-        protocol (string): Valid values include: LWM2M, OMA and HTTP.
+        campaign_name (str): Campaign name.
+        firmware_name (str): Firmware name to upgrade to.
+        firmware_from (str): Old firmware version.
+        firmware_to (str): New firmware version.
+        protocol (str): Valid values include: LWM2M, OMA and HTTP.
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
-        campaign_time_window_list (list of V3TimeWindow): List of allowed
+        campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
-        device_list (list of string): Device IMEI list.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -89,11 +89,11 @@ class CampaignFirmwareUpgrade(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         firmware_name = dictionary.get("firmwareName") if dictionary.get("firmwareName") else None
         firmware_from = dictionary.get("firmwareFrom") if dictionary.get("firmwareFrom") else None
         firmware_to = dictionary.get("firmwareTo") if dictionary.get("firmwareTo") else None

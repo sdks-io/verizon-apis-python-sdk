@@ -11,13 +11,13 @@ Array of software upgrade objects with the specified status.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device identifier. |
-| `id` | `string` | Required | Upgrade identifier. |
-| `account_name` | `string` | Required | Account identifier. |
-| `software_name` | `string` | Optional | Software name. |
+| `device_id` | `str` | Required | Device identifier. |
+| `id` | `str` | Required | Upgrade identifier. |
+| `account_name` | `str` | Required | Account identifier. |
+| `software_name` | `str` | Optional | Software name. |
 | `start_date` | `date` | Required | Software upgrade start date. |
-| `status` | `string` | Required | Software upgrade status. |
-| `reason` | `string` | Required | Software upgrade result reason. |
+| `status` | `str` | Required | Software upgrade status. |
+| `reason` | `str` | Required | Software upgrade result reason. |
 
 ## Example (as JSON)
 

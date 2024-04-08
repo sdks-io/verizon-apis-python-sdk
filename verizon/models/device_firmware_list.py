@@ -17,8 +17,8 @@ class DeviceFirmwareList(object):
     Device Firmware Information.
 
     Attributes:
-        account_name (string): Account name.
-        device_firmwar_version_list (list of DeviceFirmwareVersion): List of
+        account_name (str): Account name.
+        device_firmwar_version_list (List[DeviceFirmwareVersion]): List of
             device & firmware.
 
     """
@@ -57,11 +57,11 @@ class DeviceFirmwareList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         device_firmwar_version_list = None
         if dictionary.get('deviceFirmwarVersionList') is not None:

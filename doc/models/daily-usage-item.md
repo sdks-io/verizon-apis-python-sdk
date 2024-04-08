@@ -11,17 +11,17 @@ Contains only dates when device had sessions.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `start_time` | `string` | Optional | Start date of session. ISO 8601 format. |
-| `end_time` | `string` | Optional | End date of session. ISO 8601 format. |
+| `start_time` | `str` | Optional | Start date of session. ISO 8601 format. |
+| `end_time` | `str` | Optional | End date of session. ISO 8601 format. |
 | `num_bytes` | `int` | Optional | Amount of data transferred, measured in Bytes. |
 
 ## Example (as JSON)
 
 ```json
 {
-  "startTime": "startTime6",
-  "endTime": "endTime6",
-  "numBytes": 150
+  "startTime": "startTime0",
+  "endTime": "endTime2",
+  "numBytes": 200
 }
 ```
 

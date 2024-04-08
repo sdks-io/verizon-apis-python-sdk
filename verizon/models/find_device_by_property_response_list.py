@@ -18,7 +18,7 @@ class FindDeviceByPropertyResponseList(object):
     includes the full device resource definition.
 
     Attributes:
-        device_property (list of FindDeviceByPropertyResponse): TODO: type
+        device_property (List[FindDeviceByPropertyResponse]): TODO: type
             description here.
 
     """
@@ -54,11 +54,11 @@ class FindDeviceByPropertyResponseList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_property = None
         if dictionary.get('DeviceProperty') is not None:
             device_property = [FindDeviceByPropertyResponse.from_dictionary(x) for x in dictionary.get('DeviceProperty')]

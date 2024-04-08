@@ -20,22 +20,21 @@ class MoveDeviceRequest(object):
     a customer profile.
 
     Attributes:
-        account_name (string): The name of the billing account that you want
-            to move the devices to.
+        account_name (str): The name of the billing account that you want to
+            move the devices to.
         filter (DeviceFilter): Specify the kind of the device identifier, the
             type of match, and the string that you want to match.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
-        devices (list of AccountDeviceList): Up to 10,000 devices that you
-            want to move to a different account, specified by device
-            identifier.
-        group_name (string): The name of a device group, to only include
-            devices in that group.
-        carrier_ip_pool_name (string): The pool from which device IP addresses
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
+        devices (List[AccountDeviceList]): Up to 10,000 devices that you want
+            to move to a different account, specified by device identifier.
+        group_name (str): The name of a device group, to only include devices
+            in that group.
+        carrier_ip_pool_name (str): The pool from which device IP addresses
             will be derived in the new account. If you do not include this
             element, the default pool will be used.
-        service_plan (string): The service plan code that you want to assign
-            to the devices in the new account. If you do not include this
+        service_plan (str): The service plan code that you want to assign to
+            the devices in the new account. If you do not include this
             element, ThingSpace will attempt to use the current service plan,
             which will result in a error if the new account does not have that
             service plan.
@@ -54,7 +53,6 @@ class MoveDeviceRequest(object):
     }
 
     _optionals = [
-        'account_name',
         'filter',
         'custom_fields',
         'devices',
@@ -64,7 +62,7 @@ class MoveDeviceRequest(object):
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
+                 account_name=None,
                  filter=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
                  devices=APIHelper.SKIP,
@@ -74,8 +72,7 @@ class MoveDeviceRequest(object):
         """Constructor for the MoveDeviceRequest class"""
 
         # Initialize members of the class
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.account_name = account_name 
         if filter is not APIHelper.SKIP:
             self.filter = filter 
         if custom_fields is not APIHelper.SKIP:
@@ -103,12 +100,12 @@ class MoveDeviceRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         filter = DeviceFilter.from_dictionary(dictionary.get('filter')) if 'filter' in dictionary.keys() else APIHelper.SKIP
         custom_fields = None
         if dictionary.get('customFields') is not None:

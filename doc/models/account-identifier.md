@@ -11,7 +11,7 @@ The ID of the authenticating billing account, in the format `{"billingaccountid"
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `billingaccountid` | `string` | Optional | - |
+| `billingaccountid` | `str` | Optional | - |
 
 ## Example (as JSON)
 

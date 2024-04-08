@@ -26,13 +26,13 @@ def request_token(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `authorization` | `string` | Header, Required | Authorization header in Basic auth format |
-| `scope` | `string` | Form, Optional | Requested scopes as a space-delimited list. |
+| `authorization` | `str` | Header, Required | Authorization header in Basic auth format |
+| `scope` | `str` | Form, Optional | Requested scopes as a space-delimited list. |
 | `_optional_form_parameters` | `array` | Optional | Pass additional field parameters. |
 
 ## Response Type
 
-[`OauthToken`](../../doc/models/oauth-token.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`OauthToken`](../../doc/models/oauth-token.md).
 
 ## Example Usage
 
@@ -40,12 +40,12 @@ def request_token(self,
 authorization = 'Authorization8'
 
 _optional_form_parameters = {
-    "key0": 'additionalFieldParams9'
+    'key0': 'additionalFieldParams9'
 }
 
 result = oauth_authorization_controller.request_token(
     authorization,
-    _optional_form_parameters
+    _optional_form_parameters=_optional_form_parameters
 )
 print(result)
 ```

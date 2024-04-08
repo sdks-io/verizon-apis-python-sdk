@@ -11,9 +11,9 @@ Fault occurred while responding.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `code` | `string` | Optional | Hyper precise location fault code. |
-| `message` | `string` | Optional | Hyper precise location fault message. |
-| `description` | `string` | Optional | Hyper precise location fault description. |
+| `code` | `str` | Optional | Hyper precise location fault code. |
+| `message` | `str` | Optional | Hyper precise location fault message. |
+| `description` | `str` | Optional | Hyper precise location fault description. |
 
 ## Example (as JSON)
 

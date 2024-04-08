@@ -16,8 +16,8 @@ class LogOutRequest(object):
     Request to end a Connectivity Management session.
 
     Attributes:
-        session_token (string): The session token is returned to confirm that
-            it was invalidated.
+        session_token (str): The session token is returned to confirm that it
+            was invalidated.
 
     """
 
@@ -52,11 +52,11 @@ class LogOutRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         session_token = dictionary.get("sessionToken") if dictionary.get("sessionToken") else APIHelper.SKIP
         # Return an object of this model
         return cls(session_token)

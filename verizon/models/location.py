@@ -18,7 +18,7 @@ class Location(object):
     Device location information.
 
     Attributes:
-        msid (string): MDN.
+        msid (str): MDN.
         pd (PositionData): Position data.
         error (PositionError): Position error.
 
@@ -65,11 +65,11 @@ class Location(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         msid = dictionary.get("msid") if dictionary.get("msid") else APIHelper.SKIP
         pd = PositionData.from_dictionary(dictionary.get('pd')) if 'pd' in dictionary.keys() else APIHelper.SKIP
         error = PositionError.from_dictionary(dictionary.get('error')) if 'error' in dictionary.keys() else APIHelper.SKIP

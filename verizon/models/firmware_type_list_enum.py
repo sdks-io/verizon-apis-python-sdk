@@ -19,7 +19,7 @@ class FirmwareTypeListEnum(object):
         REMOVE: TODO: type description here.
 
     """
-
     APPEND = 'append'
 
     REMOVE = 'remove'
+

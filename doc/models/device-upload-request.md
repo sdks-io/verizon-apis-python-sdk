@@ -9,11 +9,11 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | - |
-| `devices` | [`List of DeviceList`](../../doc/models/device-list.md) | Required | - |
-| `email_address` | `string` | Required | - |
-| `device_sku` | `string` | Required | - |
-| `upload_type` | `string` | Required | - |
+| `account_name` | `str` | Required | - |
+| `devices` | [`List[DeviceList]`](../../doc/models/device-list.md) | Required | - |
+| `email_address` | `str` | Required | - |
+| `device_sku` | `str` | Required | - |
+| `upload_type` | `str` | Required | - |
 
 ## Example (as JSON)
 
@@ -24,16 +24,8 @@
     {
       "deviceIds": [
         {
-          "id": "id6",
-          "kind": "imei"
-        },
-        {
-          "id": "id7",
-          "kind": "eid"
-        },
-        {
-          "id": "id8",
-          "kind": "esn"
+          "id": "id0",
+          "kind": "kind8"
         }
       ]
     }

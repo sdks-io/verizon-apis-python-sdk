@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier in "##########-#####". |
-| `loc_type` | `string` | Optional | Location service license type. |
-| `max_allowance` | `string` | Optional | The number of billable location requests allowed per billing cycle. |
-| `purchase_time` | `string` | Optional | Location service purchase time. |
+| `account_name` | `str` | Optional | Account identifier in "##########-#####". |
+| `loc_type` | `str` | Optional | Location service license type. |
+| `max_allowance` | `str` | Optional | The number of billable location requests allowed per billing cycle. |
+| `purchase_time` | `str` | Optional | Location service purchase time. |
 
 ## Example (as JSON)
 

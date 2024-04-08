@@ -17,36 +17,34 @@ class DeleteDevicesRequest(object):
     Request to delete a device request.
 
     Attributes:
-        account_name (string): The Verizon billing account that the device
-            group belongs to. An account name is usually numeric, and must
-            include any leading zeros.
-        devices_to_delete (list of AccountDeviceList): A list of up to 100
+        devices_to_delete (List[AccountDeviceList]): A list of up to 100
             devices that you want to delete, specified by device identifier.
             You only need to provide one identifier per device.
+        account_name (str): The Verizon billing account that the device group
+            belongs to. An account name is usually numeric, and must include
+            any leading zeros.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "account_name": 'accountName',
-        "devices_to_delete": 'devicesToDelete'
+        "devices_to_delete": 'devicesToDelete',
+        "account_name": 'accountName'
     }
 
     _optionals = [
         'account_name',
-        'devices_to_delete',
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
-                 devices_to_delete=APIHelper.SKIP):
+                 devices_to_delete=None,
+                 account_name=APIHelper.SKIP):
         """Constructor for the DeleteDevicesRequest class"""
 
         # Initialize members of the class
+        self.devices_to_delete = devices_to_delete 
         if account_name is not APIHelper.SKIP:
             self.account_name = account_name 
-        if devices_to_delete is not APIHelper.SKIP:
-            self.devices_to_delete = devices_to_delete 
 
     @classmethod
     def from_dictionary(cls,
@@ -62,17 +60,15 @@ class DeleteDevicesRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         devices_to_delete = None
         if dictionary.get('devicesToDelete') is not None:
             devices_to_delete = [AccountDeviceList.from_dictionary(x) for x in dictionary.get('devicesToDelete')]
-        else:
-            devices_to_delete = APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         # Return an object of this model
-        return cls(account_name,
-                   devices_to_delete)
+        return cls(devices_to_delete,
+                   account_name)

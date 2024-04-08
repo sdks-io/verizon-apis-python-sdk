@@ -16,9 +16,9 @@ class DeviceListResult(object):
     Device list information.
 
     Attributes:
-        account_name (string): Account name.
+        account_name (str): Account name.
         device_count (int): Total device count.
-        device_list (list of V3Device): List of devices with id in IMEI.
+        device_list (List[V3Device]): List of devices with id in IMEI.
 
     """
 
@@ -54,11 +54,11 @@ class DeviceListResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         device_count = dictionary.get("deviceCount") if dictionary.get("deviceCount") else None
         device_list = None

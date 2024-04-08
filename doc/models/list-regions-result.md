@@ -11,7 +11,7 @@ Response to return an array of all regions in the Verizon 5G Edge service. You c
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `regions` | [`List of Region`](../../doc/models/region.md) | Optional | An array of all regions in the Verizon 5G Edge service.<br>**Constraints**: *Maximum Items*: `100` |
+| `regions` | [`List[Region]`](../../doc/models/region.md) | Optional | An array of all regions in the Verizon 5G Edge service.<br>**Constraints**: *Maximum Items*: `100` |
 
 ## Example (as JSON)
 
@@ -19,11 +19,11 @@ Response to return an array of all regions in the Verizon 5G Edge service. You c
 {
   "regions": [
     {
-      "regionId": "regionId3",
-      "name": "name5",
-      "countryCode": "countryCode9",
-      "metro": "metro7",
-      "area": "area7"
+      "regionId": "regionId8",
+      "name": "name0",
+      "countryCode": "countryCode4",
+      "metro": "metro2",
+      "area": "area2"
     }
   ]
 }

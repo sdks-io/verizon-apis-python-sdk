@@ -17,7 +17,7 @@ class CreateServiceProfileResult(object):
     subsequent requests.
 
     Attributes:
-        service_profile_id (string): Unique identifier for a service profile.
+        service_profile_id (str): Unique identifier for a service profile.
 
     """
 
@@ -52,11 +52,11 @@ class CreateServiceProfileResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         service_profile_id = dictionary.get("serviceProfileId") if dictionary.get("serviceProfileId") else APIHelper.SKIP
         # Return an object of this model
         return cls(service_profile_id)

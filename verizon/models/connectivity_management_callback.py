@@ -17,20 +17,18 @@ class ConnectivityManagementCallback(object):
     Management API.
 
     Attributes:
-        account_name (string): The name of the billing account for which
-            callback messages will be sent.
-        password (string): The password defined when a URL was registered for
-            the callback service, or an empty string if no password was
-            defined.
-        service_name (string): The name of the callback service, which
-            identifies the type and format of messages that will be sent to
-            the registered URL.
-        url (string): The address of the callback listening service where the
+        account_name (str): The name of the billing account for which callback
+            messages will be sent.
+        password (str): The password defined when a URL was registered for the
+            callback service, or an empty string if no password was defined.
+        service_name (str): The name of the callback service, which identifies
+            the type and format of messages that will be sent to the
+            registered URL.
+        url (str): The address of the callback listening service where the
             ThingSpace Platform will send callback messages for the service
             type.
-        username (string): The username defined when a URL was registered for
-            the callback service, or an empty string if no username was
-            defined.
+        username (str): The username defined when a URL was registered for the
+            callback service, or an empty string if no username was defined.
 
     """
 
@@ -85,11 +83,11 @@ class ConnectivityManagementCallback(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         password = dictionary.get("password") if dictionary.get("password") else APIHelper.SKIP
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else APIHelper.SKIP

@@ -19,12 +19,12 @@ class DeviceSuspensionStatusRequest(object):
     devices.
 
     Attributes:
-        device_ids (list of DeviceId): The devices that you want to include in
+        device_ids (List[DeviceId]): The devices that you want to include in
             the request, specified by device identifier. You only need to
             provide one identifier per device.
         filter (DeviceFilterWithoutAccount): Filter for devices without
             account.
-        account_name (string): The name of a billing account.
+        account_name (str): The name of a billing account.
 
     """
 
@@ -69,11 +69,11 @@ class DeviceSuspensionStatusRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = None
         if dictionary.get('deviceIds') is not None:
             device_ids = [DeviceId.from_dictionary(x) for x in dictionary.get('deviceIds')]

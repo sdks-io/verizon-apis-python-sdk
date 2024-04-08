@@ -20,8 +20,8 @@ class UpgradeListQueryResult(object):
         has_more_flag (bool): True if there are more devices to retrieve.
         last_seen_upgrade_id (int): If hasMoreData=true, the startIndex to use
             for the next request. 0 if hasMoreData=false.
-        report_list (list of FirmwareUpgrade): Array of upgrade objects with
-            the specified status.
+        report_list (List[FirmwareUpgrade]): Array of upgrade objects with the
+            specified status.
 
     """
 
@@ -70,11 +70,11 @@ class UpgradeListQueryResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         has_more_flag = dictionary.get("hasMoreFlag") if "hasMoreFlag" in dictionary.keys() else APIHelper.SKIP
         last_seen_upgrade_id = dictionary.get("lastSeenUpgradeId") if dictionary.get("lastSeenUpgradeId") else APIHelper.SKIP
         if 'reportList' in dictionary.keys():

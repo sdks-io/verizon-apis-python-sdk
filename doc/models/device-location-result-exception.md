@@ -11,8 +11,8 @@ Will be empty if there was no error.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error_code` | `string` | Required | - |
-| `error_message` | `string` | Required | - |
+| `error_code` | `str` | Required | - |
+| `error_message` | `str` | Required | - |
 
 ## Example (as JSON)
 

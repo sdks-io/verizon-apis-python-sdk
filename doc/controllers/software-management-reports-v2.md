@@ -11,9 +11,9 @@ software_management_reports_v2_controller = client.software_management_reports_v
 ## Methods
 
 * [List Available Software](../../doc/controllers/software-management-reports-v2.md#list-available-software)
-* [Get Campaign History by Status](../../doc/controllers/software-management-reports-v2.md#get-campaign-history-by-status)
 * [List Account Devices](../../doc/controllers/software-management-reports-v2.md#list-account-devices)
 * [Get Device Firmware Upgrade History](../../doc/controllers/software-management-reports-v2.md#get-device-firmware-upgrade-history)
+* [Get Campaign History by Status](../../doc/controllers/software-management-reports-v2.md#get-campaign-history-by-status)
 * [Get Campaign Device Status](../../doc/controllers/software-management-reports-v2.md#get-campaign-device-status)
 
 
@@ -31,12 +31,12 @@ def list_available_software(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-| `distribution_type` | `string` | Query, Optional | Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP. |
+| `account` | `str` | Template, Required | Account identifier. |
+| `distribution_type` | `str` | Query, Optional | Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP. |
 
 ## Response Type
 
-[`List of SoftwarePackage`](../../doc/models/software-package.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[SoftwarePackage]`](../../doc/models/software-package.md).
 
 ## Example Usage
 
@@ -47,7 +47,7 @@ distribution_type = 'HTTP'
 
 result = software_management_reports_v2_controller.list_available_software(
     account,
-    distribution_type
+    distribution_type=distribution_type
 )
 print(result)
 ```
@@ -75,92 +75,6 @@ print(result)
 | 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
 
 
-# Get Campaign History by Status
-
-The report endpoint allows user to get campaign history of an account for specified status.
-
-```python
-def get_campaign_history_by_status(self,
-                                  account,
-                                  campaign_status,
-                                  last_seen_campaign_id=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-| `campaign_status` | `string` | Query, Required | Status of the campaign. |
-| `last_seen_campaign_id` | `string` | Query, Optional | Last seen campaign Id. |
-
-## Response Type
-
-[`V2CampaignHistory`](../../doc/models/v2-campaign-history.md)
-
-## Example Usage
-
-```python
-account = '0000123456-00001'
-
-campaign_status = 'campaignStatus6'
-
-last_seen_campaign_id = '60b5d639-ccdc-4db8-8824-069bd94c95bf'
-
-result = software_management_reports_v2_controller.get_campaign_history_by_status(
-    account,
-    campaign_status,
-    last_seen_campaign_id
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "hasMoreData": true,
-  "lastSeenCampaignId": "60b5d639-ccdc-4db8-8824-069bd94c95bf",
-  "campaignList": [
-    {
-      "accountName": "0402196254-00001",
-      "id": "60b5d639-ccdc-4db8-8824-069bd94c95bf",
-      "campaignName": "FOTA_Verizon_Upgrade",
-      "softwareName": "FOTA_Verizon_Model-A_02To03_HF",
-      "distributionType": "HTTP",
-      "softwareFrom": "FOTA_Verizon_Model-A_00To01_HF",
-      "softwareTo": "FOTA_Verizon_Model-A_02To03_HF",
-      "make": "Verizon",
-      "model": "Model-A",
-      "startDate": "2020-08-21",
-      "endDate": "2020-08-22",
-      "downloadAfterDate": "2020-08-21",
-      "downloadTimeWindowList": [
-        {
-          "startTime": 20,
-          "endTime": 21
-        }
-      ],
-      "installAfterDate": "2020-08-21",
-      "installTimeWindowList": [
-        {
-          "startTime": 22,
-          "endTime": 23
-        }
-      ],
-      "status": "CampaignEnded"
-    }
-  ]
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
-
-
 # List Account Devices
 
 The device endpoint gets devices information of an account.
@@ -176,13 +90,13 @@ def list_account_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
-| `distribution_type` | `string` | Query, Optional | Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP. |
+| `account` | `str` | Template, Required | Account identifier. |
+| `last_seen_device_id` | `str` | Query, Optional | Last seen device identifier. |
+| `distribution_type` | `str` | Query, Optional | Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP. |
 
 ## Response Type
 
-[`V2AccountDeviceList`](../../doc/models/v2-account-device-list.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V2AccountDeviceList`](../../doc/models/v2-account-device-list.md).
 
 ## Example Usage
 
@@ -195,8 +109,8 @@ distribution_type = 'HTTP'
 
 result = software_management_reports_v2_controller.list_account_devices(
     account,
-    last_seen_device_id,
-    distribution_type
+    last_seen_device_id=last_seen_device_id,
+    distribution_type=distribution_type
 )
 print(result)
 ```
@@ -298,12 +212,12 @@ def get_device_firmware_upgrade_history(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-| `device_id` | `string` | Template, Required | Device IMEI identifier. |
+| `account` | `str` | Template, Required | Account identifier. |
+| `device_id` | `str` | Template, Required | Device IMEI identifier. |
 
 ## Response Type
 
-[`List of DeviceSoftwareUpgrade`](../../doc/models/device-software-upgrade.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[DeviceSoftwareUpgrade]`](../../doc/models/device-software-upgrade.md).
 
 ## Example Usage
 
@@ -351,6 +265,92 @@ print(result)
 | 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
 
 
+# Get Campaign History by Status
+
+The report endpoint allows user to get campaign history of an account for specified status.
+
+```python
+def get_campaign_history_by_status(self,
+                                  account,
+                                  campaign_status,
+                                  last_seen_campaign_id=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account` | `str` | Template, Required | Account identifier. |
+| `campaign_status` | `str` | Query, Required | Status of the campaign. |
+| `last_seen_campaign_id` | `str` | Query, Optional | Last seen campaign Id. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V2CampaignHistory`](../../doc/models/v2-campaign-history.md).
+
+## Example Usage
+
+```python
+account = '0000123456-00001'
+
+campaign_status = 'campaignStatus6'
+
+last_seen_campaign_id = '60b5d639-ccdc-4db8-8824-069bd94c95bf'
+
+result = software_management_reports_v2_controller.get_campaign_history_by_status(
+    account,
+    campaign_status,
+    last_seen_campaign_id=last_seen_campaign_id
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "hasMoreData": true,
+  "lastSeenCampaignId": "60b5d639-ccdc-4db8-8824-069bd94c95bf",
+  "campaignList": [
+    {
+      "accountName": "0402196254-00001",
+      "id": "60b5d639-ccdc-4db8-8824-069bd94c95bf",
+      "campaignName": "FOTA_Verizon_Upgrade",
+      "softwareName": "FOTA_Verizon_Model-A_02To03_HF",
+      "distributionType": "HTTP",
+      "softwareFrom": "FOTA_Verizon_Model-A_00To01_HF",
+      "softwareTo": "FOTA_Verizon_Model-A_02To03_HF",
+      "make": "Verizon",
+      "model": "Model-A",
+      "startDate": "2020-08-21",
+      "endDate": "2020-08-22",
+      "downloadAfterDate": "2020-08-21",
+      "downloadTimeWindowList": [
+        {
+          "startTime": 20,
+          "endTime": 21
+        }
+      ],
+      "installAfterDate": "2020-08-21",
+      "installTimeWindowList": [
+        {
+          "startTime": 22,
+          "endTime": 23
+        }
+      ],
+      "status": "CampaignEnded"
+    }
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`FotaV2ResultException`](../../doc/models/fota-v2-result-exception.md) |
+
+
 # Get Campaign Device Status
 
 The report endpoint allows user to get the full list of device of a campaign.
@@ -366,13 +366,13 @@ def get_campaign_device_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-| `campaign_id` | `string` | Template, Required | Campaign identifier. |
-| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
+| `account` | `str` | Template, Required | Account identifier. |
+| `campaign_id` | `str` | Template, Required | Campaign identifier. |
+| `last_seen_device_id` | `str` | Query, Optional | Last seen device identifier. |
 
 ## Response Type
 
-[`V2CampaignDevice`](../../doc/models/v2-campaign-device.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V2CampaignDevice`](../../doc/models/v2-campaign-device.md).
 
 ## Example Usage
 
@@ -386,7 +386,7 @@ last_seen_device_id = '15-digit IMEI'
 result = software_management_reports_v2_controller.get_campaign_device_status(
     account,
     campaign_id,
-    last_seen_device_id
+    last_seen_device_id=last_seen_device_id
 )
 print(result)
 ```

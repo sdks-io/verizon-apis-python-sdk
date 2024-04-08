@@ -17,13 +17,11 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.fota_v2_success_result import FotaV2SuccessResult
-from verizon.models.v2_licenses_assigned_removed_result import V2LicensesAssignedRemovedResult
 from verizon.models.v2_license_summary import V2LicenseSummary
+from verizon.models.v2_licenses_assigned_removed_result import V2LicensesAssignedRemovedResult
 from verizon.models.v2_list_of_licenses_to_remove import V2ListOfLicensesToRemove
 from verizon.models.v2_list_of_licenses_to_remove_result import V2ListOfLicensesToRemoveResult
+from verizon.models.fota_v2_success_result import FotaV2SuccessResult
 from verizon.exceptions.fota_v2_result_exception import FotaV2ResultException
 
 
@@ -33,21 +31,21 @@ class SoftwareManagementLicensesV2Controller(BaseController):
     def __init__(self, config):
         super(SoftwareManagementLicensesV2Controller, self).__init__(config)
 
-    @deprecated()
-    def delete_list_of_licenses_to_remove(self,
-                                          account):
-        """Does a DELETE request to /licenses/{account}/cancel.
+    def get_account_license_status(self,
+                                   account,
+                                   last_seen_device_id=None):
+        """Does a GET request to /licenses/{account}.
 
-        This endpoint allows user to delete a created cancel candidate device
-        list.
+        The endpoint allows user to list license usage.
 
         Args:
-            account (string): Account identifier.
+            account (str): Account identifier.
+            last_seen_device_id (str, optional): Last seen device identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Result of
-                deletion of candidate list of devices to remove.
+                useful information such as status codes and headers. Summary
+                of license assignment.
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -59,20 +57,23 @@ class SoftwareManagementLicensesV2Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/licenses/{account}/cancel')
-            .http_method(HttpMethodEnum.DELETE)
+            .path('/licenses/{account}')
+            .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('account')
                             .value(account)
                             .should_encode(True))
+            .query_param(Parameter()
+                         .key('lastSeenDeviceId')
+                         .value(last_seen_device_id))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FotaV2SuccessResult.from_dictionary)
+            .deserialize_into(V2LicenseSummary.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()
@@ -86,7 +87,7 @@ class SoftwareManagementLicensesV2Controller(BaseController):
         This endpoint allows user to assign licenses to a list of devices.
 
         Args:
-            account (string): Account identifier.
+            account (str): Account identifier.
             body (V2LicenseIMEI): License assignment.
 
         Returns:
@@ -119,59 +120,11 @@ class SoftwareManagementLicensesV2Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(V2LicensesAssignedRemovedResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def get_account_license_status(self,
-                                   account,
-                                   last_seen_device_id=None):
-        """Does a GET request to /licenses/{account}.
-
-        The endpoint allows user to list license usage.
-
-        Args:
-            account (string): Account identifier.
-            last_seen_device_id (string, optional): Last seen device
-                identifier.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Summary
-                of license assignment.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/licenses/{account}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('lastSeenDeviceId')
-                         .value(last_seen_device_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(V2LicenseSummary.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()
@@ -185,7 +138,7 @@ class SoftwareManagementLicensesV2Controller(BaseController):
         This endpoint allows user to remove licenses from a list of devices.
 
         Args:
-            account (string): Account identifier.
+            account (str): Account identifier.
             body (V2LicenseIMEI): License removal.
 
         Returns:
@@ -218,7 +171,7 @@ class SoftwareManagementLicensesV2Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -237,8 +190,8 @@ class SoftwareManagementLicensesV2Controller(BaseController):
         cancellation candidate devices.
 
         Args:
-            account (string): Account identifier.
-            start_index (string, optional): Start index to retrieve.
+            account (str): Account identifier.
+            start_index (str, optional): Start index to retrieve.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -267,7 +220,7 @@ class SoftwareManagementLicensesV2Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -286,7 +239,7 @@ class SoftwareManagementLicensesV2Controller(BaseController):
         cancellation candidate devices.
 
         Args:
-            account (string): Account identifier.
+            account (str): Account identifier.
             body (V2ListOfLicensesToRemoveRequest): List of licensess to
                 remove.
 
@@ -320,11 +273,55 @@ class SoftwareManagementLicensesV2Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(V2ListOfLicensesToRemoveResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
+
+    @deprecated()
+    def delete_list_of_licenses_to_remove(self,
+                                          account):
+        """Does a DELETE request to /licenses/{account}/cancel.
+
+        This endpoint allows user to delete a created cancel candidate device
+        list.
+
+        Args:
+            account (str): Account identifier.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Result of
+                deletion of candidate list of devices to remove.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/licenses/{account}/cancel')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FotaV2SuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()

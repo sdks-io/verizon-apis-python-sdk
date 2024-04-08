@@ -13,9 +13,9 @@ List of devices in a campaign.
 |  --- | --- | --- | --- |
 | `total_device` | `int` | Optional | Total device count. |
 | `has_more_data` | `bool` | Required | Has more report flag. |
-| `last_seen_device_id` | `string` | Optional | Device identifier. |
+| `last_seen_device_id` | `str` | Optional | Device identifier. |
 | `max_page_size` | `int` | Required | Maximum page size. |
-| `device_list` | [`List of V2DeviceStatus`](../../doc/models/v2-device-status.md) | Required | List of devices with id in IMEI. |
+| `device_list` | [`List[V2DeviceStatus]`](../../doc/models/v2-device-status.md) | Required | List of devices with id in IMEI. |
 
 ## Example (as JSON)
 

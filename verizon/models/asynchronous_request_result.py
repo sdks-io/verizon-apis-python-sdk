@@ -16,7 +16,7 @@ class AsynchronousRequestResult(object):
     A successful request returns the request ID and the current status.
 
     Attributes:
-        request_id (string): The unique ID of the asynchronous request.
+        request_id (str): The unique ID of the asynchronous request.
         status (RequestStatusEnum): The current status of the callback
             response.
 
@@ -58,11 +58,11 @@ class AsynchronousRequestResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         request_id = dictionary.get("requestId") if dictionary.get("requestId") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         # Return an object of this model

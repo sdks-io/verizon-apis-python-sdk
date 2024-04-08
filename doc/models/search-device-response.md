@@ -11,19 +11,19 @@ A success response includes an array of all matching events. Each event includes
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `action` | `string` | Optional | The action requested in this event; “change” for device configuration changes. |
-| `createdon` | `string` | Optional | The date and time of the change request. |
-| `deviceid` | `string` | Optional | The device’s ThingSpace UUID. |
+| `action` | `str` | Optional | The action requested in this event; “change” for device configuration changes. |
+| `createdon` | `str` | Optional | The date and time of the change request. |
+| `deviceid` | `str` | Optional | The device’s ThingSpace UUID. |
 | `fields` | [`Fields2`](../../doc/models/fields-2.md) | Optional | List of fields affected by the event. |
-| `id` | `string` | Optional | The unique ID of this ts.event.configuration event. |
-| `kind` | `string` | Optional | The kind of the ThingSpace resource that is being reported; “ts.event.configuration” for device configuration changes. |
-| `lastupdated` | `string` | Optional | The date and time that the event was last updated. |
-| `name` | `string` | Optional | The name of the event |
-| `state` | `string` | Optional | The current status of the request. |
-| `tagids` | `List of string` | Optional | UUIDs of tag resources that are applied to this device. |
-| `transactionid` | `string` | Optional | transaction id |
-| `version` | `string` | Optional | The version of the resource. |
-| `versionid` | `string` | Optional | The version of the resource. |
+| `id` | `str` | Optional | The unique ID of this ts.event.configuration event. |
+| `kind` | `str` | Optional | The kind of the ThingSpace resource that is being reported; “ts.event.configuration” for device configuration changes. |
+| `lastupdated` | `str` | Optional | The date and time that the event was last updated. |
+| `name` | `str` | Optional | The name of the event |
+| `state` | `str` | Optional | The current status of the request. |
+| `tagids` | `List[str]` | Optional | UUIDs of tag resources that are applied to this device. |
+| `transactionid` | `str` | Optional | transaction id |
+| `version` | `str` | Optional | The version of the resource. |
+| `versionid` | `str` | Optional | The version of the resource. |
 
 ## Example (as JSON)
 

@@ -18,10 +18,10 @@ class FirmwareUpgradeDeviceListItem(object):
     about the status.
 
     Attributes:
-        device_id (string): Device IMEI.
-        status (string): The status of the upgrade for this device.
-        result_reason (string): Additional details about the status. Not
-            included when status='Request Pending.'
+        device_id (str): Device IMEI.
+        status (str): The status of the upgrade for this device.
+        result_reason (str): Additional details about the status. Not included
+            when status='Request Pending.'
 
     """
 
@@ -66,11 +66,11 @@ class FirmwareUpgradeDeviceListItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         result_reason = dictionary.get("resultReason") if dictionary.get("resultReason") else APIHelper.SKIP

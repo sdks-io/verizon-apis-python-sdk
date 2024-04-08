@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.diagnostic_observation_setting import DiagnosticObservationSetting
 from verizon.exceptions.device_diagnostics_result_exception import DeviceDiagnosticsResultException
 
@@ -36,8 +34,8 @@ class DiagnosticsSettingsController(BaseController):
         This endpoint retrieves diagnostics settings synchronously.
 
         Args:
-            account_name (string): Account identifier.
-            devices (string): Devices list format:
+            account_name (str): Account identifier.
+            devices (str): Devices list format:
                 [{"id":"{imei1}","kind":"imei"},{"id":"{imei2}","kind":"imei"}]
                 .
 
@@ -67,7 +65,7 @@ class DiagnosticsSettingsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

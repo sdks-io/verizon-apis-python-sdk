@@ -11,8 +11,8 @@ Notification SMS details.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `carrier` | `string` | Optional | - |
-| `number` | `string` | Optional | - |
+| `carrier` | `str` | Optional | - |
+| `number` | `str` | Optional | - |
 
 ## Example (as JSON)
 

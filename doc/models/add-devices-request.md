@@ -11,12 +11,13 @@ Request to add the devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The billing account to which the devices are added. |
-| `custom_fields` | [`List of CustomFields`](../../doc/models/custom-fields.md) | Optional | The names and values for any custom fields that you want set for the devices as they are added to the account. |
-| `devices_to_add` | [`List of AccountDeviceList`](../../doc/models/account-device-list.md) | Optional | The devices that you want to add. |
-| `group_name` | `string` | Optional | The name of a device group to add the devices to. They are added to the default device group if you don't include this parameter. |
-| `sku_number` | `string` | Optional | The Stock Keeping Unit (SKU) number of a 4G device type with an embedded SIM. |
-| `state` | `string` | Optional | The initial service state for the devices. The only valid state is “Preactive.” |
+| `state` | `str` | Required | The initial service state for the devices. The only valid state is “Preactive.” |
+| `devices_to_add` | [`List[AccountDeviceList]`](../../doc/models/account-device-list.md) | Required | The devices that you want to add. |
+| `account_name` | `str` | Optional | The billing account to which the devices are added. |
+| `custom_fields` | [`List[CustomFields]`](../../doc/models/custom-fields.md) | Optional | The names and values for any custom fields that you want set for the devices as they are added to the account. |
+| `group_name` | `str` | Optional | The name of a device group to add the devices to. They are added to the default device group if you don't include this parameter. |
+| `sku_number` | `str` | Optional | The Stock Keeping Unit (SKU) number of a 4G device type with an embedded SIM. |
+| `smsr_oid` | `str` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
 
 ## Example (as JSON)
 
@@ -40,7 +41,8 @@ Request to add the devices.
           "kind": "iccid",
           "id": "89141390780800784259"
         }
-      ]
+      ],
+      "ipAddress": "ipAddress2"
     },
     {
       "deviceIds": [
@@ -52,12 +54,14 @@ Request to add the devices.
           "kind": "iccid",
           "id": "89141390780800735573"
         }
-      ]
+      ],
+      "ipAddress": "ipAddress2"
     }
   ],
   "groupName": "West Region",
   "state": "preactive",
-  "skuNumber": "skuNumber6"
+  "skuNumber": "skuNumber2",
+  "smsrOid": "smsrOid6"
 }
 ```
 

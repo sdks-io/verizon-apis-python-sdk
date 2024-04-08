@@ -19,11 +19,11 @@ class AccountLead(object):
     Attributes:
         address (Address): The customer address for the line's primary place
             of use, for line usage taxation.
-        lead_id (string): Unique number for each lead. Use this value in the
+        lead_id (str): Unique number for each lead. Use this value in the
             leadId parameter when activating devices to credit the activations
             to the lead.
-        lead_state (string): The current state of the lead, such as
-            “Qualified” or “Closed.”
+        lead_state (str): The current state of the lead, such as “Qualified”
+            or “Closed.”
 
     """
 
@@ -68,11 +68,11 @@ class AccountLead(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         address = Address.from_dictionary(dictionary.get('address')) if 'address' in dictionary.keys() else APIHelper.SKIP
         lead_id = dictionary.get("leadId") if dictionary.get("leadId") else APIHelper.SKIP
         lead_state = dictionary.get("leadState") if dictionary.get("leadState") else APIHelper.SKIP

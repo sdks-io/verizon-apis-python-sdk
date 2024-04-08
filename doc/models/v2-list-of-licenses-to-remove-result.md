@@ -12,7 +12,7 @@ List of created license cancellation devices.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `count` | `int` | Required | The number of devices. |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 

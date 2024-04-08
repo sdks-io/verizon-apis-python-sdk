@@ -28,12 +28,12 @@ def get_device_hyper_precise_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `imei` | `string` | Query, Required | A unique identifier for a device. |
-| `account_number` | `string` | Query, Required | A unique identifier for an account. |
+| `imei` | `str` | Query, Required | A unique identifier for a device. |
+| `account_number` | `str` | Query, Required | A unique identifier for an account. |
 
 ## Response Type
 
-[`BullseyeServiceResult`](../../doc/models/bullseye-service-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`BullseyeServiceResult`](../../doc/models/bullseye-service-result.md).
 
 ## Example Usage
 
@@ -92,7 +92,7 @@ def update_device_hyper_precise_status(self,
 
 ## Response Type
 
-[`BullseyeServiceResult`](../../doc/models/bullseye-service-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`BullseyeServiceResult`](../../doc/models/bullseye-service-result.md).
 
 ## Example Usage
 

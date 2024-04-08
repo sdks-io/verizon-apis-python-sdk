@@ -17,9 +17,9 @@ class LicenseDeviceList(object):
     List of all devices.
 
     Attributes:
-        device_ids (list of LicenseDeviceId): For 4G devices, IMEI (decimal,
-            up to 15 digits).
-        ip_address (string): TODO: type description here.
+        device_ids (List[LicenseDeviceId]): For 4G devices, IMEI (decimal, up
+            to 15 digits).
+        ip_address (str): TODO: type description here.
 
     """
 
@@ -59,11 +59,11 @@ class LicenseDeviceList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = None
         if dictionary.get('deviceIds') is not None:
             device_ids = [LicenseDeviceId.from_dictionary(x) for x in dictionary.get('deviceIds')]

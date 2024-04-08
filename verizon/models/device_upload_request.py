@@ -16,11 +16,11 @@ class DeviceUploadRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): TODO: type description here.
-        devices (list of DeviceList): TODO: type description here.
-        email_address (string): TODO: type description here.
-        device_sku (string): TODO: type description here.
-        upload_type (string): TODO: type description here.
+        account_name (str): TODO: type description here.
+        devices (List[DeviceList]): TODO: type description here.
+        email_address (str): TODO: type description here.
+        device_sku (str): TODO: type description here.
+        upload_type (str): TODO: type description here.
 
     """
 
@@ -62,11 +62,11 @@ class DeviceUploadRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         devices = None
         if dictionary.get('devices') is not None:

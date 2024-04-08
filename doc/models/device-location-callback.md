@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | [`CallbackServiceNameEnum`](../../doc/models/callback-service-name-enum.md) | Required | The name of the callback service. |
-| `url` | `string` | Required | The location of your callback listener. |
+| `url` | `str` | Required | The location of your callback listener. |
 
 ## Example (as JSON)
 

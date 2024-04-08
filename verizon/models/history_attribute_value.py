@@ -17,7 +17,7 @@ class HistoryAttributeValue(object):
 
     Attributes:
         name (AttributeIdentifierEnum): Attribute identifier.
-        value (string): Attribute value.
+        value (str): Attribute value.
         created_on (datetime): Date and time the request was created.
 
     """
@@ -47,7 +47,7 @@ class HistoryAttributeValue(object):
         if value is not APIHelper.SKIP:
             self.value = value 
         if created_on is not APIHelper.SKIP:
-            self.created_on = APIHelper.RFC3339DateTime(created_on) if created_on else None 
+            self.created_on = APIHelper.apply_datetime_converter(created_on, APIHelper.RFC3339DateTime) if created_on else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -63,11 +63,11 @@ class HistoryAttributeValue(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         value = dictionary.get("value") if dictionary.get("value") else APIHelper.SKIP
         created_on = APIHelper.RFC3339DateTime.from_value(dictionary.get("createdOn")).datetime if dictionary.get("createdOn") else APIHelper.SKIP

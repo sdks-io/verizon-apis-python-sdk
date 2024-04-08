@@ -17,8 +17,8 @@ class V2ListOfLicensesToRemove(object):
     Attributes:
         count (int): Cancellation candidate devices count.
         has_more_data (bool): Flag to indicat more devices.
-        update_time (string): Last update time.
-        device_list (list of string): Device IMEI list.
+        update_time (str): Last update time.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -57,11 +57,11 @@ class V2ListOfLicensesToRemove(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         count = dictionary.get("count") if dictionary.get("count") else None
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else None
         update_time = dictionary.get("updateTime") if dictionary.get("updateTime") else None

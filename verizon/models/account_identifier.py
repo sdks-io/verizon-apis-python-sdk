@@ -17,7 +17,7 @@ class AccountIdentifier(object):
     `{"billingaccountid":"1234567890-12345"}`.
 
     Attributes:
-        billingaccountid (string): TODO: type description here.
+        billingaccountid (str): TODO: type description here.
 
     """
 
@@ -52,11 +52,11 @@ class AccountIdentifier(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         billingaccountid = dictionary.get("billingaccountid") if dictionary.get("billingaccountid") else APIHelper.SKIP
         # Return an object of this model
         return cls(billingaccountid)

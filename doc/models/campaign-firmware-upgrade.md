@@ -11,15 +11,15 @@ Firmware upgrade for devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `campaign_name` | `string` | Optional | Campaign name. |
-| `firmware_name` | `string` | Required | Firmware name to upgrade to. |
-| `firmware_from` | `string` | Required | Old firmware version. |
-| `firmware_to` | `string` | Required | New firmware version. |
-| `protocol` | `string` | Required | Valid values include: LWM2M, OMA and HTTP.<br>**Default**: `'LWM2M'` |
+| `campaign_name` | `str` | Optional | Campaign name. |
+| `firmware_name` | `str` | Required | Firmware name to upgrade to. |
+| `firmware_from` | `str` | Required | Old firmware version. |
+| `firmware_to` | `str` | Required | New firmware version. |
+| `protocol` | `str` | Required | Valid values include: LWM2M, OMA and HTTP.<br>**Default**: `'LWM2M'` |
 | `start_date` | `date` | Required | Campaign start date. |
 | `end_date` | `date` | Required | Campaign end date. |
-| `campaign_time_window_list` | [`List of V3TimeWindow`](../../doc/models/v3-time-window.md) | Optional | List of allowed campaign time windows. |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `campaign_time_window_list` | [`List[V3TimeWindow]`](../../doc/models/v3-time-window.md) | Optional | List of allowed campaign time windows. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 

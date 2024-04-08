@@ -16,8 +16,8 @@ class DeleteServiceProfileResult(object):
     Response on successful deletion of service profile.
 
     Attributes:
-        status (string): TODO: type description here.
-        message (string): TODO: type description here.
+        status (str): TODO: type description here.
+        message (str): TODO: type description here.
 
     """
 
@@ -57,11 +57,11 @@ class DeleteServiceProfileResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP
         # Return an object of this model

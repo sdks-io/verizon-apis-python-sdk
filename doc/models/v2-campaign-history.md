@@ -12,8 +12,8 @@ Campaign history details.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `has_more_data` | `bool` | Required | Has more report flag. |
-| `last_seen_campaign_id` | `string` | Optional | Campaign identifier. |
-| `campaign_list` | [`List of V2CampaignMetaInfo`](../../doc/models/v2-campaign-meta-info.md) | Required | Software upgrade list. |
+| `last_seen_campaign_id` | `str` | Optional | Campaign identifier. |
+| `campaign_list` | [`List[V2CampaignMetaInfo]`](../../doc/models/v2-campaign-meta-info.md) | Required | Software upgrade list. |
 
 ## Example (as JSON)
 

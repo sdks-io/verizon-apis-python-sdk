@@ -11,14 +11,14 @@ Request for getting an aggregated session report.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_number` | `string` | Required | The unique identifier for the account. |
-| `start_date` | `string` | Optional | Start date of session to include. If not specified  information will be shown from the earliest available (180 days). Can be either date in ISO 8601 format or predefined constants. |
-| `end_date` | `string` | Optional | End date of session to include. If not specified  information will be shown to the latest available. Can be either date in ISO 8601 format or predefined constants. |
-| `imei` | `List of string` | Required | Devices for which return usage info. Could be 0, 1 or more. In case of 0 will return all devices belonging to customer (except of filtered by other parameters). |
-| `device_group` | `string` | Optional | User defined group name the devices are a member of. |
-| `device_label` | `string` | Optional | Optional filter parameter. |
-| `data_plan` | `string` | Optional | The data plan the devices beign queried belong to. |
-| `no_session_flag` | `string` | Optional | Optional filter parameter which return only devices with no sessions. |
+| `account_number` | `str` | Required | The unique identifier for the account. |
+| `start_date` | `str` | Optional | Start date of session to include. If not specified  information will be shown from the earliest available (180 days). Can be either date in ISO 8601 format or predefined constants. |
+| `end_date` | `str` | Optional | End date of session to include. If not specified  information will be shown to the latest available. Can be either date in ISO 8601 format or predefined constants. |
+| `imei` | `List[str]` | Required | Devices for which return usage info. Could be 0, 1 or more. In case of 0 will return all devices belonging to customer (except of filtered by other parameters). |
+| `device_group` | `str` | Optional | User defined group name the devices are a member of. |
+| `device_label` | `str` | Optional | Optional filter parameter. |
+| `data_plan` | `str` | Optional | The data plan the devices beign queried belong to. |
+| `no_session_flag` | `str` | Optional | Optional filter parameter which return only devices with no sessions. |
 
 ## Example (as JSON)
 
@@ -31,9 +31,9 @@ Request for getting an aggregated session report.
     "709312034493372"
   ],
   "deviceGroup": "deviceGroup4",
-  "dataPlan": "dataPlan8",
+  "dataPlan": "dataPlan2",
   "noSessionFlag": "false",
-  "deviceLabel": "deviceLabel6"
+  "deviceLabel": "deviceLabel4"
 }
 ```
 

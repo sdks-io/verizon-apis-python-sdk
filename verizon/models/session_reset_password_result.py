@@ -16,7 +16,7 @@ class SessionResetPasswordResult(object):
     Response to a new, randomly generated password for the current username.
 
     Attributes:
-        new_password (string): The new password for the username.
+        new_password (str): The new password for the username.
 
     """
 
@@ -51,11 +51,11 @@ class SessionResetPasswordResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         new_password = dictionary.get("newPassword") if dictionary.get("newPassword") else APIHelper.SKIP
         # Return an object of this model
         return cls(new_password)

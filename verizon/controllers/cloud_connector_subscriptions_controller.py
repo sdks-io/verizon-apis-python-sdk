@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.subscription import Subscription
 
 
@@ -26,6 +24,52 @@ class CloudConnectorSubscriptionsController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(CloudConnectorSubscriptionsController, self).__init__(config)
+
+    def create_subscription(self,
+                            body):
+        """Does a POST request to /subscriptions.
+
+        Create a subscription to define a streaming channel that sends data
+        from devices in the account to an endpoint defined in a target
+        resource.
+
+        Args:
+            body (CreateSubscriptionRequest): The request body provides the
+                details of the subscription that you want to create.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Returns
+                full subscription resource definition.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.CLOUD_CONNECTOR)
+            .path('/subscriptions')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Subscription.from_dictionary)
+            .is_api_response(True)
+        ).execute()
 
     def query_subscription(self,
                            body):
@@ -65,7 +109,7 @@ class CloudConnectorSubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -106,54 +150,8 @@ class CloudConnectorSubscriptionsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
-            .is_api_response(True)
-        ).execute()
-
-    def create_subscription(self,
-                            body):
-        """Does a POST request to /subscriptions.
-
-        Create a subscription to define a streaming channel that sends data
-        from devices in the account to an endpoint defined in a target
-        resource.
-
-        Args:
-            body (CreateSubscriptionRequest): The request body provides the
-                details of the subscription that you want to create.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Returns
-                full subscription resource definition.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.CLOUD_CONNECTOR)
-            .path('/subscriptions')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Subscription.from_dictionary)
             .is_api_response(True)
         ).execute()

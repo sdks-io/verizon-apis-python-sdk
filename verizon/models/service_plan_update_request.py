@@ -18,28 +18,32 @@ class ServicePlanUpdateRequest(object):
     Request to update service plan.
 
     Attributes:
-        account_name (string): The name of a billing account.
-        current_service_plan (string): The name of a service plan, if you want
-            to only include devices that have that service plan.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
-        devices (list of AccountDeviceList): A list of the devices that you
-            want to change, specified by device identifier.
-        group_name (string): The name of a device group, if you want to
-            restore service for all devices in that group.
-        service_plan (string): The service plan code that you want to assign
-            to all specified devices.
+        service_plan (str): The service plan code that you want to assign to
+            all specified devices.
+        account_name (str): The name of a billing account.
+        current_service_plan (str): The name of a service plan, if you want to
+            only include devices that have that service plan.
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
+        devices (List[AccountDeviceList]): A list of the devices that you want
+            to change, specified by device identifier.
+        group_name (str): The name of a device group, if you want to restore
+            service for all devices in that group.
+        carrier_ip_pool_name (str): TODO: type description here.
+        take_effect (datetime): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "service_plan": 'servicePlan',
         "account_name": 'accountName',
         "current_service_plan": 'currentServicePlan',
         "custom_fields": 'customFields',
         "devices": 'devices',
         "group_name": 'groupName',
-        "service_plan": 'servicePlan'
+        "carrier_ip_pool_name": 'carrierIpPoolName',
+        "take_effect": 'takeEffect'
     }
 
     _optionals = [
@@ -48,19 +52,23 @@ class ServicePlanUpdateRequest(object):
         'custom_fields',
         'devices',
         'group_name',
-        'service_plan',
+        'carrier_ip_pool_name',
+        'take_effect',
     ]
 
     def __init__(self,
+                 service_plan=None,
                  account_name=APIHelper.SKIP,
                  current_service_plan=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
                  devices=APIHelper.SKIP,
                  group_name=APIHelper.SKIP,
-                 service_plan=APIHelper.SKIP):
+                 carrier_ip_pool_name=APIHelper.SKIP,
+                 take_effect=APIHelper.SKIP):
         """Constructor for the ServicePlanUpdateRequest class"""
 
         # Initialize members of the class
+        self.service_plan = service_plan 
         if account_name is not APIHelper.SKIP:
             self.account_name = account_name 
         if current_service_plan is not APIHelper.SKIP:
@@ -71,8 +79,10 @@ class ServicePlanUpdateRequest(object):
             self.devices = devices 
         if group_name is not APIHelper.SKIP:
             self.group_name = group_name 
-        if service_plan is not APIHelper.SKIP:
-            self.service_plan = service_plan 
+        if carrier_ip_pool_name is not APIHelper.SKIP:
+            self.carrier_ip_pool_name = carrier_ip_pool_name 
+        if take_effect is not APIHelper.SKIP:
+            self.take_effect = APIHelper.apply_datetime_converter(take_effect, APIHelper.RFC3339DateTime) if take_effect else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -88,11 +98,12 @@ class ServicePlanUpdateRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
+        service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         current_service_plan = dictionary.get("currentServicePlan") if dictionary.get("currentServicePlan") else APIHelper.SKIP
         custom_fields = None
@@ -106,11 +117,14 @@ class ServicePlanUpdateRequest(object):
         else:
             devices = APIHelper.SKIP
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
-        service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
+        carrier_ip_pool_name = dictionary.get("carrierIpPoolName") if dictionary.get("carrierIpPoolName") else APIHelper.SKIP
+        take_effect = APIHelper.RFC3339DateTime.from_value(dictionary.get("takeEffect")).datetime if dictionary.get("takeEffect") else APIHelper.SKIP
         # Return an object of this model
-        return cls(account_name,
+        return cls(service_plan,
+                   account_name,
                    current_service_plan,
                    custom_fields,
                    devices,
                    group_name,
-                   service_plan)
+                   carrier_ip_pool_name,
+                   take_effect)

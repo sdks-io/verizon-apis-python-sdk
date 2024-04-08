@@ -17,23 +17,23 @@ class UploadsActivatesDeviceRequest(object):
     The request body identifies the devices to upload.
 
     Attributes:
-        account_name (string): The name of a billing account. An account name
-            is usually numeric, and must include any leading zeros.
-        email_address (string): The email address that the report should be
-            sent to when the upload is complete.
-        device_sku (string): The stock keeping unit that identifies the type
-            of devices in the upload and activation.
-        upload_type (string): The format of the device identifiers in the
-            upload and activation.
-        service_plan (string): The service plan code that you want to assign
-            to all specified devices.
-        carrier_ip_pool_name (string): The pool from which your device IP
+        account_name (str): The name of a billing account. An account name is
+            usually numeric, and must include any leading zeros.
+        email_address (str): The email address that the report should be sent
+            to when the upload is complete.
+        device_sku (str): The stock keeping unit that identifies the type of
+            devices in the upload and activation.
+        upload_type (str): The format of the device identifiers in the upload
+            and activation.
+        service_plan (str): The service plan code that you want to assign to
+            all specified devices.
+        carrier_ip_pool_name (str): The pool from which your device IP
             addresses is derived.
-        mdn_zip_code (string): The Zip code of the location where the line of
+        mdn_zip_code (str): The Zip code of the location where the line of
             service is primarily used, or a Zip code that you have been told
             to use with these devices.
-        devices (list of DeviceList): The devices to upload, specified by
-            device IDs in a format matching uploadType.
+        devices (List[DeviceList]): The devices to upload, specified by device
+            IDs in a format matching uploadType.
 
     """
 
@@ -89,11 +89,11 @@ class UploadsActivatesDeviceRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         email_address = dictionary.get("emailAddress") if dictionary.get("emailAddress") else None
         device_sku = dictionary.get("deviceSku") if dictionary.get("deviceSku") else None

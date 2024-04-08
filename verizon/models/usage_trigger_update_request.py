@@ -16,14 +16,14 @@ class UsageTriggerUpdateRequest(object):
     TODO: type model description here.
 
     Attributes:
-        trigger_name (string): Usage trigger name
-        account_name (string): Account name
-        threshold_value (string): The percent of subscribed usage required to
+        trigger_name (str): Usage trigger name
+        account_name (str): Account name
+        threshold_value (str): The percent of subscribed usage required to
             activate the trigger, such as 90 or 100.
-        sms_phone_numbers (string): Comma-separated list of phone numbers to
-            send SMS alerts to. Digits only; no dashes or parentheses, etc.
-        email_addresses (string): Comma-separated list of email addresses to
-            send alerts to.
+        sms_phone_numbers (str): Comma-separated list of phone numbers to send
+            SMS alerts to. Digits only; no dashes or parentheses, etc.
+        email_addresses (str): Comma-separated list of email addresses to send
+            alerts to.
 
     """
 
@@ -76,11 +76,11 @@ class UsageTriggerUpdateRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         trigger_name = dictionary.get("triggerName") if dictionary.get("triggerName") else APIHelper.SKIP
         threshold_value = dictionary.get("thresholdValue") if dictionary.get("thresholdValue") else APIHelper.SKIP

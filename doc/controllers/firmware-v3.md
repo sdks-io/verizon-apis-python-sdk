@@ -11,8 +11,8 @@ firmware_v3_controller = client.firmware_v3
 ## Methods
 
 * [List Available Firmware](../../doc/controllers/firmware-v3.md#list-available-firmware)
-* [Report Device Firmware](../../doc/controllers/firmware-v3.md#report-device-firmware)
 * [Synchronize Device Firmware](../../doc/controllers/firmware-v3.md#synchronize-device-firmware)
+* [Report Device Firmware](../../doc/controllers/firmware-v3.md#report-device-firmware)
 
 
 # List Available Firmware
@@ -29,12 +29,12 @@ def list_available_firmware(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
 | `protocol` | [`FirmwareProtocolEnum`](../../doc/models/firmware-protocol-enum.md) | Query, Required | Filter to retrieve a specific protocol type used. |
 
 ## Response Type
 
-[`List of FirmwarePackage`](../../doc/models/firmware-package.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[FirmwarePackage]`](../../doc/models/firmware-package.md).
 
 ## Example Usage
 
@@ -74,48 +74,6 @@ print(result)
 | 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
 
 
-# Report Device Firmware
-
-Ask a device to report its firmware version asynchronously.
-
-```python
-def report_device_firmware(self,
-                          acc,
-                          device_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `device_id` | `string` | Template, Required | Device identifier. |
-
-## Response Type
-
-[`DeviceFirmwareVersionUpdateResult`](../../doc/models/device-firmware-version-update-result.md)
-
-## Example Usage
-
-```python
-acc = '0000123456-00001'
-
-device_id = '15-digit IMEI'
-
-result = firmware_v3_controller.report_device_firmware(
-    acc,
-    device_id
-)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
-
-
 # Synchronize Device Firmware
 
 Synchronize ThingSpace with the FOTA server for up to 100 devices.
@@ -130,12 +88,12 @@ def synchronize_device_firmware(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
 | `body` | [`FirmwareIMEI`](../../doc/models/firmware-imei.md) | Body, Required | DeviceIds to get firmware info synchronously. |
 
 ## Response Type
 
-[`DeviceFirmwareList`](../../doc/models/device-firmware-list.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DeviceFirmwareList`](../../doc/models/device-firmware-list.md).
 
 ## Example Usage
 
@@ -168,6 +126,48 @@ print(result)
     }
   ]
 }
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`FotaV3ResultException`](../../doc/models/fota-v3-result-exception.md) |
+
+
+# Report Device Firmware
+
+Ask a device to report its firmware version asynchronously.
+
+```python
+def report_device_firmware(self,
+                          acc,
+                          device_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `device_id` | `str` | Template, Required | Device identifier. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DeviceFirmwareVersionUpdateResult`](../../doc/models/device-firmware-version-update-result.md).
+
+## Example Usage
+
+```python
+acc = '0000123456-00001'
+
+device_id = '15-digit IMEI'
+
+result = firmware_v3_controller.report_device_firmware(
+    acc,
+    device_id
+)
+print(result)
 ```
 
 ## Errors

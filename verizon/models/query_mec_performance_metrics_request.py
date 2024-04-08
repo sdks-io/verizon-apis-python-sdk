@@ -15,9 +15,8 @@ class QueryMECPerformanceMetricsRequest(object):
     MEC performance metrics request.
 
     Attributes:
-        imei (string): The 15-digit International Mobile Equipment
-            Identifier.
-        msisdn (string): The 12-digit Mobile Station International Subscriber
+        imei (str): The 15-digit International Mobile Equipment Identifier.
+        msisdn (str): The 12-digit Mobile Station International Subscriber
             Directory Number.
 
     """
@@ -51,11 +50,11 @@ class QueryMECPerformanceMetricsRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         imei = dictionary.get("IMEI") if dictionary.get("IMEI") else None
         msisdn = dictionary.get("MSISDN") if dictionary.get("MSISDN") else None
         # Return an object of this model

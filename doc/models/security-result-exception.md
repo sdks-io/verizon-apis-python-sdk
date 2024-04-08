@@ -11,17 +11,17 @@ Error response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error_code` | `string` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `3`, *Pattern*: `^[0-9]{3,3}$` |
-| `error_message` | `string` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
-| `error_url` | `string` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `64`, *Pattern*: `^https://[A-Za-z0-9].[A-Za-z]{3,64}$` |
+| `error_code` | `str` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `3`, *Pattern*: `^[0-9]{3,3}$` |
+| `error_message` | `str` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
+| `error_url` | `str` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `64`, *Pattern*: `^https://[A-Za-z0-9].[A-Za-z]{3,64}$` |
 
 ## Example (as JSON)
 
 ```json
 {
-  "errorCode": "errorCode6",
-  "errorMessage": "errorMessage8",
-  "errorUrl": "errorUrl4"
+  "errorCode": "errorCode8",
+  "errorMessage": "errorMessage0",
+  "errorUrl": "errorUrl8"
 }
 ```
 

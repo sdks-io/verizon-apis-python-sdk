@@ -16,14 +16,14 @@ class V1AccountSubscription(object):
     Account subscription information.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
-        purchase_type (string): Subscription models used by the account.
+        account_name (str): Account identifier in "##########-#####".
+        purchase_type (str): Subscription models used by the account.
         license_count (int): Number of monthly licenses in an MRC
             subscription.
         license_used_count (int): Number of licenses currently assigned to
             devices.
-        update_time (string): The date and time of when the subscription was
-            last updated.
+        update_time (str): The date and time of when the subscription was last
+            updated.
 
     """
 
@@ -78,11 +78,11 @@ class V1AccountSubscription(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         purchase_type = dictionary.get("purchaseType") if dictionary.get("purchaseType") else APIHelper.SKIP
         license_count = dictionary.get("licenseCount") if dictionary.get("licenseCount") else APIHelper.SKIP

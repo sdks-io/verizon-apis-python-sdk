@@ -11,7 +11,7 @@ Host information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `hostandpath` | `string` | Optional | - |
+| `hostandpath` | `str` | Optional | - |
 
 ## Example (as JSON)
 

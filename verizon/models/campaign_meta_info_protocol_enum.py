@@ -19,7 +19,7 @@ class CampaignMetaInfoProtocolEnum(object):
         OMDDM: TODO: type description here.
 
     """
-
     LW_M2M = 'LWM2M'
 
     OMDDM = 'OMD-DM'
+

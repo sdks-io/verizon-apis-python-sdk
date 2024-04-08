@@ -17,11 +17,11 @@ class CheckOrderStatusRequest(object):
     The request body identifies the devices to upload.
 
     Attributes:
-        account_name (string): The name of a billing account. An account name
-            is usually numeric, and must include any leading zeros.
-        order_request_id (string): The request id from the activation order.
-        devices (list of DeviceList): The devices to upload, specified by
-            device IDs in a format matching uploadType.
+        account_name (str): The name of a billing account. An account name is
+            usually numeric, and must include any leading zeros.
+        order_request_id (str): The request id from the activation order.
+        devices (List[DeviceList]): The devices to upload, specified by device
+            IDs in a format matching uploadType.
 
     """
 
@@ -62,11 +62,11 @@ class CheckOrderStatusRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         devices = None
         if dictionary.get('devices') is not None:

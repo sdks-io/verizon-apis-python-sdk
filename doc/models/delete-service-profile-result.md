@@ -11,8 +11,8 @@ Response on successful deletion of service profile.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `status` | `string` | Optional | **Constraints**: *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
-| `message` | `string` | Optional | **Constraints**: *Maximum Length*: `32` |
+| `status` | `str` | Optional | **Constraints**: *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
+| `message` | `str` | Optional | **Constraints**: *Maximum Length*: `32` |
 
 ## Example (as JSON)
 

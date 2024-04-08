@@ -11,9 +11,9 @@ Information required to associate a usage segmentation label with a device to re
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | - |
+| `account_name` | `str` | Required | - |
 | `labels` | [`LabelsList`](../../doc/models/labels-list.md) | Optional | - |
-| `devices` | [`List of DeviceList`](../../doc/models/device-list.md) | Optional | - |
+| `device_ids` | [`List[DeviceList]`](../../doc/models/device-list.md) | Optional | - |
 | `billing_cycle` | [`BillingCycle`](../../doc/models/billing-cycle.md) | Optional | - |
 
 ## Example (as JSON)
@@ -24,40 +24,40 @@ Information required to associate a usage segmentation label with a device to re
   "labels": {
     "deviceIds": [
       {
-        "name": "name8",
-        "value": "value0"
+        "name": "name0",
+        "value": "value2"
       }
     ]
   },
-  "devices": [
+  "deviceIds": [
     {
       "deviceIds": [
         {
-          "id": "id6",
-          "kind": "imei"
+          "id": "id0",
+          "kind": "kind8"
         },
         {
-          "id": "id7",
-          "kind": "eid"
-        },
-        {
-          "id": "id8",
-          "kind": "esn"
+          "id": "id0",
+          "kind": "kind8"
         }
       ]
     },
     {
       "deviceIds": [
         {
-          "id": "id7",
-          "kind": "eid"
+          "id": "id0",
+          "kind": "kind8"
+        },
+        {
+          "id": "id0",
+          "kind": "kind8"
         }
       ]
     }
   ],
-  "BillingCycle": {
-    "year": "year0",
-    "month": "month8"
+  "billingCycle": {
+    "year": "year6",
+    "month": "month4"
   }
 }
 ```

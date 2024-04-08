@@ -20,9 +20,9 @@ class RequestStatusEnum(object):
         FAILURE: TODO: type description here.
 
     """
-
     PENDING = 'Pending'
 
     SUCCESS = 'Success'
 
     FAILURE = 'Failure'
+

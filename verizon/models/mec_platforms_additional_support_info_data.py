@@ -16,7 +16,7 @@ class MECPlatformsAdditionalSupportInfoData(object):
     Data about additional service support information for the MEC platform.
 
     Attributes:
-        additional_info (string): TODO: type description here.
+        additional_info (str): TODO: type description here.
 
     """
 
@@ -51,11 +51,11 @@ class MECPlatformsAdditionalSupportInfoData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         additional_info = dictionary.get("additionalInfo") if dictionary.get("additionalInfo") else APIHelper.SKIP
         # Return an object of this model
         return cls(additional_info)

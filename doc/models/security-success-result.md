@@ -11,7 +11,7 @@ Success response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request_id` | `string` | Optional | A unique string that associates the request with the results that are sent via a callback message.The ThingSpace Platform sends a separate callback message for each device that matches the request criteria, indicating whether the operation succeeded for that device and containing any requested information. All callback messages will have the same requestId. |
+| `request_id` | `str` | Optional | A unique string that associates the request with the results that are sent via a callback message.The ThingSpace Platform sends a separate callback message for each device that matches the request criteria, indicating whether the operation succeeded for that device and containing any requested information. All callback messages will have the same requestId. |
 
 ## Example (as JSON)
 

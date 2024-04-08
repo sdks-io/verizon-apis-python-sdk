@@ -11,8 +11,8 @@ anomaly_settings_controller = client.anomaly_settings
 ## Methods
 
 * [Activate Anomaly Detection](../../doc/controllers/anomaly-settings.md#activate-anomaly-detection)
-* [Reset Anomaly Detection Parameters](../../doc/controllers/anomaly-settings.md#reset-anomaly-detection-parameters)
 * [List Anomaly Detection Settings](../../doc/controllers/anomaly-settings.md#list-anomaly-detection-settings)
+* [Reset Anomaly Detection Parameters](../../doc/controllers/anomaly-settings.md#reset-anomaly-detection-parameters)
 
 
 # Activate Anomaly Detection
@@ -32,7 +32,7 @@ def activate_anomaly_detection(self,
 
 ## Response Type
 
-[`IntelligenceSuccessResult`](../../doc/models/intelligence-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`IntelligenceSuccessResult`](../../doc/models/intelligence-success-result.md).
 
 ## Example Usage
 
@@ -67,49 +67,6 @@ print(result)
 | Default | An error occurred. | [`IntelligenceResultException`](../../doc/models/intelligence-result-exception.md) |
 
 
-# Reset Anomaly Detection Parameters
-
-Resets the thresholds to zero.
-
-```python
-def reset_anomaly_detection_parameters(self,
-                                      account_name)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account_name` | `string` | Template, Required | The name of the subscribed account. |
-
-## Response Type
-
-[`IntelligenceSuccessResult`](../../doc/models/intelligence-success-result.md)
-
-## Example Usage
-
-```python
-account_name = '0000123456-00001'
-
-result = anomaly_settings_controller.reset_anomaly_detection_parameters(account_name)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "status": "Success"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| Default | An error occurred. | [`IntelligenceResultException`](../../doc/models/intelligence-result-exception.md) |
-
-
 # List Anomaly Detection Settings
 
 Retrieves the current anomaly detection settings for an account.
@@ -123,11 +80,11 @@ def list_anomaly_detection_settings(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Template, Required | The name of the subscribed account. |
+| `account_name` | `str` | Template, Required | The name of the subscribed account. |
 
 ## Response Type
 
-[`AnomalyDetectionSettings`](../../doc/models/anomaly-detection-settings.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`AnomalyDetectionSettings`](../../doc/models/anomaly-detection-settings.md).
 
 ## Example Usage
 
@@ -150,6 +107,49 @@ print(result)
     "veryAbnormalMaxValue": 0.55
   },
   "status": "Active"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | An error occurred. | [`IntelligenceResultException`](../../doc/models/intelligence-result-exception.md) |
+
+
+# Reset Anomaly Detection Parameters
+
+Resets the thresholds to zero.
+
+```python
+def reset_anomaly_detection_parameters(self,
+                                      account_name)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `str` | Template, Required | The name of the subscribed account. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`IntelligenceSuccessResult`](../../doc/models/intelligence-success-result.md).
+
+## Example Usage
+
+```python
+account_name = '0000123456-00001'
+
+result = anomaly_settings_controller.reset_anomaly_detection_parameters(account_name)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "status": "Success"
 }
 ```
 

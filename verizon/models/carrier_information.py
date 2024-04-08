@@ -16,12 +16,11 @@ class CarrierInformation(object):
     Information about the carrier.
 
     Attributes:
-        carrier_name (string): The carrier that will perform the activation.
-            This parameter is only required if you have more than one
-            carrier.
-        service_plan (string): The service plan code that is assigned to the
+        carrier_name (str): The carrier that will perform the activation. This
+            parameter is only required if you have more than one carrier.
+        service_plan (str): The service plan code that is assigned to the
             device.
-        state (string): The device state. Valid values include: Activate,
+        state (str): The device state. Valid values include: Activate,
             Suspend, Deactive, Pre-active.
 
     """
@@ -67,11 +66,11 @@ class CarrierInformation(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         carrier_name = dictionary.get("carrierName") if dictionary.get("carrierName") else APIHelper.SKIP
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP

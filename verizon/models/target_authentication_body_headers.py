@@ -16,8 +16,8 @@ class TargetAuthenticationBodyHeaders(object):
     Authentication headers.
 
     Attributes:
-        authorization (string): Authorization header.
-        content_type (string): Content-Type header.
+        authorization (str): Authorization header.
+        content_type (str): Content-Type header.
 
     """
 
@@ -57,11 +57,11 @@ class TargetAuthenticationBodyHeaders(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         authorization = dictionary.get("Authorization") if dictionary.get("Authorization") else APIHelper.SKIP
         content_type = dictionary.get("Content-Type") if dictionary.get("Content-Type") else APIHelper.SKIP
         # Return an object of this model

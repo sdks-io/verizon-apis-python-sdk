@@ -52,11 +52,11 @@ class ActiveTriggerIndicator(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         active = dictionary.get("active") if "active" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(active)

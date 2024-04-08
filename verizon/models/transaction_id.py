@@ -17,7 +17,7 @@ class TransactionID(object):
     /devicelocations synchronus response.
 
     Attributes:
-        txid (string): TODO: type description here.
+        txid (str): TODO: type description here.
 
     """
 
@@ -52,11 +52,11 @@ class TransactionID(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else APIHelper.SKIP
         # Return an object of this model
         return cls(txid)

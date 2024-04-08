@@ -16,7 +16,7 @@ class FotaV3CallbackRegistrationRequest(object):
     Callback URL where the listening service is running.
 
     Attributes:
-        url (string): Callback URL for an subscribed service.
+        url (str): Callback URL for an subscribed service.
 
     """
 
@@ -51,11 +51,11 @@ class FotaV3CallbackRegistrationRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
         # Return an object of this model
         return cls(url)

@@ -11,7 +11,7 @@ Trigger for anomaly detection.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `trigger_id` | `string` | Optional | Trigger ID to identify the request in a callback. |
+| `trigger_id` | `str` | Optional | Trigger ID to identify the request in a callback. |
 
 ## Example (as JSON)
 

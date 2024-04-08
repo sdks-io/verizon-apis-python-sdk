@@ -18,5 +18,5 @@ class CallbackServiceEnum(object):
         FOTA: TODO: type description here.
 
     """
-
     FOTA = 'Fota'
+

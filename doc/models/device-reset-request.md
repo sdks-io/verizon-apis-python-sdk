@@ -11,9 +11,9 @@ Request body to Performs a device reboot.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of the account. An account name is usually numeric, and must include any leading zeros. |
-| `action` | `string` | Optional | The action you want to take on the device. |
-| `devices` | [`List of Device`](../../doc/models/device.md) | Optional | The devices for which you want to perform a factory reset or reboot. |
+| `account_name` | `str` | Optional | The name of the account. An account name is usually numeric, and must include any leading zeros. |
+| `action` | `str` | Optional | The action you want to take on the device. |
+| `devices` | [`List[Device]`](../../doc/models/device.md) | Optional | The devices for which you want to perform a factory reset or reboot. |
 
 ## Example (as JSON)
 
@@ -23,12 +23,12 @@ Request body to Performs a device reboot.
   "action": "reboot",
   "devices": [
     {
-      "id": "id6",
-      "kind": "kind4"
+      "id": "id4",
+      "kind": "kind2"
     },
     {
-      "id": "id7",
-      "kind": "kind5"
+      "id": "id4",
+      "kind": "kind2"
     }
   ]
 }

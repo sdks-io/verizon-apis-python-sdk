@@ -19,7 +19,7 @@ class DeviceServiceInformation(object):
     Attributes:
         response_type (ApiResponseCode): ResponseCode and/or a message
             indicating success or failure of the request.
-        imei (string): The International Mobile Equipment Identifier of the
+        imei (str): The International Mobile Equipment Identifier of the
             device.
         bullseye_enable (bool): Shows if Hyper Precise is enabled (true) or
             disabled (false).
@@ -63,11 +63,11 @@ class DeviceServiceInformation(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         imei = dictionary.get("imei") if dictionary.get("imei") else None
         bullseye_enable = dictionary.get("BullseyeEnable") if "BullseyeEnable" in dictionary.keys() else None
         response_type = ApiResponseCode.from_dictionary(dictionary.get('responseType')) if 'responseType' in dictionary.keys() else APIHelper.SKIP

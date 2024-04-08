@@ -18,13 +18,13 @@ class MECPerformanceMetrics(object):
     (KPIs) like network availability, MEC hostnames and more.
 
     Attributes:
-        query_status (string): Success or Failed.
-        start (string): Timestamp of the query's start,
+        query_status (str): Success or Failed.
+        start (str): Timestamp of the query's start,
             format:mm/dd/yyyy,hr:min:sec.
-        end (string): Timestamp of the query's end , format:mm/dd/yyyy,
+        end (str): Timestamp of the query's end , format:mm/dd/yyyy,
             hr:min:sec.
-        query_result (list of MECPerformanceQueryResult): MEC performance
-            query result.
+        query_result (List[MECPerformanceQueryResult]): MEC performance query
+            result.
 
     """
 
@@ -74,11 +74,11 @@ class MECPerformanceMetrics(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         query_status = dictionary.get("QueryStatus") if dictionary.get("QueryStatus") else APIHelper.SKIP
         start = dictionary.get("Start") if dictionary.get("Start") else APIHelper.SKIP
         end = dictionary.get("End") if dictionary.get("End") else APIHelper.SKIP

@@ -17,12 +17,12 @@ class V1LicensesAssignedRemovedResult(object):
     License assignment or removal confirmation.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
+        account_name (str): Account identifier in "##########-#####".
         lic_count (int): Total number of monthly licenses in an MRC
             subscription.
         lic_used_count (int): Number of licenses assigned to devices after the
             request completed.
-        device_list (list of V1DeviceListItem): A JSON object for each device
+        device_list (List[V1DeviceListItem]): A JSON object for each device
             that was in the request.
 
     """
@@ -73,11 +73,11 @@ class V1LicensesAssignedRemovedResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         lic_count = dictionary.get("licCount") if dictionary.get("licCount") else APIHelper.SKIP
         lic_used_count = dictionary.get("licUsedCount") if dictionary.get("licUsedCount") else APIHelper.SKIP

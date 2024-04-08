@@ -18,16 +18,16 @@ class DeviceFirmwareUpgrade(object):
     Firmware upgrades information.
 
     Attributes:
-        device_id (string): Device identifier.
-        campaign_id (string): Campaign identifier.
-        account_name (string): Account identifier.
-        firmware_name (string): Firmware name.
-        firmware_from (string): Old firmware version.
-        firmware_to (string): New firmware version.
+        device_id (str): Device identifier.
+        campaign_id (str): Campaign identifier.
+        account_name (str): Account identifier.
+        firmware_name (str): Firmware name.
+        firmware_from (str): Old firmware version.
+        firmware_to (str): New firmware version.
         start_date (date): Firmware upgrade start date.
-        status (string): Firmware upgrade status.
-        reason (string): Software upgrade result reason.
-        report_updated_time (string): Report updated time.
+        status (str): Firmware upgrade status.
+        reason (str): Software upgrade result reason.
+        report_updated_time (str): Report updated time.
 
     """
 
@@ -95,11 +95,11 @@ class DeviceFirmwareUpgrade(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         campaign_id = dictionary.get("campaignId") if dictionary.get("campaignId") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None

@@ -17,11 +17,11 @@ class V3AccountDeviceList(object):
     Array of devices.
 
     Attributes:
-        account_name (string): Account name.
+        account_name (str): Account name.
         has_more_data (bool): Has more device flag?
-        last_seen_device_id (string): Last seen device identifier.
+        last_seen_device_id (str): Last seen device identifier.
         max_page_size (int): Maximum page size.
-        device_list (list of V3AccountDevice): Account device list.
+        device_list (List[V3AccountDevice]): Account device list.
 
     """
 
@@ -68,11 +68,11 @@ class V3AccountDeviceList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else None
         max_page_size = dictionary.get("maxPageSize") if dictionary.get("maxPageSize") else None

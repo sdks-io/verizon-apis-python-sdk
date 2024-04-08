@@ -16,12 +16,10 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.firmware_upgrade_change_result import FirmwareUpgradeChangeResult
-from verizon.models.firmware_upgrade import FirmwareUpgrade
-from verizon.models.fota_v1_success_result import FotaV1SuccessResult
 from verizon.models.firmware import Firmware
+from verizon.models.firmware_upgrade import FirmwareUpgrade
+from verizon.models.firmware_upgrade_change_result import FirmwareUpgradeChangeResult
+from verizon.models.fota_v1_success_result import FotaV1SuccessResult
 from verizon.exceptions.fota_v1_result_exception import FotaV1ResultException
 
 
@@ -31,25 +29,20 @@ class FirmwareV1Controller(BaseController):
     def __init__(self, config):
         super(FirmwareV1Controller, self).__init__(config)
 
-    def update_firmware_upgrade_devices(self,
-                                        account,
-                                        upgrade_id,
-                                        body):
-        """Does a PUT request to /upgrades/{account}/upgrade/{upgradeId}.
+    def list_available_firmware(self,
+                                account):
+        """Does a GET request to /firmware/{account}.
 
-        Add or remove devices from a scheduled upgrade.
+        Lists all device firmware images available for an account, based on
+        the devices registered to that account.
 
         Args:
-            account (string): Account identifier in "##########-#####".
-            upgrade_id (string): The UUID of the upgrade, returned by POST
-                /upgrades when the upgrade was scheduled.
-            body (FirmwareUpgradeChangeRequest): List of devices to add or
-                remove.
+            account (str): Account identifier in "##########-#####".
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Upgrade
-                information.
+                useful information such as status codes and headers. List of
+                available firmware.
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -61,30 +54,20 @@ class FirmwareV1Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades/{account}/upgrade/{upgradeId}')
-            .http_method(HttpMethodEnum.PUT)
+            .path('/firmware/{account}')
+            .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('account')
                             .value(account)
                             .should_encode(True))
-            .template_param(Parameter()
-                            .key('upgradeId')
-                            .value(upgrade_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('*/*'))
-            .body_param(Parameter()
-                        .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FirmwareUpgradeChangeResult.from_dictionary)
+            .deserialize_into(Firmware.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()
@@ -125,103 +108,11 @@ class FirmwareV1Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FirmwareUpgrade.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
-
-    def cancel_scheduled_firmware_upgrade(self,
-                                          account,
-                                          upgrade_id):
-        """Does a DELETE request to /upgrades/{account}/upgrade/{upgradeId}.
-
-        Cancel a scheduled firmware upgrade.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-            upgrade_id (string): The UUID of the scheduled upgrade that you
-                want to cancel.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Upgrade
-                canceled.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades/{account}/upgrade/{upgradeId}')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('upgradeId')
-                            .value(upgrade_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FotaV1SuccessResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV1ResultException)
-        ).execute()
-
-    def list_available_firmware(self,
-                                account):
-        """Does a GET request to /firmware/{account}.
-
-        Lists all device firmware images available for an account, based on
-        the devices registered to that account.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                available firmware.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/firmware/{account}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Firmware.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()
@@ -236,8 +127,8 @@ class FirmwareV1Controller(BaseController):
         the upgrade for each device.
 
         Args:
-            account (string): Account identifier in "##########-#####".
-            upgrade_id (string): The UUID of the upgrade, returned by POST
+            account (str): Account identifier in "##########-#####".
+            upgrade_id (str): The UUID of the upgrade, returned by POST
                 /upgrades when the upgrade was scheduled.
 
         Returns:
@@ -268,11 +159,118 @@ class FirmwareV1Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FirmwareUpgrade.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
+    def update_firmware_upgrade_devices(self,
+                                        account,
+                                        upgrade_id,
+                                        body):
+        """Does a PUT request to /upgrades/{account}/upgrade/{upgradeId}.
+
+        Add or remove devices from a scheduled upgrade.
+
+        Args:
+            account (str): Account identifier in "##########-#####".
+            upgrade_id (str): The UUID of the upgrade, returned by POST
+                /upgrades when the upgrade was scheduled.
+            body (FirmwareUpgradeChangeRequest): List of devices to add or
+                remove.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Upgrade
+                information.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/upgrades/{account}/upgrade/{upgradeId}')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('upgradeId')
+                            .value(upgrade_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('*/*'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FirmwareUpgradeChangeResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV1ResultException)
+        ).execute()
+
+    def cancel_scheduled_firmware_upgrade(self,
+                                          account,
+                                          upgrade_id):
+        """Does a DELETE request to /upgrades/{account}/upgrade/{upgradeId}.
+
+        Cancel a scheduled firmware upgrade.
+
+        Args:
+            account (str): Account identifier in "##########-#####".
+            upgrade_id (str): The UUID of the scheduled upgrade that you want
+                to cancel.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Upgrade
+                canceled.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
+            .path('/upgrades/{account}/upgrade/{upgradeId}')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('upgradeId')
+                            .value(upgrade_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FotaV1SuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV1ResultException)
         ).execute()

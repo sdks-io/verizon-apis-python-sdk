@@ -11,13 +11,13 @@ Data about additional service support information for the MEC platform.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `additional_info` | `string` | Optional | **Constraints**: *Maximum Length*: `32` |
+| `additional_info` | `str` | Optional | **Constraints**: *Maximum Length*: `32` |
 
 ## Example (as JSON)
 
 ```json
 {
-  "additionalInfo": "additionalInfo8"
+  "additionalInfo": "additionalInfo2"
 }
 ```
 

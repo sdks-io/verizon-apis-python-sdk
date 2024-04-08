@@ -16,10 +16,10 @@ class PositionError(object):
     Position error.
 
     Attributes:
-        time (string): Time location obtained.
-        utcoffset (string): UTC offset of time.
-        mtype (string): Error type returned from location server.
-        info (string): Additional information about the error.
+        time (str): Time location obtained.
+        utcoffset (str): UTC offset of time.
+        mtype (str): Error type returned from location server.
+        info (str): Additional information about the error.
 
     """
 
@@ -69,11 +69,11 @@ class PositionError(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         time = dictionary.get("time") if dictionary.get("time") else APIHelper.SKIP
         utcoffset = dictionary.get("utcoffset") if dictionary.get("utcoffset") else APIHelper.SKIP
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP

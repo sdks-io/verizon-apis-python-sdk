@@ -15,7 +15,7 @@ class SynchronousLocationRequestResult(object):
     TODO: type model description here.
 
     Attributes:
-        txid (string): The transaction ID of the report.
+        txid (str): The transaction ID of the report.
         status (ReportStatusEnum): Status of the report.
 
     """
@@ -49,11 +49,11 @@ class SynchronousLocationRequestResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else None
         status = dictionary.get("status") if dictionary.get("status") else None
         # Return an object of this model

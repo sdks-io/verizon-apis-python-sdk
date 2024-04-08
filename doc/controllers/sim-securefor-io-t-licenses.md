@@ -29,11 +29,11 @@ def assign_license_to_devices(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`AssignLicenseRequest`](../../doc/models/assign-license-request.md) | Body, Required | Request to assign license to devices. |
-| `x_request_id` | `string` | Header, Optional | Transaction Id.<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[0-9]-[0-9]{3,32}$` |
+| `x_request_id` | `str` | Header, Optional | Transaction Id. |
 
 ## Response Type
 
-[`SecuritySuccessResult`](../../doc/models/security-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`SecuritySuccessResult`](../../doc/models/security-success-result.md).
 
 ## Example Usage
 
@@ -91,11 +91,11 @@ def unassign_license_to_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `x_request_id` | `string` | Header, Required | Transaction Id.<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[0-9]-[0-9]{3,32}$` |
+| `x_request_id` | `str` | Header, Required | Transaction Id. |
 
 ## Response Type
 
-[`SecuritySuccessResult`](../../doc/models/security-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`SecuritySuccessResult`](../../doc/models/security-success-result.md).
 
 ## Example Usage
 

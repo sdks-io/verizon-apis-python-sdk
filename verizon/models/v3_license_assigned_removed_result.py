@@ -16,11 +16,10 @@ class V3LicenseAssignedRemovedResult(object):
     License assignment/removal response.
 
     Attributes:
-        account_name (string): Account name.
+        account_name (str): Account name.
         lic_count (int): Total license count.
         lic_used_count (int): Assigned license count.
-        device_list (list of V3DeviceStatus): List of devices with id in
-            IMEI.
+        device_list (List[V3DeviceStatus]): List of devices with id in IMEI.
 
     """
 
@@ -59,11 +58,11 @@ class V3LicenseAssignedRemovedResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         lic_count = dictionary.get("licCount") if dictionary.get("licCount") else None
         lic_used_count = dictionary.get("licUsedCount") if dictionary.get("licUsedCount") else None

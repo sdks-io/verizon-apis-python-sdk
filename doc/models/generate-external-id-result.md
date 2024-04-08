@@ -11,7 +11,7 @@ A new external ID.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `externalid` | `string` | Optional | Newly created security string. |
+| `externalid` | `str` | Optional | Newly created security string. |
 
 ## Example (as JSON)
 

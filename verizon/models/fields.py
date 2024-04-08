@@ -53,11 +53,11 @@ class Fields(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         configuration = Configuration.from_dictionary(dictionary.get('configuration')) if 'configuration' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(configuration)

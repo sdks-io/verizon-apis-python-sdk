@@ -19,22 +19,21 @@ class FirmwareCampaign(object):
     Firmware upgrade information.
 
     Attributes:
-        id (string): Upgrade identifier.
-        account_name (string): Account identifier.
-        campaign_name (string): Campaign name.
-        firmware_name (string): Firmware name (for firmware upgrade only).
-        firmware_from (string): Old firmware version (for firmware upgrade
+        id (str): Upgrade identifier.
+        account_name (str): Account identifier.
+        campaign_name (str): Campaign name.
+        firmware_name (str): Firmware name (for firmware upgrade only).
+        firmware_from (str): Old firmware version (for firmware upgrade
             only).
-        firmware_to (string): New firmware version (for firmware upgrade
-            only).
-        protocol (string): Available values: LWM2M.
-        make (string): TODO: type description here.
-        model (string): TODO: type description here.
+        firmware_to (str): New firmware version (for firmware upgrade only).
+        protocol (str): Available values: LWM2M.
+        make (str): TODO: type description here.
+        model (str): TODO: type description here.
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
-        campaign_time_window_list (list of V3TimeWindow): List of allowed
+        campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
-        status (string): Campaign status.
+        status (str): Campaign status.
 
     """
 
@@ -109,11 +108,11 @@ class FirmwareCampaign(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         firmware_from = dictionary.get("firmwareFrom") if dictionary.get("firmwareFrom") else None

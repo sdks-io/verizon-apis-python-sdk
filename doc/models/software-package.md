@@ -11,13 +11,13 @@ Software package information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `software_name` | `string` | Required | Software name. |
+| `software_name` | `str` | Required | Software name. |
 | `launch_date` | `date` | Required | Software launch date. |
-| `release_note` | `string` | Optional | Software release note reserved for future use. |
-| `model` | `string` | Required | Software applicable device model. |
-| `make` | `string` | Required | Software applicable device make. |
-| `distribution_type` | `string` | Required | LWM2M, OMD-DM or HTTP. |
-| `device_platform_id` | `string` | Required | The platform (Android, iOS, etc.) that the software can be applied to. |
+| `release_note` | `str` | Optional | Software release note reserved for future use. |
+| `model` | `str` | Required | Software applicable device model. |
+| `make` | `str` | Required | Software applicable device make. |
+| `distribution_type` | `str` | Required | LWM2M, OMD-DM or HTTP. |
+| `device_platform_id` | `str` | Required | The platform (Android, iOS, etc.) that the software can be applied to. |
 
 ## Example (as JSON)
 

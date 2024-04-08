@@ -11,7 +11,7 @@ A success response includes an array of all matching devices. Each device includ
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_property` | [`List of FindDeviceByPropertyResponse`](../../doc/models/find-device-by-property-response.md) | Optional | **Constraints**: *Maximum Items*: `100` |
+| `device_property` | [`List[FindDeviceByPropertyResponse]`](../../doc/models/find-device-by-property-response.md) | Optional | **Constraints**: *Maximum Items*: `100` |
 
 ## Example (as JSON)
 
@@ -19,11 +19,18 @@ A success response includes an array of all matching devices. Each device includ
 {
   "DeviceProperty": [
     {
-      "billingaccountid": "billingaccountid0",
-      "createdon": "createdon8",
+      "billingaccountid": "billingaccountid4",
+      "createdon": "createdon6",
       "eventretention": "eventretention2",
-      "iccid": "iccid0",
-      "id": "id4"
+      "iccid": "iccid4",
+      "id": "id8"
+    },
+    {
+      "billingaccountid": "billingaccountid4",
+      "createdon": "createdon6",
+      "eventretention": "eventretention2",
+      "iccid": "iccid4",
+      "id": "id8"
     }
   ]
 }

@@ -64,11 +64,11 @@ class ComputeResourcesType(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         gpu = GPU.from_dictionary(dictionary.get('GPU')) if 'GPU' in dictionary.keys() else APIHelper.SKIP
         min_ramgb = dictionary.get("minRAMGB") if dictionary.get("minRAMGB") else APIHelper.SKIP
         min_storage_gb = dictionary.get("minStorageGB") if dictionary.get("minStorageGB") else APIHelper.SKIP

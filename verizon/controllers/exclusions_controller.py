@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.device_location_success_result import DeviceLocationSuccessResult
 from verizon.models.devices_consent_result import DevicesConsentResult
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
@@ -65,7 +63,7 @@ class ExclusionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -83,8 +81,8 @@ class ExclusionsController(BaseController):
         with Device Location Services requests.
 
         Args:
-            account_name (string): The numeric name of the account.
-            device_list (string): A list of the device IDs to remove from the
+            account_name (str): The numeric name of the account.
+            device_list (str): A list of the device IDs to remove from the
                 exclusion list.
 
         Returns:
@@ -113,7 +111,7 @@ class ExclusionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -131,8 +129,8 @@ class ExclusionsController(BaseController):
         account.
 
         Args:
-            account (string): Account identifier in "##########-#####".
-            start_index (string): Zero-based number of the first record to
+            account (str): Account identifier in "##########-#####".
+            start_index (str): Zero-based number of the first record to
                 return.
 
         Returns:
@@ -163,7 +161,7 @@ class ExclusionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

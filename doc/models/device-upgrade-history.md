@@ -11,15 +11,15 @@ Firmware upgrade information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Optional | Device IMEI. |
-| `id` | `string` | Optional | The unique identifier for the upgrade. |
-| `account_name` | `string` | Optional | The name (number) of the billing account that the device belongs to. |
-| `firmware_from` | `string` | Optional | The firmware version that was on the device before the upgrade. |
-| `firmware_to` | `string` | Optional | The name of the firmware version that was on the device after the upgrade. |
-| `start_date` | `string` | Optional | The date of the upgrade. |
-| `upgrade_start_time` | `string` | Optional | The date and time that the upgrade actually started for this device. |
-| `status` | `string` | Optional | The status of the upgrade for this device. |
-| `reason` | `string` | Optional | More information about the status. |
+| `device_id` | `str` | Optional | Device IMEI. |
+| `id` | `str` | Optional | The unique identifier for the upgrade. |
+| `account_name` | `str` | Optional | The name (number) of the billing account that the device belongs to. |
+| `firmware_from` | `str` | Optional | The firmware version that was on the device before the upgrade. |
+| `firmware_to` | `str` | Optional | The name of the firmware version that was on the device after the upgrade. |
+| `start_date` | `str` | Optional | The date of the upgrade. |
+| `upgrade_start_time` | `str` | Optional | The date and time that the upgrade actually started for this device. |
+| `status` | `str` | Optional | The status of the upgrade for this device. |
+| `reason` | `str` | Optional | More information about the status. |
 
 ## Example (as JSON)
 

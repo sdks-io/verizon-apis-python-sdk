@@ -16,7 +16,7 @@ class CallbackRegistrationResult(object):
     TODO: type model description here.
 
     Attributes:
-        account (string): The name of the account that registered the callback
+        account (str): The name of the account that registered the callback
             URL.
         name (CallbackServiceNameEnum): The name of the callback service.
 
@@ -58,11 +58,11 @@ class CallbackRegistrationResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account = dictionary.get("account") if dictionary.get("account") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         # Return an object of this model

@@ -17,12 +17,12 @@ class IErrorMessage(object):
 
     Attributes:
         error_code (ErrorResponseCodeEnum): Error Code.
-        error_message (string): Details and additional information about the
+        error_message (str): Details and additional information about the
             error code.
         http_status_code (HttpStatusCodeEnum): HTML error code and
             description.
-        detail_error_message (string): More detail and information about the
-            HTML error code.
+        detail_error_message (str): More detail and information about the HTML
+            error code.
 
     """
 
@@ -72,11 +72,11 @@ class IErrorMessage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         error_code = dictionary.get("errorCode") if dictionary.get("errorCode") else APIHelper.SKIP
         error_message = dictionary.get("errorMessage") if dictionary.get("errorMessage") else APIHelper.SKIP
         http_status_code = dictionary.get("httpStatusCode") if dictionary.get("httpStatusCode") else APIHelper.SKIP

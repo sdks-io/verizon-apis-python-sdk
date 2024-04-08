@@ -11,11 +11,11 @@ FOTA Subscription.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier in "##########-#####". |
-| `purchase_type` | `string` | Optional | Subscription models used by the account. |
+| `account_name` | `str` | Optional | Account identifier in "##########-#####". |
+| `purchase_type` | `str` | Optional | Subscription models used by the account. |
 | `license_count` | `int` | Optional | Number of monthly licenses in an MRC subscription. |
 | `license_used_count` | `int` | Optional | Number of licenses currently assigned to devices. |
-| `update_time` | `string` | Optional | The date and time of when the subscription was last updated. |
+| `update_time` | `str` | Optional | The date and time of when the subscription was last updated. |
 
 ## Example (as JSON)
 

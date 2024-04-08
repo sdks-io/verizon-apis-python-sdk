@@ -16,7 +16,7 @@ class DiagnosticsSubscription(object):
     Status of the diagnostic services subscription.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####". An
+        account_name (str): Account identifier in "##########-#####". An
             account name is usually numeric, and must include any leading
             zeros.
         created_on (datetime): The date and time of when the subscription was
@@ -26,7 +26,7 @@ class DiagnosticsSubscription(object):
         total_allowed (int): Number of licenses currently assigned to
             devices.
         total_used (int): Number of licenses currently used by the devices.
-        sku_name (string): Name of the SKU for the account.
+        sku_name (str): Name of the SKU for the account.
 
     """
 
@@ -51,8 +51,8 @@ class DiagnosticsSubscription(object):
 
         # Initialize members of the class
         self.account_name = account_name 
-        self.created_on = APIHelper.RFC3339DateTime(created_on) if created_on else None 
-        self.last_updated = APIHelper.RFC3339DateTime(last_updated) if last_updated else None 
+        self.created_on = APIHelper.apply_datetime_converter(created_on, APIHelper.RFC3339DateTime) if created_on else None 
+        self.last_updated = APIHelper.apply_datetime_converter(last_updated, APIHelper.RFC3339DateTime) if last_updated else None 
         self.total_allowed = total_allowed 
         self.total_used = total_used 
         self.sku_name = sku_name 
@@ -71,11 +71,11 @@ class DiagnosticsSubscription(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         created_on = APIHelper.RFC3339DateTime.from_value(dictionary.get("createdOn")).datetime if dictionary.get("createdOn") else None
         last_updated = APIHelper.RFC3339DateTime.from_value(dictionary.get("lastUpdated")).datetime if dictionary.get("lastUpdated") else None

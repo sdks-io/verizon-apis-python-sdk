@@ -11,19 +11,19 @@ Target resource definition.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `address` | `string` | Optional | The endpoint for data streams. |
-| `addressscheme` | `string` | Optional | The transport format. |
-| `billingaccountid` | `string` | Optional | The billing account ID. |
-| `createdon` | `string` | Optional | The date the resource was created. |
-| `externalid` | `string` | Optional | Security identification string. |
-| `id` | `string` | Optional | ThingSpace unique ID for the target that was created. |
-| `kind` | `string` | Optional | Identifies the resource kind. Targets are ts.target. |
-| `lastupdated` | `string` | Optional | The date the resource was last updated. |
-| `name` | `string` | Optional | Name of the target. |
-| `region` | `string` | Optional | AWS region value. |
-| `version` | `string` | Optional | Version of the underlying schema resource. |
-| `versionid` | `string` | Optional | The version of the resource. |
-| `description` | `string` | Optional | Description of the target. |
+| `address` | `str` | Optional | The endpoint for data streams. |
+| `addressscheme` | `str` | Optional | The transport format. |
+| `billingaccountid` | `str` | Optional | The billing account ID. |
+| `createdon` | `str` | Optional | The date the resource was created. |
+| `externalid` | `str` | Optional | Security identification string. |
+| `id` | `str` | Optional | ThingSpace unique ID for the target that was created. |
+| `kind` | `str` | Optional | Identifies the resource kind. Targets are ts.target. |
+| `lastupdated` | `str` | Optional | The date the resource was last updated. |
+| `name` | `str` | Optional | Name of the target. |
+| `region` | `str` | Optional | AWS region value. |
+| `version` | `str` | Optional | Version of the underlying schema resource. |
+| `versionid` | `str` | Optional | The version of the resource. |
+| `description` | `str` | Optional | Description of the target. |
 
 ## Example (as JSON)
 
@@ -40,7 +40,7 @@ Target resource definition.
   "region": "us-east-1",
   "version": "1.0",
   "versionid": "caf85ff7-200e-11e9-a85b-02420a621e0a",
-  "billingaccountid": "billingaccountid4"
+  "billingaccountid": "billingaccountid0"
 }
 ```
 

@@ -16,12 +16,10 @@ class ResourcesServiceEndpoint(object):
     Service Endpoint path, address, and port.
 
     Attributes:
-        uri (string): URI of Service Endpoint if available.
-        fqdn (string): FQDN of Service Endpoint if available.
-        i_pv_4_address (string): IPv4 Address of Service Endpoint if
-            available.
-        i_pv_6_address (string): IPv6 Address of Service Endpoint if
-            available.
+        uri (str): URI of Service Endpoint if available.
+        fqdn (str): FQDN of Service Endpoint if available.
+        i_pv_4_address (str): IPv4 Address of Service Endpoint if available.
+        i_pv_6_address (str): IPv6 Address of Service Endpoint if available.
         port (int): Port information of Service Endpoint if IPv4 or IPv6 is
             mentioned.
 
@@ -78,11 +76,11 @@ class ResourcesServiceEndpoint(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         uri = dictionary.get("URI") if dictionary.get("URI") else APIHelper.SKIP
         fqdn = dictionary.get("FQDN") if dictionary.get("FQDN") else APIHelper.SKIP
         i_pv_4_address = dictionary.get("IPv4Address") if dictionary.get("IPv4Address") else APIHelper.SKIP

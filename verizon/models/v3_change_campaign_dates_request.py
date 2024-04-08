@@ -21,7 +21,7 @@ class V3ChangeCampaignDatesRequest(object):
     Attributes:
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
-        campaign_time_window_list (list of V3TimeWindow): List of allowed
+        campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
 
     """
@@ -63,11 +63,11 @@ class V3ChangeCampaignDatesRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         start_date = dateutil.parser.parse(dictionary.get('startDate')).date() if dictionary.get('startDate') else None
         end_date = dateutil.parser.parse(dictionary.get('endDate')).date() if dictionary.get('endDate') else None
         campaign_time_window_list = None

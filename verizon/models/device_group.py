@@ -17,11 +17,11 @@ class DeviceGroup(object):
     Returns a list of all device groups in a specified account.
 
     Attributes:
-        description (string): The description of the device group.
-        extended_attributes (list of CustomFields): Any extended attributes
-            for the device group, as Key and Value pairs.
+        description (str): The description of the device group.
+        extended_attributes (List[CustomFields]): Any extended attributes for
+            the device group, as Key and Value pairs.
         is_default_group (bool): Identifies the default device group.
-        name (string): The name of the device group.
+        name (str): The name of the device group.
 
     """
 
@@ -71,11 +71,11 @@ class DeviceGroup(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         extended_attributes = None
         if dictionary.get('extendedAttributes') is not None:

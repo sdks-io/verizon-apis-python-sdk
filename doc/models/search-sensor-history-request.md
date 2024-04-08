@@ -14,7 +14,7 @@ Search Device By Property resource definition.
 | `accountidentifier` | [`AccountIdentifier`](../../doc/models/account-identifier.md) | Required | The ID of the authenticating billing account, in the format `{"billingaccountid":"1234567890-12345"}`. |
 | `resourceidentifier` | [`ResourceIdentifier`](../../doc/models/resource-identifier.md) | Required | The ID of the target to delete, in the format {"id": "dd1682d3-2d80-cefc-f3ee-25154800beff"}. |
 | `limitnumber` | `int` | Optional | The maximum number of events to include in the response. |
-| `page` | `string` | Optional | The maximum number of events to include in the response. |
+| `page` | `str` | Optional | The maximum number of events to include in the response. |
 
 ## Example (as JSON)
 

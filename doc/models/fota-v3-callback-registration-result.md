@@ -11,7 +11,7 @@ Callback registration information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `url` | `string` | Optional | Callback URL. |
+| `url` | `str` | Optional | Callback URL. |
 
 ## Example (as JSON)
 

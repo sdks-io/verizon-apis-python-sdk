@@ -11,7 +11,7 @@ Response to activate service for one or more devices so that they can send and r
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request_id` | `string` | Optional | A unique string that associates the request with the results that are sent via a callback service. |
+| `request_id` | `str` | Optional | A unique string that associates the request with the results that are sent via a callback service. |
 
 ## Example (as JSON)
 

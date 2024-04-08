@@ -17,10 +17,10 @@ class ConnectionEvent(object):
     Network connection events for a device during a specified time period.
 
     Attributes:
-        connection_event_attributes (list of CustomFields): The attributes
-            that describe the connection event.
-        extended_attributes (list of CustomFields): Currently not used.
-        occurred_at (string): The date and time when the connection event
+        connection_event_attributes (List[CustomFields]): The attributes that
+            describe the connection event.
+        extended_attributes (List[CustomFields]): Currently not used.
+        occurred_at (str): The date and time when the connection event
             occured.
 
     """
@@ -66,11 +66,11 @@ class ConnectionEvent(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         connection_event_attributes = None
         if dictionary.get('connectionEventAttributes') is not None:
             connection_event_attributes = [CustomFields.from_dictionary(x) for x in dictionary.get('connectionEventAttributes')]

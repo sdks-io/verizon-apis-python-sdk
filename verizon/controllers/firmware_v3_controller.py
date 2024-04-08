@@ -16,11 +16,9 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.firmware_package import FirmwarePackage
-from verizon.models.device_firmware_version_update_result import DeviceFirmwareVersionUpdateResult
 from verizon.models.device_firmware_list import DeviceFirmwareList
+from verizon.models.device_firmware_version_update_result import DeviceFirmwareVersionUpdateResult
 from verizon.exceptions.fota_v3_result_exception import FotaV3ResultException
 
 
@@ -38,7 +36,7 @@ class FirmwareV3Controller(BaseController):
         This endpoint allows user to list the firmware of an account.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             protocol (FirmwareProtocolEnum): Filter to retrieve a specific
                 protocol type used.
 
@@ -69,59 +67,11 @@ class FirmwareV3Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FirmwarePackage.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV3ResultException)
-        ).execute()
-
-    def report_device_firmware(self,
-                               acc,
-                               device_id):
-        """Does a PUT request to /firmware/{acc}/async/{deviceId}.
-
-        Ask a device to report its firmware version asynchronously.
-
-        Args:
-            acc (string): Account identifier.
-            device_id (string): Device identifier.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Device
-                firmware version update request.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
-            .path('/firmware/{acc}/async/{deviceId}')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('deviceId')
-                            .value(device_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DeviceFirmwareVersionUpdateResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV3ResultException)
         ).execute()
@@ -134,7 +84,7 @@ class FirmwareV3Controller(BaseController):
         Synchronize ThingSpace with the FOTA server for up to 100 devices.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             body (FirmwareIMEI): DeviceIds to get firmware info
                 synchronously.
 
@@ -168,11 +118,59 @@ class FirmwareV3Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(DeviceFirmwareList.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV3ResultException)
+        ).execute()
+
+    def report_device_firmware(self,
+                               acc,
+                               device_id):
+        """Does a PUT request to /firmware/{acc}/async/{deviceId}.
+
+        Ask a device to report its firmware version asynchronously.
+
+        Args:
+            acc (str): Account identifier.
+            device_id (str): Device identifier.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Device
+                firmware version update request.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
+            .path('/firmware/{acc}/async/{deviceId}')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('acc')
+                            .value(acc)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('deviceId')
+                            .value(device_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DeviceFirmwareVersionUpdateResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV3ResultException)
         ).execute()

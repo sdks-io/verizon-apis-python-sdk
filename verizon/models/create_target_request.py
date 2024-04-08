@@ -22,23 +22,22 @@ class CreateTargetRequest(object):
         accountidentifier (AccountIdentifier): The ID of the authenticating
             billing account, in the format
             `{"billingaccountid":"1234567890-12345"}`.
-        billingaccountid (string): The ID of the authenticating billing
-            account.
-        kind (string): Identifies the resource kind. Targets are ts.target.
-        address (string): The endpoint for notifications or data streams. The
+        billingaccountid (str): The ID of the authenticating billing account.
+        kind (str): Identifies the resource kind. Targets are ts.target.
+        address (str): The endpoint for notifications or data streams. The
             format depends on the selected `addressscheme`.<br />`streamrest`
             requires a `host:port` value <br />`streamawsiot` requres a valid
             ARN.
-        addressscheme (string): The transport format. Valid values are: <br
+        addressscheme (str): The transport format. Valid values are: <br
             />streamawsiot - streamed data to an AWS account <br />streamrest
             - streamed REST data to a defined endpoint.
         fields (CreateTargetRequestFields): TODO: type description here.
-        description (string): Descriptive information about the target.
-        externalid (string): Security identification string created by a POST
+        description (str): Descriptive information about the target.
+        externalid (str): Security identification string created by a POST
             /targets/actions/newextid request.
-        name (string): Name of the target.
-        region (string): AWS region value.
-        key_1 (string): OAuth 2.0 bearer token.
+        name (str): Name of the target.
+        region (str): AWS region value.
+        key_1 (str): OAuth 2.0 bearer token.
         oauth (TargetAuthentication): OAuth 2 token and refresh token for TS
             to stream events to Target.
 
@@ -130,11 +129,11 @@ class CreateTargetRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         accountidentifier = AccountIdentifier.from_dictionary(dictionary.get('accountidentifier')) if 'accountidentifier' in dictionary.keys() else APIHelper.SKIP
         billingaccountid = dictionary.get("billingaccountid") if dictionary.get("billingaccountid") else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP

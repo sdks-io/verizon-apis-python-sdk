@@ -16,13 +16,11 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
+from verizon.models.change_configuration_response import ChangeConfigurationResponse
+from verizon.models.find_device_by_property_response_list import FindDeviceByPropertyResponseList
 from verizon.models.search_device_by_property_response_list import SearchDeviceByPropertyResponseList
 from verizon.models.search_device_event_history_response_list import SearchDeviceEventHistoryResponseList
-from verizon.models.find_device_by_property_response_list import FindDeviceByPropertyResponseList
 from verizon.models.search_sensor_history_response_list import SearchSensorHistoryResponseList
-from verizon.models.change_configuration_response import ChangeConfigurationResponse
 
 
 class CloudConnectorDevicesController(BaseController):
@@ -30,6 +28,98 @@ class CloudConnectorDevicesController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(CloudConnectorDevicesController, self).__init__(config)
+
+    def update_devices_configuration_value(self,
+                                           body):
+        """Does a POST request to /devices/configuration/actions/set.
+
+        Change configuration values on a device, such as setting how often a
+        device records and reports sensor readings.
+
+        Args:
+            body (ChangeConfigurationRequest): The request body changes
+                configuration values on a device.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. A success
+                response contains the ts.event.configuration event that was
+                created to record the change.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.CLOUD_CONNECTOR)
+            .path('/devices/configuration/actions/set')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ChangeConfigurationResponse.from_dictionary)
+            .is_api_response(True)
+        ).execute()
+
+    def find_device_by_property_values(self,
+                                       body):
+        """Does a POST request to /devices/actions/query.
+
+        Find devices by property values. Returns an array of all matching
+        device resources.
+
+        Args:
+            body (QuerySubscriptionRequest): The request body specifies fields
+                and values to match.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. A success
+                response includes an array of all matching devices. Each
+                device includes the full device resource definition.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.CLOUD_CONNECTOR)
+            .path('/devices/actions/query')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FindDeviceByPropertyResponseList.from_dictionary)
+            .is_api_response(True)
+        ).execute()
 
     def search_devices_resources_by_property_values(self,
                                                     body):
@@ -68,7 +158,7 @@ class CloudConnectorDevicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -114,57 +204,11 @@ class CloudConnectorDevicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SearchDeviceEventHistoryResponseList.from_dictionary)
-            .is_api_response(True)
-        ).execute()
-
-    def find_device_by_property_values(self,
-                                       body):
-        """Does a POST request to /devices/actions/query.
-
-        Find devices by property values. Returns an array of all matching
-        device resources.
-
-        Args:
-            body (QuerySubscriptionRequest): The request body specifies fields
-                and values to match.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. A success
-                response includes an array of all matching devices. Each
-                device includes the full device resource definition.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.CLOUD_CONNECTOR)
-            .path('/devices/actions/query')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FindDeviceByPropertyResponseList.from_dictionary)
             .is_api_response(True)
         ).execute()
 
@@ -178,7 +222,7 @@ class CloudConnectorDevicesController(BaseController):
         array of events.
 
         Args:
-            fieldname (string): The name of the sensor.
+            fieldname (str): The name of the sensor.
             body (SearchSensorHistoryRequest): The device identifier and
                 fields to match in the search.
 
@@ -212,57 +256,11 @@ class CloudConnectorDevicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SearchSensorHistoryResponseList.from_dictionary)
-            .is_api_response(True)
-        ).execute()
-
-    def update_devices_configuration_value(self,
-                                           body):
-        """Does a POST request to /devices/configuration/actions/set.
-
-        Change configuration values on a device, such as setting how often a
-        device records and reports sensor readings.
-
-        Args:
-            body (ChangeConfigurationRequest): The request body changes
-                configuration values on a device.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. A success
-                response contains the ts.event.configuration event that was
-                created to record the change.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.CLOUD_CONNECTOR)
-            .path('/devices/configuration/actions/set')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ChangeConfigurationResponse.from_dictionary)
             .is_api_response(True)
         ).execute()
 
@@ -299,7 +297,7 @@ class CloudConnectorDevicesController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .is_api_response(True)

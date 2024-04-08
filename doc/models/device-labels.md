@@ -11,8 +11,8 @@ A label for a single device.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | The label you want to associate with the device. |
-| `value` | `string` | Optional | The value of label |
+| `name` | `str` | Required | The label you want to associate with the device. |
+| `value` | `str` | Required | The value of label |
 
 ## Example (as JSON)
 

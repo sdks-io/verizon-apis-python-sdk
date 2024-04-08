@@ -17,7 +17,7 @@ class Addressquery(object):
     TODO: type model description here.
 
     Attributes:
-        address (list of Address): TODO: type description here.
+        address (List[Address]): TODO: type description here.
 
     """
 
@@ -52,11 +52,11 @@ class Addressquery(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         address = None
         if dictionary.get('address') is not None:
             address = [Address.from_dictionary(x) for x in dictionary.get('address')]

@@ -13,8 +13,8 @@ A list of license cancellation candidate devices.
 |  --- | --- | --- | --- |
 | `count` | `int` | Required | Cancellation candidate devices count. |
 | `has_more_data` | `bool` | Required | Flag to indicat more devices. |
-| `update_time` | `string` | Required | Last update time. |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `update_time` | `str` | Required | Last update time. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 

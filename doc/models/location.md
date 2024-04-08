@@ -11,7 +11,7 @@ Device location information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `msid` | `string` | Optional | MDN. |
+| `msid` | `str` | Optional | MDN. |
 | `pd` | [`PositionData`](../../doc/models/position-data.md) | Optional | Position data. |
 | `error` | [`PositionError`](../../doc/models/position-error.md) | Optional | Position error. |
 

@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.v3_campaign_history import V3CampaignHistory
 from verizon.models.device_firmware_upgrade import DeviceFirmwareUpgrade
 from verizon.models.v3_campaign_device import V3CampaignDevice
@@ -40,9 +38,9 @@ class SoftwareManagementReportsV3Controller(BaseController):
         campaign status.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             campaign_status (CampaignStatusEnum): Campaign status.
-            last_seen_campaign_id (string, optional): Last seen campaign Id.
+            last_seen_campaign_id (str, optional): Last seen campaign Id.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -74,7 +72,7 @@ class SoftwareManagementReportsV3Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -91,8 +89,8 @@ class SoftwareManagementReportsV3Controller(BaseController):
         Retrieve campaign history for a specific device.
 
         Args:
-            acc (string): Account identifier.
-            device_id (string): Device IMEI identifier.
+            acc (str): Account identifier.
+            device_id (str): Device IMEI identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -122,7 +120,7 @@ class SoftwareManagementReportsV3Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -141,10 +139,9 @@ class SoftwareManagementReportsV3Controller(BaseController):
         device.
 
         Args:
-            acc (string): Account identifier.
-            campaign_id (string): Campaign identifier.
-            last_seen_device_id (string, optional): Last seen device
-                identifier.
+            acc (str): Account identifier.
+            campaign_id (str): Campaign identifier.
+            last_seen_device_id (str, optional): Last seen device identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -177,7 +174,7 @@ class SoftwareManagementReportsV3Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

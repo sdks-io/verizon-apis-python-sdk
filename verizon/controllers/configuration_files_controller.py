@@ -17,10 +17,8 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.upload_configuration_files_response import UploadConfigurationFilesResponse
 from verizon.models.retrieves_available_files_response_list import RetrievesAvailableFilesResponseList
+from verizon.models.upload_configuration_files_response import UploadConfigurationFilesResponse
 from verizon.exceptions.fota_v2_result_exception import FotaV2ResultException
 
 
@@ -29,6 +27,55 @@ class ConfigurationFilesController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(ConfigurationFilesController, self).__init__(config)
+
+    def get_list_of_files(self,
+                          acc,
+                          distribution_type):
+        """Does a GET request to /files/{acc}.
+
+        You can retrieve a list of configuration or supplementary of files for
+        an account.
+
+        Args:
+            acc (str): Account identifier.
+            distribution_type (str): Filter the distributionType to only
+                retrieve files for a specific distribution type.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers.
+                Successful responses.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
+            .path('/files/{acc}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('acc')
+                            .value(acc)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('distributionType')
+                         .value(distribution_type))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(RetrievesAvailableFilesResponseList.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV2ResultException)
+        ).execute()
 
     def upload_config_file(self,
                            acc,
@@ -44,12 +91,12 @@ class ConfigurationFilesController(BaseController):
         response.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             fileupload (typing.BinaryIO, optional): The file to upload.
-            file_version (string, optional): Version of the file.
-            make (string, optional): The software-applicable device make.
-            model (string, optional): The software-applicable device model.
-            local_target_path (string, optional): Local target path on the
+            file_version (str, optional): Version of the file.
+            make (str, optional): The software-applicable device make.
+            model (str, optional): The software-applicable device model.
+            local_target_path (str, optional): Local target path on the
                 device.
 
         Returns:
@@ -92,60 +139,11 @@ class ConfigurationFilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UploadConfigurationFilesResponse.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV2ResultException)
-        ).execute()
-
-    def get_list_of_files(self,
-                          acc,
-                          distribution_type):
-        """Does a GET request to /files/{acc}.
-
-        You can retrieve a list of configuration or supplementary of files for
-        an account.
-
-        Args:
-            acc (string): Account identifier.
-            distribution_type (string): Filter the distributionType to only
-                retrieve files for a specific distribution type.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers.
-                Successful responses.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V2)
-            .path('/files/{acc}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('distributionType')
-                         .value(distribution_type))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(RetrievesAvailableFilesResponseList.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV2ResultException)
         ).execute()

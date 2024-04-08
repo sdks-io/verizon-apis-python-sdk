@@ -16,21 +16,21 @@ class UsageTriggerAddRequest(object):
     TODO: type model description here.
 
     Attributes:
-        trigger_name (string): Usage trigger name
-        account_name (string): Account name
+        trigger_name (str): Usage trigger name
+        account_name (str): Account name
         service_name (ServiceNameEnum): Service name
-        threshold_value (string): The percent of subscribed usage required to
+        threshold_value (str): The percent of subscribed usage required to
             activate the trigger, such as 90 or 100.
         allow_excess (bool): Allow additional requests after thresholdValue is
             reached. (currently not functional)
         send_sms_notification (bool): Send SMS (text) alerts when the
             thresholdValue is reached.
-        sms_phone_numbers (string): Comma-separated list of phone numbers to
-            send SMS alerts to. Digits only; no dashes or parentheses, etc.
+        sms_phone_numbers (str): Comma-separated list of phone numbers to send
+            SMS alerts to. Digits only; no dashes or parentheses, etc.
         send_email_notification (bool): Send email alerts when the
             thresholdValue is reached.
-        email_addresses (string): Comma-separated list of email addresses to
-            send alerts to.
+        email_addresses (str): Comma-separated list of email addresses to send
+            alerts to.
 
     """
 
@@ -99,11 +99,11 @@ class UsageTriggerAddRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else 'Location'
         threshold_value = dictionary.get("thresholdValue") if dictionary.get("thresholdValue") else None

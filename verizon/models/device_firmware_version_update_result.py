@@ -15,8 +15,8 @@ class DeviceFirmwareVersionUpdateResult(object):
     Device firmware version update response.
 
     Attributes:
-        account_name (string): Account identifier.
-        request_id (string): Request identifier.
+        account_name (str): Account identifier.
+        request_id (str): Request identifier.
 
     """
 
@@ -49,11 +49,11 @@ class DeviceFirmwareVersionUpdateResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         request_id = dictionary.get("requestId") if dictionary.get("requestId") else None
         # Return an object of this model

@@ -21,9 +21,9 @@ class ObservationRequest(object):
     observation was made.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
-        devices (list of Device): List of devices.
-        attributes (list of ObservationRequestAttribute): Attributes are
+        account_name (str): Account identifier in "##########-#####".
+        devices (List[Device]): List of devices.
+        attributes (List[ObservationRequestAttribute]): Attributes are
             streaming RF parameters that you want to observe.
         frequency (NumericalData): Describes value and unit of time.
         duration (NumericalData): Describes value and unit of time.
@@ -75,11 +75,11 @@ class ObservationRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         devices = None
         if dictionary.get('devices') is not None:

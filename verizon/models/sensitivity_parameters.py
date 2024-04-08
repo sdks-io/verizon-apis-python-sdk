@@ -75,11 +75,11 @@ class SensitivityParameters(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         abnormal_max_value = dictionary.get("abnormalMaxValue") if dictionary.get("abnormalMaxValue") else APIHelper.SKIP
         enable_abnormal = dictionary.get("enableAbnormal") if "enableAbnormal" in dictionary.keys() else APIHelper.SKIP
         enable_very_abnormal = dictionary.get("enableVeryAbnormal") if "enableVeryAbnormal" in dictionary.keys() else APIHelper.SKIP

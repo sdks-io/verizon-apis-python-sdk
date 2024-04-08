@@ -31,12 +31,14 @@ from verizon.controllers.connectivity_callbacks_controller\
 from verizon.controllers.account_requests_controller\
     import AccountRequestsController
 from verizon.controllers.service_plans_controller import ServicePlansController
+from verizon.controllers.device_diagnostics_controller\
+    import DeviceDiagnosticsController
 from verizon.controllers.device_profile_management_controller\
     import DeviceProfileManagementController
 from verizon.controllers.device_monitoring_controller\
     import DeviceMonitoringController
-from verizon.controllers.uicc_device_profile_management_controller\
-    import UICCDeviceProfileManagementController
+from verizon.controllers.euicc_device_profile_management_controller\
+    import EUICCDeviceProfileManagementController
 from verizon.controllers.devices_locations_controller\
     import DevicesLocationsController
 from verizon.controllers.exclusions_controller import ExclusionsController
@@ -116,29 +118,35 @@ from verizon.controllers.anomaly_settings_controller\
     import AnomalySettingsController
 from verizon.controllers.anomaly_triggers_controller\
     import AnomalyTriggersController
-from verizon.controllers.mec_sites_controller import MECSitesController
-from verizon.controllers.service_launch_profiles_controller\
-    import ServiceLaunchProfilesController
-from verizon.controllers.service_launch_requests_controller\
-    import ServiceLaunchRequestsController
-from verizon.controllers.service_instances_controller\
-    import ServiceInstancesController
-from verizon.controllers.service_instance_operations_controller\
-    import ServiceInstanceOperationsController
-from verizon.controllers.service_onboarding_controller\
-    import ServiceOnboardingController
-from verizon.controllers.service_metadata_controller\
-    import ServiceMetadataController
-from verizon.controllers.repositories_controller import RepositoriesController
-from verizon.controllers.csp_profiles_controller import CSPProfilesController
-from verizon.controllers.service_claims_controller\
-    import ServiceClaimsController
+from verizon.controllers.anomaly_triggers_v2_controller\
+    import AnomalyTriggersV2Controller
+from verizon.controllers.wireless_network_performance_controller\
+    import WirelessNetworkPerformanceController
+from verizon.controllers.fixed_wireless_qualification_controller\
+    import FixedWirelessQualificationController
+from verizon.controllers.managing_esim_profiles_controller\
+    import ManagingESIMProfilesController
+from verizon.controllers.device_sms_messaging_controller\
+    import DeviceSMSMessagingController
+from verizon.controllers.device_actions_controller\
+    import DeviceActionsController
+from verizon.controllers.thing_space_quality_of_service_api_actions_controller\
+    import ThingSpaceQualityOfServiceAPIActionsController
+from verizon.controllers.mec_controller import MECController
+from verizon.controllers.promotion_period_information_controller\
+    import PromotionPeriodInformationController
+from verizon.controllers.retrieve_the_triggers_controller\
+    import RetrieveTheTriggersController
+from verizon.controllers.update_triggers_controller\
+    import UpdateTriggersController
+from verizon.controllers.sim_actions_controller import SIMActionsController
+from verizon.controllers.global_reporting_controller\
+    import GlobalReportingController
 from verizon.controllers.oauth_authorization_controller\
     import OauthAuthorizationController
 
 
 class VerizonClient(object):
-
     @LazyProperty
     def m_5g_edge_platforms(self):
         return M5gEdgePlatformsController(self.global_configuration)
@@ -184,6 +192,10 @@ class VerizonClient(object):
         return ServicePlansController(self.global_configuration)
 
     @LazyProperty
+    def device_diagnostics(self):
+        return DeviceDiagnosticsController(self.global_configuration)
+
+    @LazyProperty
     def device_profile_management(self):
         return DeviceProfileManagementController(self.global_configuration)
 
@@ -192,8 +204,8 @@ class VerizonClient(object):
         return DeviceMonitoringController(self.global_configuration)
 
     @LazyProperty
-    def uicc_device_profile_management(self):
-        return UICCDeviceProfileManagementController(self.global_configuration)
+    def e_uicc_device_profile_management(self):
+        return EUICCDeviceProfileManagementController(self.global_configuration)
 
     @LazyProperty
     def devices_locations(self):
@@ -368,76 +380,84 @@ class VerizonClient(object):
         return AnomalyTriggersController(self.global_configuration)
 
     @LazyProperty
-    def mec_sites(self):
-        return MECSitesController(self.global_configuration)
+    def anomaly_triggers_v2(self):
+        return AnomalyTriggersV2Controller(self.global_configuration)
 
     @LazyProperty
-    def service_launch_profiles(self):
-        return ServiceLaunchProfilesController(self.global_configuration)
+    def wireless_network_performance(self):
+        return WirelessNetworkPerformanceController(self.global_configuration)
 
     @LazyProperty
-    def service_launch_requests(self):
-        return ServiceLaunchRequestsController(self.global_configuration)
+    def fixed_wireless_qualification(self):
+        return FixedWirelessQualificationController(self.global_configuration)
 
     @LazyProperty
-    def service_instances(self):
-        return ServiceInstancesController(self.global_configuration)
+    def managing_e_sim_profiles(self):
+        return ManagingESIMProfilesController(self.global_configuration)
 
     @LazyProperty
-    def service_instance_operations(self):
-        return ServiceInstanceOperationsController(self.global_configuration)
+    def device_sms_messaging(self):
+        return DeviceSMSMessagingController(self.global_configuration)
 
     @LazyProperty
-    def service_onboarding(self):
-        return ServiceOnboardingController(self.global_configuration)
+    def device_actions(self):
+        return DeviceActionsController(self.global_configuration)
 
     @LazyProperty
-    def service_metadata(self):
-        return ServiceMetadataController(self.global_configuration)
+    def thing_space_quality_of_service_api_actions(self):
+        return ThingSpaceQualityOfServiceAPIActionsController(self.global_configuration)
 
     @LazyProperty
-    def repositories(self):
-        return RepositoriesController(self.global_configuration)
+    def mec(self):
+        return MECController(self.global_configuration)
 
     @LazyProperty
-    def csp_profiles(self):
-        return CSPProfilesController(self.global_configuration)
+    def promotion_period_information(self):
+        return PromotionPeriodInformationController(self.global_configuration)
 
     @LazyProperty
-    def service_claims(self):
-        return ServiceClaimsController(self.global_configuration)
+    def retrieve_the_triggers(self):
+        return RetrieveTheTriggersController(self.global_configuration)
+
+    @LazyProperty
+    def update_triggers(self):
+        return UpdateTriggersController(self.global_configuration)
+
+    @LazyProperty
+    def sim_actions(self):
+        return SIMActionsController(self.global_configuration)
+
+    @LazyProperty
+    def global_reporting(self):
+        return GlobalReportingController(self.global_configuration)
 
     @LazyProperty
     def oauth_authorization(self):
         return OauthAuthorizationController(self.global_configuration)
 
+    @property
+    def oauth_2(self):
+        return self.auth_managers['oAuth2']
+
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=60, max_retries=0, backoff_factor=2,
-                 retry_statuses=[408, 413, 429, 500, 502, 503, 504, 521, 522, 524],
-                 retry_methods=['GET', 'PUT'],
-                 environment=Environment.PRODUCTION,
-                 oauth_client_id='TODO: Replace',
-                 oauth_client_secret='TODO: Replace', oauth_token=None,
-                 oauth_scopes=None, vz_m2m_token='TODO: Replace', config=None):
-        if config is None:
-            self.config = Configuration(
-                                         http_client_instance=http_client_instance,
-                                         override_http_client_configuration=override_http_client_configuration,
-                                         http_call_back=http_call_back,
-                                         timeout=timeout,
-                                         max_retries=max_retries,
-                                         backoff_factor=backoff_factor,
-                                         retry_statuses=retry_statuses,
-                                         retry_methods=retry_methods,
-                                         environment=environment,
-                                         oauth_client_id=oauth_client_id,
-                                         oauth_client_secret=oauth_client_secret,
-                                         oauth_token=oauth_token,
-                                         oauth_scopes=oauth_scopes,
-                                         vz_m2m_token=vz_m2m_token)
-        else:
-            self.config = config
+                 retry_statuses=None, retry_methods=None,
+                 environment=Environment.PRODUCTION, oauth_client_id=None,
+                 oauth_client_secret=None, oauth_token=None, oauth_scopes=None,
+                 client_credentials_auth_credentials=None,
+                 vz_m2m_token='TODO: Replace', config=None):
+        self.config = config or Configuration(
+            http_client_instance=http_client_instance,
+            override_http_client_configuration=override_http_client_configuration,
+            http_call_back=http_call_back, timeout=timeout,
+            max_retries=max_retries, backoff_factor=backoff_factor,
+            retry_statuses=retry_statuses, retry_methods=retry_methods,
+            environment=environment, oauth_client_id=oauth_client_id,
+            oauth_client_secret=oauth_client_secret, oauth_token=oauth_token,
+            oauth_scopes=oauth_scopes,
+            client_credentials_auth_credentials=client_credentials_auth_credentials,
+            vz_m2m_token=vz_m2m_token)
 
         self.global_configuration = GlobalConfiguration(self.config)\
             .global_errors(BaseController.global_errors())\
@@ -445,12 +465,9 @@ class VerizonClient(object):
             .user_agent(BaseController.user_agent(), BaseController.user_agent_parameters())\
             .global_header('VZ-M2M-Token', self.config.vz_m2m_token)
 
-        self.initialize_auth_managers(self.global_configuration)
-
+        self.auth_managers = {key: None for key in ['oAuth2']}
+        self.auth_managers['oAuth2'] = Oauth2(
+            self.config.client_credentials_auth_credentials,
+            self.global_configuration)
         self.global_configuration = self.global_configuration.auth_managers(self.auth_managers)
 
-    def initialize_auth_managers(self, global_config):
-        http_client_config = global_config.get_http_client_configuration()
-        self.auth_managers = { key: None for key in ['global']}
-        self.auth_managers['global'] = Oauth2(http_client_config.oauth_client_id, http_client_config.oauth_client_secret, http_client_config.oauth_token, global_config, http_client_config.oauth_scopes)
-        return self.auth_managers

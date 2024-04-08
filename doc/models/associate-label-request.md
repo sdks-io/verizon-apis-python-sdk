@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of a billing account. An account name is usually numeric, and must include any leading zeros. |
-| `labels` | [`AccountLabels`](../../doc/models/account-labels.md) | Optional | Maximum of 2,000 objects are allowed in the array. |
+| `account_name` | `str` | Required | The name of a billing account. An account name is usually numeric, and must include any leading zeros. |
+| `labels` | [`AccountLabels`](../../doc/models/account-labels.md) | Required | Maximum of 2,000 objects are allowed in the array. |
 
 ## Example (as JSON)
 
@@ -22,52 +22,24 @@
       {
         "deviceIds": [
           {
-            "id": "id4",
-            "kind": "imei"
-          }
-        ]
-      },
-      {
-        "deviceIds": [
-          {
-            "id": "id5",
-            "kind": "eid"
-          },
-          {
-            "id": "id6",
-            "kind": "esn"
-          }
-        ]
-      },
-      {
-        "deviceIds": [
-          {
-            "id": "id6",
-            "kind": "esn"
-          },
-          {
-            "id": "id7",
-            "kind": "iccid"
-          },
-          {
-            "id": "id8",
-            "kind": "imei"
+            "id": "id0",
+            "kind": "kind8"
           }
         ]
       }
     ],
     "label": [
       {
-        "name": "name3",
-        "value": "value5"
+        "name": "name0",
+        "value": "value2"
       },
       {
-        "name": "name4",
-        "value": "value6"
+        "name": "name0",
+        "value": "value2"
       },
       {
-        "name": "name5",
-        "value": "value7"
+        "name": "name0",
+        "value": "value2"
       }
     ]
   }

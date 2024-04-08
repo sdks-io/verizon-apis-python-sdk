@@ -17,8 +17,8 @@ class SecuritySubscriptionResult(object):
     Response for a subscription request.
 
     Attributes:
-        account_name (string): The name of a billing account.
-        subscription_list (list of SecuritySubscription): The list of SKU
+        account_name (str): The name of a billing account.
+        subscription_list (List[SecuritySubscription]): The list of SKU
             numbers and counts for each license type specified in the
             request.
 
@@ -60,11 +60,11 @@ class SecuritySubscriptionResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         subscription_list = None
         if dictionary.get('subscriptionList') is not None:

@@ -15,7 +15,7 @@ class DeviceLoggingRequest(object):
     Device logging information.
 
     Attributes:
-        device_ids (list of string): List of device IMEI identifiers.
+        device_ids (List[str]): List of device IMEI identifiers.
 
     """
 
@@ -45,11 +45,11 @@ class DeviceLoggingRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = dictionary.get("deviceIds") if dictionary.get("deviceIds") else None
         # Return an object of this model
         return cls(device_ids)

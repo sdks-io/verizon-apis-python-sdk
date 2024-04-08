@@ -16,8 +16,8 @@ class BullseyeServiceRequest(object):
     Account number and list of devices.
 
     Attributes:
-        device_list (list of DeviceServiceRequest): A list of devices.
-        account_number (string): A unique identifier for an account.
+        device_list (List[DeviceServiceRequest]): A list of devices.
+        account_number (str): A unique identifier for an account.
 
     """
 
@@ -50,11 +50,11 @@ class BullseyeServiceRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_list = None
         if dictionary.get('deviceList') is not None:
             device_list = [DeviceServiceRequest.from_dictionary(x) for x in dictionary.get('deviceList')]

@@ -9,12 +9,12 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `txid` | `string` | Required | Transaction identifier |
-| `account_name` | `string` | Required | Managed account identifier |
-| `paccount_name` | `string` | Required | Primary account identifier |
+| `txid` | `str` | Required | Transaction identifier |
+| `account_name` | `str` | Required | Managed account identifier |
+| `paccount_name` | `str` | Required | Primary account identifier |
 | `service_name` | [`ServiceNameEnum`](../../doc/models/service-name-enum.md) | Required | Service name<br>**Default**: `'Location'` |
-| `status` | `string` | Required | Deactivate/cancel status, Success or Fail |
-| `reason` | `string` | Required | Detailed reason |
+| `status` | `str` | Required | Deactivate/cancel status, Success or Fail |
+| `reason` | `str` | Required | Detailed reason |
 
 ## Example (as JSON)
 

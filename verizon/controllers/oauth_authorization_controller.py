@@ -34,8 +34,8 @@ class OauthAuthorizationController(BaseController):
         Create a new OAuth 2 token.
 
         Args:
-            authorization (string): Authorization header in Basic auth format
-            scope (string, optional): Requested scopes as a space-delimited
+            authorization (str): Authorization header in Basic auth format
+            scope (str, optional): Requested scopes as a space-delimited
                 list.
             _optional_form_parameters (Array, optional): Additional optional
                 form parameters are supported by this endpoint

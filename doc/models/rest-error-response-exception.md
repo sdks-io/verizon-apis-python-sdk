@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error_code` | `string` | Optional | **Constraints**: *Maximum Length*: `3`, *Pattern*: `^[0-9]{3}$` |
-| `error_message` | `string` | Optional | - |
+| `error_code` | `str` | Optional | **Constraints**: *Maximum Length*: `3`, *Pattern*: `^[0-9]{3}$` |
+| `error_message` | `str` | Optional | - |
 
 ## Example (as JSON)
 

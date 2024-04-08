@@ -10,8 +10,54 @@ devices_location_subscriptions_controller = client.devices_location_subscription
 
 ## Methods
 
-* [Get Location Service Usage](../../doc/controllers/devices-location-subscriptions.md#get-location-service-usage)
 * [Get Location Service Subscription Status](../../doc/controllers/devices-location-subscriptions.md#get-location-service-subscription-status)
+* [Get Location Service Usage](../../doc/controllers/devices-location-subscriptions.md#get-location-service-usage)
+
+
+# Get Location Service Subscription Status
+
+This subscriptions endpoint retrieves an account's current location subscription status.
+
+```python
+def get_location_service_subscription_status(self,
+                                            account)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DeviceLocationSubscription`](../../doc/models/device-location-subscription.md).
+
+## Example Usage
+
+```python
+account = '0000123456-00001'
+
+result = devices_location_subscriptions_controller.get_location_service_subscription_status(account)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "accountName": "2024009649-00001",
+  "locType": "TS-LOC-COARSE-CellID-5K",
+  "maxAllowance": "5000",
+  "purchaseTime": "2017-05-10 06:25:25.171 +0000 UTC"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Unexpected error. | [`DeviceLocationResultException`](../../doc/models/device-location-result-exception.md) |
 
 
 # Get Location Service Usage
@@ -31,7 +77,7 @@ def get_location_service_usage(self,
 
 ## Response Type
 
-`object`
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type `object`.
 
 ## Example Usage
 
@@ -61,52 +107,6 @@ print(result)
     "transactionsCount": "125"
   },
   "ManagedAccounts": []
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Unexpected error. | [`DeviceLocationResultException`](../../doc/models/device-location-result-exception.md) |
-
-
-# Get Location Service Subscription Status
-
-This subscriptions endpoint retrieves an account's current location subscription status.
-
-```python
-def get_location_service_subscription_status(self,
-                                            account)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
-
-## Response Type
-
-[`DeviceLocationSubscription`](../../doc/models/device-location-subscription.md)
-
-## Example Usage
-
-```python
-account = '0000123456-00001'
-
-result = devices_location_subscriptions_controller.get_location_service_subscription_status(account)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "accountName": "2024009649-00001",
-  "locType": "TS-LOC-COARSE-CellID-5K",
-  "maxAllowance": "5000",
-  "purchaseTime": "2017-05-10 06:25:25.171 +0000 UTC"
 }
 ```
 

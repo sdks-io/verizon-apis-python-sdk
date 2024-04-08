@@ -17,22 +17,22 @@ class UploadAndScheduleFileRequest(object):
     TODO: type model description here.
 
     Attributes:
-        campaign_name (string): The campaign name.
-        file_name (string): The name of the file you are upgrading to.
-        file_version (string): The version of the file you are upgrading to.
-        distribution_type (string): Valid values
-        start_date (string): Campaign start date.
-        end_date (string): Campaign end date.
-        download_after_date (string): Specifies the starting date the client
+        campaign_name (str): The campaign name.
+        file_name (str): The name of the file you are upgrading to.
+        file_version (str): The version of the file you are upgrading to.
+        distribution_type (str): Valid values
+        start_date (str): Campaign start date.
+        end_date (str): Campaign end date.
+        download_after_date (str): Specifies the starting date the client
             should download the package. If null, client downloads as soon as
             possible.
-        download_time_window_list (list of DownloadTimeWindow): List of
-            allowed download time windows.
-        install_after_date (string): The date after which you install the
+        download_time_window_list (List[DownloadTimeWindow]): List of allowed
+            download time windows.
+        install_after_date (str): The date after which you install the
             package. If null, install as soon as possible.
-        install_time_window_list (list of DownloadTimeWindow): List of allowed
+        install_time_window_list (List[DownloadTimeWindow]): List of allowed
             install time windows.
-        device_list (list of string): Device IMEI list.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -117,11 +117,11 @@ class UploadAndScheduleFileRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         campaign_name = dictionary.get("campaignName") if dictionary.get("campaignName") else APIHelper.SKIP
         file_name = dictionary.get("fileName") if dictionary.get("fileName") else APIHelper.SKIP
         file_version = dictionary.get("fileVersion") if dictionary.get("fileVersion") else APIHelper.SKIP

@@ -11,19 +11,19 @@ Firmware upgrade information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Required | Upgrade identifier. |
-| `account_name` | `string` | Required | Account identifier. |
-| `campaign_name` | `string` | Optional | Campaign name. |
-| `firmware_name` | `string` | Optional | Firmware name (for firmware upgrade only). |
-| `firmware_from` | `string` | Required | Old firmware version (for firmware upgrade only). |
-| `firmware_to` | `string` | Required | New firmware version (for firmware upgrade only). |
-| `protocol` | `string` | Required | Available values: LWM2M.<br>**Default**: `'LWM2M'` |
-| `make` | `string` | Required | - |
-| `model` | `string` | Required | - |
+| `id` | `str` | Required | Upgrade identifier. |
+| `account_name` | `str` | Required | Account identifier. |
+| `campaign_name` | `str` | Optional | Campaign name. |
+| `firmware_name` | `str` | Optional | Firmware name (for firmware upgrade only). |
+| `firmware_from` | `str` | Required | Old firmware version (for firmware upgrade only). |
+| `firmware_to` | `str` | Required | New firmware version (for firmware upgrade only). |
+| `protocol` | `str` | Required | Available values: LWM2M.<br>**Default**: `'LWM2M'` |
+| `make` | `str` | Required | - |
+| `model` | `str` | Required | - |
 | `start_date` | `date` | Required | Campaign start date. |
 | `end_date` | `date` | Required | Campaign end date. |
-| `campaign_time_window_list` | [`List of V3TimeWindow`](../../doc/models/v3-time-window.md) | Optional | List of allowed campaign time windows. |
-| `status` | `string` | Required | Campaign status. |
+| `campaign_time_window_list` | [`List[V3TimeWindow]`](../../doc/models/v3-time-window.md) | Optional | List of allowed campaign time windows. |
+| `status` | `str` | Required | Campaign status. |
 
 ## Example (as JSON)
 

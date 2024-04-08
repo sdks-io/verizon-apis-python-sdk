@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `start_time` | `string` | Optional | Device IMEI list. |
-| `end_time` | `string` | Optional | Device IMEI list. |
+| `start_time` | `str` | Optional | Device IMEI list. |
+| `end_time` | `str` | Optional | Device IMEI list. |
 
 ## Example (as JSON)
 

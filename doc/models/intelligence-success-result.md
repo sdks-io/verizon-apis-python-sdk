@@ -11,7 +11,7 @@ Success response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `status` | `string` | Optional | Anomaly detection status. |
+| `status` | `str` | Optional | Anomaly detection status. |
 
 ## Example (as JSON)
 

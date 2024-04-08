@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.device_location_callback import DeviceLocationCallback
 from verizon.models.callback_registration_result import CallbackRegistrationResult
 from verizon.models.device_location_success_result import DeviceLocationSuccessResult
@@ -37,7 +35,7 @@ class DeviceLocationCallbacksController(BaseController):
         Returns a list of all registered callback URLs for the account.
 
         Args:
-            account (string): Account number.
+            account (str): Account number.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -63,7 +61,7 @@ class DeviceLocationCallbacksController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -80,7 +78,7 @@ class DeviceLocationCallbacksController(BaseController):
         Provide a URL to receive messages from a ThingSpace callback service.
 
         Args:
-            account (string): Account number.
+            account (str): Account number.
             body (DeviceLocationCallback): Request to register a callback.
 
         Returns:
@@ -113,7 +111,7 @@ class DeviceLocationCallbacksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -130,7 +128,7 @@ class DeviceLocationCallbacksController(BaseController):
         Deregister a URL to stop receiving callback messages.
 
         Args:
-            account (string): Account number.
+            account (str): Account number.
             service (CallbackServiceNameEnum): Callback service name.
 
         Returns:
@@ -161,7 +159,7 @@ class DeviceLocationCallbacksController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

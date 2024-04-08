@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `authorization` | `string` | Optional | - |
+| `authorization` | `str` | Optional | - |
 
 ## Example (as JSON)
 

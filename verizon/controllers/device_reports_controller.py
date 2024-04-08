@@ -16,11 +16,9 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.aggregate_session_report import AggregateSessionReport
-from verizon.models.session_report import SessionReport
 from verizon.models.aggregated_report_callback_result import AggregatedReportCallbackResult
+from verizon.models.session_report import SessionReport
 from verizon.exceptions.hyper_precise_location_result_exception import HyperPreciseLocationResultException
 
 
@@ -68,62 +66,11 @@ class DeviceReportsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AggregateSessionReport.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Bad request.', HyperPreciseLocationResultException)
-            .local_error('401', 'Unauthorized request. Access token is missing or invalid.', HyperPreciseLocationResultException)
-            .local_error('403', 'Forbidden request.', HyperPreciseLocationResultException)
-            .local_error('404', 'Bad request. Not found.', HyperPreciseLocationResultException)
-            .local_error('409', 'Bad request. Conflict state.', HyperPreciseLocationResultException)
-            .local_error('500', 'Internal Server Error.', HyperPreciseLocationResultException)
-        ).execute()
-
-    def get_sessions_report(self,
-                            body):
-        """Does a POST request to /report/sessions.
-
-        Detailed report of session duration and number of bytes transferred
-        per day.
-
-        Args:
-            body (SessionReportRequest): Request for sessions report.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. A
-                successful response includes the session information for an
-                individual device.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.HYPER_PRECISE_LOCATION)
-            .path('/report/sessions')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SessionReport.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Bad request.', HyperPreciseLocationResultException)
             .local_error('401', 'Unauthorized request. Access token is missing or invalid.', HyperPreciseLocationResultException)
@@ -172,11 +119,62 @@ class DeviceReportsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AggregatedReportCallbackResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad request.', HyperPreciseLocationResultException)
+            .local_error('401', 'Unauthorized request. Access token is missing or invalid.', HyperPreciseLocationResultException)
+            .local_error('403', 'Forbidden request.', HyperPreciseLocationResultException)
+            .local_error('404', 'Bad request. Not found.', HyperPreciseLocationResultException)
+            .local_error('409', 'Bad request. Conflict state.', HyperPreciseLocationResultException)
+            .local_error('500', 'Internal Server Error.', HyperPreciseLocationResultException)
+        ).execute()
+
+    def get_sessions_report(self,
+                            body):
+        """Does a POST request to /report/sessions.
+
+        Detailed report of session duration and number of bytes transferred
+        per day.
+
+        Args:
+            body (SessionReportRequest): Request for sessions report.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. A
+                successful response includes the session information for an
+                individual device.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.HYPER_PRECISE_LOCATION)
+            .path('/report/sessions')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SessionReport.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Bad request.', HyperPreciseLocationResultException)
             .local_error('401', 'Unauthorized request. Access token is missing or invalid.', HyperPreciseLocationResultException)

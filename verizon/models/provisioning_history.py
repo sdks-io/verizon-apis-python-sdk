@@ -18,20 +18,20 @@ class ProvisioningHistory(object):
     period.
 
     Attributes:
-        occurred_at (string): The date and time when the provisioning event
+        occurred_at (str): The date and time when the provisioning event
             occured.
-        status (string): The success or failure of the provisioning event.
-        event_by (string): The user who performed the provisioning event.
-        event_type (string): The provisioning
+        status (str): The success or failure of the provisioning event.
+        event_by (str): The user who performed the provisioning event.
+        event_type (str): The provisioning
             action:Activate,Suspend,Restore,Deactivate,Device Move.
-        mdn (string): The MDN assigned to the device after the provisioning
+        mdn (str): The MDN assigned to the device after the provisioning
             event.
-        msisdn (string): The MSISDN assigned to the device after the
-            provisioning event.
-        service_plan (string): The service plan of the device after the
+        msisdn (str): The MSISDN assigned to the device after the provisioning
+            event.
+        service_plan (str): The service plan of the device after the
             provisioning event occurred.
-        extended_attributes (list of CustomFields): Any extended attributes
-            for the event, as Key and Value pairs.
+        extended_attributes (List[CustomFields]): Any extended attributes for
+            the event, as Key and Value pairs.
 
     """
 
@@ -101,11 +101,11 @@ class ProvisioningHistory(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         occurred_at = dictionary.get("occurredAt") if dictionary.get("occurredAt") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         event_by = dictionary.get("eventBy") if dictionary.get("eventBy") else APIHelper.SKIP

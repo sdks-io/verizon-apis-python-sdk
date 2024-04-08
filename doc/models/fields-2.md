@@ -11,7 +11,7 @@ List of fields affected by the event.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `temperature` | `string` | Optional | - |
+| `temperature` | `str` | Optional | - |
 
 ## Example (as JSON)
 

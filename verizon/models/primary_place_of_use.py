@@ -18,8 +18,8 @@ class PrimaryPlaceOfUse(object):
     TODO: type model description here.
 
     Attributes:
-        customer_name (list of CustomerName): TODO: type description here.
-        address (list of Address): TODO: type description here.
+        customer_name (List[CustomerName]): TODO: type description here.
+        address (List[Address]): TODO: type description here.
 
     """
 
@@ -59,11 +59,11 @@ class PrimaryPlaceOfUse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         customer_name = None
         if dictionary.get('customerName') is not None:
             customer_name = [CustomerName.from_dictionary(x) for x in dictionary.get('customerName')]

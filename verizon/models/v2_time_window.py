@@ -50,11 +50,11 @@ class V2TimeWindow(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         start_time = dictionary.get("startTime") if dictionary.get("startTime") else None
         end_time = dictionary.get("endTime") if dictionary.get("endTime") else None
         # Return an object of this model

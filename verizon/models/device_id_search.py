@@ -16,12 +16,12 @@ class DeviceIdSearch(object):
     Search by device id.
 
     Attributes:
-        contains (string): The string appears anywhere in the identifer.
-        startswith (string): The identifer must start with the specified
-            string.
-        endswith (string): The identifier must end with the specified string.
-        kind (string): The type of the device identifier to match. Valid types
-            of identifiers are:EID,ESN,ICCID,IMEI,MDN,MEID,MSISDN.
+        contains (str): The string appears anywhere in the identifer.
+        startswith (str): The identifer must start with the specified string.
+        endswith (str): The identifier must end with the specified string.
+        kind (str): The type of the device identifier. Valid types of
+            identifiers are:ESN (decimal),EID,ICCID (up to 20 digits),IMEI (up
+            to 16 digits),MDN,MEID (hexadecimal),MSISDN.
 
     """
 
@@ -69,11 +69,11 @@ class DeviceIdSearch(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         kind = dictionary.get("kind") if dictionary.get("kind") else None
         contains = dictionary.get("contains") if dictionary.get("contains") else APIHelper.SKIP
         startswith = dictionary.get("startswith") if dictionary.get("startswith") else APIHelper.SKIP

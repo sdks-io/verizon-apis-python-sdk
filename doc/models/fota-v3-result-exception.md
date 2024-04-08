@@ -11,8 +11,8 @@ Error response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error_code` | `string` | Required | Error code string. |
-| `error_message` | `string` | Required | Error message string. |
+| `error_code` | `str` | Required | Error code string. |
+| `error_message` | `str` | Required | Error message string. |
 
 ## Example (as JSON)
 

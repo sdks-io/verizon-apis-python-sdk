@@ -16,11 +16,11 @@ class UsageAnomalyAttributes(object):
     The details of the UsageAnomaly trigger.
 
     Attributes:
-        account_names (string): The Verizon billing account associated with
-            the anomaly triggers for this trigger to be active for devices in
+        account_names (str): The Verizon billing account associated with the
+            anomaly triggers for this trigger to be active for devices in
             those accounts. An account name is usually numeric, and must
             include any leading zeros.
-        device_group (string): The names of device groups associated with the
+        device_group (str): The names of device groups associated with the
             anomaly triggers for this trigger to be active for devices in
             those groups.
         include_abnormal (bool): Whether or not to include anomalies
@@ -96,11 +96,11 @@ class UsageAnomalyAttributes(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_names = dictionary.get("accountNames") if dictionary.get("accountNames") else APIHelper.SKIP
         device_group = dictionary.get("deviceGroup") if dictionary.get("deviceGroup") else APIHelper.SKIP
         include_abnormal = dictionary.get("includeAbnormal") if "includeAbnormal" in dictionary.keys() else APIHelper.SKIP

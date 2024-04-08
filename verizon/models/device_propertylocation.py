@@ -16,8 +16,8 @@ class DevicePropertylocation(object):
     TODO: type model description here.
 
     Attributes:
-        latitude (string): TODO: type description here.
-        longitude (string): TODO: type description here.
+        latitude (str): TODO: type description here.
+        longitude (str): TODO: type description here.
 
     """
 
@@ -57,11 +57,11 @@ class DevicePropertylocation(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         latitude = dictionary.get("latitude") if dictionary.get("latitude") else APIHelper.SKIP
         longitude = dictionary.get("longitude") if dictionary.get("longitude") else APIHelper.SKIP
         # Return an object of this model

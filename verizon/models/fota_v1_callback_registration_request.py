@@ -16,15 +16,15 @@ class FotaV1CallbackRegistrationRequest(object):
     Callback endpoint information.
 
     Attributes:
-        name (string): The name of the callback service that you want to
+        name (str): The name of the callback service that you want to
             subscribe to, which must be 'Fota' for Software Management
             Services callbacks.
-        url (string): The address on your server where you have enabled a
+        url (str): The address on your server where you have enabled a
             listening service for Software Management Services callback
             messages.
-        username (string): The user name that ThingSpace should return in the
+        username (str): The user name that ThingSpace should return in the
             callback messages.
-        password (string): The password that ThingSpace should return in the
+        password (str): The password that ThingSpace should return in the
             callback messages.
 
     """
@@ -71,11 +71,11 @@ class FotaV1CallbackRegistrationRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else None
         url = dictionary.get("url") if dictionary.get("url") else None
         username = dictionary.get("username") if dictionary.get("username") else APIHelper.SKIP

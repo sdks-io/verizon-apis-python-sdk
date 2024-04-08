@@ -17,12 +17,12 @@ class DeviceGroupDevicesData(object):
     Returns the name, description, and list of devices in a device group.
 
     Attributes:
-        description (string): The description of the device group.
-        devices (list of AccountDeviceList): The devices in the device group.
+        description (str): The description of the device group.
+        devices (List[AccountDeviceList]): The devices in the device group.
         has_more_data (bool): False for a status 200 response.True for a
             status 202 response, indicating that there is more data to be
             retrieved.
-        name (string): The name of the device group.
+        name (str): The name of the device group.
 
     """
 
@@ -72,11 +72,11 @@ class DeviceGroupDevicesData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         devices = None
         if dictionary.get('devices') is not None:

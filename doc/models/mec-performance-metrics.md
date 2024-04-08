@@ -11,10 +11,10 @@ Response to query the most recent data for Key Performance Indicators (KPIs) lik
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `query_status` | `string` | Optional | Success or Failed. |
-| `start` | `string` | Optional | Timestamp of the query's start, format:mm/dd/yyyy,hr:min:sec. |
-| `end` | `string` | Optional | Timestamp of the query's end , format:mm/dd/yyyy, hr:min:sec. |
-| `query_result` | [`List of MECPerformanceQueryResult`](../../doc/models/mec-performance-query-result.md) | Optional | MEC performance query result. |
+| `query_status` | `str` | Optional | Success or Failed. |
+| `start` | `str` | Optional | Timestamp of the query's start, format:mm/dd/yyyy,hr:min:sec. |
+| `end` | `str` | Optional | Timestamp of the query's end , format:mm/dd/yyyy, hr:min:sec. |
+| `query_result` | [`List[MECPerformanceQueryResult]`](../../doc/models/mec-performance-query-result.md) | Optional | MEC performance query result. |
 
 ## Example (as JSON)
 

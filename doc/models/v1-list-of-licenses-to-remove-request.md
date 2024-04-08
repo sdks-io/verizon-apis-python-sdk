@@ -11,8 +11,8 @@ List of devices to removes.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | `string` | Optional | Set to 'append' to append the devices in the current request to the existing list. If there is no existing list then it will be created with only these devices. Leave this parameter out when you want to replace the existing list with the devices in the current request. |
-| `device_list` | `List of string` | Required | The IMEIs of the devices. |
+| `mtype` | `str` | Optional | Set to 'append' to append the devices in the current request to the existing list. If there is no existing list then it will be created with only these devices. Leave this parameter out when you want to replace the existing list with the devices in the current request. |
+| `device_list` | `List[str]` | Required | The IMEIs of the devices. |
 
 ## Example (as JSON)
 

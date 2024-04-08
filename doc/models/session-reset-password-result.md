@@ -11,7 +11,7 @@ Response to a new, randomly generated password for the current username.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `new_password` | `string` | Optional | The new password for the username. |
+| `new_password` | `str` | Optional | The new password for the username. |
 
 ## Example (as JSON)
 

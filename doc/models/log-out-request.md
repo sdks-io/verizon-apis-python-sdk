@@ -11,7 +11,7 @@ Request to end a Connectivity Management session.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `session_token` | `string` | Optional | The session token is returned to confirm that it was invalidated. |
+| `session_token` | `str` | Optional | The session token is returned to confirm that it was invalidated. |
 
 ## Example (as JSON)
 

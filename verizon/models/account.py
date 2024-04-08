@@ -18,19 +18,19 @@ class Account(object):
     Returns information about a specified account.
 
     Attributes:
-        account_name (string): The name of the account.
-        account_number (string): The billing number of the account.
-        organization_name (string): The name of the organization that the
-            account is part of.
+        account_name (str): The name of the account.
+        account_number (str): The billing number of the account.
+        organization_name (str): The name of the organization that the account
+            is part of.
         is_provisioning_allowed (bool): True if devices can be added to the
             account and activated with a single request. False if devices must
             be added to the account before they can be activated.
-        carriers (list of string): The names of all carriers for the account.
-        features (list of string): The names of features that are enabled for
-            the account.
-        i_p_pools (list of IPPool): Array of IP pools that are available to
-            the account.
-        service_plans (list of ServicePlan): Array of service plans that are
+        carriers (List[str]): The names of all carriers for the account.
+        features (List[str]): The names of features that are enabled for the
+            account.
+        i_p_pools (List[IPPool]): Array of IP pools that are available to the
+            account.
+        service_plans (List[ServicePlan]): Array of service plans that are
             available to the account.
 
     """
@@ -101,11 +101,11 @@ class Account(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         account_number = dictionary.get("accountNumber") if dictionary.get("accountNumber") else APIHelper.SKIP
         organization_name = dictionary.get("organizationName") if dictionary.get("organizationName") else APIHelper.SKIP

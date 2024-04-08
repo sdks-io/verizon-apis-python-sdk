@@ -16,13 +16,12 @@ class AggregateUsageItem(object):
     Contains usage information per device.
 
     Attributes:
-        imei (string): International Mobile Equipment Identifier. This is the
-            ID of the device reporting usage.
+        imei (str): International Mobile Equipment Identifier. This is the ID
+            of the device reporting usage.
         number_of_sessions (int): Number of sessions established by the device
             reporting usage.
         bytes_transferred (int): The amount of data transferred by the device
             reporting usage, measured in Bytes.
-        example (object): TODO: type description here.
 
     """
 
@@ -30,22 +29,19 @@ class AggregateUsageItem(object):
     _names = {
         "imei": 'imei',
         "number_of_sessions": 'numberOfSessions',
-        "bytes_transferred": 'bytesTransferred',
-        "example": 'example'
+        "bytes_transferred": 'bytesTransferred'
     }
 
     _optionals = [
         'imei',
         'number_of_sessions',
         'bytes_transferred',
-        'example',
     ]
 
     def __init__(self,
                  imei=APIHelper.SKIP,
                  number_of_sessions=APIHelper.SKIP,
-                 bytes_transferred=APIHelper.SKIP,
-                 example=APIHelper.SKIP):
+                 bytes_transferred=APIHelper.SKIP):
         """Constructor for the AggregateUsageItem class"""
 
         # Initialize members of the class
@@ -55,8 +51,6 @@ class AggregateUsageItem(object):
             self.number_of_sessions = number_of_sessions 
         if bytes_transferred is not APIHelper.SKIP:
             self.bytes_transferred = bytes_transferred 
-        if example is not APIHelper.SKIP:
-            self.example = example 
 
     @classmethod
     def from_dictionary(cls,
@@ -72,17 +66,15 @@ class AggregateUsageItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         imei = dictionary.get("imei") if dictionary.get("imei") else APIHelper.SKIP
         number_of_sessions = dictionary.get("numberOfSessions") if dictionary.get("numberOfSessions") else APIHelper.SKIP
         bytes_transferred = dictionary.get("bytesTransferred") if dictionary.get("bytesTransferred") else APIHelper.SKIP
-        example = dictionary.get("example") if dictionary.get("example") else APIHelper.SKIP
         # Return an object of this model
         return cls(imei,
                    number_of_sessions,
-                   bytes_transferred,
-                   example)
+                   bytes_transferred)

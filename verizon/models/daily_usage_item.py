@@ -16,8 +16,8 @@ class DailyUsageItem(object):
     Contains only dates when device had sessions.
 
     Attributes:
-        start_time (string): Start date of session. ISO 8601 format.
-        end_time (string): End date of session. ISO 8601 format.
+        start_time (str): Start date of session. ISO 8601 format.
+        end_time (str): End date of session. ISO 8601 format.
         num_bytes (int): Amount of data transferred, measured in Bytes.
 
     """
@@ -63,11 +63,11 @@ class DailyUsageItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         start_time = dictionary.get("startTime") if dictionary.get("startTime") else APIHelper.SKIP
         end_time = dictionary.get("endTime") if dictionary.get("endTime") else APIHelper.SKIP
         num_bytes = dictionary.get("numBytes") if dictionary.get("numBytes") else APIHelper.SKIP

@@ -22,11 +22,11 @@ def get_account_subscription_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
+| `account` | `str` | Template, Required | Account identifier. |
 
 ## Response Type
 
-[`FotaV2Subscription`](../../doc/models/fota-v2-subscription.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`FotaV2Subscription`](../../doc/models/fota-v2-subscription.md).
 
 ## Example Usage
 

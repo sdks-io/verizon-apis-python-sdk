@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_ids` | [`List of DeviceId1`](../../doc/models/device-id-1.md) | Optional | **Constraints**: *Maximum Items*: `100` |
+| `device_ids` | [`List[DeviceId]`](../../doc/models/device-id.md) | Optional | **Constraints**: *Maximum Items*: `100` |
 
 ## Example (as JSON)
 
@@ -18,15 +18,15 @@
   "deviceIds": [
     {
       "id": "id0",
-      "kind": "imei"
+      "kind": "kind8"
     },
     {
-      "id": "id1",
-      "kind": "eid"
+      "id": "id0",
+      "kind": "kind8"
     },
     {
-      "id": "id2",
-      "kind": "esn"
+      "id": "id0",
+      "kind": "kind8"
     }
   ]
 }

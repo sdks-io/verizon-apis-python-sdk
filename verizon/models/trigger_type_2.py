@@ -60,11 +60,11 @@ class TriggerType2(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         anomalyattributes = UsageAnomalyAttributes.from_dictionary(dictionary.get('anomalyattributes')) if 'anomalyattributes' in dictionary.keys() else APIHelper.SKIP
         notification = Notification.from_dictionary(dictionary.get('notification')) if 'notification' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model

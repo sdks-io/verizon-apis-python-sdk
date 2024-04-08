@@ -21,11 +21,12 @@ class QuerySubscriptionRequest(object):
         accountidentifier (AccountIdentifier): The ID of the authenticating
             billing account, in the format
             `{"billingaccountid":"1234567890-12345"}`.
-        selection (dict): A comma-separated list of properties and comparator
-            values to match against subscriptions in the ThingSpace account.
-            See Working with Query Filters for more information. If the
-            request does not include `$selection`, the response will include
-            all subscriptions to which the requesting user has access.
+        selection (Dict[str, str]): A comma-separated list of properties and
+            comparator values to match against subscriptions in the ThingSpace
+            account. See Working with Query Filters for more information. If
+            the request does not include `$selection`, the response will
+            include all subscriptions to which the requesting user has
+            access.
         resourceidentifier (ResourceIdentifier): The ID of the target to
             delete, in the format {"id":
             "dd1682d3-2d80-cefc-f3ee-25154800beff"}.
@@ -73,11 +74,11 @@ class QuerySubscriptionRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         accountidentifier = AccountIdentifier.from_dictionary(dictionary.get('accountidentifier')) if 'accountidentifier' in dictionary.keys() else APIHelper.SKIP
         selection = dictionary.get("$selection") if dictionary.get("$selection") else APIHelper.SKIP
         resourceidentifier = ResourceIdentifier.from_dictionary(dictionary.get('resourceidentifier')) if 'resourceidentifier' in dictionary.keys() else APIHelper.SKIP

@@ -15,8 +15,8 @@ class V2AddOrRemoveDeviceRequest(object):
     Add or remove device to existing software upgrade information.
 
     Attributes:
-        mtype (string): Operation either 'append' or 'remove'.
-        device_list (list of string): Device IMEI list.
+        mtype (str): Operation either 'append' or 'remove'.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -49,11 +49,11 @@ class V2AddOrRemoveDeviceRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         mtype = dictionary.get("Type") if dictionary.get("Type") else None
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         # Return an object of this model

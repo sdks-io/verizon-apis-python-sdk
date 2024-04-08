@@ -11,8 +11,8 @@ Registered callback listener.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | The billing account number for which callback messages will be sent. |
-| `name` | `string` | Required | The name of the callback service, which identifies the type and format of messages that will be sent to the registered URL. |
+| `account_name` | `str` | Required | The billing account number for which callback messages will be sent. |
+| `name` | `str` | Required | The name of the callback service, which identifies the type and format of messages that will be sent to the registered URL. |
 
 ## Example (as JSON)
 

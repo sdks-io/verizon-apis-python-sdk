@@ -18,20 +18,19 @@ class DeviceGroupUpdateRequest(object):
     description, and adding or removing devices.
 
     Attributes:
-        devices_to_add (list of DeviceId): Zero or more devices to add to the
+        devices_to_add (List[DeviceId]): Zero or more devices to add to the
             device group, specified by device ID. The devices will be removed
             from their current device groups. You can use POST
             /devices/actions/list to get a list of all devices in the
             account.
-        devices_to_remove (list of DeviceId): Zero or more devices to remove
+        devices_to_remove (List[DeviceId]): Zero or more devices to remove
             from the device group, specified by device ID. The devices will be
             added to the default device group.
-        new_group_description (string): A new description for the device
-            group. Do not include this parameter to leave the group
-            description unchanged.
-        new_group_name (string): A new name for the device group. Do not
-            include this parameter if you want to leave the group name
+        new_group_description (str): A new description for the device group.
+            Do not include this parameter to leave the group description
             unchanged.
+        new_group_name (str): A new name for the device group. Do not include
+            this parameter if you want to leave the group name unchanged.
 
     """
 
@@ -81,11 +80,11 @@ class DeviceGroupUpdateRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices_to_add = None
         if dictionary.get('devicesToAdd') is not None:
             devices_to_add = [DeviceId.from_dictionary(x) for x in dictionary.get('devicesToAdd')]

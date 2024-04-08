@@ -16,8 +16,8 @@ class V2LicenseDevice(object):
     Device IMEI list.
 
     Attributes:
-        device_id (string): Device IMEI.
-        assignment_time (string): License assignment time.
+        device_id (str): Device IMEI.
+        assignment_time (str): License assignment time.
 
     """
 
@@ -55,11 +55,11 @@ class V2LicenseDevice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         assignment_time = dictionary.get("assignmentTime") if dictionary.get("assignmentTime") else APIHelper.SKIP
         # Return an object of this model

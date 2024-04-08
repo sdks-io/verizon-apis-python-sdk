@@ -18,7 +18,7 @@ class CreateTargetRequestFields(object):
 
     Attributes:
         httpheaders (FieldsHttpHeaders): TODO: type description here.
-        devicetypes (list of string): List of device types.
+        devicetypes (List[str]): List of device types.
 
     """
 
@@ -58,11 +58,11 @@ class CreateTargetRequestFields(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         httpheaders = FieldsHttpHeaders.from_dictionary(dictionary.get('httpheaders')) if 'httpheaders' in dictionary.keys() else APIHelper.SKIP
         devicetypes = dictionary.get("devicetypes") if dictionary.get("devicetypes") else APIHelper.SKIP
         # Return an object of this model

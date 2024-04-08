@@ -16,11 +16,11 @@ class DeviceLocationSubscription(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
-        loc_type (string): Location service license type.
-        max_allowance (string): The number of billable location requests
-            allowed per billing cycle.
-        purchase_time (string): Location service purchase time.
+        account_name (str): Account identifier in "##########-#####".
+        loc_type (str): Location service license type.
+        max_allowance (str): The number of billable location requests allowed
+            per billing cycle.
+        purchase_time (str): Location service purchase time.
 
     """
 
@@ -70,11 +70,11 @@ class DeviceLocationSubscription(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         loc_type = dictionary.get("locType") if dictionary.get("locType") else APIHelper.SKIP
         max_allowance = dictionary.get("maxAllowance") if dictionary.get("maxAllowance") else APIHelper.SKIP

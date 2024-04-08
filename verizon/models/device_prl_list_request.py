@@ -20,22 +20,22 @@ class DevicePrlListRequest(object):
     GSM devices do not have a PRL.).
 
     Attributes:
-        device_ids (list of DeviceId): The devices for which you want the PRL
+        device_ids (List[DeviceId]): The devices for which you want the PRL
             version, specified by device identifier. You only need to provide
             one identifier per device. Do not use any of the other parameters
             if you specify device IDs.
-        account_name (string): The name of a billing account. This parameter
-            is only required if you are passing groupName and the UWS account
+        account_name (str): The name of a billing account. This parameter is
+            only required if you are passing groupName and the UWS account
             used for the current API session has access to multiple billing
             accounts, because the same device group name can exist in multiple
             accounts.An account name is usually numeric, and must include any
             leading zeros.
-        custom_fields (list of CustomFields): The names and values of custom
+        custom_fields (List[CustomFields]): The names and values of custom
             fields, if you want to only include devices that have matching
             custom fields.
-        group_name (string): The name of a device group, if you want to only
+        group_name (str): The name of a device group, if you want to only
             include devices in that group.
-        service_plan (string): The name of a service plan, if you want to only
+        service_plan (str): The name of a service plan, if you want to only
             include devices that have that service plan.
 
     """
@@ -91,11 +91,11 @@ class DevicePrlListRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = None
         if dictionary.get('deviceIds') is not None:
             device_ids = [DeviceId.from_dictionary(x) for x in dictionary.get('deviceIds')]

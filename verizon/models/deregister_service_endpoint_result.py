@@ -17,9 +17,9 @@ class DeregisterServiceEndpointResult(object):
     Multi-access Edge Compute (MEC) Platforms.
 
     Attributes:
-        status (string): HTTP status code.
-        message (string): EdgeAppServicesID that are deleted or error details
-            in case of an error.
+        status (str): HTTP status code.
+        message (str): EdgeAppServicesID that are deleted or error details in
+            case of an error.
 
     """
 
@@ -59,11 +59,11 @@ class DeregisterServiceEndpointResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP
         # Return an object of this model

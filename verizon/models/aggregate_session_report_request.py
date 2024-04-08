@@ -16,23 +16,21 @@ class AggregateSessionReportRequest(object):
     Request for getting an aggregated session report.
 
     Attributes:
-        account_number (string): The unique identifier for the account.
-        start_date (string): Start date of session to include. If not
-            specified  information will be shown from the earliest available
-            (180 days). Can be either date in ISO 8601 format or predefined
-            constants.
-        end_date (string): End date of session to include. If not specified 
+        account_number (str): The unique identifier for the account.
+        start_date (str): Start date of session to include. If not specified 
+            information will be shown from the earliest available (180 days).
+            Can be either date in ISO 8601 format or predefined constants.
+        end_date (str): End date of session to include. If not specified 
             information will be shown to the latest available. Can be either
             date in ISO 8601 format or predefined constants.
-        imei (list of string): Devices for which return usage info. Could be
-            0, 1 or more. In case of 0 will return all devices belonging to
+        imei (List[str]): Devices for which return usage info. Could be 0, 1
+            or more. In case of 0 will return all devices belonging to
             customer (except of filtered by other parameters).
-        device_group (string): User defined group name the devices are a
-            member of.
-        device_label (string): Optional filter parameter.
-        data_plan (string): The data plan the devices beign queried belong
-            to.
-        no_session_flag (string): Optional filter parameter which return only
+        device_group (str): User defined group name the devices are a member
+            of.
+        device_label (str): Optional filter parameter.
+        data_plan (str): The data plan the devices beign queried belong to.
+        no_session_flag (str): Optional filter parameter which return only
             devices with no sessions.
 
     """
@@ -105,11 +103,11 @@ class AggregateSessionReportRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_number = dictionary.get("accountNumber") if dictionary.get("accountNumber") else None
         imei = dictionary.get("imei") if dictionary.get("imei") else None
         start_date = dictionary.get("startDate") if dictionary.get("startDate") else APIHelper.SKIP

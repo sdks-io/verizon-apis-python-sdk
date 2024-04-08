@@ -11,10 +11,10 @@ Specify the kind of the device identifier, the type of match, and the string tha
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Optional | The the billing account that the devices belong to. |
-| `group_name` | `string` | Optional | Only include devices that are in this device group. |
-| `service_plan` | `string` | Optional | Only include devices that have this service plan. |
-| `custom_fields` | [`List of CustomFields`](../../doc/models/custom-fields.md) | Optional | Custom field names and values, if you want to only include devices that have matching values. |
+| `account` | `str` | Optional | The the billing account that the devices belong to. |
+| `group_name` | `str` | Optional | Only include devices that are in this device group. |
+| `service_plan` | `str` | Optional | Only include devices that have this service plan. |
+| `custom_fields` | [`List[CustomFields]`](../../doc/models/custom-fields.md) | Optional | Custom field names and values, if you want to only include devices that have matching values. |
 
 ## Example (as JSON)
 
@@ -27,8 +27,8 @@ Specify the kind of the device identifier, the type of match, and the string tha
       "value": "East Region Trucks"
     }
   ],
-  "account": "account0",
-  "servicePlan": "servicePlan0"
+  "account": "account8",
+  "servicePlan": "servicePlan2"
 }
 ```
 

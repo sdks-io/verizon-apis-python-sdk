@@ -16,8 +16,8 @@ class BillingCycle(object):
     TODO: type model description here.
 
     Attributes:
-        year (string): TODO: type description here.
-        month (string): TODO: type description here.
+        year (str): TODO: type description here.
+        month (str): TODO: type description here.
 
     """
 
@@ -57,11 +57,11 @@ class BillingCycle(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         year = dictionary.get("year") if dictionary.get("year") else APIHelper.SKIP
         month = dictionary.get("month") if dictionary.get("month") else APIHelper.SKIP
         # Return an object of this model

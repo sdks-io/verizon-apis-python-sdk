@@ -23,12 +23,12 @@ def get_current_asynchronous_request_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `aname` | `string` | Template, Required | Account name. |
-| `request_id` | `string` | Template, Required | UUID from synchronous response. |
+| `aname` | `str` | Template, Required | Account name. |
+| `request_id` | `str` | Template, Required | UUID from synchronous response. |
 
 ## Response Type
 
-[`AsynchronousRequestResult`](../../doc/models/asynchronous-request-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`AsynchronousRequestResult`](../../doc/models/asynchronous-request-result.md).
 
 ## Example Usage
 

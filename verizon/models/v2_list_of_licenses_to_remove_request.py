@@ -16,9 +16,9 @@ class V2ListOfLicensesToRemoveRequest(object):
     License cancellation candidate devices.
 
     Attributes:
-        mtype (string): List creation option.
+        mtype (str): List creation option.
         count (int): The number of devices.
-        device_list (list of string): Device IMEI list.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -61,11 +61,11 @@ class V2ListOfLicensesToRemoveRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         count = dictionary.get("count") if dictionary.get("count") else APIHelper.SKIP

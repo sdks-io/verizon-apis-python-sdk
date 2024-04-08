@@ -11,19 +11,19 @@ Account device information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device identifier. |
-| `mdn` | `string` | Required | MDN. |
-| `model` | `string` | Required | Device model. |
-| `make` | `string` | Required | Device make. |
+| `device_id` | `str` | Required | Device identifier. |
+| `mdn` | `str` | Required | MDN. |
+| `model` | `str` | Required | Device model. |
+| `make` | `str` | Required | Device make. |
 | `fota_eligible` | `bool` | Required | Device FOTA capable. |
 | `app_fota_eligible` | `bool` | Required | Device application FOTA capable. |
 | `license_assigned` | `bool` | Required | License assigned device. |
-| `distribution_type` | `string` | Required | LWM2M, OMD-DM or HTTP. |
-| `software_list` | [`List of V2SoftwareInfo`](../../doc/models/v2-software-info.md) | Required | List of sofware. |
-| `create_time` | `string` | Optional | The date and time of when the device is created. |
-| `upgrade_time` | `string` | Optional | The date and time of when the device firmware or software is upgraded. |
-| `update_time` | `string` | Optional | The date and time of when the device is updated. |
-| `refresh_time` | `string` | Optional | The date and time of when the device is refreshed. |
+| `distribution_type` | `str` | Required | LWM2M, OMD-DM or HTTP. |
+| `software_list` | [`List[V2SoftwareInfo]`](../../doc/models/v2-software-info.md) | Required | List of sofware. |
+| `create_time` | `str` | Optional | The date and time of when the device is created. |
+| `upgrade_time` | `str` | Optional | The date and time of when the device firmware or software is upgraded. |
+| `update_time` | `str` | Optional | The date and time of when the device is updated. |
+| `refresh_time` | `str` | Optional | The date and time of when the device is refreshed. |
 
 ## Example (as JSON)
 

@@ -9,11 +9,11 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `trigger_name` | `string` | Optional | Usage trigger name |
-| `account_name` | `string` | Required | Account name |
-| `threshold_value` | `string` | Optional | The percent of subscribed usage required to activate the trigger, such as 90 or 100. |
-| `sms_phone_numbers` | `string` | Optional | Comma-separated list of phone numbers to send SMS alerts to. Digits only; no dashes or parentheses, etc. |
-| `email_addresses` | `string` | Optional | Comma-separated list of email addresses to send alerts to. |
+| `trigger_name` | `str` | Optional | Usage trigger name |
+| `account_name` | `str` | Required | Account name |
+| `threshold_value` | `str` | Optional | The percent of subscribed usage required to activate the trigger, such as 90 or 100. |
+| `sms_phone_numbers` | `str` | Optional | Comma-separated list of phone numbers to send SMS alerts to. Digits only; no dashes or parentheses, etc. |
+| `email_addresses` | `str` | Optional | Comma-separated list of email addresses to send alerts to. |
 
 ## Example (as JSON)
 

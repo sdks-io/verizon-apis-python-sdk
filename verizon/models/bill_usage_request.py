@@ -16,10 +16,10 @@ class BillUsageRequest(object):
     Bill usage request.
 
     Attributes:
-        account_name (string): Account identifier.
-        start_date (string): Start date to search for billable usage,
+        account_name (str): Account identifier.
+        start_date (str): Start date to search for billable usage,
             mm-dd-yyyy.
-        end_date (string): End date to search for billable usage, mm-dd-yyyy.
+        end_date (str): End date to search for billable usage, mm-dd-yyyy.
         usage_for_all_accounts (bool): Request usage for single or multiple
             accounts.
 
@@ -34,26 +34,20 @@ class BillUsageRequest(object):
     }
 
     _optionals = [
-        'account_name',
-        'start_date',
-        'end_date',
         'usage_for_all_accounts',
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
-                 start_date=APIHelper.SKIP,
-                 end_date=APIHelper.SKIP,
+                 account_name=None,
+                 start_date=None,
+                 end_date=None,
                  usage_for_all_accounts=APIHelper.SKIP):
         """Constructor for the BillUsageRequest class"""
 
         # Initialize members of the class
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
-        if start_date is not APIHelper.SKIP:
-            self.start_date = start_date 
-        if end_date is not APIHelper.SKIP:
-            self.end_date = end_date 
+        self.account_name = account_name 
+        self.start_date = start_date 
+        self.end_date = end_date 
         if usage_for_all_accounts is not APIHelper.SKIP:
             self.usage_for_all_accounts = usage_for_all_accounts 
 
@@ -71,14 +65,14 @@ class BillUsageRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
-        start_date = dictionary.get("startDate") if dictionary.get("startDate") else APIHelper.SKIP
-        end_date = dictionary.get("endDate") if dictionary.get("endDate") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
+        start_date = dictionary.get("startDate") if dictionary.get("startDate") else None
+        end_date = dictionary.get("endDate") if dictionary.get("endDate") else None
         usage_for_all_accounts = dictionary.get("usageForAllAccounts") if "usageForAllAccounts" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(account_name,

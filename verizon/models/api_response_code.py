@@ -17,7 +17,7 @@ class ApiResponseCode(object):
 
     Attributes:
         response_code (ResponseCodeEnum): Possible response codes.
-        message (string): More details about the responseCode received.
+        message (str): More details about the responseCode received.
 
     """
 
@@ -50,11 +50,11 @@ class ApiResponseCode(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         response_code = dictionary.get("responseCode") if dictionary.get("responseCode") else None
         message = dictionary.get("message") if dictionary.get("message") else None
         # Return an object of this model

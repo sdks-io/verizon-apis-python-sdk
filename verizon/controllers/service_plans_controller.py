@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.service_plan import ServicePlan
 from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
@@ -30,7 +28,7 @@ class ServicePlansController(BaseController):
 
     def list_account_service_plans(self,
                                    aname):
-        """Does a GET request to /v1/plans/{aname}.
+        """Does a GET request to /m2m/v1/plans/{aname}.
 
         Returns a list of all data service plans that are associated with a
         specified billing account. When you send a request to
@@ -39,7 +37,7 @@ class ServicePlansController(BaseController):
         account.
 
         Args:
-            aname (string): Account name.
+            aname (str): Account name.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -55,8 +53,8 @@ class ServicePlansController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/plans/{aname}')
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/plans/{aname}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('aname')
@@ -65,7 +63,7 @@ class ServicePlansController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

@@ -11,13 +11,13 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The account that the device is associated with. |
-| `mdn` | `string` | Optional | The assigned phone number of the device. |
-| `activation_date` | `string` | Optional | The date and time when the SIM was last activated. |
-| `iccid` | `string` | Optional | The ID of the SIM. |
-| `pre_imei` | `string` | Optional | The IMEI of the device prior to the SIM OTA activation on simOtaDate. |
-| `post_imei` | `string` | Optional | The IMEI of the device after the SIM OTA activation on simOtaDate. |
-| `sim_ota_date` | `string` | Optional | The date and time of the SIM OTA activation. |
+| `account_name` | `str` | Optional | The account that the device is associated with. |
+| `mdn` | `str` | Optional | The assigned phone number of the device. |
+| `activation_date` | `str` | Optional | The date and time when the SIM was last activated. |
+| `iccid` | `str` | Optional | The ID of the SIM. |
+| `pre_imei` | `str` | Optional | The IMEI of the device prior to the SIM OTA activation on simOtaDate. |
+| `post_imei` | `str` | Optional | The IMEI of the device after the SIM OTA activation on simOtaDate. |
+| `sim_ota_date` | `str` | Optional | The date and time of the SIM OTA activation. |
 
 ## Example (as JSON)
 

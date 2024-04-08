@@ -16,9 +16,9 @@ class IPPool(object):
     IP pool that is available to the account.
 
     Attributes:
-        pool_name (string): The name of the IP pool.
-        pool_type (string): The type of IP pool, such as “Static IP” or
-            “Dynamic IP.”
+        pool_name (str): The name of the IP pool.
+        pool_type (str): The type of IP pool, such as “Static IP” or “Dynamic
+            IP.”
         is_default_pool (bool): True if this is the default IP pool for the
             account.
 
@@ -65,11 +65,11 @@ class IPPool(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         pool_name = dictionary.get("poolName") if dictionary.get("poolName") else APIHelper.SKIP
         pool_type = dictionary.get("poolType") if dictionary.get("poolType") else APIHelper.SKIP
         is_default_pool = dictionary.get("isDefaultPool") if "isDefaultPool" in dictionary.keys() else APIHelper.SKIP

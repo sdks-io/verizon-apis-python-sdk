@@ -20,44 +20,42 @@ class DeviceMismatchListRequest(object):
     frame.
 
     Attributes:
-        devices (list of AccountDeviceList): A list of specific devices that
-            you want to check, specified by ICCID or MDN.
         filter (DateFilter): Filter out the dates.
-        account_name (string): The account that you want to search for
-            mismatched devices. If you don't specify an accountName, the
-            search includes all devices to which you have access.
-        group_name (string): The name of a device group, to only include
-            devices in that group.
+        devices (List[AccountDeviceList]): A list of specific devices that you
+            want to check, specified by ICCID or MDN.
+        account_name (str): The account that you want to search for mismatched
+            devices. If you don't specify an accountName, the search includes
+            all devices to which you have access.
+        group_name (str): The name of a device group, to only include devices
+            in that group.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "devices": 'devices',
         "filter": 'filter',
+        "devices": 'devices',
         "account_name": 'accountName',
         "group_name": 'groupName'
     }
 
     _optionals = [
         'devices',
-        'filter',
         'account_name',
         'group_name',
     ]
 
     def __init__(self,
+                 filter=None,
                  devices=APIHelper.SKIP,
-                 filter=APIHelper.SKIP,
                  account_name=APIHelper.SKIP,
                  group_name=APIHelper.SKIP):
         """Constructor for the DeviceMismatchListRequest class"""
 
         # Initialize members of the class
+        self.filter = filter 
         if devices is not APIHelper.SKIP:
             self.devices = devices 
-        if filter is not APIHelper.SKIP:
-            self.filter = filter 
         if account_name is not APIHelper.SKIP:
             self.account_name = account_name 
         if group_name is not APIHelper.SKIP:
@@ -77,21 +75,21 @@ class DeviceMismatchListRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
+        filter = DateFilter.from_dictionary(dictionary.get('filter')) if dictionary.get('filter') else None
         devices = None
         if dictionary.get('devices') is not None:
             devices = [AccountDeviceList.from_dictionary(x) for x in dictionary.get('devices')]
         else:
             devices = APIHelper.SKIP
-        filter = DateFilter.from_dictionary(dictionary.get('filter')) if 'filter' in dictionary.keys() else APIHelper.SKIP
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         # Return an object of this model
-        return cls(devices,
-                   filter,
+        return cls(filter,
+                   devices,
                    account_name,
                    group_name)

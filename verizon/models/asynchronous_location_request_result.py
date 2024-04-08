@@ -16,9 +16,9 @@ class AsynchronousLocationRequestResult(object):
     TODO: type model description here.
 
     Attributes:
-        txid (string): The transaction ID of the report.
+        txid (str): The transaction ID of the report.
         status (ReportStatusEnum): Status of the report.
-        estimated_duration (string): Estimated number of minutes required to
+        estimated_duration (str): Estimated number of minutes required to
             complete the report.
 
     """
@@ -64,11 +64,11 @@ class AsynchronousLocationRequestResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         estimated_duration = dictionary.get("estimatedDuration") if dictionary.get("estimatedDuration") else APIHelper.SKIP

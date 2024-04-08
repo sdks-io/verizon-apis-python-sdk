@@ -16,7 +16,7 @@ class DeviceLocationCallback(object):
 
     Attributes:
         name (CallbackServiceNameEnum): The name of the callback service.
-        url (string): The location of your callback listener.
+        url (str): The location of your callback listener.
 
     """
 
@@ -49,11 +49,11 @@ class DeviceLocationCallback(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else None
         url = dictionary.get("url") if dictionary.get("url") else None
         # Return an object of this model

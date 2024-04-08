@@ -17,7 +17,7 @@ class RegisterServiceEndpointResult(object):
     specified Muli-access Edge Compute (MEC) Platforms.
 
     Attributes:
-        service_endpoints_id (string): A system-defined string identifier
+        service_endpoints_id (str): A system-defined string identifier
             representing one or more registered Service Endpoints.
 
     """
@@ -53,11 +53,11 @@ class RegisterServiceEndpointResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         service_endpoints_id = dictionary.get("serviceEndpointsId") if dictionary.get("serviceEndpointsId") else APIHelper.SKIP
         # Return an object of this model
         return cls(service_endpoints_id)

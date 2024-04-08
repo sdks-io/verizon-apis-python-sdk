@@ -11,7 +11,7 @@ The list of devices that have licenses assigned, including the date and time of 
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Optional | Device IMEI. |
+| `device_id` | `str` | Optional | Device IMEI. |
 | `assignment_time` | `datetime` | Optional | Timestamp of when a license was assigned to the device. |
 
 ## Example (as JSON)

@@ -16,9 +16,9 @@ class LicenseDeviceId(object):
     Id of the devices.
 
     Attributes:
-        id (string): For 4G devices, IMEI (decimal, up to 15 digits) for
-            unassign and ICCID (decimal, up to 20 digits) for assign.
-        kind (string): For 4G devices, ICCID (decimal, up to 20 digits) for
+        id (str): For 4G devices, IMEI (decimal, up to 15 digits) for unassign
+            and ICCID (decimal, up to 20 digits) for assign.
+        kind (str): For 4G devices, ICCID (decimal, up to 20 digits) for
             unassign and IMEI (decimal, up to 15 digits) for assign.
 
     """
@@ -59,11 +59,11 @@ class LicenseDeviceId(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         # Return an object of this model

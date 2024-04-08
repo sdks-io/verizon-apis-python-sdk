@@ -16,12 +16,12 @@ class CallbackCreated(object):
     TODO: type model description here.
 
     Attributes:
-        aname (string): The billing account number for which callback messages
+        aname (str): The billing account number for which callback messages
             will be sent.
-        name (string): The name of the callback service, which identifies the
+        name (str): The name of the callback service, which identifies the
             type and format of messages that will be sent to the registered
             URL.
-        url (string): The address of the callback listening service where the
+        url (str): The address of the callback listening service where the
             ThingSpace Platform will send callback messages for the service
             type.
 
@@ -64,11 +64,11 @@ class CallbackCreated(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         aname = dictionary.get("aname") if dictionary.get("aname") else None
         name = dictionary.get("name") if dictionary.get("name") else None
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP

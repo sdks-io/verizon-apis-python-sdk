@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request_id` | `string` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32` |
+| `request_id` | `str` | Optional | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32` |
 
 ## Example (as JSON)
 

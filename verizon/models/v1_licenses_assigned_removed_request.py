@@ -15,7 +15,7 @@ class V1LicensesAssignedRemovedRequest(object):
     IMEIs of the devices to assign licenses to.
 
     Attributes:
-        device_list (list of string): The IMEIs of the devices.
+        device_list (List[str]): The IMEIs of the devices.
 
     """
 
@@ -45,11 +45,11 @@ class V1LicensesAssignedRemovedRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         # Return an object of this model
         return cls(device_list)

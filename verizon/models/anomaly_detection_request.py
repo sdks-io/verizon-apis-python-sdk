@@ -17,9 +17,9 @@ class AnomalyDetectionRequest(object):
     Anomaly detection request.
 
     Attributes:
-        account_name (string): The name of a billing account. An account name
-            is usually numeric, and must include any leading zeros.
-        request_type (string): The type of request being made. anomaly is the
+        account_name (str): The name of a billing account. An account name is
+            usually numeric, and must include any leading zeros.
+        request_type (str): The type of request being made. anomaly is the
             request to activate anomaly detection.
         sensitivity_parameter (SensitivityParameters): Details for sensitivity
             parameters.
@@ -67,11 +67,11 @@ class AnomalyDetectionRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         request_type = dictionary.get("requestType") if dictionary.get("requestType") else APIHelper.SKIP
         sensitivity_parameter = SensitivityParameters.from_dictionary(dictionary.get('sensitivityParameter')) if 'sensitivityParameter' in dictionary.keys() else APIHelper.SKIP

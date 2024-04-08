@@ -11,7 +11,7 @@ Device logging status information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device IMEI. |
+| `device_id` | `str` | Required | Device IMEI. |
 | `expiry_date` | `date` | Required | The date when device logging expires. |
 
 ## Example (as JSON)

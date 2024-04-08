@@ -19,23 +19,23 @@ class CampaignSoftwareUpgrade(object):
     Software upgrade information.
 
     Attributes:
-        campaign_name (string): Campaign name.
-        software_name (string): Software name to upgrade to.
-        software_from (string): Old software name.
-        software_to (string): New software name.
-        distribution_type (string): OMA or HTTP.
+        campaign_name (str): Campaign name.
+        software_name (str): Software name to upgrade to.
+        software_from (str): Old software name.
+        software_to (str): New software name.
+        distribution_type (str): OMA or HTTP.
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
         download_after_date (date): Specifies starting date client should
             download package. If null, client will download as soon as
             possible.
-        download_time_window_list (list of V2TimeWindow): List of allowed
+        download_time_window_list (List[V2TimeWindow]): List of allowed
             download time windows.
         install_after_date (date): Client will install package after date. If
             null, client will install as soon as possible.
-        install_time_window_list (list of V2TimeWindow): List of allowed
-            install time windows.
-        device_list (list of string): Device IMEI list.
+        install_time_window_list (List[V2TimeWindow]): List of allowed install
+            time windows.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -111,11 +111,11 @@ class CampaignSoftwareUpgrade(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         software_name = dictionary.get("softwareName") if dictionary.get("softwareName") else None
         software_from = dictionary.get("softwareFrom") if dictionary.get("softwareFrom") else None
         software_to = dictionary.get("softwareTo") if dictionary.get("softwareTo") else None

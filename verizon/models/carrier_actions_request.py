@@ -18,14 +18,16 @@ class CarrierActionsRequest(object):
     Request for a carrier action.
 
     Attributes:
-        account_name (string): The name of a billing account.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
-        devices (list of AccountDeviceList): The devices for which you want to
+        account_name (str): The name of a billing account.
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
+        devices (List[AccountDeviceList]): The devices for which you want to
             restore service, specified by device identifier.
-        group_name (string): The name of a device group, if you want to
-            restore service for all devices in that group.
-        service_plan (string): The name of a service plan, if you want to only
+        with_billing (bool): set to "true" to suspend with billing, set to
+            "false" to suspend without billing
+        group_name (str): The name of a device group, if you want to restore
+            service for all devices in that group.
+        service_plan (str): The name of a service plan, if you want to only
             include devices that have that service plan.
 
     """
@@ -35,6 +37,7 @@ class CarrierActionsRequest(object):
         "account_name": 'accountName',
         "custom_fields": 'customFields',
         "devices": 'devices',
+        "with_billing": 'withBilling',
         "group_name": 'groupName',
         "service_plan": 'servicePlan'
     }
@@ -43,6 +46,7 @@ class CarrierActionsRequest(object):
         'account_name',
         'custom_fields',
         'devices',
+        'with_billing',
         'group_name',
         'service_plan',
     ]
@@ -51,6 +55,7 @@ class CarrierActionsRequest(object):
                  account_name=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
                  devices=APIHelper.SKIP,
+                 with_billing=APIHelper.SKIP,
                  group_name=APIHelper.SKIP,
                  service_plan=APIHelper.SKIP):
         """Constructor for the CarrierActionsRequest class"""
@@ -62,6 +67,8 @@ class CarrierActionsRequest(object):
             self.custom_fields = custom_fields 
         if devices is not APIHelper.SKIP:
             self.devices = devices 
+        if with_billing is not APIHelper.SKIP:
+            self.with_billing = with_billing 
         if group_name is not APIHelper.SKIP:
             self.group_name = group_name 
         if service_plan is not APIHelper.SKIP:
@@ -81,11 +88,11 @@ class CarrierActionsRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         custom_fields = None
         if dictionary.get('customFields') is not None:
@@ -97,11 +104,13 @@ class CarrierActionsRequest(object):
             devices = [AccountDeviceList.from_dictionary(x) for x in dictionary.get('devices')]
         else:
             devices = APIHelper.SKIP
+        with_billing = dictionary.get("withBilling") if "withBilling" in dictionary.keys() else APIHelper.SKIP
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
         # Return an object of this model
         return cls(account_name,
                    custom_fields,
                    devices,
+                   with_billing,
                    group_name,
                    service_plan)

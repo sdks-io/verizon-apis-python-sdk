@@ -12,7 +12,7 @@ Response to return the provisioning history of a specified device during a speci
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `has_more_data` | `bool` | Optional | False for a status 200 response.True for a status 202 response, indicating that there is more data to be retrieved. |
-| `provisioning_history` | [`List of ProvisioningHistory`](../../doc/models/provisioning-history.md) | Optional | The provisioning history of a specified device during a specified time period. |
+| `provisioning_history` | [`List[ProvisioningHistory]`](../../doc/models/provisioning-history.md) | Optional | The provisioning history of a specified device during a specified time period. |
 
 ## Example (as JSON)
 

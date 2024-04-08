@@ -16,13 +16,13 @@ class FirmwarePackage(object):
     Available firmware.
 
     Attributes:
-        firmware_name (string): Firmware name.
-        firmware_from (string): Firmware from version.
-        firmware_to (string): Firmware to version.
+        firmware_name (str): Firmware name.
+        firmware_from (str): Firmware from version.
+        firmware_to (str): Firmware to version.
         launch_date (datetime): Firmware launch date.
-        release_note (string): Firmware release note.
-        model (string): Firmware applicable device model.
-        make (string): Firmware applicable device make.
+        release_note (str): Firmware release note.
+        model (str): Firmware applicable device model.
+        make (str): Firmware applicable device make.
         protocol (CampaignMetaInfoProtocolEnum): Firmware protocol. Valid
             values include: LWM2M, OMD-DM.
 
@@ -55,7 +55,7 @@ class FirmwarePackage(object):
         self.firmware_name = firmware_name 
         self.firmware_from = firmware_from 
         self.firmware_to = firmware_to 
-        self.launch_date = APIHelper.RFC3339DateTime(launch_date) if launch_date else None 
+        self.launch_date = APIHelper.apply_datetime_converter(launch_date, APIHelper.RFC3339DateTime) if launch_date else None 
         self.release_note = release_note 
         self.model = model 
         self.make = make 
@@ -75,11 +75,11 @@ class FirmwarePackage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         firmware_name = dictionary.get("firmwareName") if dictionary.get("firmwareName") else None
         firmware_from = dictionary.get("firmwareFrom") if dictionary.get("firmwareFrom") else None
         firmware_to = dictionary.get("firmwareTo") if dictionary.get("firmwareTo") else None

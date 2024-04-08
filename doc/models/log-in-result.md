@@ -11,7 +11,7 @@ Response to initiate a Connectivity Management session and returns a VZ-M2M sess
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `session_token` | `string` | Optional | The identifier for the session that was created by the request. Store the sessionToken for use in the header of all other API requests. |
+| `session_token` | `str` | Optional | The identifier for the session that was created by the request. Store the sessionToken for use in the header of all other API requests. |
 
 ## Example (as JSON)
 

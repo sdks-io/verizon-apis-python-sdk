@@ -16,7 +16,7 @@ class GenerateExternalIDResult(object):
     A new external ID.
 
     Attributes:
-        externalid (string): Newly created security string.
+        externalid (str): Newly created security string.
 
     """
 
@@ -51,11 +51,11 @@ class GenerateExternalIDResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         externalid = dictionary.get("externalid") if dictionary.get("externalid") else APIHelper.SKIP
         # Return an object of this model
         return cls(externalid)

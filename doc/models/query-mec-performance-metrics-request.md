@@ -11,8 +11,8 @@ MEC performance metrics request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `imei` | `string` | Required | The 15-digit International Mobile Equipment Identifier. |
-| `msisdn` | `string` | Required | The 12-digit Mobile Station International Subscriber Directory Number. |
+| `imei` | `str` | Required | The 15-digit International Mobile Equipment Identifier. |
+| `msisdn` | `str` | Required | The 12-digit Mobile Station International Subscriber Directory Number. |
 
 ## Example (as JSON)
 

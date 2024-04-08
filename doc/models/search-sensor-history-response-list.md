@@ -11,7 +11,7 @@ A success response includes an array of all matching events.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `search_sensor_history` | [`List of SearchDeviceResponse`](../../doc/models/search-device-response.md) | Optional | **Constraints**: *Maximum Items*: `100` |
+| `search_sensor_history` | [`List[SearchDeviceResponse]`](../../doc/models/search-device-response.md) | Optional | **Constraints**: *Maximum Items*: `100` |
 
 ## Example (as JSON)
 
@@ -19,22 +19,22 @@ A success response includes an array of all matching events.
 {
   "SearchSensorHistory": [
     {
-      "action": "action4",
-      "createdon": "createdon4",
-      "deviceid": "deviceid2",
+      "action": "action6",
+      "createdon": "createdon6",
+      "deviceid": "deviceid6",
       "fields": {
-        "temperature": "temperature8"
+        "temperature": "temperature0"
       },
-      "id": "id8"
+      "id": "id6"
     },
     {
-      "action": "action3",
-      "createdon": "createdon3",
-      "deviceid": "deviceid1",
+      "action": "action6",
+      "createdon": "createdon6",
+      "deviceid": "deviceid6",
       "fields": {
-        "temperature": "temperature9"
+        "temperature": "temperature0"
       },
-      "id": "id9"
+      "id": "id6"
     }
   ]
 }

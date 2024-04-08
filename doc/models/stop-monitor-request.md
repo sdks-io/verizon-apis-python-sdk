@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | - |
-| `monitor_ids` | `List of string` | Required | - |
+| `account_name` | `str` | Required | - |
+| `monitor_ids` | `List[str]` | Required | - |
 
 ## Example (as JSON)
 

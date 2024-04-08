@@ -16,9 +16,9 @@ class DeviceInfo(object):
     devices.
 
     Attributes:
-        id (string): Device identifier.
-        kind (string): Device identifier kind.
-        mdn (string): Device MDN.
+        id (str): Device identifier.
+        kind (str): Device identifier kind.
+        mdn (str): Device MDN.
 
     """
 
@@ -54,11 +54,11 @@ class DeviceInfo(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else None
         kind = dictionary.get("kind") if dictionary.get("kind") else None
         mdn = dictionary.get("mdn") if dictionary.get("mdn") else None

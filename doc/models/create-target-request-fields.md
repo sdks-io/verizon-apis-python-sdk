@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `httpheaders` | [`FieldsHttpHeaders`](../../doc/models/fields-http-headers.md) | Optional | - |
-| `devicetypes` | `List of string` | Optional | List of device types. |
+| `devicetypes` | `List[str]` | Optional | List of device types. |
 
 ## Example (as JSON)
 

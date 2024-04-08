@@ -16,13 +16,12 @@ class SessionReportRequest(object):
     Request for obtaining a session report.
 
     Attributes:
-        account_number (string): Account Number.
-        imei (string): Device ids.
-        start_date (string): Start date of session to include. If not
-            specified  information will be shown from the earliest available
-            (180 days). Can be either date in ISO 8601 format or predefined
-            constants.
-        end_date (string): End date of session to include. If not specified 
+        account_number (str): Account Number.
+        imei (str): Device ids.
+        start_date (str): Start date of session to include. If not specified 
+            information will be shown from the earliest available (180 days).
+            Can be either date in ISO 8601 format or predefined constants.
+        end_date (str): End date of session to include. If not specified 
             information will be shown to the latest available. Can be either
             date in ISO 8601 format or predefined constants.
         duration_low (int): The Low value of session duration.
@@ -87,11 +86,11 @@ class SessionReportRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_number = dictionary.get("accountNumber") if dictionary.get("accountNumber") else None
         imei = dictionary.get("imei") if dictionary.get("imei") else None
         start_date = dictionary.get("startDate") if dictionary.get("startDate") else APIHelper.SKIP

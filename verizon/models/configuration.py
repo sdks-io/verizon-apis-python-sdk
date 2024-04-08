@@ -16,7 +16,7 @@ class Configuration(object):
     List of the field names and values to set.
 
     Attributes:
-        frequency (string): TODO: type description here.
+        frequency (str): TODO: type description here.
 
     """
 
@@ -51,11 +51,11 @@ class Configuration(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         frequency = dictionary.get("frequency") if dictionary.get("frequency") else APIHelper.SKIP
         # Return an object of this model
         return cls(frequency)

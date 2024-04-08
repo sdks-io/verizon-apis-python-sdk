@@ -17,8 +17,8 @@ class ManagedAccountsAddResponse(object):
     TODO: type model description here.
 
     Attributes:
-        tx_id (string): Transaction identifier
-        status_list (list of StatusList): TODO: type description here.
+        tx_id (str): Transaction identifier
+        status_list (List[StatusList]): TODO: type description here.
 
     """
 
@@ -58,11 +58,11 @@ class ManagedAccountsAddResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         tx_id = dictionary.get("TxId") if dictionary.get("TxId") else APIHelper.SKIP
         status_list = None
         if dictionary.get('statusList') is not None:

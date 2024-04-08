@@ -16,8 +16,8 @@ class CallbackActionResult(object):
     Response to a callback action.
 
     Attributes:
-        account_name (string): The name of the billing account.
-        service_name (string): The name of the callback service that was
+        account_name (str): The name of the billing account.
+        service_name (str): The name of the callback service that was
             registered/deregistered.
 
     """
@@ -58,11 +58,11 @@ class CallbackActionResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else APIHelper.SKIP
         # Return an object of this model

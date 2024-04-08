@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.registered_callbacks import RegisteredCallbacks
 from verizon.models.fota_v1_callback_registration_result import FotaV1CallbackRegistrationResult
 from verizon.models.fota_v1_success_result import FotaV1SuccessResult
@@ -38,7 +36,7 @@ class SoftwareManagementCallbacksV1Controller(BaseController):
         registered for a given account.
 
         Args:
-            account (string): Account identifier in "##########-#####".
+            account (str): Account identifier in "##########-#####".
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -64,7 +62,7 @@ class SoftwareManagementCallbacksV1Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -83,7 +81,7 @@ class SoftwareManagementCallbacksV1Controller(BaseController):
         finish.
 
         Args:
-            account (string): Account identifier in "##########-#####".
+            account (str): Account identifier in "##########-#####".
             body (FotaV1CallbackRegistrationRequest): Callback details.
 
         Returns:
@@ -116,7 +114,7 @@ class SoftwareManagementCallbacksV1Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -134,7 +132,7 @@ class SoftwareManagementCallbacksV1Controller(BaseController):
         FOTA callback messages for the specified account.
 
         Args:
-            account (string): Account identifier in "##########-#####".
+            account (str): Account identifier in "##########-#####".
             service (CallbackServiceEnum): Callback type. Must be 'Fota' for
                 Software Management Services API.
 
@@ -166,7 +164,7 @@ class SoftwareManagementCallbacksV1Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

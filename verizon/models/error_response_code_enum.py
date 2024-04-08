@@ -21,7 +21,6 @@ class ErrorResponseCodeEnum(object):
         SUCCESS: TODO: type description here.
 
     """
-
     INVALID_ACCESS = 'INVALID_ACCESS'
 
     INVALID_PARAMETER = 'INVALID_PARAMETER'
@@ -29,3 +28,4 @@ class ErrorResponseCodeEnum(object):
     INTERNAL_ERROR = 'INTERNAL_ERROR'
 
     SUCCESS = 'SUCCESS'
+

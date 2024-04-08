@@ -16,8 +16,8 @@ class V2LicenseIMEI(object):
     IMEIs of the devices to assign or remove licenses.
 
     Attributes:
-        account_name (string): Account name.
-        device_list (list of string): Device IMEI list.
+        account_name (str): Account name.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -55,11 +55,11 @@ class V2LicenseIMEI(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         # Return an object of this model

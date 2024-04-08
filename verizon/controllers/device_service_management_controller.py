@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.bullseye_service_result import BullseyeServiceResult
 from verizon.exceptions.hyper_precise_location_result_exception import HyperPreciseLocationResultException
 
@@ -36,8 +34,8 @@ class DeviceServiceManagementController(BaseController):
         Gets the list of a status for hyper-precise location devices.
 
         Args:
-            imei (string): A unique identifier for a device.
-            account_number (string): A unique identifier for an account.
+            imei (str): A unique identifier for a device.
+            account_number (str): A unique identifier for an account.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -65,7 +63,7 @@ class DeviceServiceManagementController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -115,7 +113,7 @@ class DeviceServiceManagementController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

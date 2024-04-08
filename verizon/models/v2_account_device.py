@@ -17,22 +17,20 @@ class V2AccountDevice(object):
     Account device information.
 
     Attributes:
-        device_id (string): Device identifier.
-        mdn (string): MDN.
-        model (string): Device model.
-        make (string): Device make.
+        device_id (str): Device identifier.
+        mdn (str): MDN.
+        model (str): Device model.
+        make (str): Device make.
         fota_eligible (bool): Device FOTA capable.
         app_fota_eligible (bool): Device application FOTA capable.
         license_assigned (bool): License assigned device.
-        distribution_type (string): LWM2M, OMD-DM or HTTP.
-        software_list (list of V2SoftwareInfo): List of sofware.
-        create_time (string): The date and time of when the device is
-            created.
-        upgrade_time (string): The date and time of when the device firmware
-            or software is upgraded.
-        update_time (string): The date and time of when the device is
-            updated.
-        refresh_time (string): The date and time of when the device is
+        distribution_type (str): LWM2M, OMD-DM or HTTP.
+        software_list (List[V2SoftwareInfo]): List of sofware.
+        create_time (str): The date and time of when the device is created.
+        upgrade_time (str): The date and time of when the device firmware or
+            software is upgraded.
+        update_time (str): The date and time of when the device is updated.
+        refresh_time (str): The date and time of when the device is
             refreshed.
 
     """
@@ -110,11 +108,11 @@ class V2AccountDevice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         mdn = dictionary.get("mdn") if dictionary.get("mdn") else None
         model = dictionary.get("model") if dictionary.get("model") else None

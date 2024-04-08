@@ -11,21 +11,21 @@ Device information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device identifier. |
-| `mdn` | `string` | Required | MDN. |
-| `model` | `string` | Required | Device model. |
-| `make` | `string` | Required | Device make. |
-| `firmware` | `string` | Required | Device firmware version. |
+| `device_id` | `str` | Required | Device identifier. |
+| `mdn` | `str` | Required | MDN. |
+| `model` | `str` | Required | Device model. |
+| `make` | `str` | Required | Device make. |
+| `firmware` | `str` | Required | Device firmware version. |
 | `fota_eligible` | `bool` | Required | Value=true if the device software can be upgraded over the air using the Software Management Services API. |
-| `status` | `string` | Required | Device status. |
+| `status` | `str` | Required | Device status. |
 | `license_assigned` | `bool` | Required | License assigned device. |
-| `protocol` | `string` | Required | Firmware protocol. Valid values include: LWM2M, OMADM, HTTP or NONE. |
-| `software_list` | [`List of V3SoftwareInfo`](../../doc/models/v3-software-info.md) | Required | List of sofware. |
-| `file_list` | [`List of V3SoftwareInfo`](../../doc/models/v3-software-info.md) | Optional | List of files. |
-| `create_time` | `string` | Optional | The date and time of when the device is created. |
-| `upgrade_time` | `string` | Optional | The date and time of when the device firmware or software is updated. |
-| `update_time` | `string` | Optional | The date and time of when the device is updated. |
-| `refresh_time` | `string` | Optional | The date and time of when the device is refreshed. |
+| `protocol` | `str` | Required | Firmware protocol. Valid values include: LWM2M, OMADM, HTTP or NONE. |
+| `software_list` | [`List[V3SoftwareInfo]`](../../doc/models/v3-software-info.md) | Required | List of sofware. |
+| `file_list` | [`List[V3SoftwareInfo]`](../../doc/models/v3-software-info.md) | Optional | List of files. |
+| `create_time` | `str` | Optional | The date and time of when the device is created. |
+| `upgrade_time` | `str` | Optional | The date and time of when the device firmware or software is updated. |
+| `update_time` | `str` | Optional | The date and time of when the device is updated. |
+| `refresh_time` | `str` | Optional | The date and time of when the device is refreshed. |
 
 ## Example (as JSON)
 

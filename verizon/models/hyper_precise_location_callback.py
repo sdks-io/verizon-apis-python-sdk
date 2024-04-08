@@ -15,9 +15,9 @@ class HyperPreciseLocationCallback(object):
     Callback registration request.
 
     Attributes:
-        name (string): The name of the callback service that you want to
+        name (str): The name of the callback service that you want to
             subscribe to.
-        url (string): The address on your server where you have enabled a
+        url (str): The address on your server where you have enabled a
             listening service for the specific type of callback messages.
             Specify a URL that is reachable from the Verizon data centers. If
             your service is running on HTTPS, you should use a one-way
@@ -54,11 +54,11 @@ class HyperPreciseLocationCallback(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else None
         url = dictionary.get("url") if dictionary.get("url") else None
         # Return an object of this model

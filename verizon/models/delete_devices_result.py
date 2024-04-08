@@ -18,11 +18,11 @@ class DeleteDevicesResult(object):
     Attributes:
         device_ids (object): One object per device to be deleted. Each object
             must contain a kind and id element identifying the device.
-        status (string): “Success” if the device was deleted, or “Failed” if
+        status (str): “Success” if the device was deleted, or “Failed” if
             there was a problem.
-        message (string): Not present if status=Success. One of these messages
-            if status=Failed:The device is not in deactivate state.The user
-            does not have access to delete the device.
+        message (str): Not present if status=Success. One of these messages if
+            status=Failed:The device is not in deactivate state.The user does
+            not have access to delete the device.
 
     """
 
@@ -67,11 +67,11 @@ class DeleteDevicesResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = dictionary.get("deviceIds") if dictionary.get("deviceIds") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP

@@ -16,12 +16,12 @@ class FotaV1CallbackRegistrationResult(object):
     Registered callback account name and service name.
 
     Attributes:
-        account_name (string): The name of the billing account for which
-            callback messages will be sent.
-        service_name (string): The name of the callback service, which
-            identifies the type and format of messages that will be sent to
-            the registered URL. This will be 'Fota' for the Software
-            Management Services callback.
+        account_name (str): The name of the billing account for which callback
+            messages will be sent.
+        service_name (str): The name of the callback service, which identifies
+            the type and format of messages that will be sent to the
+            registered URL. This will be 'Fota' for the Software Management
+            Services callback.
 
     """
 
@@ -61,11 +61,11 @@ class FotaV1CallbackRegistrationResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else APIHelper.SKIP
         # Return an object of this model

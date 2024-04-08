@@ -18,16 +18,16 @@ class UploadConfigurationFilesResponse(object):
     TODO: type model description here.
 
     Attributes:
-        file_name (string): The name of the file you are upgrading to.
-        file_version (string): The version of the file you are upgrading to.
+        file_name (str): The name of the file you are upgrading to.
+        file_version (str): The version of the file you are upgrading to.
         launch_date (date): Software launch date.
-        release_note (string): Software release note.
-        model (string): Software applicable device model.
-        make (string): Software applicable device make.
-        distribution_type (string): LWM2M, OMD-DM or HTTP.
-        device_platform_id (string): The platform (Android, iOS, etc.) that
-            the software can be applied to.
-        local_target_path (string): Local target path on the device.
+        release_note (str): Software release note.
+        model (str): Software applicable device model.
+        make (str): Software applicable device make.
+        distribution_type (str): LWM2M, OMD-DM or HTTP.
+        device_platform_id (str): The platform (Android, iOS, etc.) that the
+            software can be applied to.
+        local_target_path (str): Local target path on the device.
 
     """
 
@@ -102,11 +102,11 @@ class UploadConfigurationFilesResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         file_name = dictionary.get("fileName") if dictionary.get("fileName") else APIHelper.SKIP
         file_version = dictionary.get("fileVersion") if dictionary.get("fileVersion") else APIHelper.SKIP
         launch_date = dateutil.parser.parse(dictionary.get('launchDate')).date() if dictionary.get('launchDate') else APIHelper.SKIP

@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.diagnostics_subscription import DiagnosticsSubscription
 from verizon.exceptions.device_diagnostics_result_exception import DeviceDiagnosticsResultException
 
@@ -35,7 +33,7 @@ class DiagnosticsSubscriptionsController(BaseController):
         This endpoint retrieves a diagnostics subscription by account.
 
         Args:
-            account_name (string): Account identifier.
+            account_name (str): Account identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -60,7 +58,7 @@ class DiagnosticsSubscriptionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

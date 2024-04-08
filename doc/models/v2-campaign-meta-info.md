@@ -11,22 +11,22 @@ Campaign and campaign details.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account identifier. |
-| `id` | `string` | Required | Campaign identifier. |
-| `campaign_name` | `string` | Optional | Campaign name. |
-| `software_name` | `string` | Required | Software name. |
-| `distribution_type` | `string` | Required | LWM2M, OMD-DM or HTTP. |
-| `software_from` | `string` | Required | Old software name. |
-| `software_to` | `string` | Required | New software name. |
-| `make` | `string` | Required | Applicable make. |
-| `model` | `string` | Required | Applicable model. |
+| `account_name` | `str` | Required | Account identifier. |
+| `id` | `str` | Required | Campaign identifier. |
+| `campaign_name` | `str` | Optional | Campaign name. |
+| `software_name` | `str` | Required | Software name. |
+| `distribution_type` | `str` | Required | LWM2M, OMD-DM or HTTP. |
+| `software_from` | `str` | Required | Old software name. |
+| `software_to` | `str` | Required | New software name. |
+| `make` | `str` | Required | Applicable make. |
+| `model` | `str` | Required | Applicable model. |
 | `start_date` | `date` | Required | Campaign start date. |
 | `end_date` | `date` | Required | Campaign end date. |
 | `download_after_date` | `date` | Optional | Specifies starting date client should download package. If null, client will download as soon as possible. |
-| `download_time_window_list` | [`List of V2TimeWindow`](../../doc/models/v2-time-window.md) | Optional | List of allowed download time windows. |
+| `download_time_window_list` | [`List[V2TimeWindow]`](../../doc/models/v2-time-window.md) | Optional | List of allowed download time windows. |
 | `install_after_date` | `date` | Optional | Client will install package after date. If null, client will install as soon as possible. |
-| `install_time_window_list` | [`List of V2TimeWindow`](../../doc/models/v2-time-window.md) | Optional | List of allowed install time windows. |
-| `status` | `string` | Required | Software upgrade status. |
+| `install_time_window_list` | [`List[V2TimeWindow]`](../../doc/models/v2-time-window.md) | Optional | List of allowed install time windows. |
+| `status` | `str` | Required | Software upgrade status. |
 
 ## Example (as JSON)
 

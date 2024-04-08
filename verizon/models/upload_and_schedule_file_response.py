@@ -17,30 +17,30 @@ class UploadAndScheduleFileResponse(object):
     TODO: type model description here.
 
     Attributes:
-        id (string): Updgrade identifier.
-        account_name (string): Account identifer.
-        campaign_name (string): The campaign name.
-        software_name (string): Software name.
-        software_from (string): Old software name.
-        software_to (string): New software name.
-        file_name (string): The name of the file you are upgrading to.
-        file_version (string): The version of the file you are upgrading to.
-        distribution_type (string): Valid values
-        make (string): Applicable make.
-        model (string): Applicable model.
-        start_date (string): Campaign start date.
-        end_date (string): Campaign end date.
-        download_after_date (string): Specifies the starting date the client
+        id (str): Updgrade identifier.
+        account_name (str): Account identifer.
+        campaign_name (str): The campaign name.
+        software_name (str): Software name.
+        software_from (str): Old software name.
+        software_to (str): New software name.
+        file_name (str): The name of the file you are upgrading to.
+        file_version (str): The version of the file you are upgrading to.
+        distribution_type (str): Valid values
+        make (str): Applicable make.
+        model (str): Applicable model.
+        start_date (str): Campaign start date.
+        end_date (str): Campaign end date.
+        download_after_date (str): Specifies the starting date the client
             should download the package. If null, client downloads as soon as
             possible.
-        download_time_window_list (list of DownloadTimeWindow): List of
-            allowed download time windows.
-        install_after_date (string): The date after which you install the
+        download_time_window_list (List[DownloadTimeWindow]): List of allowed
+            download time windows.
+        install_after_date (str): The date after which you install the
             package. If null, install as soon as possible.
-        install_time_window_list (list of DownloadTimeWindow): List of allowed
+        install_time_window_list (List[DownloadTimeWindow]): List of allowed
             install time windows.
-        device_list (list of string): Device IMEI list.
-        status (string): Software update status.
+        device_list (List[str]): Device IMEI list.
+        status (str): Software update status.
 
     """
 
@@ -165,11 +165,11 @@ class UploadAndScheduleFileResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         campaign_name = dictionary.get("campaignName") if dictionary.get("campaignName") else APIHelper.SKIP

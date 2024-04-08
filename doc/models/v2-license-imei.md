@@ -11,8 +11,8 @@ IMEIs of the devices to assign or remove licenses.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account name. |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `account_name` | `str` | Optional | Account name. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 
@@ -22,7 +22,7 @@ IMEIs of the devices to assign or remove licenses.
     "990003425730524",
     "990000473475967"
   ],
-  "accountName": "accountName4"
+  "accountName": "accountName8"
 }
 ```
 

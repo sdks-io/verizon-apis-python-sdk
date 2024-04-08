@@ -11,7 +11,7 @@ The transaction ID of the request that you want to cancel, from the POST /device
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `txid` | `string` | Optional | - |
+| `txid` | `str` | Optional | - |
 
 ## Example (as JSON)
 

@@ -17,10 +17,10 @@ class ActivateDeviceProfileRequest(object):
     TODO: type model description here.
 
     Attributes:
-        devices (list of DeviceList): TODO: type description here.
-        account_name (string): TODO: type description here.
-        service_plan (string): TODO: type description here.
-        mdn_zip_code (string): TODO: type description here.
+        devices (List[DeviceList]): TODO: type description here.
+        account_name (str): TODO: type description here.
+        service_plan (str): TODO: type description here.
+        mdn_zip_code (str): TODO: type description here.
 
     """
 
@@ -33,24 +33,20 @@ class ActivateDeviceProfileRequest(object):
     }
 
     _optionals = [
-        'devices',
-        'account_name',
         'service_plan',
         'mdn_zip_code',
     ]
 
     def __init__(self,
-                 devices=APIHelper.SKIP,
-                 account_name=APIHelper.SKIP,
+                 devices=None,
+                 account_name=None,
                  service_plan=APIHelper.SKIP,
                  mdn_zip_code=APIHelper.SKIP):
         """Constructor for the ActivateDeviceProfileRequest class"""
 
         # Initialize members of the class
-        if devices is not APIHelper.SKIP:
-            self.devices = devices 
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.devices = devices 
+        self.account_name = account_name 
         if service_plan is not APIHelper.SKIP:
             self.service_plan = service_plan 
         if mdn_zip_code is not APIHelper.SKIP:
@@ -70,17 +66,15 @@ class ActivateDeviceProfileRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices = None
         if dictionary.get('devices') is not None:
             devices = [DeviceList.from_dictionary(x) for x in dictionary.get('devices')]
-        else:
-            devices = APIHelper.SKIP
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
         mdn_zip_code = dictionary.get("mdnZipCode") if dictionary.get("mdnZipCode") else APIHelper.SKIP
         # Return an object of this model

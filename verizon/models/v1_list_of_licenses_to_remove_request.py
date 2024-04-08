@@ -16,12 +16,12 @@ class V1ListOfLicensesToRemoveRequest(object):
     List of devices to removes.
 
     Attributes:
-        mtype (string): Set to 'append' to append the devices in the current
+        mtype (str): Set to 'append' to append the devices in the current
             request to the existing list. If there is no existing list then it
             will be created with only these devices. Leave this parameter out
             when you want to replace the existing list with the devices in the
             current request.
-        device_list (list of string): The IMEIs of the devices.
+        device_list (List[str]): The IMEIs of the devices.
 
     """
 
@@ -59,11 +59,11 @@ class V1ListOfLicensesToRemoveRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         # Return an object of this model

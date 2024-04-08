@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Optional | Account name |
-| `status` | `string` | Optional | Success or Fail |
-| `reason` | `string` | Optional | detailed reason |
+| `id` | `str` | Optional | Account name |
+| `status` | `str` | Optional | Success or Fail |
+| `reason` | `str` | Optional | detailed reason |
 
 ## Example (as JSON)
 

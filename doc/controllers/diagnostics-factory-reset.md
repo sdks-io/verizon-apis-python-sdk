@@ -26,7 +26,7 @@ def decives_restart(self,
 
 ## Response Type
 
-[`DiagnosticsObservationResult`](../../doc/models/diagnostics-observation-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DiagnosticsObservationResult`](../../doc/models/diagnostics-observation-result.md).
 
 ## Example Usage
 

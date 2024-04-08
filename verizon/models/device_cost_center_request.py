@@ -18,17 +18,17 @@ class DeviceCostCenterRequest(object):
     Request to retrieve cost center value of a device.
 
     Attributes:
-        account_name (string): The name of a billing account.
-        cost_center (string): The new cost center code. Valid values are any
+        account_name (str): The name of a billing account.
+        cost_center (str): The new cost center code. Valid values are any
             string of up to 36 alphanumeric characters, space, dash,
             exclamation point, and pound sign.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
-        devices (list of AccountDeviceList): A list of the devices that you
-            want to change, specified by device identifier. Do not include
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
+        devices (List[AccountDeviceList]): A list of the devices that you want
+            to change, specified by device identifier. Do not include
             accountName, groupName, customFields, or servicePlan if you use
             this parameter.
-        group_name (string): The name of a device group, if you want to only
+        group_name (str): The name of a device group, if you want to only
             include devices in that group.
         primary_place_of_use (object): The customer name and the address of
             the device's primary place of use. These values are applied to all
@@ -41,7 +41,7 @@ class DeviceCostCenterRequest(object):
             this flag is true and costCenter has a value, the cost center code
             is removed. Do not include this parameter, or set it to false to
             change the costCenter value.
-        service_plan (string): The name of a service plan, if you want to only
+        service_plan (str): The name of a service plan, if you want to only
             include devices that have that service plan.
 
     """
@@ -112,11 +112,11 @@ class DeviceCostCenterRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         cost_center = dictionary.get("costCenter") if dictionary.get("costCenter") else APIHelper.SKIP
         custom_fields = None

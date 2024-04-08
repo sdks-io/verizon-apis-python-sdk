@@ -23,12 +23,12 @@ def list_diagnostics_settings(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Query, Required | Account identifier. |
-| `devices` | `string` | Query, Required | Devices list format: [{"id":"{imei1}","kind":"imei"},{"id":"{imei2}","kind":"imei"}]. |
+| `account_name` | `str` | Query, Required | Account identifier. |
+| `devices` | `str` | Query, Required | Devices list format: [{"id":"{imei1}","kind":"imei"},{"id":"{imei2}","kind":"imei"}]. |
 
 ## Response Type
 
-[`List of DiagnosticObservationSetting`](../../doc/models/diagnostic-observation-setting.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[DiagnosticObservationSetting]`](../../doc/models/diagnostic-observation-setting.md).
 
 ## Example Usage
 

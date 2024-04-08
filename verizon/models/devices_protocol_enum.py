@@ -20,9 +20,9 @@ class DevicesProtocolEnum(object):
         HTTP: TODO: type description here.
 
     """
-
     LW_M2M = 'LWM2M'
 
     OMDADM = 'OMDADM'
 
     HTTP = 'HTTP'
+

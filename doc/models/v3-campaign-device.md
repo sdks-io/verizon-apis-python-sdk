@@ -13,9 +13,9 @@ Campaign history.
 |  --- | --- | --- | --- |
 | `total_device` | `int` | Optional | Total device count. |
 | `has_more_data` | `bool` | Required | Has more report flag. |
-| `last_seen_device_id` | `string` | Optional | Device identifier. |
+| `last_seen_device_id` | `str` | Optional | Device identifier. |
 | `max_page_size` | `int` | Required | Maximum page size. |
-| `device_list` | [`List of V3DeviceStatus`](../../doc/models/v3-device-status.md) | Required | List of devices with id in IMEI. |
+| `device_list` | [`List[V3DeviceStatus]`](../../doc/models/v3-device-status.md) | Required | List of devices with id in IMEI. |
 
 ## Example (as JSON)
 

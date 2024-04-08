@@ -20,9 +20,9 @@ class FirmwareProtocolEnum(object):
         ALL: TODO: type description here.
 
     """
-
     LW_M2M = 'LWM2M'
 
     OMDDM = 'OMD-DM'
 
     ALL = 'all'
+

@@ -11,8 +11,8 @@ Request to delete a device request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The Verizon billing account that the device group belongs to. An account name is usually numeric, and must include any leading zeros. |
-| `devices_to_delete` | [`List of AccountDeviceList`](../../doc/models/account-device-list.md) | Optional | A list of up to 100 devices that you want to delete, specified by device identifier. You only need to provide one identifier per device. |
+| `devices_to_delete` | [`List[AccountDeviceList]`](../../doc/models/account-device-list.md) | Required | A list of up to 100 devices that you want to delete, specified by device identifier. You only need to provide one identifier per device. |
+| `account_name` | `str` | Optional | The Verizon billing account that the device group belongs to. An account name is usually numeric, and must include any leading zeros. |
 
 ## Example (as JSON)
 
@@ -25,7 +25,8 @@ Request to delete a device request.
           "id": "09005470263",
           "kind": "esn"
         }
-      ]
+      ],
+      "ipAddress": "ipAddress8"
     },
     {
       "deviceIds": [
@@ -33,7 +34,8 @@ Request to delete a device request.
           "id": "85000022411113460014",
           "kind": "iccid"
         }
-      ]
+      ],
+      "ipAddress": "ipAddress8"
     },
     {
       "deviceIds": [
@@ -41,10 +43,11 @@ Request to delete a device request.
           "id": "85000022412313460016",
           "kind": "iccid"
         }
-      ]
+      ],
+      "ipAddress": "ipAddress8"
     }
   ],
-  "accountName": "accountName4"
+  "accountName": "accountName2"
 }
 ```
 

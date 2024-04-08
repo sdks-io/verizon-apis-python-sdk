@@ -11,9 +11,9 @@ A JSON object for each device that was included in the request, showing the devi
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Optional | Device IMEI. |
-| `status` | `string` | Optional | Whether the device was successfully added or removed from the campaign. |
-| `reason` | `string` | Optional | Additional details about the status. |
+| `device_id` | `str` | Optional | Device IMEI. |
+| `status` | `str` | Optional | Whether the device was successfully added or removed from the campaign. |
+| `reason` | `str` | Optional | Additional details about the status. |
 
 ## Example (as JSON)
 

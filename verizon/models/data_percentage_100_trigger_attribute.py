@@ -16,7 +16,7 @@ class DataPercentage100TriggerAttribute(object):
     Trigger attribute for when data percentage is over 100% used.
 
     Attributes:
-        key (string): Key data percentage 100.
+        key (str): Key data percentage 100.
         value (bool): DataPercentage100<br />True - Trigger on Data percentage
             is over 100% used<br />False - Do not trigger when over 100%
             used.
@@ -59,11 +59,11 @@ class DataPercentage100TriggerAttribute(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         key = dictionary.get("key") if dictionary.get("key") else APIHelper.SKIP
         value = dictionary.get("value") if "value" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model

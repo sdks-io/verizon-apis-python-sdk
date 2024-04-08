@@ -17,12 +17,12 @@ class CreateIoTApplicationResponse(object):
     includes the full event resource definition.
 
     Attributes:
-        app_name (string): An application will be created under the user's
-            Azure subscription with this name and of type IOT central.
-        shared_secret (string): Part of the user credentials (from Azure) the
+        app_name (str): An application will be created under the user's Azure
+            subscription with this name and of type IOT central.
+        shared_secret (str): Part of the user credentials (from Azure) the
             user needs to use for calling further TS Core APIs for setting up
             Azure cloud connector.
-        url (string): An IOT central endpoint the user can use to see the data
+        url (str): An IOT central endpoint the user can use to see the data
             that is being streamed.
 
     """
@@ -68,11 +68,11 @@ class CreateIoTApplicationResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         app_name = dictionary.get("appName") if dictionary.get("appName") else APIHelper.SKIP
         shared_secret = dictionary.get("sharedSecret") if dictionary.get("sharedSecret") else APIHelper.SKIP
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP

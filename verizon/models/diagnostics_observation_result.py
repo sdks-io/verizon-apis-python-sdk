@@ -16,8 +16,8 @@ class DiagnosticsObservationResult(object):
     A success response containing the current status of the request.
 
     Attributes:
-        transaction_id (string): Transaction identifier.
-        status (string): Status of the request.
+        transaction_id (str): Transaction identifier.
+        status (str): Status of the request.
         created_on (datetime): The date and time of when this request was
             created.
 
@@ -39,7 +39,7 @@ class DiagnosticsObservationResult(object):
         # Initialize members of the class
         self.transaction_id = transaction_id 
         self.status = status 
-        self.created_on = APIHelper.RFC3339DateTime(created_on) if created_on else None 
+        self.created_on = APIHelper.apply_datetime_converter(created_on, APIHelper.RFC3339DateTime) if created_on else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -55,11 +55,11 @@ class DiagnosticsObservationResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         transaction_id = dictionary.get("transactionID") if dictionary.get("transactionID") else None
         status = dictionary.get("status") if dictionary.get("status") else None
         created_on = APIHelper.RFC3339DateTime.from_value(dictionary.get("createdOn")).datetime if dictionary.get("createdOn") else None

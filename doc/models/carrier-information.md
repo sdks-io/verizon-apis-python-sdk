@@ -11,9 +11,9 @@ Information about the carrier.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `carrier_name` | `string` | Optional | The carrier that will perform the activation. This parameter is only required if you have more than one carrier. |
-| `service_plan` | `string` | Optional | The service plan code that is assigned to the device. |
-| `state` | `string` | Optional | The device state. Valid values include: Activate, Suspend, Deactive, Pre-active. |
+| `carrier_name` | `str` | Optional | The carrier that will perform the activation. This parameter is only required if you have more than one carrier. |
+| `service_plan` | `str` | Optional | The service plan code that is assigned to the device. |
+| `state` | `str` | Optional | The device state. Valid values include: Activate, Suspend, Deactive, Pre-active. |
 
 ## Example (as JSON)
 

@@ -16,19 +16,19 @@ class DeviceUpgradeHistory(object):
     Firmware upgrade information.
 
     Attributes:
-        device_id (string): Device IMEI.
-        id (string): The unique identifier for the upgrade.
-        account_name (string): The name (number) of the billing account that
-            the device belongs to.
-        firmware_from (string): The firmware version that was on the device
+        device_id (str): Device IMEI.
+        id (str): The unique identifier for the upgrade.
+        account_name (str): The name (number) of the billing account that the
+            device belongs to.
+        firmware_from (str): The firmware version that was on the device
             before the upgrade.
-        firmware_to (string): The name of the firmware version that was on the
+        firmware_to (str): The name of the firmware version that was on the
             device after the upgrade.
-        start_date (string): The date of the upgrade.
-        upgrade_start_time (string): The date and time that the upgrade
-            actually started for this device.
-        status (string): The status of the upgrade for this device.
-        reason (string): More information about the status.
+        start_date (str): The date of the upgrade.
+        upgrade_start_time (str): The date and time that the upgrade actually
+            started for this device.
+        status (str): The status of the upgrade for this device.
+        reason (str): More information about the status.
 
     """
 
@@ -103,11 +103,11 @@ class DeviceUpgradeHistory(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP

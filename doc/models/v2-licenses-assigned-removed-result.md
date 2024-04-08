@@ -11,10 +11,10 @@ License assignment or removal confirmation.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account name. |
+| `account_name` | `str` | Required | Account name. |
 | `lic_total_count` | `int` | Required | Total license count. |
 | `lic_used_count` | `int` | Required | Assigned license count. |
-| `device_list` | [`List of V2DeviceStatus`](../../doc/models/v2-device-status.md) | Required | List of devices with id in IMEI. |
+| `device_list` | [`List[V2DeviceStatus]`](../../doc/models/v2-device-status.md) | Required | List of devices with id in IMEI. |
 
 ## Example (as JSON)
 

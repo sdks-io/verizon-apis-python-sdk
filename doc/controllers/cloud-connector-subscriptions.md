@@ -10,9 +10,69 @@ cloud_connector_subscriptions_controller = client.cloud_connector_subscriptions
 
 ## Methods
 
+* [Create Subscription](../../doc/controllers/cloud-connector-subscriptions.md#create-subscription)
 * [Query Subscription](../../doc/controllers/cloud-connector-subscriptions.md#query-subscription)
 * [Delete Subscription](../../doc/controllers/cloud-connector-subscriptions.md#delete-subscription)
-* [Create Subscription](../../doc/controllers/cloud-connector-subscriptions.md#create-subscription)
+
+
+# Create Subscription
+
+Create a subscription to define a streaming channel that sends data from devices in the account to an endpoint defined in a target resource.
+
+```python
+def create_subscription(self,
+                       body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Required | The request body provides the details of the subscription that you want to create. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`Subscription`](../../doc/models/subscription.md).
+
+## Example Usage
+
+```python
+body = CreateSubscriptionRequest(
+    accountidentifier=AccountIdentifier(
+        billingaccountid='1223334444-00001'
+    ),
+    email='me@mycompany.com',
+    billingaccountid='1223334444-00001',
+    streamkind='ts.event',
+    targetid='{target ID}',
+    name='Account subscription 1',
+    allowaggregation=False
+)
+
+result = cloud_connector_subscriptions_controller.create_subscription(body)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "configurationfailures": 0,
+  "createdon": "2018-12-21T05:05:02.134Z",
+  "delegateid": "00000000-0000-0000-0000-000000000000",
+  "id": "d8c145dd-6948-67ec-ed9b-6a298806bb4a",
+  "kind": "ts.subscription",
+  "laststreamingstatus": "",
+  "laststreamingtime": "0001-01-01T00:00:00Z",
+  "lastupdated": "2018-12-21T05:22:12.178Z",
+  "networkfailures": 0,
+  "streamfailures": 0,
+  "streamkind": "ts.event",
+  "targetid": "4e211a0e-e39d-6c32-e15b-d6f07f9e2ec8",
+  "version": "1.0",
+  "versionid": "5ed6063f-04e0-11e9-8279-02420a5e1b0b"
+}
+```
 
 
 # Query Subscription
@@ -32,7 +92,7 @@ def query_subscription(self,
 
 ## Response Type
 
-[`List of Subscription`](../../doc/models/subscription.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[Subscription]`](../../doc/models/subscription.md).
 
 ## Example Usage
 
@@ -94,7 +154,7 @@ def delete_subscription(self,
 
 ## Response Type
 
-`void`
+This method returns a `ApiResponse` instance.
 
 ## Example Usage
 
@@ -110,65 +170,5 @@ body = DeleteSubscriptionRequest(
 
 result = cloud_connector_subscriptions_controller.delete_subscription(body)
 print(result)
-```
-
-
-# Create Subscription
-
-Create a subscription to define a streaming channel that sends data from devices in the account to an endpoint defined in a target resource.
-
-```python
-def create_subscription(self,
-                       body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Required | The request body provides the details of the subscription that you want to create. |
-
-## Response Type
-
-[`Subscription`](../../doc/models/subscription.md)
-
-## Example Usage
-
-```python
-body = CreateSubscriptionRequest(
-    accountidentifier=AccountIdentifier(
-        billingaccountid='1223334444-00001'
-    ),
-    email='me@mycompany.com',
-    billingaccountid='1223334444-00001',
-    streamkind='ts.event',
-    targetid='{target ID}',
-    name='Account subscription 1',
-    allowaggregation=False
-)
-
-result = cloud_connector_subscriptions_controller.create_subscription(body)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "configurationfailures": 0,
-  "createdon": "2018-12-21T05:05:02.134Z",
-  "delegateid": "00000000-0000-0000-0000-000000000000",
-  "id": "d8c145dd-6948-67ec-ed9b-6a298806bb4a",
-  "kind": "ts.subscription",
-  "laststreamingstatus": "",
-  "laststreamingtime": "0001-01-01T00:00:00Z",
-  "lastupdated": "2018-12-21T05:22:12.178Z",
-  "networkfailures": 0,
-  "streamfailures": 0,
-  "streamkind": "ts.event",
-  "targetid": "4e211a0e-e39d-6c32-e15b-d6f07f9e2ec8",
-  "version": "1.0",
-  "versionid": "5ed6063f-04e0-11e9-8279-02420a5e1b0b"
-}
 ```
 

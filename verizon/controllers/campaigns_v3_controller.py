@@ -16,12 +16,10 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.fota_v3_success_result import FotaV3SuccessResult
 from verizon.models.firmware_campaign import FirmwareCampaign
 from verizon.models.v3_add_or_remove_device_result import V3AddOrRemoveDeviceResult
 from verizon.models.campaign import Campaign
+from verizon.models.fota_v3_success_result import FotaV3SuccessResult
 from verizon.exceptions.fota_v3_result_exception import FotaV3ResultException
 
 
@@ -30,55 +28,6 @@ class CampaignsV3Controller(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(CampaignsV3Controller, self).__init__(config)
-
-    def cancel_campaign(self,
-                        acc,
-                        campaign_id):
-        """Does a DELETE request to /campaigns/{acc}/{campaignId}.
-
-        This endpoint allows user to cancel a firmware campaign. A firmware
-        campaign already started can not be cancelled.
-
-        Args:
-            acc (string): Account identifier.
-            campaign_id (string): Firmware upgrade information.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Returns
-                cancellation status.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
-            .path('/campaigns/{acc}/{campaignId}')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('campaignId')
-                            .value(campaign_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(FotaV3SuccessResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Unexpected error.', FotaV3ResultException)
-        ).execute()
 
     def schedule_campaign_firmware_upgrade(self,
                                            acc,
@@ -89,7 +38,7 @@ class CampaignsV3Controller(BaseController):
         of devices.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             body (CampaignFirmwareUpgrade): Firmware upgrade information.
 
         Returns:
@@ -122,7 +71,7 @@ class CampaignsV3Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -141,8 +90,8 @@ class CampaignsV3Controller(BaseController):
         campaign.
 
         Args:
-            acc (string): Account identifier.
-            campaign_id (string): Unique identifier of a campaign.
+            acc (str): Account identifier.
+            campaign_id (str): Unique identifier of a campaign.
             body (V3AddOrRemoveDeviceRequest): Add or remove device to
                 existing upgrade information.
 
@@ -180,7 +129,7 @@ class CampaignsV3Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -199,8 +148,8 @@ class CampaignsV3Controller(BaseController):
         Fields which need to remain unchanged should be also provided.
 
         Args:
-            acc (string): Account identifier.
-            campaign_id (string): Firmware upgrade information.
+            acc (str): Account identifier.
+            campaign_id (str): Firmware upgrade information.
             body (V3ChangeCampaignDatesRequest): New dates and time windows.
 
         Returns:
@@ -237,7 +186,7 @@ class CampaignsV3Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -255,8 +204,8 @@ class CampaignsV3Controller(BaseController):
         for a specified campaign.
 
         Args:
-            acc (string): Account identifier.
-            campaign_id (string): Firmware upgrade identifier.
+            acc (str): Account identifier.
+            campaign_id (str): Firmware upgrade identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -286,11 +235,60 @@ class CampaignsV3Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Campaign.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Unexpected error.', FotaV3ResultException)
+        ).execute()
+
+    def cancel_campaign(self,
+                        acc,
+                        campaign_id):
+        """Does a DELETE request to /campaigns/{acc}/{campaignId}.
+
+        This endpoint allows user to cancel a firmware campaign. A firmware
+        campaign already started can not be cancelled.
+
+        Args:
+            acc (str): Account identifier.
+            campaign_id (str): Firmware upgrade information.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Returns
+                cancellation status.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
+            .path('/campaigns/{acc}/{campaignId}')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('acc')
+                            .value(acc)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('campaignId')
+                            .value(campaign_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(FotaV3SuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Unexpected error.', FotaV3ResultException)
         ).execute()

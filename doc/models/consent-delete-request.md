@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier. |
-| `device_list` | `List of string` | Optional | Device ID list. |
+| `account_name` | `str` | Optional | Account identifier. |
+| `device_list` | `List[str]` | Optional | Device ID list. |
 
 ## Example (as JSON)
 
@@ -18,8 +18,8 @@
 {
   "accountName": "MyAccount-1",
   "deviceList": [
-    "deviceList6",
-    "deviceList7"
+    "deviceList2",
+    "deviceList3"
   ]
 }
 ```

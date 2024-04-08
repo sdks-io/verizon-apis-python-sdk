@@ -28,7 +28,7 @@ class HistorySearchRequest(object):
         limit_time (HistorySearchLimitTime): The time period for which a
             request should retrieve data, beginning with the limitTime.startOn
             and proceeding with the limitTime.duration.
-        page (string): Page number for pagination purposes.
+        page (str): Page number for pagination purposes.
 
     """
 
@@ -76,11 +76,11 @@ class HistorySearchRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         filter = HistorySearchFilter.from_dictionary(dictionary.get('$filter')) if dictionary.get('$filter') else None
         limit_number = dictionary.get("$limitNumber") if dictionary.get("$limitNumber") else APIHelper.SKIP
         limit_time = HistorySearchLimitTime.from_dictionary(dictionary.get('$limitTime')) if '$limitTime' in dictionary.keys() else APIHelper.SKIP

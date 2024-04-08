@@ -11,10 +11,10 @@ License assignment or removal confirmation.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier in "##########-#####". |
+| `account_name` | `str` | Optional | Account identifier in "##########-#####". |
 | `lic_count` | `int` | Optional | Total number of monthly licenses in an MRC subscription. |
 | `lic_used_count` | `int` | Optional | Number of licenses assigned to devices after the request completed. |
-| `device_list` | [`List of V1DeviceListItem`](../../doc/models/v1-device-list-item.md) | Optional | A JSON object for each device that was in the request. |
+| `device_list` | [`List[V1DeviceListItem]`](../../doc/models/v1-device-list-item.md) | Optional | A JSON object for each device that was in the request. |
 
 ## Example (as JSON)
 

@@ -17,23 +17,23 @@ class Notification(object):
     The notification details of the trigger.
 
     Attributes:
-        notification_type (string): The type of notification, i.e.
+        notification_type (str): The type of notification, i.e.
             'DailySummary'.
         callback (bool): Whether or not the notification should be sent via
             callback.<br />true<br />false.
         email_notification (bool): Whether or not the notification should be
             sent via e-mail.<br />true<br />false.
-        notification_group_name (string): Name for the notification group.
+        notification_group_name (str): Name for the notification group.
         notification_frequency_factor (int): Frequency factor for
             notification.
-        notification_frequency_interval (string): Frequency interval for
+        notification_frequency_interval (str): Frequency interval for
             notification.
-        external_email_recipients (string): E-mail address(es) where the
+        external_email_recipients (str): E-mail address(es) where the
             notification should be delivered.
         sms_notification (bool): SMS notification.
-        sms_numbers (list of SMSNumber): List of SMS numbers.
+        sms_numbers (List[SMSNumber]): List of SMS numbers.
         reminder (bool): TODO: type description here.
-        severity (string): Severity level associated with the notification.
+        severity (str): Severity level associated with the notification.
             Examples would be:<br />Major<br />Minor<br />Critical<br
             />NotApplicable.
 
@@ -120,11 +120,11 @@ class Notification(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         notification_type = dictionary.get("notificationType") if dictionary.get("notificationType") else APIHelper.SKIP
         callback = dictionary.get("callback") if "callback" in dictionary.keys() else APIHelper.SKIP
         email_notification = dictionary.get("emailNotification") if "emailNotification" in dictionary.keys() else APIHelper.SKIP

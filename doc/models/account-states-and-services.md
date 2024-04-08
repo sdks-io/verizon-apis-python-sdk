@@ -11,7 +11,7 @@ Returns a list and details of all custom services and states defined for a speci
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `engagement` | [`List of Engagement`](../../doc/models/engagement.md) | Required | The engagements associated with the account. |
+| `engagement` | [`List[Engagement]`](../../doc/models/engagement.md) | Required | The engagements associated with the account. |
 
 ## Example (as JSON)
 

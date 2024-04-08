@@ -16,7 +16,7 @@ class AggregatedReportCallbackResult(object):
     Aggregated usage report (Asynchronous).
 
     Attributes:
-        txid (string): A unique string that associates the request with the
+        txid (str): A unique string that associates the request with the
             location report information that is sent in asynchronous callback
             message.ThingSpace will send a separate callback message for each
             device that was in the request. All of the callback messages will
@@ -61,11 +61,11 @@ class AggregatedReportCallbackResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else None
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         # Return an object of this model

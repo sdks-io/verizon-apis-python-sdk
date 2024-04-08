@@ -18,7 +18,7 @@ class V1ListOfLicensesToRemoveResult(object):
     Attributes:
         count (int): The total number of devices on the cancellation candidate
             list.
-        device_list (list of string): The IMEIs of the devices.
+        device_list (List[str]): The IMEIs of the devices.
 
     """
 
@@ -58,11 +58,11 @@ class V1ListOfLicensesToRemoveResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         count = dictionary.get("count") if dictionary.get("count") else APIHelper.SKIP
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else APIHelper.SKIP
         # Return an object of this model

@@ -16,9 +16,9 @@ class V3AddOrRemoveDeviceResult(object):
     Add or remove devices to existing upgrade information.
 
     Attributes:
-        account_name (string): Account identifier.
-        campaign_id (string): Campaign identifier.
-        device_list (list of V3DeviceListItem): Array of devices changed.
+        account_name (str): Account identifier.
+        campaign_id (str): Campaign identifier.
+        device_list (List[V3DeviceListItem]): Array of devices changed.
 
     """
 
@@ -54,11 +54,11 @@ class V3AddOrRemoveDeviceResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         campaign_id = dictionary.get("campaignId") if dictionary.get("campaignId") else None
         device_list = None

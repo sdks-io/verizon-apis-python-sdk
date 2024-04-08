@@ -16,8 +16,10 @@ class PropertyDeviceId(object):
     TODO: type model description here.
 
     Attributes:
-        id (string): TODO: type description here.
-        kind (Kind1Enum): TODO: type description here.
+        id (str): TODO: type description here.
+        kind (str): The type of the device identifier. Valid types of
+            identifiers are:ESN (decimal),EID,ICCID (up to 20 digits),IMEI (up
+            to 16 digits),MDN,MEID (hexadecimal),MSISDN.
 
     """
 
@@ -57,11 +59,11 @@ class PropertyDeviceId(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         # Return an object of this model

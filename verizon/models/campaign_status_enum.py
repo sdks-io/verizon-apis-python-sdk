@@ -25,7 +25,6 @@ class CampaignStatusEnum(object):
         CAMPAIGNENDED: TODO: type description here.
 
     """
-
     CAMPAIGNREQUESTPENDING = 'CampaignRequestPending'
 
     CAMPAIGNREQUESTFAILED = 'CampaignRequestFailed'
@@ -41,3 +40,4 @@ class CampaignStatusEnum(object):
     CAMPAIGNSCHEDULED = 'CampaignScheduled'
 
     CAMPAIGNENDED = 'CampaignEnded'
+

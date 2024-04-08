@@ -16,10 +16,8 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.callback_action_result import CallbackActionResult
 from verizon.models.connectivity_management_callback import ConnectivityManagementCallback
+from verizon.models.callback_action_result import CallbackActionResult
 from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
 
@@ -29,64 +27,15 @@ class ConnectivityCallbacksController(BaseController):
     def __init__(self, config):
         super(ConnectivityCallbacksController, self).__init__(config)
 
-    def deregister_callback(self,
-                            aname,
-                            sname):
-        """Does a DELETE request to /v1/callbacks/{aname}/name/{sname}.
-
-        Stops ThingSpace from sending callback messages for the specified
-        account and service.
-
-        Args:
-            aname (string): Account name.
-            sname (string): Service name.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Response
-                for a request to deregister a callback.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/callbacks/{aname}/name/{sname}')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('aname')
-                            .value(aname)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('sname')
-                            .value(sname)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CallbackActionResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
-        ).execute()
-
     def list_registered_callbacks(self,
                                   aname):
-        """Does a GET request to /v1/callbacks/{aname}.
+        """Does a GET request to /m2m/v1/callbacks/{aname}.
 
         Returns the name and endpoint URL of the callback listening services
         registered for a given account.
 
         Args:
-            aname (string): Account name.
+            aname (str): Account name.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -102,8 +51,8 @@ class ConnectivityCallbacksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/callbacks/{aname}')
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/callbacks/{aname}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('aname')
@@ -112,7 +61,7 @@ class ConnectivityCallbacksController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -124,13 +73,13 @@ class ConnectivityCallbacksController(BaseController):
     def register_callback(self,
                           aname,
                           body):
-        """Does a POST request to /v1/callbacks/{aname}.
+        """Does a POST request to /m2m/v1/callbacks/{aname}.
 
         You are responsible for creating and running a listening process on
         your server at that URL.
 
         Args:
-            aname (string): Account name.
+            aname (str): Account name.
             body (RegisterCallbackRequest): Request to register a callback.
 
         Returns:
@@ -147,8 +96,8 @@ class ConnectivityCallbacksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/callbacks/{aname}')
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/callbacks/{aname}')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
                             .key('aname')
@@ -163,7 +112,56 @@ class ConnectivityCallbacksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CallbackActionResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
+
+    def deregister_callback(self,
+                            aname,
+                            sname):
+        """Does a DELETE request to /m2m/v1/callbacks/{aname}/name/{sname}.
+
+        Stops ThingSpace from sending callback messages for the specified
+        account and service.
+
+        Args:
+            aname (str): Account name.
+            sname (str): Service name.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Response
+                for a request to deregister a callback.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/callbacks/{aname}/name/{sname}')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('aname')
+                            .value(aname)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('sname')
+                            .value(sname)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

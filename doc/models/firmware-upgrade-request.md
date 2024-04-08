@@ -11,11 +11,11 @@ Details of the firmware upgrade request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account identifier in "##########-#####". |
-| `firmware_name` | `string` | Required | The name of the firmware image that will be used for the upgrade, from a GET /firmware response. |
-| `firmware_to` | `string` | Required | The name of the firmware version that will be on the devices after a successful upgrade. |
+| `account_name` | `str` | Required | Account identifier in "##########-#####". |
+| `firmware_name` | `str` | Required | The name of the firmware image that will be used for the upgrade, from a GET /firmware response. |
+| `firmware_to` | `str` | Required | The name of the firmware version that will be on the devices after a successful upgrade. |
 | `start_date` | `datetime` | Required | The date that the upgrade should begin. |
-| `device_list` | `List of string` | Required | The IMEIs of the devices. |
+| `device_list` | `List[str]` | Required | The IMEIs of the devices. |
 
 ## Example (as JSON)
 

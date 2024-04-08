@@ -9,11 +9,11 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Managed account identifier |
-| `paccount_name` | `string` | Required | Primary Account identifier |
+| `account_name` | `str` | Required | Managed account identifier |
+| `paccount_name` | `str` | Required | Primary Account identifier |
 | `service_name` | [`ServiceNameEnum`](../../doc/models/service-name-enum.md) | Required | Service name<br>**Default**: `'Location'` |
-| `mtype` | `string` | Required | SKU name |
-| `txid` | `string` | Required | Transaction identifier returned by add request |
+| `mtype` | `str` | Required | SKU name |
+| `txid` | `str` | Required | Transaction identifier returned by add request |
 
 ## Example (as JSON)
 

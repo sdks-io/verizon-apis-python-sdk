@@ -23,7 +23,6 @@ class UpgradeStatusEnum(object):
         UPGRADEFAILED: TODO: type description here.
 
     """
-
     REQUESTPENDING = 'RequestPending'
 
     QUEUED = 'Queued'
@@ -35,3 +34,4 @@ class UpgradeStatusEnum(object):
     FINISHED = 'Finished'
 
     UPGRADEFAILED = 'UpgradeFailed'
+

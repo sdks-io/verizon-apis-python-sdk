@@ -12,7 +12,7 @@ List of licenses assigned.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `count` | `int` | Optional | The total number of devices on the cancellation candidate list. |
-| `device_list` | `List of string` | Optional | The IMEIs of the devices. |
+| `device_list` | `List[str]` | Optional | The IMEIs of the devices. |
 
 ## Example (as JSON)
 

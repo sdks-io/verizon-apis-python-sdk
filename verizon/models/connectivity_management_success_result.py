@@ -52,11 +52,11 @@ class ConnectivityManagementSuccessResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         success = dictionary.get("success") if "success" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(success)

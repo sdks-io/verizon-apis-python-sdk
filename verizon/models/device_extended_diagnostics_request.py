@@ -16,11 +16,11 @@ class DeviceExtendedDiagnosticsRequest(object):
     Request for obtaining device extended diagnostics.
 
     Attributes:
-        account_name (string): The Verizon billing account that the device
+        account_name (str): The Verizon billing account that the device
             belongs to. An account name is usually numeric, and must include
             any leading zeros.
-        device_list (list of DeviceId): The device for which you want
-            diagnostic information, specified by the device's MDN.
+        device_list (List[DeviceId]): The device for which you want diagnostic
+            information, specified by the device's MDN.
 
     """
 
@@ -53,11 +53,11 @@ class DeviceExtendedDiagnosticsRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         device_list = None
         if dictionary.get('deviceList') is not None:

@@ -29,12 +29,12 @@ def get_account_licenses_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
-| `last_seen_device_id` | `string` | Query, Optional | Last seen device identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
+| `last_seen_device_id` | `str` | Query, Optional | Last seen device identifier. |
 
 ## Response Type
 
-[`V3LicenseSummary`](../../doc/models/v3-license-summary.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V3LicenseSummary`](../../doc/models/v3-license-summary.md).
 
 ## Example Usage
 
@@ -45,7 +45,7 @@ last_seen_device_id = '0'
 
 result = software_management_licenses_v3_controller.get_account_licenses_status(
     acc,
-    last_seen_device_id
+    last_seen_device_id=last_seen_device_id
 )
 print(result)
 ```
@@ -93,12 +93,12 @@ def assign_licenses_to_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
 | `body` | [`V3LicenseIMEI`](../../doc/models/v3-license-imei.md) | Body, Required | License assignment. |
 
 ## Response Type
 
-[`V3LicenseAssignedRemovedResult`](../../doc/models/v3-license-assigned-removed-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V3LicenseAssignedRemovedResult`](../../doc/models/v3-license-assigned-removed-result.md).
 
 ## Example Usage
 
@@ -160,12 +160,12 @@ def remove_licenses_from_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `string` | Template, Required | Account identifier. |
+| `acc` | `str` | Template, Required | Account identifier. |
 | `body` | [`V3LicenseIMEI`](../../doc/models/v3-license-imei.md) | Body, Required | License removal. |
 
 ## Response Type
 
-[`V3LicenseAssignedRemovedResult`](../../doc/models/v3-license-assigned-removed-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V3LicenseAssignedRemovedResult`](../../doc/models/v3-license-assigned-removed-result.md).
 
 ## Example Usage
 

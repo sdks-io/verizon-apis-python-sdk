@@ -11,7 +11,7 @@ Response containing the connection history. It is a list of Network Connection E
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `connection_history` | [`List of ConnectionEvent`](../../doc/models/connection-event.md) | Optional | Device connection events, sorted by the occurredAt timestamp, oldest first. |
+| `connection_history` | [`List[ConnectionEvent]`](../../doc/models/connection-event.md) | Optional | Device connection events, sorted by the occurredAt timestamp, oldest first. |
 | `has_more_data` | `bool` | Optional | False for a status 200 response.True for a status 202 response, indicating that there is more data to be retrieved. Send another request, adjusting the earliest value in the request based on the occuredAt value for the last device in the current response. |
 
 ## Example (as JSON)

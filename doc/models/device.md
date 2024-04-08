@@ -11,8 +11,8 @@ Identifies a particular IoT device.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Required | Device identifier. |
-| `kind` | `string` | Required | Device kind identifier. |
+| `id` | `str` | Required | Device identifier. |
+| `kind` | `str` | Required | Device kind identifier. |
 
 ## Example (as JSON)
 

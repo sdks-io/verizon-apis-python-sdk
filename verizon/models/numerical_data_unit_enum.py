@@ -21,7 +21,6 @@ class NumericalDataUnitEnum(object):
         DAY: TODO: type description here.
 
     """
-
     SECOND = 'SECOND'
 
     MINUTE = 'MINUTE'
@@ -29,3 +28,4 @@ class NumericalDataUnitEnum(object):
     HOUR = 'HOUR'
 
     DAY = 'DAY'
+

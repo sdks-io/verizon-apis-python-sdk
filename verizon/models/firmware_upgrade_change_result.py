@@ -17,9 +17,9 @@ class FirmwareUpgradeChangeResult(object):
     Upgrade information.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
-        id (string): The unique identifier for this upgrade.
-        device_list (list of V1DeviceListItem): A JSON object for each device
+        account_name (str): Account identifier in "##########-#####".
+        id (str): The unique identifier for this upgrade.
+        device_list (List[V1DeviceListItem]): A JSON object for each device
             that was included in the request, showing the device IMEI, the
             status of the addition or removal, and additional information
             about the status.
@@ -67,11 +67,11 @@ class FirmwareUpgradeChangeResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         device_list = None

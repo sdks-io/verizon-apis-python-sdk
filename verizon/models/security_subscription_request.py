@@ -16,11 +16,11 @@ class SecuritySubscriptionRequest(object):
     Request for a subscription.
 
     Attributes:
-        account_name (string): The name of a billing account.
-        sku_number (string): The Stock Keeping Unit (SKU). Valid skuNumbers
-            for SIM-Secure for IoT are:SIMSec-IoT-Lt”. (Lifetime) Once a
-            license is assigned to a SIM, the SIM-Secure feature is enabled
-            for the life of the SIM.“TS-BUNDLE-KTO-SIMSEC-MRC”. (Bundle) The
+        account_name (str): The name of a billing account.
+        sku_number (str): The Stock Keeping Unit (SKU). Valid skuNumbers for
+            SIM-Secure for IoT are:SIMSec-IoT-Lt”. (Lifetime) Once a license
+            is assigned to a SIM, the SIM-Secure feature is enabled for the
+            life of the SIM.“TS-BUNDLE-KTO-SIMSEC-MRC”. (Bundle) The
             SIM-Secure Flex license can be assigned to or removed from a SIM
             at any time. This SKU is bundled with other ThingSpace
             Services.*“SIMSec-IoT”. (Flex) The SIM-Secure Flex license can be
@@ -65,11 +65,11 @@ class SecuritySubscriptionRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         sku_number = dictionary.get("skuNumber") if dictionary.get("skuNumber") else APIHelper.SKIP
         # Return an object of this model

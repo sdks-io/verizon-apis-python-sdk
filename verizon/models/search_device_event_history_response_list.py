@@ -17,7 +17,7 @@ class SearchDeviceEventHistoryResponseList(object):
     A success response includes an array of all matching events.
 
     Attributes:
-        search_device_event_history (list of SearchDeviceResponse): TODO: type
+        search_device_event_history (List[SearchDeviceResponse]): TODO: type
             description here.
 
     """
@@ -53,11 +53,11 @@ class SearchDeviceEventHistoryResponseList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         search_device_event_history = None
         if dictionary.get('SearchDeviceEventHistory') is not None:
             search_device_event_history = [SearchDeviceResponse.from_dictionary(x) for x in dictionary.get('SearchDeviceEventHistory')]

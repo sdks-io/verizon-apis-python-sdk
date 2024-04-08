@@ -12,7 +12,7 @@ OAuth 2 token and refresh token for TS to stream events to Target.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`TargetAuthenticationBody`](../../doc/models/target-authentication-body.md) | Optional | - |
-| `version` | `string` | Optional | - |
+| `version` | `str` | Optional | - |
 
 ## Example (as JSON)
 

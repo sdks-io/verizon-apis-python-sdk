@@ -15,9 +15,9 @@ class CallbackRegistered(object):
     Registered callback listener.
 
     Attributes:
-        account_name (string): The billing account number for which callback
+        account_name (str): The billing account number for which callback
             messages will be sent.
-        name (string): The name of the callback service, which identifies the
+        name (str): The name of the callback service, which identifies the
             type and format of messages that will be sent to the registered
             URL.
 
@@ -52,11 +52,11 @@ class CallbackRegistered(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         name = dictionary.get("name") if dictionary.get("name") else None
         # Return an object of this model

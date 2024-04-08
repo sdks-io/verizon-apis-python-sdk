@@ -17,7 +17,7 @@ class EdgeDiscoveryResultData(object):
     'data' key will be returned with a relevant description.
 
     Attributes:
-        additional_message (string): TODO: type description here.
+        additional_message (str): TODO: type description here.
 
     """
 
@@ -52,11 +52,11 @@ class EdgeDiscoveryResultData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         additional_message = dictionary.get("additionalMessage") if dictionary.get("additionalMessage") else APIHelper.SKIP
         # Return an object of this model
         return cls(additional_message)

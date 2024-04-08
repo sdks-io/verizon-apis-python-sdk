@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `grant_type` | `string` | Optional | Authentication grant type. |
-| `refresh_token` | `string` | Optional | Refresh token. |
-| `scope` | `string` | Optional | Authentication scopes. |
+| `grant_type` | `str` | Optional | Authentication grant type. |
+| `refresh_token` | `str` | Optional | Refresh token. |
+| `scope` | `str` | Optional | Authentication scopes. |
 | `headers` | [`TargetAuthenticationBodyHeaders`](../../doc/models/target-authentication-body-headers.md) | Optional | Authentication headers. |
 | `host` | [`TargetAuthenticationBodyHost`](../../doc/models/target-authentication-body-host.md) | Optional | Host information. |
 
@@ -28,7 +28,7 @@
   "host": {
     "hostandpath": "https:// myhost.com:1825"
   },
-  "scope": "scope2"
+  "scope": "scope0"
 }
 ```
 

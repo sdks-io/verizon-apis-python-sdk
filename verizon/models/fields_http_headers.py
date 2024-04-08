@@ -16,7 +16,7 @@ class FieldsHttpHeaders(object):
     TODO: type model description here.
 
     Attributes:
-        authorization (string): TODO: type description here.
+        authorization (str): TODO: type description here.
 
     """
 
@@ -51,11 +51,11 @@ class FieldsHttpHeaders(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         authorization = dictionary.get("Authorization") if dictionary.get("Authorization") else APIHelper.SKIP
         # Return an object of this model
         return cls(authorization)

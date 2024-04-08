@@ -11,7 +11,7 @@ Device logging information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_ids` | `List of string` | Required | List of device IMEI identifiers. |
+| `device_ids` | `List[str]` | Required | List of device IMEI identifiers. |
 
 ## Example (as JSON)
 

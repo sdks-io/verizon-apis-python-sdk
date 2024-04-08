@@ -11,12 +11,12 @@ Account license information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier in "##########-#####". |
+| `account_name` | `str` | Optional | Account identifier in "##########-#####". |
 | `total_licenses` | `int` | Optional | Number of monthly licenses in an MRC subscription. |
 | `assigned_licenses` | `int` | Optional | Number of licenses currently assigned to devices. |
 | `has_more_data` | `bool` | Optional | True if there are more devices to retrieve. |
 | `last_seen_device_id` | `int` | Optional | If hasMoreData=true, the startIndex to use for the next request. 0 if hasMoreData=false. |
-| `device_list` | [`List of AccountLicenseDeviceListItem`](../../doc/models/account-license-device-list-item.md) | Optional | The list of devices that have licenses assigned, including the date and time of when each license was assigned. |
+| `device_list` | [`List[AccountLicenseDeviceListItem]`](../../doc/models/account-license-device-list-item.md) | Optional | The list of devices that have licenses assigned, including the date and time of when each license was assigned. |
 
 ## Example (as JSON)
 

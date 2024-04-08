@@ -11,7 +11,7 @@ Callback URL registration.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `url` | `string` | Optional | Callback URL for an subscribed service. |
+| `url` | `str` | Optional | Callback URL for an subscribed service. |
 
 ## Example (as JSON)
 

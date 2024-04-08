@@ -11,14 +11,14 @@ Returns information about a specified account.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of the account. |
-| `account_number` | `string` | Optional | The billing number of the account. |
-| `organization_name` | `string` | Optional | The name of the organization that the account is part of. |
+| `account_name` | `str` | Optional | The name of the account. |
+| `account_number` | `str` | Optional | The billing number of the account. |
+| `organization_name` | `str` | Optional | The name of the organization that the account is part of. |
 | `is_provisioning_allowed` | `bool` | Optional | True if devices can be added to the account and activated with a single request. False if devices must be added to the account before they can be activated. |
-| `carriers` | `List of string` | Optional | The names of all carriers for the account. |
-| `features` | `List of string` | Optional | The names of features that are enabled for the account. |
-| `i_p_pools` | [`List of IPPool`](../../doc/models/ip-pool.md) | Optional | Array of IP pools that are available to the account. |
-| `service_plans` | [`List of ServicePlan`](../../doc/models/service-plan.md) | Optional | Array of service plans that are available to the account. |
+| `carriers` | `List[str]` | Optional | The names of all carriers for the account. |
+| `features` | `List[str]` | Optional | The names of features that are enabled for the account. |
+| `i_p_pools` | [`List[IPPool]`](../../doc/models/ip-pool.md) | Optional | Array of IP pools that are available to the account. |
+| `service_plans` | [`List[ServicePlan]`](../../doc/models/service-plan.md) | Optional | Array of service plans that are available to the account. |
 
 ## Example (as JSON)
 

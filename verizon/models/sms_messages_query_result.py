@@ -21,7 +21,7 @@ class SMSMessagesQueryResult(object):
         has_more_data (bool): False for a status 200 response.True for a
             status 202 response, indicating that there is more data to be
             retrieved.
-        messages (list of SMSMessage): An array of up to 100 SMS messages that
+        messages (List[SMSMessage]): An array of up to 100 SMS messages that
             were sent by devices in the account.
 
     """
@@ -62,11 +62,11 @@ class SMSMessagesQueryResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else APIHelper.SKIP
         messages = None
         if dictionary.get('messages') is not None:

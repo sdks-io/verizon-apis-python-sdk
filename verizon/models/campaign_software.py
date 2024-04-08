@@ -19,27 +19,27 @@ class CampaignSoftware(object):
     Software upgrade information.
 
     Attributes:
-        id (string): Upgrade identifier.
-        account_name (string): Account identifier.
-        campaign_name (string): Campaign name.
-        software_name (string): Software name.
-        distribution_type (string): LWM2M, OMD-DM or HTTP.
-        make (string): Applicable make.
-        model (string): Applicable model.
-        software_from (string): Old software name.
-        software_to (string): New software name.
+        id (str): Upgrade identifier.
+        account_name (str): Account identifier.
+        campaign_name (str): Campaign name.
+        software_name (str): Software name.
+        distribution_type (str): LWM2M, OMD-DM or HTTP.
+        make (str): Applicable make.
+        model (str): Applicable model.
+        software_from (str): Old software name.
+        software_to (str): New software name.
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
         download_after_date (date): Specifies starting date client should
             download package. If null, client will download as soon as
             possible.
-        download_time_window_list (list of V2TimeWindow): List of allowed
+        download_time_window_list (List[V2TimeWindow]): List of allowed
             download time windows.
         install_after_date (date): Client will install package after date. If
             null, client will install as soon as possible.
-        install_time_window_list (list of V2TimeWindow): List of allowed
-            install time windows.
-        status (string): Software upgrade status.
+        install_time_window_list (List[V2TimeWindow]): List of allowed install
+            time windows.
+        status (str): Software upgrade status.
 
     """
 
@@ -127,11 +127,11 @@ class CampaignSoftware(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         software_name = dictionary.get("softwareName") if dictionary.get("softwareName") else None

@@ -18,24 +18,23 @@ class SearchDeviceResponse(object):
     includes the full event resource definition.
 
     Attributes:
-        action (string): The action requested in this event; “change” for
-            device configuration changes.
-        createdon (string): The date and time of the change request.
-        deviceid (string): The device’s ThingSpace UUID.
+        action (str): The action requested in this event; “change” for device
+            configuration changes.
+        createdon (str): The date and time of the change request.
+        deviceid (str): The device’s ThingSpace UUID.
         fields (Fields2): List of fields affected by the event.
-        id (string): The unique ID of this ts.event.configuration event.
-        kind (string): The kind of the ThingSpace resource that is being
+        id (str): The unique ID of this ts.event.configuration event.
+        kind (str): The kind of the ThingSpace resource that is being
             reported; “ts.event.configuration” for device configuration
             changes.
-        lastupdated (string): The date and time that the event was last
-            updated.
-        name (string): The name of the event
-        state (string): The current status of the request.
-        tagids (list of string): UUIDs of tag resources that are applied to
-            this device.
-        transactionid (string): transaction id
-        version (string): The version of the resource.
-        versionid (string): The version of the resource.
+        lastupdated (str): The date and time that the event was last updated.
+        name (str): The name of the event
+        state (str): The current status of the request.
+        tagids (List[str]): UUIDs of tag resources that are applied to this
+            device.
+        transactionid (str): transaction id
+        version (str): The version of the resource.
+        versionid (str): The version of the resource.
 
     """
 
@@ -130,11 +129,11 @@ class SearchDeviceResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         action = dictionary.get("action") if dictionary.get("action") else APIHelper.SKIP
         createdon = dictionary.get("createdon") if dictionary.get("createdon") else APIHelper.SKIP
         deviceid = dictionary.get("deviceid") if dictionary.get("deviceid") else APIHelper.SKIP

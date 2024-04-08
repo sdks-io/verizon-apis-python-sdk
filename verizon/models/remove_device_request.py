@@ -55,11 +55,11 @@ class RemoveDeviceRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         accountidentifier = AccountIdentifier.from_dictionary(dictionary.get('accountidentifier')) if dictionary.get('accountidentifier') else None
         resourceidentifier = ResourceIdentifier.from_dictionary(dictionary.get('resourceidentifier')) if dictionary.get('resourceidentifier') else None
         # Return an object of this model

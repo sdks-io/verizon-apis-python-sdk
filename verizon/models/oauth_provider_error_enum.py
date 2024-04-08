@@ -35,7 +35,6 @@ class OauthProviderErrorEnum(object):
             exceeds the scope granted by the resource owner.
 
     """
-
     INVALID_REQUEST = 'invalid_request'
 
     INVALID_CLIENT = 'invalid_client'
@@ -47,3 +46,4 @@ class OauthProviderErrorEnum(object):
     UNSUPPORTED_GRANT_TYPE = 'unsupported_grant_type'
 
     INVALID_SCOPE = 'invalid_scope'
+

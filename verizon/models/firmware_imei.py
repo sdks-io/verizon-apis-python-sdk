@@ -16,7 +16,7 @@ class FirmwareIMEI(object):
     FOTA server.
 
     Attributes:
-        device_list (list of string): Device IMEI list.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -46,11 +46,11 @@ class FirmwareIMEI(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         # Return an object of this model
         return cls(device_list)

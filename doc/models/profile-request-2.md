@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `devices` | [`List of DeviceList2`](../../doc/models/device-list-2.md) | Optional | **Constraints**: *Maximum Items*: `100` |
-| `account_name` | `string` | Optional | - |
-| `carrier_name` | `string` | Optional | - |
-| `reason_code` | `string` | Optional | - |
+| `devices` | [`List[DeviceList2]`](../../doc/models/device-list-2.md) | Optional | **Constraints**: *Maximum Items*: `100` |
+| `account_name` | `str` | Optional | - |
+| `carrier_name` | `str` | Optional | - |
+| `reason_code` | `str` | Optional | - |
 | `etf_waiver` | `bool` | Optional | **Default**: `True` |
 | `check_fallback_profile` | `bool` | Optional | **Default**: `False` |
 
@@ -21,36 +21,56 @@
 ```json
 {
   "accountName": "0000123456-00001",
-  "carrierName": "the name of the mobile service provider",
-  "reasonCode": "a short code for the reason action was taken",
+  "carrierName": "Verizon Wireless",
+  "reasonCode": "FF",
   "etfWaiver": true,
   "checkFallbackProfile": false,
   "devices": [
     {
       "ids": [
         {
-          "id": "id7",
-          "kind": "iccid"
+          "id": "id4",
+          "kind": "kind2"
         },
         {
-          "id": "id8",
-          "kind": "imei"
+          "id": "id4",
+          "kind": "kind2"
+        },
+        {
+          "id": "id4",
+          "kind": "kind2"
         }
       ]
     },
     {
       "ids": [
         {
-          "id": "id8",
-          "kind": "imei"
+          "id": "id4",
+          "kind": "kind2"
         },
         {
-          "id": "id9",
-          "kind": "eid"
+          "id": "id4",
+          "kind": "kind2"
         },
         {
-          "id": "id0",
-          "kind": "esn"
+          "id": "id4",
+          "kind": "kind2"
+        }
+      ]
+    },
+    {
+      "ids": [
+        {
+          "id": "id4",
+          "kind": "kind2"
+        },
+        {
+          "id": "id4",
+          "kind": "kind2"
+        },
+        {
+          "id": "id4",
+          "kind": "kind2"
         }
       ]
     }

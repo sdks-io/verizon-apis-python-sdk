@@ -18,14 +18,14 @@ class SoftwarePackage(object):
     Software package information.
 
     Attributes:
-        software_name (string): Software name.
+        software_name (str): Software name.
         launch_date (date): Software launch date.
-        release_note (string): Software release note reserved for future use.
-        model (string): Software applicable device model.
-        make (string): Software applicable device make.
-        distribution_type (string): LWM2M, OMD-DM or HTTP.
-        device_platform_id (string): The platform (Android, iOS, etc.) that
-            the software can be applied to.
+        release_note (str): Software release note reserved for future use.
+        model (str): Software applicable device model.
+        make (str): Software applicable device make.
+        distribution_type (str): LWM2M, OMD-DM or HTTP.
+        device_platform_id (str): The platform (Android, iOS, etc.) that the
+            software can be applied to.
 
     """
 
@@ -78,11 +78,11 @@ class SoftwarePackage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         software_name = dictionary.get("softwareName") if dictionary.get("softwareName") else None
         launch_date = dateutil.parser.parse(dictionary.get('launchDate')).date() if dictionary.get('launchDate') else None
         model = dictionary.get("model") if dictionary.get("model") else None

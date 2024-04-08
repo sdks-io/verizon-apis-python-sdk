@@ -17,7 +17,7 @@ class AnomalyTriggerResult(object):
     A result containing a list of anomaly triggers.
 
     Attributes:
-        triggers (list of TriggersListOptions): Trigger value chunk details.
+        triggers (List[TriggersListOptions]): Trigger value chunk details.
 
     """
 
@@ -52,11 +52,11 @@ class AnomalyTriggerResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         triggers = None
         if dictionary.get('triggers') is not None:
             triggers = [TriggersListOptions.from_dictionary(x) for x in dictionary.get('triggers')]

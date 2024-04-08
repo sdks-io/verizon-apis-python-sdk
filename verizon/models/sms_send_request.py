@@ -18,58 +18,56 @@ class SMSSendRequest(object):
     Request to send SMS.
 
     Attributes:
-        account_name (string): The name of a billing account.
-        custom_fields (list of CustomFields): The names and values of custom
+        account_name (str): The name of a billing account.
+        sms_message (str): The contents of the SMS message. The SMS message is
+            limited to 160 characters in 7-bit format, or 140 characters in
+            8-bit format.
+        custom_fields (List[CustomFields]): The names and values of custom
             fields, if you want to only include devices that have matching
             custom fields.
-        data_encoding (string): The SMS message encoding, which can be 7-bit
+        data_encoding (str): The SMS message encoding, which can be 7-bit
             (default), 8-bit-ASCII, 8-bit-UTF-8, 8-bit-DATA.
-        device_ids (list of DeviceId): The devices that you want to send the
+        device_ids (List[DeviceId]): The devices that you want to send the
             message to, specified by device identifier.
-        group_name (string): The name of a device group, if you want to send
-            the SMS message to all devices in the device group.
-        service_plan (string): The name of a service plan, if you want to only
+        group_name (str): The name of a device group, if you want to send the
+            SMS message to all devices in the device group.
+        service_plan (str): The name of a service plan, if you want to only
             include devices that have that service plan.
-        sms_message (string): The contents of the SMS message. The SMS message
-            is limited to 160 characters in 7-bit format, or 140 characters in
-            8-bit format.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
         "account_name": 'accountName',
+        "sms_message": 'smsMessage',
         "custom_fields": 'customFields',
         "data_encoding": 'dataEncoding',
         "device_ids": 'deviceIds',
         "group_name": 'groupName',
-        "service_plan": 'servicePlan',
-        "sms_message": 'smsMessage'
+        "service_plan": 'servicePlan'
     }
 
     _optionals = [
-        'account_name',
         'custom_fields',
         'data_encoding',
         'device_ids',
         'group_name',
         'service_plan',
-        'sms_message',
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
+                 account_name=None,
+                 sms_message=None,
                  custom_fields=APIHelper.SKIP,
                  data_encoding=APIHelper.SKIP,
                  device_ids=APIHelper.SKIP,
                  group_name=APIHelper.SKIP,
-                 service_plan=APIHelper.SKIP,
-                 sms_message=APIHelper.SKIP):
+                 service_plan=APIHelper.SKIP):
         """Constructor for the SMSSendRequest class"""
 
         # Initialize members of the class
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.account_name = account_name 
+        self.sms_message = sms_message 
         if custom_fields is not APIHelper.SKIP:
             self.custom_fields = custom_fields 
         if data_encoding is not APIHelper.SKIP:
@@ -80,8 +78,6 @@ class SMSSendRequest(object):
             self.group_name = group_name 
         if service_plan is not APIHelper.SKIP:
             self.service_plan = service_plan 
-        if sms_message is not APIHelper.SKIP:
-            self.sms_message = sms_message 
 
     @classmethod
     def from_dictionary(cls,
@@ -97,12 +93,13 @@ class SMSSendRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
+        sms_message = dictionary.get("smsMessage") if dictionary.get("smsMessage") else None
         custom_fields = None
         if dictionary.get('customFields') is not None:
             custom_fields = [CustomFields.from_dictionary(x) for x in dictionary.get('customFields')]
@@ -116,12 +113,11 @@ class SMSSendRequest(object):
             device_ids = APIHelper.SKIP
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
-        sms_message = dictionary.get("smsMessage") if dictionary.get("smsMessage") else APIHelper.SKIP
         # Return an object of this model
         return cls(account_name,
+                   sms_message,
                    custom_fields,
                    data_encoding,
                    device_ids,
                    group_name,
-                   service_plan,
-                   sms_message)
+                   service_plan)

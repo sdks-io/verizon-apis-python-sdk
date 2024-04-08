@@ -70,11 +70,11 @@ class GPU(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         min_core_clock_m_hz = dictionary.get("minCoreClockMHz") if dictionary.get("minCoreClockMHz") else APIHelper.SKIP
         min_memory_clock_m_hz = dictionary.get("minMemoryClockMHz") if dictionary.get("minMemoryClockMHz") else APIHelper.SKIP
         min_bandwidth_g_bs = dictionary.get("minBandwidthGBs") if dictionary.get("minBandwidthGBs") else APIHelper.SKIP

@@ -18,7 +18,7 @@ class ListOptimalServiceEndpointsResult(object):
     clients.
 
     Attributes:
-        service_endpoints (list of ResourcesEdgeHostedService): An array of
+        service_endpoints (List[ResourcesEdgeHostedService]): An array of
             optimal Service Endpoint IDs for clients to connect to.
 
     """
@@ -54,11 +54,11 @@ class ListOptimalServiceEndpointsResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         service_endpoints = None
         if dictionary.get('serviceEndpoints') is not None:
             service_endpoints = [ResourcesEdgeHostedService.from_dictionary(x) for x in dictionary.get('serviceEndpoints')]

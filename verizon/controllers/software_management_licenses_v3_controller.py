@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.v3_license_summary import V3LicenseSummary
 from verizon.models.v3_license_assigned_removed_result import V3LicenseAssignedRemovedResult
 from verizon.exceptions.fota_v3_result_exception import FotaV3ResultException
@@ -37,9 +35,8 @@ class SoftwareManagementLicensesV3Controller(BaseController):
         The endpoint allows user to list license usage.
 
         Args:
-            acc (string): Account identifier.
-            last_seen_device_id (string, optional): Last seen device
-                identifier.
+            acc (str): Account identifier.
+            last_seen_device_id (str, optional): Last seen device identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -68,7 +65,7 @@ class SoftwareManagementLicensesV3Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -85,7 +82,7 @@ class SoftwareManagementLicensesV3Controller(BaseController):
         This endpoint allows user to assign licenses to a list of devices.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             body (V3LicenseIMEI): License assignment.
 
         Returns:
@@ -118,7 +115,7 @@ class SoftwareManagementLicensesV3Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -135,7 +132,7 @@ class SoftwareManagementLicensesV3Controller(BaseController):
         This endpoint allows user to remove licenses from a list of devices.
 
         Args:
-            acc (string): Account identifier.
+            acc (str): Account identifier.
             body (V3LicenseIMEI): License removal.
 
         Returns:
@@ -168,7 +165,7 @@ class SoftwareManagementLicensesV3Controller(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

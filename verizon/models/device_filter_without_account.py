@@ -17,12 +17,10 @@ class DeviceFilterWithoutAccount(object):
     Filter for devices without account.
 
     Attributes:
-        group_name (string): Only include devices that are in this device
-            group.
-        service_plan (string): Only include devices that have this service
-            plan.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
+        group_name (str): Only include devices that are in this device group.
+        service_plan (str): Only include devices that have this service plan.
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
 
     """
 
@@ -67,11 +65,11 @@ class DeviceFilterWithoutAccount(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
         custom_fields = None

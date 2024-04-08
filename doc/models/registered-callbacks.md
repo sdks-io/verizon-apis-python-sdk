@@ -11,11 +11,11 @@ List of registered callback endpoints.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `aname` | `string` | Optional | The name of the billing account for which callback messages will be sent. |
-| `name` | `string` | Optional | The name of the callback service, which identifies the type and format of messages that will be sent to the registered URL. This will be 'Fota' for the Software Management Services callback. |
-| `url` | `string` | Optional | The address to which callback messages will be sent. |
-| `username` | `string` | Optional | The user name that ThingSpace will return in the callback messages. |
-| `password` | `string` | Optional | The password that ThingSpace will return in the callback messages. |
+| `aname` | `str` | Optional | The name of the billing account for which callback messages will be sent. |
+| `name` | `str` | Optional | The name of the callback service, which identifies the type and format of messages that will be sent to the registered URL. This will be 'Fota' for the Software Management Services callback. |
+| `url` | `str` | Optional | The address to which callback messages will be sent. |
+| `username` | `str` | Optional | The user name that ThingSpace will return in the callback messages. |
+| `password` | `str` | Optional | The password that ThingSpace will return in the callback messages. |
 
 ## Example (as JSON)
 

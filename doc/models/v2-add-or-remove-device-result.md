@@ -11,9 +11,9 @@ Add or remove devices from the existing software upgrade information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account identifier. |
-| `campaign_id` | `string` | Required | Campaign identifier. |
-| `request_id` | `string` | Required | Request identifier. |
+| `account_name` | `str` | Required | Account identifier. |
+| `campaign_id` | `str` | Required | Campaign identifier. |
+| `request_id` | `str` | Required | Request identifier. |
 
 ## Example (as JSON)
 
@@ -21,7 +21,7 @@ Add or remove devices from the existing software upgrade information.
 {
   "accountName": "0402196254-00001",
   "campaignId": "60b5d639-ccdc-4db8-8824-069bd94c95bf",
-  "requestId": "requestId2"
+  "requestId": "requestId6"
 }
 ```
 

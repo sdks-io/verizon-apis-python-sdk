@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.asynchronous_request_result import AsynchronousRequestResult
 from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
@@ -31,14 +29,14 @@ class AccountRequestsController(BaseController):
     def get_current_asynchronous_request_status(self,
                                                 aname,
                                                 request_id):
-        """Does a GET request to /v1/accounts/{aname}/requests/{requestId}/status.
+        """Does a GET request to /m2m/v1/accounts/{aname}/requests/{requestId}/status.
 
         Returns the current status of an asynchronous request that was made
         for a single device.
 
         Args:
-            aname (string): Account name.
-            request_id (string): UUID from synchronous response.
+            aname (str): Account name.
+            request_id (str): UUID from synchronous response.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -54,8 +52,8 @@ class AccountRequestsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/accounts/{aname}/requests/{requestId}/status')
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/accounts/{aname}/requests/{requestId}/status')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('aname')
@@ -68,7 +66,7 @@ class AccountRequestsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

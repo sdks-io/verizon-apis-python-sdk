@@ -9,15 +9,15 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `file_name` | `string` | Optional | The name of the file you are upgrading to. |
-| `file_version` | `string` | Optional | The version of the file you are upgrading to. |
+| `file_name` | `str` | Optional | The name of the file you are upgrading to. |
+| `file_version` | `str` | Optional | The version of the file you are upgrading to. |
 | `launch_date` | `date` | Optional | Software launch date. |
-| `release_note` | `string` | Optional | Software release note. |
-| `model` | `string` | Optional | Software applicable device model. |
-| `make` | `string` | Optional | Software applicable device make. |
-| `distribution_type` | `string` | Optional | LWM2M, OMD-DM or HTTP. |
-| `device_platform_id` | `string` | Optional | The platform (Android, iOS, etc.) that the software can be applied to. |
-| `local_target_path` | `string` | Optional | Local target path on the device. |
+| `release_note` | `str` | Optional | Software release note. |
+| `model` | `str` | Optional | Software applicable device model. |
+| `make` | `str` | Optional | Software applicable device make. |
+| `distribution_type` | `str` | Optional | LWM2M, OMD-DM or HTTP. |
+| `device_platform_id` | `str` | Optional | The platform (Android, iOS, etc.) that the software can be applied to. |
+| `local_target_path` | `str` | Optional | Local target path on the device. |
 
 ## Example (as JSON)
 

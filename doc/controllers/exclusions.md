@@ -34,7 +34,7 @@ def exclude_devices(self,
 
 ## Response Type
 
-[`DeviceLocationSuccessResult`](../../doc/models/device-location-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DeviceLocationSuccessResult`](../../doc/models/device-location-success-result.md).
 
 ## Example Usage
 
@@ -75,12 +75,12 @@ def remove_devices_from_exclusion_list(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Query, Required | The numeric name of the account. |
-| `device_list` | `string` | Query, Required | A list of the device IDs to remove from the exclusion list. |
+| `account_name` | `str` | Query, Required | The numeric name of the account. |
+| `device_list` | `str` | Query, Required | A list of the device IDs to remove from the exclusion list. |
 
 ## Response Type
 
-[`DeviceLocationSuccessResult`](../../doc/models/device-location-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DeviceLocationSuccessResult`](../../doc/models/device-location-success-result.md).
 
 ## Example Usage
 
@@ -125,12 +125,12 @@ def list_excluded_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
-| `start_index` | `string` | Template, Required | Zero-based number of the first record to return. |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+| `start_index` | `str` | Template, Required | Zero-based number of the first record to return. |
 
 ## Response Type
 
-[`DevicesConsentResult`](../../doc/models/devices-consent-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DevicesConsentResult`](../../doc/models/devices-consent-result.md).
 
 ## Example Usage
 

@@ -18,8 +18,8 @@ class AccountLabels(object):
     Maximum of 2,000 objects are allowed in the array.
 
     Attributes:
-        devices (list of DeviceList): TODO: type description here.
-        label (list of DeviceLabels): TODO: type description here.
+        devices (List[DeviceList]): TODO: type description here.
+        label (List[DeviceLabels]): TODO: type description here.
 
     """
 
@@ -30,18 +30,16 @@ class AccountLabels(object):
     }
 
     _optionals = [
-        'devices',
         'label',
     ]
 
     def __init__(self,
-                 devices=APIHelper.SKIP,
+                 devices=None,
                  label=APIHelper.SKIP):
         """Constructor for the AccountLabels class"""
 
         # Initialize members of the class
-        if devices is not APIHelper.SKIP:
-            self.devices = devices 
+        self.devices = devices 
         if label is not APIHelper.SKIP:
             self.label = label 
 
@@ -59,16 +57,14 @@ class AccountLabels(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices = None
         if dictionary.get('devices') is not None:
             devices = [DeviceList.from_dictionary(x) for x in dictionary.get('devices')]
-        else:
-            devices = APIHelper.SKIP
         label = None
         if dictionary.get('label') is not None:
             label = [DeviceLabels.from_dictionary(x) for x in dictionary.get('label')]

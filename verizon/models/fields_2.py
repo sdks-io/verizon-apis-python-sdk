@@ -16,7 +16,7 @@ class Fields2(object):
     List of fields affected by the event.
 
     Attributes:
-        temperature (string): TODO: type description here.
+        temperature (str): TODO: type description here.
 
     """
 
@@ -51,11 +51,11 @@ class Fields2(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         temperature = dictionary.get("temperature") if dictionary.get("temperature") else APIHelper.SKIP
         # Return an object of this model
         return cls(temperature)

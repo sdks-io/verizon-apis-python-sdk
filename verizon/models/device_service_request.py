@@ -15,8 +15,8 @@ class DeviceServiceRequest(object):
     Device information.
 
     Attributes:
-        imei (string): International Mobile Equipment Identifier. The unique
-            ID of a device.
+        imei (str): International Mobile Equipment Identifier. The unique ID
+            of a device.
         bullseye_enable (bool): Set to Enable (true) or Disable (false).
 
     """
@@ -50,11 +50,11 @@ class DeviceServiceRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         imei = dictionary.get("imei") if dictionary.get("imei") else None
         bullseye_enable = dictionary.get("BullseyeEnable") if "BullseyeEnable" in dictionary.keys() else None
         # Return an object of this model

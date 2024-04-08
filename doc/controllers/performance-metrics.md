@@ -26,11 +26,13 @@ def query_mec_performance_metrics(self,
 
 ## Requires scope
 
-`EDGEDISCOVERYREAD`, `EDGESERVICEPROFILEREAD`, `EDGESERVICEPROFILEWRITE`, `EDGESERVICEREGISTRYREAD`, `EDGESERVICEREGISTRYWRITE`, `TS_APPLICATION_RO`, `TS_MEC_FULLACCESS`, `TS_MEC_LIMITACCESS`
+### oAuth2
+
+`discovery:read`, `serviceprofile:read`, `serviceprofile:write`, `serviceregistry:read`, `serviceregistry:write`, `ts.application.ro`, `ts.mec.fullaccess`, `ts.mec.limitaccess`
 
 ## Response Type
 
-[`MECPerformanceMetrics`](../../doc/models/mec-performance-metrics.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`MECPerformanceMetrics`](../../doc/models/mec-performance-metrics.md).
 
 ## Example Usage
 
@@ -41,7 +43,7 @@ body = QueryMECPerformanceMetricsRequest(
 )
 
 result = performance_metrics_controller.query_mec_performance_metrics(
-    body
+    body=body
 )
 print(result)
 ```

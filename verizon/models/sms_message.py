@@ -17,10 +17,10 @@ class SMSMessage(object):
     SMS messages sent by all M2M devices associated with a billing account.
 
     Attributes:
-        device_ids (list of DeviceId): One or more IDs of the device that sent
+        device_ids (List[DeviceId]): One or more IDs of the device that sent
             the message.
-        message (string): The contents of the SMS message.
-        timestamp (string): The date and time that the message was received by
+        message (str): The contents of the SMS message.
+        timestamp (str): The date and time that the message was received by
             the Verizon ThingSpace Platform.
 
     """
@@ -66,11 +66,11 @@ class SMSMessage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = None
         if dictionary.get('deviceIds') is not None:
             device_ids = [DeviceId.from_dictionary(x) for x in dictionary.get('deviceIds')]

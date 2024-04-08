@@ -41,7 +41,7 @@ class HistorySearchLimitTime(object):
 
         # Initialize members of the class
         if start_on is not APIHelper.SKIP:
-            self.start_on = APIHelper.RFC3339DateTime(start_on) if start_on else None 
+            self.start_on = APIHelper.apply_datetime_converter(start_on, APIHelper.RFC3339DateTime) if start_on else None 
         if duration is not APIHelper.SKIP:
             self.duration = duration 
 
@@ -59,11 +59,11 @@ class HistorySearchLimitTime(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         start_on = APIHelper.RFC3339DateTime.from_value(dictionary.get("startOn")).datetime if dictionary.get("startOn") else APIHelper.SKIP
         duration = NumericalData.from_dictionary(dictionary.get('duration')) if 'duration' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model

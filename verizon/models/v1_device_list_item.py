@@ -18,10 +18,10 @@ class V1DeviceListItem(object):
     information about the status.
 
     Attributes:
-        device_id (string): Device IMEI.
-        status (string): Whether the device was successfully added or removed
+        device_id (str): Device IMEI.
+        status (str): Whether the device was successfully added or removed
             from the campaign.
-        reason (string): Additional details about the status.
+        reason (str): Additional details about the status.
 
     """
 
@@ -66,11 +66,11 @@ class V1DeviceListItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         reason = dictionary.get("Reason") if dictionary.get("Reason") else APIHelper.SKIP

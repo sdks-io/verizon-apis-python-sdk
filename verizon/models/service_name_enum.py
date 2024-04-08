@@ -19,7 +19,7 @@ class ServiceNameEnum(object):
         FOTA: TODO: type description here.
 
     """
-
     LOCATION = 'Location'
 
     FOTA = 'fota'
+

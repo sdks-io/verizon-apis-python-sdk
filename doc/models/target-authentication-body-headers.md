@@ -11,8 +11,8 @@ Authentication headers.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `authorization` | `string` | Optional | Authorization header. |
-| `content_type` | `string` | Optional | Content-Type header. |
+| `authorization` | `str` | Optional | Authorization header. |
+| `content_type` | `str` | Optional | Content-Type header. |
 
 ## Example (as JSON)
 

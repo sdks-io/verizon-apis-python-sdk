@@ -16,8 +16,7 @@ class NotificationGroupNameTriggerAttribute(object):
     Notification group name trigger attribute.
 
     Attributes:
-        key (string): If present, the NotificationGroupName will be listed
-            here.
+        key (str): If present, the NotificationGroupName will be listed here.
 
     """
 
@@ -52,11 +51,11 @@ class NotificationGroupNameTriggerAttribute(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         key = dictionary.get("key") if dictionary.get("key") else APIHelper.SKIP
         # Return an object of this model
         return cls(key)

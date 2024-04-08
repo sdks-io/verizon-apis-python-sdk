@@ -20,25 +20,25 @@ class CreateSubscriptionRequest(object):
         accountidentifier (AccountIdentifier): The ID of the authenticating
             billing account, in the format
             `{"billingaccountid":"1234567890-12345"}`.
-        description (string): Descriptive information about the subscription.
+        description (str): Descriptive information about the subscription.
         disabled (bool): Enable or disable the subscription. A disabled
             subscription will not send any data.
-        email (string): The address to which any error reports should be
+        email (str): The address to which any error reports should be
             delivered.
-        filter (string): String containing a $filter object with a property
-            and value to filter out non-matching events.
-        billingaccountid (string): TODO: type description here.
-        streamkind (string): The type of event data to send via this
+        filter (str): String containing a $filter object with a property and
+            value to filter out non-matching events.
+        billingaccountid (str): TODO: type description here.
+        streamkind (str): The type of event data to send via this
             subscription. This will be `ts.event` in most cases. Other event
             types are `ts.event.diagnostics` for device diagnostic data,
             `ts.event.configuration` for device configuration events, or
             `ts.event.security`. Note that the device ThingSpace client must
             support sending specific event types for anything other than
             `ts.event`.
-        targetid (string): The ID of the target resource to be used when
+        targetid (str): The ID of the target resource to be used when
             dispatching events. The corresponding target should have a
             “stream” addressscheme.
-        name (string): Name of the subscription.
+        name (str): Name of the subscription.
         allowaggregation (bool): Setting this value to `false` prevents the
             data returned from being aggregated and makes the data easier to
             parse.
@@ -121,11 +121,11 @@ class CreateSubscriptionRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         accountidentifier = AccountIdentifier.from_dictionary(dictionary.get('accountidentifier')) if 'accountidentifier' in dictionary.keys() else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         disabled = dictionary.get("disabled") if "disabled" in dictionary.keys() else APIHelper.SKIP

@@ -11,7 +11,7 @@ Device information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `imei` | `string` | Required | International Mobile Equipment Identifier. The unique ID of a device.<br>**Constraints**: *Pattern*: `^[0-9]{15}$` |
+| `imei` | `str` | Required | International Mobile Equipment Identifier. The unique ID of a device.<br>**Constraints**: *Pattern*: `^[0-9]{15}$` |
 | `bullseye_enable` | `bool` | Required | Set to Enable (true) or Disable (false). |
 
 ## Example (as JSON)

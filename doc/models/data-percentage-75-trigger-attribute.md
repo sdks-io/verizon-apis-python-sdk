@@ -11,7 +11,7 @@ Trigger attribute for when data percentage is over 75% used.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `key` | `string` | Optional | Key data percentage 75. |
+| `key` | `str` | Optional | Key data percentage 75. |
 | `value` | `bool` | Optional | DataPercentage75<br />True - Trigger on Data percentage is over 75% used<br />False - Do not trigger when over 75% used. |
 
 ## Example (as JSON)

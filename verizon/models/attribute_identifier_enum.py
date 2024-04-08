@@ -22,7 +22,6 @@ class AttributeIdentifierEnum(object):
         MANUFACTURER: TODO: type description here.
 
     """
-
     NETWORK_BEARER = 'NETWORK_BEARER'
 
     RADIO_SIGNAL_STRENGTH = 'RADIO_SIGNAL_STRENGTH'
@@ -32,3 +31,4 @@ class AttributeIdentifierEnum(object):
     CELL_ID = 'CELL_ID'
 
     MANUFACTURER = 'MANUFACTURER'
+

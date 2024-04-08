@@ -15,8 +15,8 @@ class Device(object):
     Identifies a particular IoT device.
 
     Attributes:
-        id (string): Device identifier.
-        kind (string): Device kind identifier.
+        id (str): Device identifier.
+        kind (str): Device kind identifier.
 
     """
 
@@ -49,11 +49,11 @@ class Device(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else None
         kind = dictionary.get("kind") if dictionary.get("kind") else None
         # Return an object of this model

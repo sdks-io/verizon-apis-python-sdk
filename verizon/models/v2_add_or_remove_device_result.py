@@ -15,9 +15,9 @@ class V2AddOrRemoveDeviceResult(object):
     Add or remove devices from the existing software upgrade information.
 
     Attributes:
-        account_name (string): Account identifier.
-        campaign_id (string): Campaign identifier.
-        request_id (string): Request identifier.
+        account_name (str): Account identifier.
+        campaign_id (str): Campaign identifier.
+        request_id (str): Request identifier.
 
     """
 
@@ -53,11 +53,11 @@ class V2AddOrRemoveDeviceResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         campaign_id = dictionary.get("campaignId") if dictionary.get("campaignId") else None
         request_id = dictionary.get("requestId") if dictionary.get("requestId") else None

@@ -17,23 +17,23 @@ class CreateIoTApplicationRequest(object):
     to update plus any properties that you want to change.
 
     Attributes:
-        app_name (string): A user defined name for the application being
-            deployed in Azure IoT Central.
-        billing_account_id (string): The ThingSpace ID of the authenticating
+        app_name (str): A user defined name for the application being deployed
+            in Azure IoT Central.
+        billing_account_id (str): The ThingSpace ID of the authenticating
             billing account
-        client_id (string): The Azure ClientID of the associated Azure target
+        client_id (str): The Azure ClientID of the associated Azure target
             account
-        client_secret (string): The Azure Client Secret of the associated
-            Azure target account
-        email_i_ds (string): The “email IDs” to be added to/sent to with this
+        client_secret (str): The Azure Client Secret of the associated Azure
+            target account
+        email_i_ds (str): The “email IDs” to be added to/sent to with this
             API.
-        resourcegroup (string): The Azure Resource group of the associated
-            Azure target account
-        sample_io_tc_app (string): This is the reference Azure IoT Central
+        resourcegroup (str): The Azure Resource group of the associated Azure
+            target account
+        sample_io_tc_app (str): This is the reference Azure IoT Central
             application developed by Verizon.
-        subscription_id (string): The Azure Subscription ID of the associated
+        subscription_id (str): The Azure Subscription ID of the associated
             Azure target account
-        tenant_id (string): The Azure Tenant ID of the associated Azure target
+        tenant_id (str): The Azure Tenant ID of the associated Azure target
             account
 
     """
@@ -109,11 +109,11 @@ class CreateIoTApplicationRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         app_name = dictionary.get("appName") if dictionary.get("appName") else APIHelper.SKIP
         billing_account_id = dictionary.get("billingAccountID") if dictionary.get("billingAccountID") else APIHelper.SKIP
         client_id = dictionary.get("clientID") if dictionary.get("clientID") else APIHelper.SKIP

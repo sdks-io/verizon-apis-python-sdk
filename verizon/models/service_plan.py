@@ -17,13 +17,13 @@ class ServicePlan(object):
     Details of the service plan.
 
     Attributes:
-        carrier_service_plan_code (string): The code that is used by the
-            carrier for the service plan.
-        code (string): The code of the service plan, which may not be the same
-            as the name.
-        extended_attributes (list of CustomFields): Any extended attributes
-            for the service plan, as Key and Value pairs.
-        name (string): The name of the service plan.
+        carrier_service_plan_code (str): The code that is used by the carrier
+            for the service plan.
+        code (str): The code of the service plan, which may not be the same as
+            the name.
+        extended_attributes (List[CustomFields]): Any extended attributes for
+            the service plan, as Key and Value pairs.
+        name (str): The name of the service plan.
         size_kb (long|int): The size of the service plan in kilobytes.
 
     """
@@ -79,11 +79,11 @@ class ServicePlan(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         carrier_service_plan_code = dictionary.get("carrierServicePlanCode") if dictionary.get("carrierServicePlanCode") else APIHelper.SKIP
         code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
         extended_attributes = None

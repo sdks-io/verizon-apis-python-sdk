@@ -18,19 +18,19 @@ class CustomFieldsUpdateRequest(object):
     Request to assign or change custom field values for one or more devices.
 
     Attributes:
-        account_name (string): The name of a billing account.This parameter is
+        account_name (str): The name of a billing account.This parameter is
             only required if the UWS account used for the current API session
             has access to multiple billing accounts.An account name is usually
             numeric, and must include any leading zeros.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
-        custom_fields_to_update (list of CustomFields): The names and new
-            values of any custom fields that you want to change.
-        devices (list of AccountDeviceList): The devices that you want to
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
+        custom_fields_to_update (List[CustomFields]): The names and new values
+            of any custom fields that you want to change.
+        devices (List[AccountDeviceList]): The devices that you want to
             change.
-        group_name (string): The name of a device group, if you want to only
+        group_name (str): The name of a device group, if you want to only
             include devices in that group.
-        service_plan (string): The name of a service plan, if you want to only
+        service_plan (str): The name of a service plan, if you want to only
             include devices that have that service plan.
 
     """
@@ -91,11 +91,11 @@ class CustomFieldsUpdateRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         custom_fields = None
         if dictionary.get('customFields') is not None:

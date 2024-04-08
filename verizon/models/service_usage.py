@@ -16,8 +16,8 @@ class ServiceUsage(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account identifier.
-        transactions_count (string): Total requests for the account during the
+        account_name (str): Account identifier.
+        transactions_count (str): Total requests for the account during the
             reporting period.
 
     """
@@ -58,11 +58,11 @@ class ServiceUsage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         transactions_count = dictionary.get("transactionsCount") if dictionary.get("transactionsCount") else APIHelper.SKIP
         # Return an object of this model

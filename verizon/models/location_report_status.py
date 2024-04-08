@@ -16,7 +16,7 @@ class LocationReportStatus(object):
     Status of the report.
 
     Attributes:
-        txid (string): The transaction ID of the report.
+        txid (str): The transaction ID of the report.
         status (ReportStatusEnum): Status of the report.
 
     """
@@ -57,11 +57,11 @@ class LocationReportStatus(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         # Return an object of this model

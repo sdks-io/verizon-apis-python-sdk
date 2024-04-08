@@ -18,8 +18,8 @@ class ConnectionHistoryResult(object):
     Connection Events for a device.
 
     Attributes:
-        connection_history (list of ConnectionEvent): Device connection
-            events, sorted by the occurredAt timestamp, oldest first.
+        connection_history (List[ConnectionEvent]): Device connection events,
+            sorted by the occurredAt timestamp, oldest first.
         has_more_data (bool): False for a status 200 response.True for a
             status 202 response, indicating that there is more data to be
             retrieved. Send another request, adjusting the earliest value in
@@ -64,11 +64,11 @@ class ConnectionHistoryResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         connection_history = None
         if dictionary.get('connectionHistory') is not None:
             connection_history = [ConnectionEvent.from_dictionary(x) for x in dictionary.get('connectionHistory')]

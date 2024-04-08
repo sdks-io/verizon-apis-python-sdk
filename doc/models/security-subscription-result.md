@@ -11,8 +11,8 @@ Response for a subscription request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of a billing account. |
-| `subscription_list` | [`List of SecuritySubscription`](../../doc/models/security-subscription.md) | Optional | The list of SKU numbers and counts for each license type specified in the request.<br>**Constraints**: *Maximum Items*: `5` |
+| `account_name` | `str` | Optional | The name of a billing account. |
+| `subscription_list` | [`List[SecuritySubscription]`](../../doc/models/security-subscription.md) | Optional | The list of SKU numbers and counts for each license type specified in the request.<br>**Constraints**: *Maximum Items*: `5` |
 
 ## Example (as JSON)
 
@@ -28,12 +28,12 @@ Response for a subscription request.
       "licenseAvailable": 1,
       "extendedAttributes": [
         {
-          "key": "key4",
-          "value": "value6"
+          "key": "key8",
+          "value": "value0"
         },
         {
-          "key": "key5",
-          "value": "value7"
+          "key": "key8",
+          "value": "value0"
         }
       ]
     }

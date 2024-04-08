@@ -17,8 +17,8 @@ class ResourceIdentifier(object):
     "dd1682d3-2d80-cefc-f3ee-25154800beff"}.
 
     Attributes:
-        id (string): Target ID.
-        imei (string): Device IMEI.
+        id (str): Target ID.
+        imei (str): Device IMEI.
 
     """
 
@@ -58,11 +58,11 @@ class ResourceIdentifier(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         imei = dictionary.get("imei") if dictionary.get("imei") else APIHelper.SKIP
         # Return an object of this model

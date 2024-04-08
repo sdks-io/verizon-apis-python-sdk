@@ -17,13 +17,13 @@ class AssignLicenseRequest(object):
     Request to assign license.
 
     Attributes:
-        account_name (string): The name of a billing account.This parameter is
+        account_name (str): The name of a billing account.This parameter is
             required only if the UWS account used for the current API session
             has access to multiple accounts. An account name is usually
             numeric, and must include any leading zeros.
-        devices (list of LicenseDeviceList): A list of 4G devices.
-        sku_number (string): The Stock Keeping Unit (SKU). Valid skuNumbers
-            for license types: “SIMSec-IoT-Lt”. (Lifetime) Once a license is
+        devices (List[LicenseDeviceList]): A list of 4G devices.
+        sku_number (str): The Stock Keeping Unit (SKU). Valid skuNumbers for
+            license types: “SIMSec-IoT-Lt”. (Lifetime) Once a license is
             assigned to a SIM, the SIM-Secure feature is enabled for the life
             of the SIM.“TS-BUNDLE-KTO-SIMSEC-MRC”. (Bundle) The SIM-Secure
             Flex license can be assigned to or removed from a SIM at any time.
@@ -74,11 +74,11 @@ class AssignLicenseRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         devices = None
         if dictionary.get('devices') is not None:

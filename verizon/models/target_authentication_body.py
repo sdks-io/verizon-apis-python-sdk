@@ -18,9 +18,9 @@ class TargetAuthenticationBody(object):
     TODO: type model description here.
 
     Attributes:
-        grant_type (string): Authentication grant type.
-        refresh_token (string): Refresh token.
-        scope (string): Authentication scopes.
+        grant_type (str): Authentication grant type.
+        refresh_token (str): Refresh token.
+        scope (str): Authentication scopes.
         headers (TargetAuthenticationBodyHeaders): Authentication headers.
         host (TargetAuthenticationBodyHost): Host information.
 
@@ -77,11 +77,11 @@ class TargetAuthenticationBody(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         grant_type = dictionary.get("grant_type") if dictionary.get("grant_type") else APIHelper.SKIP
         refresh_token = dictionary.get("refresh_token") if dictionary.get("refresh_token") else APIHelper.SKIP
         scope = dictionary.get("scope") if dictionary.get("scope") else APIHelper.SKIP

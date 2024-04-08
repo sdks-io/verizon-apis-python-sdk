@@ -11,7 +11,7 @@ A list of IMEIs for devices to be synchronized between ThingSpace and the FOTA s
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_list` | `List of string` | Required | Device IMEI list.<br>**Constraints**: *Maximum Items*: `1000` |
+| `device_list` | `List[str]` | Required | Device IMEI list.<br>**Constraints**: *Maximum Items*: `1000` |
 
 ## Example (as JSON)
 

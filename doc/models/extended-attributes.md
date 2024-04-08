@@ -11,15 +11,15 @@ Additional properties associated with data.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `key` | `string` | Optional | - |
-| `value` | `string` | Optional | - |
+| `key` | `str` | Optional | - |
+| `value` | `str` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "key": "key0",
-  "value": "value2"
+  "key": "key8",
+  "value": "value0"
 }
 ```
 

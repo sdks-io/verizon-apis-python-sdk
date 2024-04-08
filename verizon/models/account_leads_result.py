@@ -19,7 +19,7 @@ class AccountLeadsResult(object):
     Attributes:
         has_more_data (bool): False if no more leads.True if there is more
             data to be retrieved.
-        leads (list of AccountLead): The leads associated with an account.
+        leads (List[AccountLead]): The leads associated with an account.
 
     """
 
@@ -59,11 +59,11 @@ class AccountLeadsResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else APIHelper.SKIP
         leads = None
         if dictionary.get('leads') is not None:

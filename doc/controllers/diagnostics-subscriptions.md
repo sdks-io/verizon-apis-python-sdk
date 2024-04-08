@@ -22,11 +22,11 @@ def get_diagnostics_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Query, Required | Account identifier. |
+| `account_name` | `str` | Query, Required | Account identifier. |
 
 ## Response Type
 
-[`DiagnosticsSubscription`](../../doc/models/diagnostics-subscription.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DiagnosticsSubscription`](../../doc/models/diagnostics-subscription.md).
 
 ## Example Usage
 

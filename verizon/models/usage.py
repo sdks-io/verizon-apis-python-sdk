@@ -20,16 +20,15 @@ class Usage(object):
     Attributes:
         bytes_used (long|int): The number of bytes that the device sent or
             received on the report date.
-        extended_attributes (list of CustomFields): The number of
+        extended_attributes (List[CustomFields]): The number of
             mobile-originated and mobile-terminated SMS messages on the report
             date.
-        service_plan (string): The list of service plans associated with the
+        service_plan (str): The list of service plans associated with the
             device/account.
         sms_used (int): The number of SMS messages that were sent or received
             on the report date.
-        source (string): The source of the information for the reported
-            usage.
-        timestamp (string): The date of the recorded usage.
+        source (str): The source of the information for the reported usage.
+        timestamp (str): The date of the recorded usage.
 
     """
 
@@ -89,11 +88,11 @@ class Usage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         bytes_used = dictionary.get("bytesUsed") if dictionary.get("bytesUsed") else APIHelper.SKIP
         extended_attributes = None
         if dictionary.get('extendedAttributes') is not None:

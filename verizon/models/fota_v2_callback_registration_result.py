@@ -16,7 +16,7 @@ class FotaV2CallbackRegistrationResult(object):
     Callback listener URL.
 
     Attributes:
-        url (string): Callback URL.
+        url (str): Callback URL.
 
     """
 
@@ -51,11 +51,11 @@ class FotaV2CallbackRegistrationResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
         # Return an object of this model
         return cls(url)

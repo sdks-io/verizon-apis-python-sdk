@@ -17,7 +17,7 @@ class AccountLicenseDeviceListItem(object):
     time of when each license was assigned.
 
     Attributes:
-        device_id (string): Device IMEI.
+        device_id (str): Device IMEI.
         assignment_time (datetime): Timestamp of when a license was assigned
             to the device.
 
@@ -43,7 +43,7 @@ class AccountLicenseDeviceListItem(object):
         if device_id is not APIHelper.SKIP:
             self.device_id = device_id 
         if assignment_time is not APIHelper.SKIP:
-            self.assignment_time = APIHelper.RFC3339DateTime(assignment_time) if assignment_time else None 
+            self.assignment_time = APIHelper.apply_datetime_converter(assignment_time, APIHelper.RFC3339DateTime) if assignment_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -59,11 +59,11 @@ class AccountLicenseDeviceListItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else APIHelper.SKIP
         assignment_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("assignmentTime")).datetime if dictionary.get("assignmentTime") else APIHelper.SKIP
         # Return an object of this model

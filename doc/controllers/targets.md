@@ -11,10 +11,10 @@ targets_controller = client.targets
 ## Methods
 
 * [Query Target](../../doc/controllers/targets.md#query-target)
+* [Delete Target](../../doc/controllers/targets.md#delete-target)
+* [Create Target](../../doc/controllers/targets.md#create-target)
 * [Generate Target External ID](../../doc/controllers/targets.md#generate-target-external-id)
 * [Create Azure Central Io T Application](../../doc/controllers/targets.md#create-azure-central-io-t-application)
-* [Create Target](../../doc/controllers/targets.md#create-target)
-* [Delete Target](../../doc/controllers/targets.md#delete-target)
 
 
 # Query Target
@@ -34,7 +34,7 @@ def query_target(self,
 
 ## Response Type
 
-[`List of Target`](../../doc/models/target.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[Target]`](../../doc/models/target.md).
 
 ## Example Usage
 
@@ -84,102 +84,39 @@ print(result)
 ```
 
 
-# Generate Target External ID
+# Delete Target
 
-Create a unique string that ThingSpace will pass to AWS for increased security.
-
-:information_source: **Note** This endpoint does not require authentication.
+Remove a target from a ThingSpace account.
 
 ```python
-def generate_target_external_id(self,
-                               body)
+def delete_target(self,
+                 body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`GenerateExternalIDRequest`](../../doc/models/generate-external-id-request.md) | Body, Required | The request body only contains the authenticating account. |
+| `body` | [`DeleteTargetRequest`](../../doc/models/delete-target-request.md) | Body, Required | The request body identifies the target to delete. |
 
 ## Response Type
 
-[`GenerateExternalIDResult`](../../doc/models/generate-external-id-result.md)
+This method returns a `ApiResponse` instance.
 
 ## Example Usage
 
 ```python
-body = GenerateExternalIDRequest(
+body = DeleteTargetRequest(
     accountidentifier=AccountIdentifier(
         billingaccountid='0000000000-00001'
+    ),
+    resourceidentifier=ResourceIdentifier(
+        id='2e61a17d-8fd1-6816-e995-e4c2528bf535'
     )
 )
 
-result = targets_controller.generate_target_external_id(body)
+result = targets_controller.delete_target(body)
 print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "externalid": "ZlJnih8BfqsosZrEEkfPuR3aGOk2i-HIr6tXN275ioJF6bezIrQB9EbzpTRep8J7RmV7QH=="
-}
-```
-
-
-# Create Azure Central Io T Application
-
-Deploy a new Azure IoT Central application based on the Verizon ARM template within the specified Azure Active Directory account.
-
-```python
-def create_azure_central_io_t_application(self,
-                                         billingaccount_id,
-                                         body)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `billingaccount_id` | `string` | Header, Required | TThe ThingSpace ID of the authenticating billing account. |
-| `body` | [`CreateIoTApplicationRequest`](../../doc/models/create-io-t-application-request.md) | Body, Required | The request body must include the UUID of the subscription that you want to update plus any properties that you want to change. |
-
-## Response Type
-
-[`CreateIoTApplicationResponse`](../../doc/models/create-io-t-application-response.md)
-
-## Example Usage
-
-```python
-billingaccount_id = 'BillingaccountID2'
-
-body = CreateIoTApplicationRequest(
-    app_name='newarmapp1',
-    billing_account_id='0000123456-00001',
-    client_id='UUID',
-    client_secret='client secret',
-    email_i_ds='email@domain.com',
-    resourcegroup='Myresourcegroup',
-    sample_io_tc_app='{app ID}',
-    subscription_id='{subscription ID}',
-    tenant_id='{tenant ID}'
-)
-
-result = targets_controller.create_azure_central_io_t_application(
-    billingaccount_id,
-    body
-)
-print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "appName": "newarmapp1",
-  "sharedSecret": "SharedAccessSignaturesr={client secret}",
-  "url": "https://newarmapp1.azureiotcentral.com"
-}
 ```
 
 
@@ -200,7 +137,7 @@ def create_target(self,
 
 ## Response Type
 
-[`Target`](../../doc/models/target.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`Target`](../../doc/models/target.md).
 
 ## Example Usage
 
@@ -250,38 +187,101 @@ print(result)
 ```
 
 
-# Delete Target
+# Generate Target External ID
 
-Remove a target from a ThingSpace account.
+Create a unique string that ThingSpace will pass to AWS for increased security.
+
+:information_source: **Note** This endpoint does not require authentication.
 
 ```python
-def delete_target(self,
-                 body)
+def generate_target_external_id(self,
+                               body)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`DeleteTargetRequest`](../../doc/models/delete-target-request.md) | Body, Required | The request body identifies the target to delete. |
+| `body` | [`GenerateExternalIDRequest`](../../doc/models/generate-external-id-request.md) | Body, Required | The request body only contains the authenticating account. |
 
 ## Response Type
 
-`void`
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`GenerateExternalIDResult`](../../doc/models/generate-external-id-result.md).
 
 ## Example Usage
 
 ```python
-body = DeleteTargetRequest(
+body = GenerateExternalIDRequest(
     accountidentifier=AccountIdentifier(
         billingaccountid='0000000000-00001'
-    ),
-    resourceidentifier=ResourceIdentifier(
-        id='2e61a17d-8fd1-6816-e995-e4c2528bf535'
     )
 )
 
-result = targets_controller.delete_target(body)
+result = targets_controller.generate_target_external_id(body)
 print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "externalid": "ZlJnih8BfqsosZrEEkfPuR3aGOk2i-HIr6tXN275ioJF6bezIrQB9EbzpTRep8J7RmV7QH=="
+}
+```
+
+
+# Create Azure Central Io T Application
+
+Deploy a new Azure IoT Central application based on the Verizon ARM template within the specified Azure Active Directory account.
+
+```python
+def create_azure_central_io_t_application(self,
+                                         billingaccount_id,
+                                         body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `billingaccount_id` | `str` | Header, Required | TThe ThingSpace ID of the authenticating billing account. |
+| `body` | [`CreateIoTApplicationRequest`](../../doc/models/create-io-t-application-request.md) | Body, Required | The request body must include the UUID of the subscription that you want to update plus any properties that you want to change. |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`CreateIoTApplicationResponse`](../../doc/models/create-io-t-application-response.md).
+
+## Example Usage
+
+```python
+billingaccount_id = 'BillingaccountID2'
+
+body = CreateIoTApplicationRequest(
+    app_name='newarmapp1',
+    billing_account_id='0000123456-00001',
+    client_id='UUID',
+    client_secret='client secret',
+    email_i_ds='email@domain.com',
+    resourcegroup='Myresourcegroup',
+    sample_io_tc_app='{app ID}',
+    subscription_id='{subscription ID}',
+    tenant_id='{tenant ID}'
+)
+
+result = targets_controller.create_azure_central_io_t_application(
+    billingaccount_id,
+    body
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "appName": "newarmapp1",
+  "sharedSecret": "SharedAccessSignaturesr={client secret}",
+  "url": "https://newarmapp1.azureiotcentral.com"
+}
 ```
 

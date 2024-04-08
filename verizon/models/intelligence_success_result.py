@@ -16,7 +16,7 @@ class IntelligenceSuccessResult(object):
     Success response.
 
     Attributes:
-        status (string): Anomaly detection status.
+        status (str): Anomaly detection status.
 
     """
 
@@ -51,11 +51,11 @@ class IntelligenceSuccessResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         # Return an object of this model
         return cls(status)

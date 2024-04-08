@@ -17,7 +17,7 @@ class SearchDeviceByPropertyResponseList(object):
     A success response includes an array of all matching devices.
 
     Attributes:
-        device_property (list of SearchDeviceByPropertyResponse): TODO: type
+        device_property (List[SearchDeviceByPropertyResponse]): TODO: type
             description here.
 
     """
@@ -53,11 +53,11 @@ class SearchDeviceByPropertyResponseList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_property = None
         if dictionary.get('DeviceProperty') is not None:
             device_property = [SearchDeviceByPropertyResponse.from_dictionary(x) for x in dictionary.get('DeviceProperty')]

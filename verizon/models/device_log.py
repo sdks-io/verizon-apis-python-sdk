@@ -16,15 +16,15 @@ class DeviceLog(object):
     Device logging information.
 
     Attributes:
-        device_id (string): Device IMEI.
+        device_id (str): Device IMEI.
         log_time (datetime): Time of log.
-        log_type (string): Log type (one of SoftwareUpdate, Event,
+        log_type (str): Log type (one of SoftwareUpdate, Event,
             UserNotification, AgentService, Wireless, WirelessWeb,
             MobileBroadbandModem, WindowsMDM).
-        event_log (string): Event log.
-        binary_log_file_base_64 (string): Base64-encoded contents of binary
-            log file.
-        binary_log_filename (string): File name of binary log file.
+        event_log (str): Event log.
+        binary_log_file_base_64 (str): Base64-encoded contents of binary log
+            file.
+        binary_log_filename (str): File name of binary log file.
 
     """
 
@@ -49,7 +49,7 @@ class DeviceLog(object):
 
         # Initialize members of the class
         self.device_id = device_id 
-        self.log_time = APIHelper.RFC3339DateTime(log_time) if log_time else None 
+        self.log_time = APIHelper.apply_datetime_converter(log_time, APIHelper.RFC3339DateTime) if log_time else None 
         self.log_type = log_type 
         self.event_log = event_log 
         self.binary_log_file_base_64 = binary_log_file_base_64 
@@ -69,11 +69,11 @@ class DeviceLog(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         log_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("logTime")).datetime if dictionary.get("logTime") else None
         log_type = dictionary.get("logType") if dictionary.get("logType") else None

@@ -17,15 +17,15 @@ class Region(object):
     resources and services are provided.
 
     Attributes:
-        region_id (string): The unique identifier of the region.
-        name (string): A relevant and identifiable region name.
-        country_code (string): A two-character alpha code for a country, based
-            on ISO 3166-1 alpha-2. This is future functionality, so the value
+        region_id (str): The unique identifier of the region.
+        name (str): A relevant and identifiable region name.
+        country_code (str): A two-character alpha code for a country, based on
+            ISO 3166-1 alpha-2. This is future functionality, so the value
             returned is 'null'.
-        metro (string): The metropolitan area or 'City' value.  This is future
+        metro (str): The metropolitan area or 'City' value.  This is future
             functionality, so the value returned is 'null'.
-        area (string): This is a sub-set of 'City' and is similar to 'Zone'.
-            This is future functionality, so the value returned is 'null'.
+        area (str): This is a sub-set of 'City' and is similar to 'Zone'. This
+            is future functionality, so the value returned is 'null'.
 
     """
 
@@ -88,11 +88,11 @@ class Region(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         region_id = dictionary.get("regionId") if "regionId" in dictionary.keys() else APIHelper.SKIP
         name = dictionary.get("name") if "name" in dictionary.keys() else APIHelper.SKIP
         country_code = dictionary.get("countryCode") if "countryCode" in dictionary.keys() else APIHelper.SKIP

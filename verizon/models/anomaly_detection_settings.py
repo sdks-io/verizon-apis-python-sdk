@@ -17,12 +17,12 @@ class AnomalyDetectionSettings(object):
     Settings for anomaly detection.
 
     Attributes:
-        account_name (string): Indicates if the account name used has anomaly
+        account_name (str): Indicates if the account name used has anomaly
             detection.<br />Success - The account has anomaly detection.<br
             />Failure - The account does not have anomaly detection.
         sensitivity_parameter (SensitivityParameters): Details for sensitivity
             parameters.
-        status (string): Indicates if anomaly detection is active on the
+        status (str): Indicates if anomaly detection is active on the
             account<br />Active - Anomaly detection is active<br />Disabled-
             Anomaly detection is not active.
 
@@ -69,11 +69,11 @@ class AnomalyDetectionSettings(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         sensitivity_parameter = SensitivityParameters.from_dictionary(dictionary.get('sensitivityParameter')) if 'sensitivityParameter' in dictionary.keys() else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP

@@ -11,7 +11,7 @@ Key service plan trigger attribute.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `key` | `string` | Optional | The ServicePlan name will be listed here. |
+| `key` | `str` | Optional | The ServicePlan name will be listed here. |
 
 ## Example (as JSON)
 

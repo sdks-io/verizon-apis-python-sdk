@@ -20,9 +20,9 @@ class MECPlatformStatusEnum(object):
         UNKNOWN: TODO: type description here.
 
     """
-
     ACTIVE = 'Active'
 
     INACTIVE = 'Inactive'
 
     UNKNOWN = 'unknown'
+

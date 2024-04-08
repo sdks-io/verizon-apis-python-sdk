@@ -16,10 +16,10 @@ class State(object):
     Each service includes custom states.
 
     Attributes:
-        name (string): The name of the state.
+        name (str): The name of the state.
         workflow_sequence_number (float): The workflow sequence number of this
             state.
-        service_plans (list of string): The service plans that can be used to
+        service_plans (List[str]): The service plans that can be used to
             charge for services for devices in this state.
 
     """
@@ -65,11 +65,11 @@ class State(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         workflow_sequence_number = dictionary.get("workflowSequenceNumber") if dictionary.get("workflowSequenceNumber") else APIHelper.SKIP
         service_plans = dictionary.get("servicePlans") if dictionary.get("servicePlans") else APIHelper.SKIP

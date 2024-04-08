@@ -19,8 +19,8 @@ class ListRegionsResult(object):
     platforms or service endpoints.
 
     Attributes:
-        regions (list of Region): An array of all regions in the Verizon 5G
-            Edge service.
+        regions (List[Region]): An array of all regions in the Verizon 5G Edge
+            service.
 
     """
 
@@ -55,11 +55,11 @@ class ListRegionsResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         regions = None
         if dictionary.get('regions') is not None:
             regions = [Region.from_dictionary(x) for x in dictionary.get('regions')]

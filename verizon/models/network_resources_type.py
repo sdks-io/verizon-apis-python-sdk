@@ -78,11 +78,11 @@ class NetworkResourcesType(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         max_latency_ms = dictionary.get("maxLatencyMs") if dictionary.get("maxLatencyMs") else None
         min_bandwidth_kbits = dictionary.get("minBandwidthKbits") if dictionary.get("minBandwidthKbits") else APIHelper.SKIP
         service_continuity_support = dictionary.get("serviceContinuitySupport") if "serviceContinuitySupport" in dictionary.keys() else APIHelper.SKIP

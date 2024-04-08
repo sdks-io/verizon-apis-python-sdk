@@ -16,8 +16,8 @@ class DeviceId2(object):
     TODO: type model description here.
 
     Attributes:
-        id (string): TODO: type description here.
-        kind (Kind1Enum): TODO: type description here.
+        id (str): TODO: type description here.
+        kind (str): TODO: type description here.
 
     """
 
@@ -57,11 +57,11 @@ class DeviceId2(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         # Return an object of this model

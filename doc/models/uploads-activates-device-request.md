@@ -11,14 +11,14 @@ The request body identifies the devices to upload.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | The name of a billing account. An account name is usually numeric, and must include any leading zeros. |
-| `email_address` | `string` | Required | The email address that the report should be sent to when the upload is complete. |
-| `device_sku` | `string` | Required | The stock keeping unit that identifies the type of devices in the upload and activation. |
-| `upload_type` | `string` | Required | The format of the device identifiers in the upload and activation. |
-| `service_plan` | `string` | Required | The service plan code that you want to assign to all specified devices. |
-| `carrier_ip_pool_name` | `string` | Optional | The pool from which your device IP addresses is derived. |
-| `mdn_zip_code` | `string` | Required | The Zip code of the location where the line of service is primarily used, or a Zip code that you have been told to use with these devices. |
-| `devices` | [`List of DeviceList`](../../doc/models/device-list.md) | Required | The devices to upload, specified by device IDs in a format matching uploadType. |
+| `account_name` | `str` | Required | The name of a billing account. An account name is usually numeric, and must include any leading zeros. |
+| `email_address` | `str` | Required | The email address that the report should be sent to when the upload is complete. |
+| `device_sku` | `str` | Required | The stock keeping unit that identifies the type of devices in the upload and activation. |
+| `upload_type` | `str` | Required | The format of the device identifiers in the upload and activation. |
+| `service_plan` | `str` | Required | The service plan code that you want to assign to all specified devices. |
+| `carrier_ip_pool_name` | `str` | Optional | The pool from which your device IP addresses is derived. |
+| `mdn_zip_code` | `str` | Required | The Zip code of the location where the line of service is primarily used, or a Zip code that you have been told to use with these devices. |
+| `devices` | [`List[DeviceList]`](../../doc/models/device-list.md) | Required | The devices to upload, specified by device IDs in a format matching uploadType. |
 
 ## Example (as JSON)
 
@@ -35,16 +35,8 @@ The request body identifies the devices to upload.
     {
       "deviceIds": [
         {
-          "id": "id6",
-          "kind": "imei"
-        },
-        {
-          "id": "id7",
-          "kind": "eid"
-        },
-        {
-          "id": "id8",
-          "kind": "esn"
+          "id": "id0",
+          "kind": "kind8"
         }
       ]
     }

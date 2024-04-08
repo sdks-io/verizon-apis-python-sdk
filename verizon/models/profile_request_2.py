@@ -17,10 +17,10 @@ class ProfileRequest2(object):
     TODO: type model description here.
 
     Attributes:
-        devices (list of DeviceList2): TODO: type description here.
-        account_name (string): TODO: type description here.
-        carrier_name (string): TODO: type description here.
-        reason_code (string): TODO: type description here.
+        devices (List[DeviceList2]): TODO: type description here.
+        account_name (str): TODO: type description here.
+        carrier_name (str): TODO: type description here.
+        reason_code (str): TODO: type description here.
         etf_waiver (bool): TODO: type description here.
         check_fallback_profile (bool): TODO: type description here.
 
@@ -80,11 +80,11 @@ class ProfileRequest2(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices = None
         if dictionary.get('devices') is not None:
             devices = [DeviceList2.from_dictionary(x) for x in dictionary.get('devices')]

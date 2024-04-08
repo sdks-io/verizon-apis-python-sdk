@@ -11,9 +11,9 @@ Diagnostic observation settings and attributes for a device.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of the billing account for which callback messages will be sent. Format: "##########-#####". |
+| `account_name` | `str` | Optional | The name of the billing account for which callback messages will be sent. Format: "##########-#####". |
 | `device` | [`Device`](../../doc/models/device.md) | Optional | Identifies a particular IoT device. |
-| `attributes` | [`List of AttributeSetting`](../../doc/models/attribute-setting.md) | Optional | Streaming RF parameters for which you want to retrieve diagnostic settings. |
+| `attributes` | [`List[AttributeSetting]`](../../doc/models/attribute-setting.md) | Optional | Streaming RF parameters for which you want to retrieve diagnostic settings. |
 
 ## Example (as JSON)
 

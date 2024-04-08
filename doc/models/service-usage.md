@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier. |
-| `transactions_count` | `string` | Optional | Total requests for the account during the reporting period. |
+| `account_name` | `str` | Optional | Account identifier. |
+| `transactions_count` | `str` | Optional | Total requests for the account during the reporting period. |
 
 ## Example (as JSON)
 

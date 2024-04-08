@@ -17,9 +17,9 @@ class SetFallbackAttributeRequest(object):
     TODO: type model description here.
 
     Attributes:
-        devices (list of DeviceList): TODO: type description here.
-        account_name (string): TODO: type description here.
-        carrier_name (string): TODO: type description here.
+        devices (List[DeviceList]): TODO: type description here.
+        account_name (str): TODO: type description here.
+        carrier_name (str): TODO: type description here.
 
     """
 
@@ -31,22 +31,18 @@ class SetFallbackAttributeRequest(object):
     }
 
     _optionals = [
-        'devices',
-        'account_name',
         'carrier_name',
     ]
 
     def __init__(self,
-                 devices=APIHelper.SKIP,
-                 account_name=APIHelper.SKIP,
+                 devices=None,
+                 account_name=None,
                  carrier_name=APIHelper.SKIP):
         """Constructor for the SetFallbackAttributeRequest class"""
 
         # Initialize members of the class
-        if devices is not APIHelper.SKIP:
-            self.devices = devices 
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.devices = devices 
+        self.account_name = account_name 
         if carrier_name is not APIHelper.SKIP:
             self.carrier_name = carrier_name 
 
@@ -64,17 +60,15 @@ class SetFallbackAttributeRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices = None
         if dictionary.get('devices') is not None:
             devices = [DeviceList.from_dictionary(x) for x in dictionary.get('devices')]
-        else:
-            devices = APIHelper.SKIP
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         carrier_name = dictionary.get("carrierName") if dictionary.get("carrierName") else APIHelper.SKIP
         # Return an object of this model
         return cls(devices,

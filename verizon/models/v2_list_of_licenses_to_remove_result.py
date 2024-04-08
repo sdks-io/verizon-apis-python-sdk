@@ -16,7 +16,7 @@ class V2ListOfLicensesToRemoveResult(object):
 
     Attributes:
         count (int): The number of devices.
-        device_list (list of string): Device IMEI list.
+        device_list (List[str]): Device IMEI list.
 
     """
 
@@ -49,11 +49,11 @@ class V2ListOfLicensesToRemoveResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         count = dictionary.get("count") if dictionary.get("count") else None
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         # Return an object of this model

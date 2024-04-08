@@ -18,12 +18,12 @@ class MECPlatformResource(object):
     used when deploying.
 
     Attributes:
-        ern (string): Edge Resource Name. A string identifier for a set of
-            edge resources.
-        zone (string): Unique identifier representing a zone. *Note:* This
-            will have a null value as a placeholder.
-        region (string): MEC region name. Current valid values are US_WEST_2
-            and US_EAST_1.
+        ern (str): Edge Resource Name. A string identifier for a set of edge
+            resources.
+        zone (str): Unique identifier representing a zone. *Note:* This will
+            have a null value as a placeholder.
+        region (str): MEC region name. Current valid values are US_WEST_2 and
+            US_EAST_1.
         status (MECPlatformStatusEnum): Status of the MEC Platform (default is
             'unknown')
         properties (object): TODO: type description here.
@@ -84,11 +84,11 @@ class MECPlatformResource(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         ern = dictionary.get("ern") if dictionary.get("ern") else APIHelper.SKIP
         zone = dictionary.get("zone") if "zone" in dictionary.keys() else APIHelper.SKIP
         region = dictionary.get("region") if dictionary.get("region") else APIHelper.SKIP

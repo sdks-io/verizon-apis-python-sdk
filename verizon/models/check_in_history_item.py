@@ -16,10 +16,10 @@ class CheckInHistoryItem(object):
     Check-in history for a device.
 
     Attributes:
-        device_id (string): Device IMEI.
-        client_type (string): Type of client.
-        result (string): TODO: type description here.
-        failure_type (string): TODO: type description here.
+        device_id (str): Device IMEI.
+        client_type (str): Type of client.
+        result (str): TODO: type description here.
+        failure_type (str): TODO: type description here.
         time_completed (datetime): TODO: type description here.
 
     """
@@ -46,7 +46,7 @@ class CheckInHistoryItem(object):
         self.client_type = client_type 
         self.result = result 
         self.failure_type = failure_type 
-        self.time_completed = APIHelper.RFC3339DateTime(time_completed) if time_completed else None 
+        self.time_completed = APIHelper.apply_datetime_converter(time_completed, APIHelper.RFC3339DateTime) if time_completed else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -62,11 +62,11 @@ class CheckInHistoryItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         client_type = dictionary.get("clientType") if dictionary.get("clientType") else None
         result = dictionary.get("result") if dictionary.get("result") else None

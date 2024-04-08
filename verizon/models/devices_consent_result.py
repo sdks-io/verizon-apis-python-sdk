@@ -16,12 +16,12 @@ class DevicesConsentResult(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
+        account_name (str): Account identifier in "##########-#####".
         all_device (bool): Exclude all devices or not?
         has_more_data (bool): Are there more devices to retrieve or not?
         total_count (int): Total number of excluded devices in the account.
-        update_time (string): Last update time.
-        exclusion (list of string): Device ID list.
+        update_time (str): Last update time.
+        exclusion (List[str]): Device ID list.
 
     """
 
@@ -81,11 +81,11 @@ class DevicesConsentResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         all_device = dictionary.get("allDevice") if "allDevice" in dictionary.keys() else APIHelper.SKIP
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else APIHelper.SKIP

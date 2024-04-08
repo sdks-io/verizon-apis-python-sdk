@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.callback_created import CallbackCreated
 from verizon.models.callback_registered import CallbackRegistered
 from verizon.exceptions.hyper_precise_location_result_exception import HyperPreciseLocationResultException
@@ -36,7 +34,7 @@ class HyperPreciseLocationCallbacksController(BaseController):
         Find registered callback listener for account by account number.
 
         Args:
-            account_number (string): A unique identifier for an account.
+            account_number (str): A unique identifier for an account.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -63,7 +61,7 @@ class HyperPreciseLocationCallbacksController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -89,7 +87,7 @@ class HyperPreciseLocationCallbacksController(BaseController):
         parse the messages.
 
         Args:
-            account_number (string): A unique identifier for an account.
+            account_number (str): A unique identifier for an account.
             body (HyperPreciseLocationCallback): TODO: type description here.
 
         Returns:
@@ -123,7 +121,7 @@ class HyperPreciseLocationCallbacksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -146,8 +144,8 @@ class HyperPreciseLocationCallbacksController(BaseController):
         account and listener name.
 
         Args:
-            account_number (string): A unique identifier for a account.
-            service (string): The name of the callback service that will be
+            account_number (str): A unique identifier for a account.
+            service (str): The name of the callback service that will be
                 deleted.
 
         Returns:
@@ -173,7 +171,7 @@ class HyperPreciseLocationCallbacksController(BaseController):
             .query_param(Parameter()
                          .key('service')
                          .value(service))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .is_api_response(True)

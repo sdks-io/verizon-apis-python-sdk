@@ -15,11 +15,11 @@ class ManagedAccountsProvisionRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Managed account identifier
-        paccount_name (string): Primary Account identifier
+        account_name (str): Managed account identifier
+        paccount_name (str): Primary Account identifier
         service_name (ServiceNameEnum): Service name
-        mtype (string): SKU name
-        txid (string): Transaction identifier returned by add request
+        mtype (str): SKU name
+        txid (str): Transaction identifier returned by add request
 
     """
 
@@ -61,11 +61,11 @@ class ManagedAccountsProvisionRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         paccount_name = dictionary.get("paccountName") if dictionary.get("paccountName") else None
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else 'Location'

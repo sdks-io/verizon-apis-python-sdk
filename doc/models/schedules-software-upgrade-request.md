@@ -9,18 +9,18 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `campaign_name` | `string` | Optional | The campaign name. |
-| `software_name` | `string` | Optional | Software name. |
-| `software_from` | `string` | Optional | Old software name. |
-| `software_to` | `string` | Optional | New software name. |
-| `distribution_type` | `string` | Optional | Valid values |
-| `start_date` | `string` | Optional | Campaign start date. |
-| `end_date` | `string` | Optional | Campaign end date. |
-| `download_after_date` | `string` | Optional | Specifies the starting date the client should download the package. If null, client downloads as soon as possible. |
-| `download_time_window_list` | [`List of DownloadTimeWindow`](../../doc/models/download-time-window.md) | Optional | List of allowed download time windows. |
-| `install_after_date` | `string` | Optional | The date after which you install the package. If null, install as soon as possible. |
-| `install_time_window_list` | [`List of DownloadTimeWindow`](../../doc/models/download-time-window.md) | Optional | List of allowed install time windows. |
-| `device_list` | `List of string` | Optional | Device IMEI list. |
+| `campaign_name` | `str` | Optional | The campaign name. |
+| `software_name` | `str` | Optional | Software name. |
+| `software_from` | `str` | Optional | Old software name. |
+| `software_to` | `str` | Optional | New software name. |
+| `distribution_type` | `str` | Optional | Valid values |
+| `start_date` | `str` | Optional | Campaign start date. |
+| `end_date` | `str` | Optional | Campaign end date. |
+| `download_after_date` | `str` | Optional | Specifies the starting date the client should download the package. If null, client downloads as soon as possible. |
+| `download_time_window_list` | [`List[DownloadTimeWindow]`](../../doc/models/download-time-window.md) | Optional | List of allowed download time windows. |
+| `install_after_date` | `str` | Optional | The date after which you install the package. If null, install as soon as possible. |
+| `install_time_window_list` | [`List[DownloadTimeWindow]`](../../doc/models/download-time-window.md) | Optional | List of allowed install time windows. |
+| `device_list` | `List[str]` | Optional | Device IMEI list. |
 
 ## Example (as JSON)
 

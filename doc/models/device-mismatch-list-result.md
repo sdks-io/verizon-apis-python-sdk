@@ -11,7 +11,7 @@ Response to list of all 4G devices with an ICCID (SIM) that was not activated wi
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `devices` | [`List of MismatchedDevice`](../../doc/models/mismatched-device.md) | Optional | A list of specific devices that you want to check, specified by ICCID or MDN. |
+| `devices` | [`List[MismatchedDevice]`](../../doc/models/mismatched-device.md) | Optional | A list of specific devices that you want to check, specified by ICCID or MDN. |
 
 ## Example (as JSON)
 

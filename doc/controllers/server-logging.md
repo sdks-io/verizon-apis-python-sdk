@@ -23,12 +23,12 @@ def get_device_check_in_history(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier. |
-| `device_id` | `string` | Template, Required | Device IMEI identifier. |
+| `account` | `str` | Template, Required | Account identifier. |
+| `device_id` | `str` | Template, Required | Device IMEI identifier. |
 
 ## Response Type
 
-[`List of CheckInHistoryItem`](../../doc/models/check-in-history-item.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[CheckInHistoryItem]`](../../doc/models/check-in-history-item.md).
 
 ## Example Usage
 

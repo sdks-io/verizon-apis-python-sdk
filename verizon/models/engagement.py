@@ -17,9 +17,9 @@ class Engagement(object):
     The engagements associated with the account.
 
     Attributes:
-        engagement_id (string): The engagement ID.
-        charging_group (string): The charging group name.
-        services (list of AccountService): The services associated with the
+        engagement_id (str): The engagement ID.
+        charging_group (str): The charging group name.
+        services (List[AccountService]): The services associated with the
             account.
 
     """
@@ -65,11 +65,11 @@ class Engagement(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         engagement_id = dictionary.get("engagementId") if dictionary.get("engagementId") else APIHelper.SKIP
         charging_group = dictionary.get("chargingGroup") if dictionary.get("chargingGroup") else APIHelper.SKIP
         services = None

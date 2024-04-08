@@ -16,7 +16,7 @@ class RequestResponse(object):
     TODO: type model description here.
 
     Attributes:
-        request_id (string): TODO: type description here.
+        request_id (str): TODO: type description here.
 
     """
 
@@ -51,11 +51,11 @@ class RequestResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         request_id = dictionary.get("requestId") if dictionary.get("requestId") else APIHelper.SKIP
         # Return an object of this model
         return cls(request_id)

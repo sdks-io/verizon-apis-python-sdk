@@ -16,8 +16,8 @@ class Id(object):
     TODO: type model description here.
 
     Attributes:
-        id (string): The value of the device identifier.
-        kind (KindEnum): The type of the device identifier. Valid types of
+        id (str): The value of the device identifier.
+        kind (str): The type of the device identifier. Valid types of
             identifiers are:ESN (decimal),EID,ICCID (up to 20 digits),IMEI (up
             to 16 digits),MDN,MEID (hexadecimal),MSISDN.
 
@@ -59,11 +59,11 @@ class Id(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         # Return an object of this model

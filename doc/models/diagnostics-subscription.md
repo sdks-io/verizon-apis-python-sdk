@@ -11,12 +11,12 @@ Status of the diagnostic services subscription.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account identifier in "##########-#####". An account name is usually numeric, and must include any leading zeros. |
+| `account_name` | `str` | Required | Account identifier in "##########-#####". An account name is usually numeric, and must include any leading zeros. |
 | `created_on` | `datetime` | Required | The date and time of when the subscription was created. |
 | `last_updated` | `datetime` | Required | The date and time of when the subscription was last updated. |
 | `total_allowed` | `int` | Required | Number of licenses currently assigned to devices. |
 | `total_used` | `int` | Required | Number of licenses currently used by the devices. |
-| `sku_name` | `string` | Required | Name of the SKU for the account. |
+| `sku_name` | `str` | Required | Name of the SKU for the account. |
 
 ## Example (as JSON)
 

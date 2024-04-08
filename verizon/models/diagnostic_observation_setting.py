@@ -18,11 +18,11 @@ class DiagnosticObservationSetting(object):
     Diagnostic observation settings and attributes for a device.
 
     Attributes:
-        account_name (string): The name of the billing account for which
-            callback messages will be sent. Format: "##########-#####".
+        account_name (str): The name of the billing account for which callback
+            messages will be sent. Format: "##########-#####".
         device (Device): Identifies a particular IoT device.
-        attributes (list of AttributeSetting): Streaming RF parameters for
-            which you want to retrieve diagnostic settings.
+        attributes (List[AttributeSetting]): Streaming RF parameters for which
+            you want to retrieve diagnostic settings.
 
     """
 
@@ -67,11 +67,11 @@ class DiagnosticObservationSetting(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         device = Device.from_dictionary(dictionary.get('device')) if 'device' in dictionary.keys() else APIHelper.SKIP
         attributes = None

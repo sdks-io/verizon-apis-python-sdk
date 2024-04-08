@@ -11,9 +11,9 @@ Upgrade information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier in "##########-#####". |
-| `id` | `string` | Optional | The unique identifier for this upgrade. |
-| `device_list` | [`List of V1DeviceListItem`](../../doc/models/v1-device-list-item.md) | Optional | A JSON object for each device that was included in the request, showing the device IMEI, the status of the addition or removal, and additional information about the status. |
+| `account_name` | `str` | Optional | Account identifier in "##########-#####". |
+| `id` | `str` | Optional | The unique identifier for this upgrade. |
+| `device_list` | [`List[V1DeviceListItem]`](../../doc/models/v1-device-list-item.md) | Optional | A JSON object for each device that was included in the request, showing the device IMEI, the status of the addition or removal, and additional information about the status. |
 
 ## Example (as JSON)
 

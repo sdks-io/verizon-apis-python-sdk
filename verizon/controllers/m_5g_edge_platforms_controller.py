@@ -16,10 +16,8 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.list_regions_result import ListRegionsResult
 from verizon.models.list_mec_platforms_result import ListMECPlatformsResult
+from verizon.models.list_regions_result import ListRegionsResult
 from verizon.exceptions.edge_discovery_result_exception import EdgeDiscoveryResultException
 
 
@@ -28,44 +26,6 @@ class M5gEdgePlatformsController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(M5gEdgePlatformsController, self).__init__(config)
-
-    def list_regions(self):
-        """Does a GET request to /regions.
-
-        List the geographical regions available, based on the user's bearer
-        token. **Note:** Country code, Metropolitan area, Area and Zone are
-        future functionality and will currently return a "null" value.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. List of
-                geographical regions.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.EDGE_DISCOVERY)
-            .path('/regions')
-            .http_method(HttpMethodEnum.GET)
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ListRegionsResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
-            .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
-            .local_error('default', 'HTTP 500 Internal Server Error.', EdgeDiscoveryResultException)
-        ).execute()
 
     def list_mec_platforms(self,
                            region=None,
@@ -84,15 +44,15 @@ class M5gEdgePlatformsController(BaseController):
         UEIdentity(Including UEIdentity Type).
 
         Args:
-            region (string, optional): MEC region name. Current valid values
-                are US_WEST_2 and US_EAST_1.
-            service_profile_id (string, optional): Unique identifier of the
+            region (str, optional): MEC region name. Current valid values are
+                US_WEST_2 and US_EAST_1.
+            service_profile_id (str, optional): Unique identifier of the
                 service profile.
             subscriber_density (int, optional): Minimum number of 4G/5G
                 subscribers per square kilometer.
             ue_identity_type (UserEquipmentIdentityTypeEnum, optional): Type
                 of User Equipment identifier used in `UEIdentity`.
-            ue_identity (string, optional): The identifier value for User
+            ue_identity (str, optional): The identifier value for User
                 Equipment. The type of identifier is defined by the
                 'UEIdentityType' parameter. The`IPAddress`format can be IPv4
                 or IPv6.
@@ -132,11 +92,49 @@ class M5gEdgePlatformsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListMECPlatformsResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
+            .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
+            .local_error('default', 'HTTP 500 Internal Server Error.', EdgeDiscoveryResultException)
+        ).execute()
+
+    def list_regions(self):
+        """Does a GET request to /regions.
+
+        List the geographical regions available, based on the user's bearer
+        token. **Note:** Country code, Metropolitan area, Area and Zone are
+        future functionality and will currently return a "null" value.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                geographical regions.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.EDGE_DISCOVERY)
+            .path('/regions')
+            .http_method(HttpMethodEnum.GET)
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ListRegionsResult.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
             .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)

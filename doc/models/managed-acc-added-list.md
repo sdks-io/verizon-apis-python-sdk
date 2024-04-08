@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Optional | Account name |
-| `txid` | `string` | Optional | Transaction identifier |
+| `id` | `str` | Optional | Account name |
+| `txid` | `str` | Optional | Transaction identifier |
 
 ## Example (as JSON)
 

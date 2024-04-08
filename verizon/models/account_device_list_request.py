@@ -19,23 +19,23 @@ class AccountDeviceListRequest(object):
     Request for listing account devices.
 
     Attributes:
-        account_name (string): The billing account for which a list of devices
-            is returned. If you don't specify an accountName, the list
-            includes all devices to which you have access.
+        account_name (str): The billing account for which a list of devices is
+            returned. If you don't specify an accountName, the list includes
+            all devices to which you have access.
         device_id (DeviceId): An identifier for a single device.
         filter (AccountDeviceListFilter): Filter for a list of devices.
-        current_state (string): The name of a device state, to only include
+        current_state (str): The name of a device state, to only include
             devices in that state.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
-        earliest (string): Only include devices that were added after this
-            date and time.
-        group_name (string): Only include devices that are in this device
-            group.
-        latest (string): Only include devices that were added before this date
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
+        earliest (str): Only include devices that were added after this date
             and time.
-        service_plan (string): Only include devices that have this service
-            plan.
+        group_name (str): Only include devices that are in this device group.
+        latest (str): Only include devices that were added before this date
+            and time.
+        service_plan (str): Only include devices that have this service plan.
+        max_number_of_devices (int): TODO: type description here.
+        largest_device_id_seen (long|int): TODO: type description here.
 
     """
 
@@ -49,7 +49,9 @@ class AccountDeviceListRequest(object):
         "earliest": 'earliest',
         "group_name": 'groupName',
         "latest": 'latest',
-        "service_plan": 'servicePlan'
+        "service_plan": 'servicePlan',
+        "max_number_of_devices": 'maxNumberOfDevices',
+        "largest_device_id_seen": 'largestDeviceIdSeen'
     }
 
     _optionals = [
@@ -62,6 +64,8 @@ class AccountDeviceListRequest(object):
         'group_name',
         'latest',
         'service_plan',
+        'max_number_of_devices',
+        'largest_device_id_seen',
     ]
 
     def __init__(self,
@@ -73,7 +77,9 @@ class AccountDeviceListRequest(object):
                  earliest=APIHelper.SKIP,
                  group_name=APIHelper.SKIP,
                  latest=APIHelper.SKIP,
-                 service_plan=APIHelper.SKIP):
+                 service_plan=APIHelper.SKIP,
+                 max_number_of_devices=APIHelper.SKIP,
+                 largest_device_id_seen=APIHelper.SKIP):
         """Constructor for the AccountDeviceListRequest class"""
 
         # Initialize members of the class
@@ -95,6 +101,10 @@ class AccountDeviceListRequest(object):
             self.latest = latest 
         if service_plan is not APIHelper.SKIP:
             self.service_plan = service_plan 
+        if max_number_of_devices is not APIHelper.SKIP:
+            self.max_number_of_devices = max_number_of_devices 
+        if largest_device_id_seen is not APIHelper.SKIP:
+            self.largest_device_id_seen = largest_device_id_seen 
 
     @classmethod
     def from_dictionary(cls,
@@ -110,11 +120,11 @@ class AccountDeviceListRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         device_id = DeviceId.from_dictionary(dictionary.get('deviceId')) if 'deviceId' in dictionary.keys() else APIHelper.SKIP
         filter = AccountDeviceListFilter.from_dictionary(dictionary.get('filter')) if 'filter' in dictionary.keys() else APIHelper.SKIP
@@ -128,6 +138,8 @@ class AccountDeviceListRequest(object):
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         latest = dictionary.get("latest") if dictionary.get("latest") else APIHelper.SKIP
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP
+        max_number_of_devices = dictionary.get("maxNumberOfDevices") if dictionary.get("maxNumberOfDevices") else APIHelper.SKIP
+        largest_device_id_seen = dictionary.get("largestDeviceIdSeen") if dictionary.get("largestDeviceIdSeen") else APIHelper.SKIP
         # Return an object of this model
         return cls(account_name,
                    device_id,
@@ -137,4 +149,6 @@ class AccountDeviceListRequest(object):
                    earliest,
                    group_name,
                    latest,
-                   service_plan)
+                   service_plan,
+                   max_number_of_devices,
+                   largest_device_id_seen)

@@ -16,11 +16,9 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.session_reset_password_result import SessionResetPasswordResult
 from verizon.models.log_in_result import LogInResult
 from verizon.models.log_out_request import LogOutRequest
+from verizon.models.session_reset_password_result import SessionResetPasswordResult
 from verizon.exceptions.connectivity_management_result_exception import ConnectivityManagementResultException
 
 
@@ -30,9 +28,88 @@ class SessionManagementController(BaseController):
     def __init__(self, config):
         super(SessionManagementController, self).__init__(config)
 
+    def start_connectivity_management_session(self,
+                                              body=None):
+        """Does a POST request to /m2m/v1/session/login.
+
+        Initiates a Connectivity Management session and returns a VZ-M2M
+        session token that is required in subsequent API requests.
+
+        Args:
+            body (LogInRequest, optional): Request to initiate a session.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. VZ-M2M
+                session token.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/session/login')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(LogInResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
+
+    def end_connectivity_management_session(self):
+        """Does a POST request to /m2m/v1/session/logout.
+
+        Ends a Connectivity Management session.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. VZ-M2M
+                session token.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/session/logout')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(LogOutRequest.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Error response.', ConnectivityManagementResultException)
+        ).execute()
+
     def reset_connectivity_management_password(self,
                                                body):
-        """Does a PUT request to /v1/session/password/actions/reset.
+        """Does a PUT request to /m2m/v1/session/password/actions/reset.
 
         The new password is effective immediately. Passwords do not expire,
         but Verizon recommends changing your password every 90 days.
@@ -55,8 +132,8 @@ class SessionManagementController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/session/password/actions/reset')
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/session/password/actions/reset')
             .http_method(HttpMethodEnum.PUT)
             .header_param(Parameter()
                           .key('Content-Type')
@@ -67,90 +144,11 @@ class SessionManagementController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SessionResetPasswordResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
-        ).execute()
-
-    def start_connectivity_management_session(self,
-                                              body=None):
-        """Does a POST request to /v1/session/login.
-
-        Initiates a Connectivity Management session and returns a VZ-M2M
-        session token that is required in subsequent API requests.
-
-        Args:
-            body (LogInRequest, optional): Request to initiate a session.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. VZ-M2M
-                session token.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/session/login')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(LogInResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'Error response.', ConnectivityManagementResultException)
-        ).execute()
-
-    def end_connectivity_management_session(self):
-        """Does a POST request to /v1/session/logout.
-
-        Ends a Connectivity Management session.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. VZ-M2M
-                session token.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/session/logout')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(LogOutRequest.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Error response.', ConnectivityManagementResultException)
         ).execute()

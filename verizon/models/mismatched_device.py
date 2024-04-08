@@ -17,17 +17,16 @@ class MismatchedDevice(object):
     IMEI (hardware) during a specified time frame.
 
     Attributes:
-        account_name (string): The account that the device is associated
-            with.
-        mdn (string): The assigned phone number of the device.
-        activation_date (string): The date and time when the SIM was last
+        account_name (str): The account that the device is associated with.
+        mdn (str): The assigned phone number of the device.
+        activation_date (str): The date and time when the SIM was last
             activated.
-        iccid (string): The ID of the SIM.
-        pre_imei (string): The IMEI of the device prior to the SIM OTA
-            activation on simOtaDate.
-        post_imei (string): The IMEI of the device after the SIM OTA
-            activation on simOtaDate.
-        sim_ota_date (string): The date and time of the SIM OTA activation.
+        iccid (str): The ID of the SIM.
+        pre_imei (str): The IMEI of the device prior to the SIM OTA activation
+            on simOtaDate.
+        post_imei (str): The IMEI of the device after the SIM OTA activation
+            on simOtaDate.
+        sim_ota_date (str): The date and time of the SIM OTA activation.
 
     """
 
@@ -92,11 +91,11 @@ class MismatchedDevice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         mdn = dictionary.get("mdn") if dictionary.get("mdn") else APIHelper.SKIP
         activation_date = dictionary.get("activationDate") if dictionary.get("activationDate") else APIHelper.SKIP

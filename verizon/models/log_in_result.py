@@ -17,9 +17,9 @@ class LogInResult(object):
     VZ-M2M session token that is required in subsequent API requests.
 
     Attributes:
-        session_token (string): The identifier for the session that was
-            created by the request. Store the sessionToken for use in the
-            header of all other API requests.
+        session_token (str): The identifier for the session that was created
+            by the request. Store the sessionToken for use in the header of
+            all other API requests.
 
     """
 
@@ -54,11 +54,11 @@ class LogInResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         session_token = dictionary.get("sessionToken") if dictionary.get("sessionToken") else APIHelper.SKIP
         # Return an object of this model
         return cls(session_token)

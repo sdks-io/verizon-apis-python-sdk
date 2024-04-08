@@ -11,8 +11,8 @@ A success response containing the current status of the request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `transaction_id` | `string` | Required | Transaction identifier. |
-| `status` | `string` | Required | Status of the request. |
+| `transaction_id` | `str` | Required | Transaction identifier. |
+| `status` | `str` | Required | Status of the request. |
 | `created_on` | `datetime` | Required | The date and time of when this request was created. |
 
 ## Example (as JSON)

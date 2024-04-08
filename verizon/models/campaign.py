@@ -19,21 +19,21 @@ class Campaign(object):
     Firmware upgrade information.
 
     Attributes:
-        id (string): Upgrade identifier.
-        account_name (string): Account identifier.
-        campaign_name (string): Campaign name.
-        firmware_name (string): Name of firmware.
-        firmware_from (string): Old firmware version.
-        firmware_to (string): New firmware version.
-        protocol (string): The protocol of the firmware distribution. Default:
+        id (str): Upgrade identifier.
+        account_name (str): Account identifier.
+        campaign_name (str): Campaign name.
+        firmware_name (str): Name of firmware.
+        firmware_from (str): Old firmware version.
+        firmware_to (str): New firmware version.
+        protocol (str): The protocol of the firmware distribution. Default:
             LWM2M.
-        make (string): Applicable make.
-        model (string): Applicable model.
+        make (str): Applicable make.
+        model (str): Applicable model.
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
-        campaign_time_window_list (list of V3TimeWindow): List of allowed
+        campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
-        status (string): Firmware upgrade status.
+        status (str): Firmware upgrade status.
 
     """
 
@@ -112,11 +112,11 @@ class Campaign(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         protocol = dictionary.get("protocol") if dictionary.get("protocol") else 'LWM2M'

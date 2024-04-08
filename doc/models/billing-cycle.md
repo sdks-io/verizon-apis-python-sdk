@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `year` | `string` | Optional | - |
-| `month` | `string` | Optional | - |
+| `year` | `str` | Optional | - |
+| `month` | `str` | Optional | - |
 
 ## Example (as JSON)
 

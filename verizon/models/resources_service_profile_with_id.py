@@ -21,13 +21,13 @@ class ResourcesServiceProfileWithId(object):
     service profile.
 
     Attributes:
-        service_profile_id (string): Unique identifier for a service profile.
+        service_profile_id (str): Unique identifier for a service profile.
         client_type (ClientTypeEnum): The category of application client.
-        ecsp_filter (string): Identity of the preferred Edge Computing Service
+        ecsp_filter (str): Identity of the preferred Edge Computing Service
             Provider.
-        client_schedule (string): The expected operation schedule of the
+        client_schedule (str): The expected operation schedule of the
             application client (e.g. time windows).
-        client_service_area (string): The expected location(s) (e.g. route) of
+        client_service_area (str): The expected location(s) (e.g. route) of
             the hosting UE during the Client's operation schedule.
         network_resources (NetworkResourcesType): Network resources of a
             service profile.
@@ -102,11 +102,11 @@ class ResourcesServiceProfileWithId(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         client_type = dictionary.get("clientType") if dictionary.get("clientType") else None
         service_profile_id = dictionary.get("serviceProfileId") if dictionary.get("serviceProfileId") else APIHelper.SKIP
         ecsp_filter = dictionary.get("ecspFilter") if dictionary.get("ecspFilter") else APIHelper.SKIP

@@ -20,7 +20,7 @@ class V1ListOfLicensesToRemove(object):
         has_more_data (bool): True if there are more devices to retrieve.
         update_time (datetime): The date and time that the list was last
             updated.
-        device_list (list of string): The IMEIs of the devices.
+        device_list (List[str]): The IMEIs of the devices.
 
     """
 
@@ -52,7 +52,7 @@ class V1ListOfLicensesToRemove(object):
         if has_more_data is not APIHelper.SKIP:
             self.has_more_data = has_more_data 
         if update_time is not APIHelper.SKIP:
-            self.update_time = APIHelper.RFC3339DateTime(update_time) if update_time else None 
+            self.update_time = APIHelper.apply_datetime_converter(update_time, APIHelper.RFC3339DateTime) if update_time else None 
         if device_list is not APIHelper.SKIP:
             self.device_list = device_list 
 
@@ -70,11 +70,11 @@ class V1ListOfLicensesToRemove(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         count = dictionary.get("count") if dictionary.get("count") else APIHelper.SKIP
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else APIHelper.SKIP
         update_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("updateTime")).datetime if dictionary.get("updateTime") else APIHelper.SKIP

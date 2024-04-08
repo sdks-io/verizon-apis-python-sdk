@@ -17,11 +17,11 @@ class DeviceListQueryResult(object):
     List of devices.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
+        account_name (str): Account identifier in "##########-#####".
         has_more_data (bool): True if there are more devices to retrieve.
         last_seen_device_id (long|int): If hasMoreData=true, the startIndex to
             use for the next request. 0 if hasMoreData=false.
-        device_list (list of DeviceListQueryItem): The list of devices in the
+        device_list (List[DeviceListQueryItem]): The list of devices in the
             account.
 
     """
@@ -72,11 +72,11 @@ class DeviceListQueryResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else APIHelper.SKIP
         last_seen_device_id = dictionary.get("lastSeenDeviceId") if dictionary.get("lastSeenDeviceId") else APIHelper.SKIP

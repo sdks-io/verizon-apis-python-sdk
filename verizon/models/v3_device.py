@@ -17,28 +17,26 @@ class V3Device(object):
     Device information.
 
     Attributes:
-        device_id (string): Device IMEI.
-        request_status (string): Success or failure.
-        result_reason (string): TODO: type description here.
-        mdn (string): MDN.
-        model (string): Device model.
-        make (string): Device make.
-        firmware (string): Device firmware version.
+        device_id (str): Device IMEI.
+        request_status (str): Success or failure.
+        result_reason (str): TODO: type description here.
+        mdn (str): MDN.
+        model (str): Device model.
+        make (str): Device make.
+        firmware (str): Device firmware version.
         fota_eligible (bool): Value=true if the device software can be
             upgraded over the air using the Software Management Services API.
-        status (string): Device status.
+        status (str): Device status.
         license_assigned (bool): License assigned device.
-        protocol (string): Firmware protocol. Valid values include: LWM2M,
-            OMADM, HTTP or NONE.
-        software_list (list of V3SoftwareInfo): List of sofware.
-        file_list (list of V3SoftwareInfo): List of files.
-        create_time (string): The date and time of when the device is
-            created.
-        status_time (string): The date and time of when the device firmware or
+        protocol (str): Firmware protocol. Valid values include: LWM2M, OMADM,
+            HTTP or NONE.
+        software_list (List[V3SoftwareInfo]): List of sofware.
+        file_list (List[V3SoftwareInfo]): List of files.
+        create_time (str): The date and time of when the device is created.
+        status_time (str): The date and time of when the device firmware or
             software is updated.
-        update_time (string): The date and time of when the device is
-            updated.
-        refresh_time (string): The date and time of when the device is
+        update_time (str): The date and time of when the device is updated.
+        refresh_time (str): The date and time of when the device is
             refreshed.
         last_connection_time (datetime): The date and time of when the device
             reachability is checked.
@@ -143,7 +141,7 @@ class V3Device(object):
         if refresh_time is not APIHelper.SKIP:
             self.refresh_time = refresh_time 
         if last_connection_time is not APIHelper.SKIP:
-            self.last_connection_time = APIHelper.RFC3339DateTime(last_connection_time) if last_connection_time else None 
+            self.last_connection_time = APIHelper.apply_datetime_converter(last_connection_time, APIHelper.RFC3339DateTime) if last_connection_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -159,11 +157,11 @@ class V3Device(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         request_status = dictionary.get("requestStatus") if dictionary.get("requestStatus") else APIHelper.SKIP
         result_reason = dictionary.get("resultReason") if dictionary.get("resultReason") else APIHelper.SKIP

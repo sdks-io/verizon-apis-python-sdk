@@ -18,5 +18,5 @@ class UserEquipmentIdentityTypeEnum(object):
         IPADDRESS: TODO: type description here.
 
     """
-
     IPADDRESS = 'IPAddress'
+

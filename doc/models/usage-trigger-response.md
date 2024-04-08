@@ -9,18 +9,18 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `trigger_id` | `string` | Required | Unique usage triggerId |
-| `trigger_name` | `string` | Required | Usage trigger name |
-| `account_name` | `string` | Required | Account name |
+| `trigger_id` | `str` | Required | Unique usage triggerId |
+| `trigger_name` | `str` | Required | Usage trigger name |
+| `account_name` | `str` | Required | Account name |
 | `service_name` | [`ServiceNameEnum`](../../doc/models/service-name-enum.md) | Required | Service name<br>**Default**: `'Location'` |
-| `threshold_value` | `string` | Required | Percent of subscription at which trigger will send an alert |
+| `threshold_value` | `str` | Required | Percent of subscription at which trigger will send an alert |
 | `allow_excess` | `bool` | Required | allowExcess determines whether to restrict usage after exceeds limits |
 | `send_sms_notification` | `bool` | Required | Send SMS (text) alerts when the thresholdValue is reached. |
-| `sms_phone_numbers` | `string` | Required | comma seperated value of list of Phone numbers for SMS notifications |
+| `sms_phone_numbers` | `str` | Required | comma seperated value of list of Phone numbers for SMS notifications |
 | `send_email_notification` | `bool` | Required | Send email alerts when the thresholdValue is reached. |
-| `email_addresses` | `string` | Required | comma seperated value of list of Email addresses for Email notifications |
-| `create_date` | `string` | Required | UTC Date when the usage trigger was created |
-| `update_date` | `string` | Required | UTC Date when the usage trigger was last updated |
+| `email_addresses` | `str` | Required | comma seperated value of list of Email addresses for Email notifications |
+| `create_date` | `str` | Required | UTC Date when the usage trigger was created |
+| `update_date` | `str` | Required | UTC Date when the usage trigger was last updated |
 
 ## Example (as JSON)
 

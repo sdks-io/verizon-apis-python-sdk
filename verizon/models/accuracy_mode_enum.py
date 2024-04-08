@@ -18,5 +18,5 @@ class AccuracyModeEnum(object):
         ENUM_0: TODO: type description here.
 
     """
-
     ENUM_0 = '0'
+

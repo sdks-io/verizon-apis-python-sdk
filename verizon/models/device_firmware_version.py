@@ -16,10 +16,10 @@ class DeviceFirmwareVersion(object):
     Device and firmware information.
 
     Attributes:
-        status (string): TODO: type description here.
-        reason (string): TODO: type description here.
-        device_id (string): Device IMEI.
-        firmware_version (string): Device Firmware Version.
+        status (str): TODO: type description here.
+        reason (str): TODO: type description here.
+        device_id (str): Device IMEI.
+        firmware_version (str): Device Firmware Version.
         firmware_version_update_time (datetime): TODO: type description here.
 
     """
@@ -55,7 +55,7 @@ class DeviceFirmwareVersion(object):
         self.device_id = device_id 
         self.firmware_version = firmware_version 
         if firmware_version_update_time is not APIHelper.SKIP:
-            self.firmware_version_update_time = APIHelper.RFC3339DateTime(firmware_version_update_time) if firmware_version_update_time else None 
+            self.firmware_version_update_time = APIHelper.apply_datetime_converter(firmware_version_update_time, APIHelper.RFC3339DateTime) if firmware_version_update_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -71,11 +71,11 @@ class DeviceFirmwareVersion(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         firmware_version = dictionary.get("firmwareVersion") if dictionary.get("firmwareVersion") else None
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP

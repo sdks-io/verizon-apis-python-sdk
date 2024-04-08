@@ -17,7 +17,7 @@ class AccountDeviceListResult(object):
     Response for a request to list down account devices.
 
     Attributes:
-        devices (list of ThingspaceDevice): Up to 10,000 devices that you want
+        devices (List[ThingspaceDevice]): Up to 10,000 devices that you want
             to move to a different account, specified by device identifier.
         has_more_data (bool): False for a status 200 response.True for a
             status 202 response, indicating that there is more data to be
@@ -61,11 +61,11 @@ class AccountDeviceListResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices = None
         if dictionary.get('devices') is not None:
             devices = [ThingspaceDevice.from_dictionary(x) for x in dictionary.get('devices')]

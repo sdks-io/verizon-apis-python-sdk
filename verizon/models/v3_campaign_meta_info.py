@@ -19,21 +19,21 @@ class V3CampaignMetaInfo(object):
     Campaign and campaign details.
 
     Attributes:
-        account_name (string): Account identifier.
-        id (string): Campaign identifier.
-        campaign_name (string): Campaign name.
-        firmware_name (string): Firmware name.
-        firmware_from (string): Old firmware version.
-        firmware_to (string): New software version.
+        account_name (str): Account identifier.
+        id (str): Campaign identifier.
+        campaign_name (str): Campaign name.
+        firmware_name (str): Firmware name.
+        firmware_from (str): Old firmware version.
+        firmware_to (str): New software version.
         protocol (CampaignMetaInfoProtocolEnum): Firmware protocol. Valid
             values include: LWM2M, OMD-DM.
-        make (string): Device make.
-        model (string): Device model.
+        make (str): Device make.
+        model (str): Device model.
         start_date (date): Campaign start date.
         end_date (date): Campaign end date.
-        campaign_time_window_list (list of V3TimeWindow): List of allowed
+        campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
-        status (string): Firmware upgrade status.
+        status (str): Firmware upgrade status.
 
     """
 
@@ -113,11 +113,11 @@ class V3CampaignMetaInfo(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         id = dictionary.get("id") if dictionary.get("id") else None
         make = dictionary.get("make") if dictionary.get("make") else None

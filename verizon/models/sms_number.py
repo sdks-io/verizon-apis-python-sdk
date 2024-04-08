@@ -16,8 +16,8 @@ class SMSNumber(object):
     Notification SMS details.
 
     Attributes:
-        carrier (string): TODO: type description here.
-        number (string): TODO: type description here.
+        carrier (str): TODO: type description here.
+        number (str): TODO: type description here.
 
     """
 
@@ -57,11 +57,11 @@ class SMSNumber(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         carrier = dictionary.get("carrier") if dictionary.get("carrier") else APIHelper.SKIP
         number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
         # Return an object of this model

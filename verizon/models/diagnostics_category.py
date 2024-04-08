@@ -19,9 +19,9 @@ class DiagnosticsCategory(object):
     Attribute objects as key-value pairs.
 
     Attributes:
-        category_name (string): The name of the category.
-        extended_attributes (list of CustomFields): A list of Extended
-            Attribute objects as key-value pairs.
+        category_name (str): The name of the category.
+        extended_attributes (List[CustomFields]): A list of Extended Attribute
+            objects as key-value pairs.
 
     """
 
@@ -61,11 +61,11 @@ class DiagnosticsCategory(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         category_name = dictionary.get("categoryName") if dictionary.get("categoryName") else APIHelper.SKIP
         extended_attributes = None
         if dictionary.get('extendedAttributes') is not None:

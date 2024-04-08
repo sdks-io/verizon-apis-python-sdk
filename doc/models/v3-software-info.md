@@ -11,9 +11,9 @@ Software information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Required | Software name. |
-| `version` | `string` | Required | Software version. |
-| `upgrade_time` | `string` | Required | Upgrade time. |
+| `name` | `str` | Required | Software name. |
+| `version` | `str` | Required | Software version. |
+| `upgrade_time` | `str` | Required | Upgrade time. |
 
 ## Example (as JSON)
 

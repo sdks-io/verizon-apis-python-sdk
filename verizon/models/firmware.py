@@ -16,16 +16,16 @@ class Firmware(object):
     Firmware information.
 
     Attributes:
-        firmware_name (string): The name of the firmware image, provided by
-            the device manufacturer.
-        participant_name (string): Internal reference; can be ignored.
+        firmware_name (str): The name of the firmware image, provided by the
+            device manufacturer.
+        participant_name (str): Internal reference; can be ignored.
         launch_date (datetime): The release date of the firmware image.
-        release_note (string): Additional information about the release.
-        model (string): The device model that the firmware applies to.
-        make (string): The device make that the firmware applies to.
-        from_version (string): The firmware version that must currently be on
-            the device to upgrade.
-        to_version (string): The firmware version that will be on the device
+        release_note (str): Additional information about the release.
+        model (str): The device model that the firmware applies to.
+        make (str): The device make that the firmware applies to.
+        from_version (str): The firmware version that must currently be on the
+            device to upgrade.
+        to_version (str): The firmware version that will be on the device
             after an upgrade.
 
     """
@@ -70,7 +70,7 @@ class Firmware(object):
         if participant_name is not APIHelper.SKIP:
             self.participant_name = participant_name 
         if launch_date is not APIHelper.SKIP:
-            self.launch_date = APIHelper.RFC3339DateTime(launch_date) if launch_date else None 
+            self.launch_date = APIHelper.apply_datetime_converter(launch_date, APIHelper.RFC3339DateTime) if launch_date else None 
         if release_note is not APIHelper.SKIP:
             self.release_note = release_note 
         if model is not APIHelper.SKIP:
@@ -96,11 +96,11 @@ class Firmware(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         firmware_name = dictionary.get("firmwareName") if dictionary.get("firmwareName") else APIHelper.SKIP
         participant_name = dictionary.get("participantName") if dictionary.get("participantName") else APIHelper.SKIP
         launch_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("launchDate")).datetime if dictionary.get("launchDate") else APIHelper.SKIP

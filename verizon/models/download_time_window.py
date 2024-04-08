@@ -16,8 +16,8 @@ class DownloadTimeWindow(object):
     TODO: type model description here.
 
     Attributes:
-        start_time (string): Device IMEI list.
-        end_time (string): Device IMEI list.
+        start_time (str): Device IMEI list.
+        end_time (str): Device IMEI list.
 
     """
 
@@ -57,11 +57,11 @@ class DownloadTimeWindow(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         start_time = dictionary.get("startTime") if dictionary.get("startTime") else APIHelper.SKIP
         end_time = dictionary.get("endTime") if dictionary.get("endTime") else APIHelper.SKIP
         # Return an object of this model

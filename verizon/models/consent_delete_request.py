@@ -16,8 +16,8 @@ class ConsentDeleteRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account identifier.
-        device_list (list of string): Device ID list.
+        account_name (str): Account identifier.
+        device_list (List[str]): Device ID list.
 
     """
 
@@ -57,11 +57,11 @@ class ConsentDeleteRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else APIHelper.SKIP
         # Return an object of this model

@@ -17,7 +17,7 @@ class FirmwareUpgradeChangeRequest(object):
     Attributes:
         mtype (FirmwareTypeListEnum): Possible values are `append` or
             `remove`
-        device_list (list of string): The IMEIs of the devices.
+        device_list (List[str]): The IMEIs of the devices.
 
     """
 
@@ -50,11 +50,11 @@ class FirmwareUpgradeChangeRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         mtype = dictionary.get("type") if dictionary.get("type") else None
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
         # Return an object of this model

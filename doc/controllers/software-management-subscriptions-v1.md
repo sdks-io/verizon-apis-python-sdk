@@ -27,11 +27,11 @@ def get_account_subscription_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
 
 ## Response Type
 
-[`V1AccountSubscription`](../../doc/models/v1-account-subscription.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`V1AccountSubscription`](../../doc/models/v1-account-subscription.md).
 
 ## Example Usage
 
@@ -75,12 +75,12 @@ def get_account_license_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
-| `start_index` | `string` | Template, Required | The zero-based number of the first record to return. Set startIndex=0 for the first request. If there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for the third request, etc. |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+| `start_index` | `str` | Template, Required | The zero-based number of the first record to return. Set startIndex=0 for the first request. If there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for the third request, etc. |
 
 ## Response Type
 
-[`AccountLicenseInfo`](../../doc/models/account-license-info.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`AccountLicenseInfo`](../../doc/models/account-license-info.md).
 
 ## Example Usage
 

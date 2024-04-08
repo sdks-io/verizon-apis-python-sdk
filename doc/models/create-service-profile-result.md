@@ -11,7 +11,7 @@ A successful request returns a serviceProfileId that you can use in subsequent r
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `service_profile_id` | `string` | Optional | Unique identifier for a service profile. |
+| `service_profile_id` | `str` | Optional | Unique identifier for a service profile. |
 
 ## Example (as JSON)
 

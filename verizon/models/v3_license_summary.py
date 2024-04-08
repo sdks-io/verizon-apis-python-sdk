@@ -17,13 +17,13 @@ class V3LicenseSummary(object):
     Information for FOTA licenses assigned to devices.
 
     Attributes:
-        account_name (string): Account identifier.
+        account_name (str): Account identifier.
         total_licenses (int): Total FOTA license count.
         assigned_licenses (int): Assigned FOTA license count.
         has_more_data (bool): True if there are more devices to retrieve.
-        last_seen_device_id (string): Last seen device identifier.
+        last_seen_device_id (str): Last seen device identifier.
         max_page_size (int): Maximum page size.
-        device_list (list of V3LicenseDevice): Device IMEI list.
+        device_list (List[V3LicenseDevice]): Device IMEI list.
 
     """
 
@@ -80,11 +80,11 @@ class V3LicenseSummary(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         assigned_licenses = dictionary.get("assignedLicenses") if dictionary.get("assignedLicenses") else None
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else None

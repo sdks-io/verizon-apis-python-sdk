@@ -26,7 +26,6 @@ class ClientTypeEnum(object):
         ROBOTICS: TODO: type description here.
 
     """
-
     V2_X = 'V2X'
 
     COMPUTERVISION = 'ComputerVision'
@@ -44,3 +43,4 @@ class ClientTypeEnum(object):
     ANALYTICS = 'Analytics'
 
     ROBOTICS = 'Robotics'
+

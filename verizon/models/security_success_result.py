@@ -16,8 +16,8 @@ class SecuritySuccessResult(object):
     Success response.
 
     Attributes:
-        request_id (string): A unique string that associates the request with
-            the results that are sent via a callback message.The ThingSpace
+        request_id (str): A unique string that associates the request with the
+            results that are sent via a callback message.The ThingSpace
             Platform sends a separate callback message for each device that
             matches the request criteria, indicating whether the operation
             succeeded for that device and containing any requested
@@ -56,11 +56,11 @@ class SecuritySuccessResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         request_id = dictionary.get("requestId") if dictionary.get("requestId") else APIHelper.SKIP
         # Return an object of this model
         return cls(request_id)

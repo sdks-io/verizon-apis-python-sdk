@@ -16,9 +16,9 @@ class StatusList(object):
     TODO: type model description here.
 
     Attributes:
-        id (string): Account name
-        status (string): Success or Fail
-        reason (string): detailed reason
+        id (str): Account name
+        status (str): Success or Fail
+        reason (str): detailed reason
 
     """
 
@@ -63,11 +63,11 @@ class StatusList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         reason = dictionary.get("reason") if dictionary.get("reason") else APIHelper.SKIP

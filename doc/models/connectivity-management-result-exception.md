@@ -11,8 +11,8 @@ Response to errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error_code` | `string` | Optional | Code of the error. |
-| `error_message` | `string` | Optional | Details of the error. |
+| `error_code` | `str` | Optional | Code of the error. |
+| `error_message` | `str` | Optional | Details of the error. |
 
 ## Example (as JSON)
 

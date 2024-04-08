@@ -11,8 +11,8 @@ All error messages are returned in this format. Error codes and messages are lis
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error_code` | `string` | Required | Simple error code. |
-| `error_message` | `string` | Required | Detailed error message. |
+| `error_code` | `str` | Required | Simple error code. |
+| `error_message` | `str` | Required | Detailed error message. |
 
 ## Example (as JSON)
 

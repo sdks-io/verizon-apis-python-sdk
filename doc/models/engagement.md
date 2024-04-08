@@ -11,9 +11,9 @@ The engagements associated with the account.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `engagement_id` | `string` | Optional | The engagement ID. |
-| `charging_group` | `string` | Optional | The charging group name. |
-| `services` | [`List of AccountService`](../../doc/models/account-service.md) | Optional | The services associated with the account. |
+| `engagement_id` | `str` | Optional | The engagement ID. |
+| `charging_group` | `str` | Optional | The charging group name. |
+| `services` | [`List[AccountService]`](../../doc/models/account-service.md) | Optional | The services associated with the account. |
 
 ## Example (as JSON)
 

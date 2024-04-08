@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customer_name` | [`List of CustomerName`](../../doc/models/customer-name.md) | Optional | **Constraints**: *Maximum Items*: `5` |
-| `address` | [`List of Address`](../../doc/models/address.md) | Optional | **Constraints**: *Maximum Items*: `5` |
+| `customer_name` | [`List[CustomerName]`](../../doc/models/customer-name.md) | Optional | **Constraints**: *Maximum Items*: `5` |
+| `address` | [`List[Address]`](../../doc/models/address.md) | Optional | **Constraints**: *Maximum Items*: `5` |
 
 ## Example (as JSON)
 
@@ -18,39 +18,56 @@
 {
   "customerName": [
     {
-      "title": "title9",
-      "firstName": "firstName9",
-      "middleName": "middleName3",
-      "lastName": "lastName9",
-      "suffix": "suffix5"
+      "title": "title4",
+      "firstName": "firstName4",
+      "middleName": "middleName8",
+      "lastName": "lastName4",
+      "suffix": "suffix0"
     },
     {
-      "title": "title8",
-      "firstName": "firstName8",
-      "middleName": "middleName4",
-      "lastName": "lastName0",
-      "suffix": "suffix4"
-    },
-    {
-      "title": "title7",
-      "firstName": "firstName7",
-      "middleName": "middleName5",
-      "lastName": "lastName1",
-      "suffix": "suffix3"
+      "title": "title4",
+      "firstName": "firstName4",
+      "middleName": "middleName8",
+      "lastName": "lastName4",
+      "suffix": "suffix0"
     }
   ],
   "address": [
     {
-      "addressLine1": "addressLine16",
-      "addressLine2": "addressLine24",
-      "city": "city4",
-      "state": "state0",
-      "zip": "zip8",
-      "zip4": "zip48",
-      "country": "country8",
+      "addressLine1": "addressLine18",
+      "addressLine2": "addressLine26",
+      "city": "city6",
+      "state": "state2",
+      "zip": "zip0",
+      "zip4": "zip40",
+      "country": "country0",
       "phone": "phone4",
-      "phoneType": "phoneType8",
-      "emailAddress": "emailAddress4"
+      "phoneType": "phoneType0",
+      "emailAddress": "emailAddress6"
+    },
+    {
+      "addressLine1": "addressLine18",
+      "addressLine2": "addressLine26",
+      "city": "city6",
+      "state": "state2",
+      "zip": "zip0",
+      "zip4": "zip40",
+      "country": "country0",
+      "phone": "phone4",
+      "phoneType": "phoneType0",
+      "emailAddress": "emailAddress6"
+    },
+    {
+      "addressLine1": "addressLine18",
+      "addressLine2": "addressLine26",
+      "city": "city6",
+      "state": "state2",
+      "zip": "zip0",
+      "zip4": "zip40",
+      "country": "country0",
+      "phone": "phone4",
+      "phoneType": "phoneType0",
+      "emailAddress": "emailAddress6"
     }
   ]
 }

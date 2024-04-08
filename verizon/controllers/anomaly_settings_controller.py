@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.intelligence_success_result import IntelligenceSuccessResult
 from verizon.models.anomaly_detection_settings import AnomalyDetectionSettings
 from verizon.exceptions.intelligence_result_exception import IntelligenceResultException
@@ -31,7 +29,7 @@ class AnomalySettingsController(BaseController):
 
     def activate_anomaly_detection(self,
                                    body):
-        """Does a PUT request to /v1/intelligence/anomaly/settings.
+        """Does a POST request to /m2m/v1/intelligence/anomaly/settings.
 
         Uses the subscribed account ID to activate anomaly detection and set
         threshold values.
@@ -54,9 +52,9 @@ class AnomalySettingsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/intelligence/anomaly/settings')
-            .http_method(HttpMethodEnum.PUT)
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/intelligence/anomaly/settings')
+            .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
                           .key('Content-Type')
                           .value('application/json'))
@@ -66,49 +64,7 @@ class AnomalySettingsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(IntelligenceSuccessResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'An error occurred.', IntelligenceResultException)
-        ).execute()
-
-    def reset_anomaly_detection_parameters(self,
-                                           account_name):
-        """Does a PUT request to /v1/intelligence/{accountName}/anomaly/settings/reset.
-
-        Resets the thresholds to zero.
-
-        Args:
-            account_name (string): The name of the subscribed account.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Success
-                response.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/intelligence/{accountName}/anomaly/settings/reset')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('accountName')
-                            .value(account_name)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -119,12 +75,12 @@ class AnomalySettingsController(BaseController):
 
     def list_anomaly_detection_settings(self,
                                         account_name):
-        """Does a GET request to /v1/intelligence/{accountName}/anomaly/settings.
+        """Does a GET request to /m2m/v1/intelligence/{accountName}/anomaly/settings.
 
         Retrieves the current anomaly detection settings for an account.
 
         Args:
-            account_name (string): The name of the subscribed account.
+            account_name (str): The name of the subscribed account.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -140,8 +96,8 @@ class AnomalySettingsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.M2M)
-            .path('/v1/intelligence/{accountName}/anomaly/settings')
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/intelligence/{accountName}/anomaly/settings')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('accountName')
@@ -150,11 +106,53 @@ class AnomalySettingsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AnomalyDetectionSettings.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'An error occurred.', IntelligenceResultException)
+        ).execute()
+
+    def reset_anomaly_detection_parameters(self,
+                                           account_name):
+        """Does a PUT request to /m2m/v1/intelligence/{accountName}/anomaly/settings/reset.
+
+        Resets the thresholds to zero.
+
+        Args:
+            account_name (str): The name of the subscribed account.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Success
+                response.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/intelligence/{accountName}/anomaly/settings/reset')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('accountName')
+                            .value(account_name)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(IntelligenceSuccessResult.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'An error occurred.', IntelligenceResultException)
         ).execute()

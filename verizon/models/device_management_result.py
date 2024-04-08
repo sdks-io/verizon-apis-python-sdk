@@ -17,8 +17,8 @@ class DeviceManagementResult(object):
     and receive data.
 
     Attributes:
-        request_id (string): A unique string that associates the request with
-            the results that are sent via a callback service.
+        request_id (str): A unique string that associates the request with the
+            results that are sent via a callback service.
 
     """
 
@@ -53,11 +53,11 @@ class DeviceManagementResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         request_id = dictionary.get("requestId") if dictionary.get("requestId") else APIHelper.SKIP
         # Return an object of this model
         return cls(request_id)

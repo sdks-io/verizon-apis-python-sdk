@@ -11,7 +11,7 @@ IMEIs of the devices to assign licenses to.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_list` | `List of string` | Required | The IMEIs of the devices. |
+| `device_list` | `List[str]` | Required | The IMEIs of the devices. |
 
 ## Example (as JSON)
 

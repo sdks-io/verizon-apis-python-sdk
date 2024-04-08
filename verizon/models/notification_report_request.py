@@ -16,10 +16,10 @@ class NotificationReportRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): TODO: type description here.
-        request_type (string): TODO: type description here.
-        devices (list of DeviceList): TODO: type description here.
-        monitor_expiration_time (string): TODO: type description here.
+        account_name (str): TODO: type description here.
+        request_type (str): TODO: type description here.
+        devices (List[DeviceList]): TODO: type description here.
+        monitor_expiration_time (str): TODO: type description here.
 
     """
 
@@ -58,11 +58,11 @@ class NotificationReportRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         request_type = dictionary.get("requestType") if dictionary.get("requestType") else None
         devices = None

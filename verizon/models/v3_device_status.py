@@ -16,9 +16,9 @@ class V3DeviceStatus(object):
     Device status.
 
     Attributes:
-        device_id (string): Device IMEI.
-        status (string): Success or failure.
-        result_reason (string): Result reason.
+        device_id (str): Device IMEI.
+        status (str): Success or failure.
+        result_reason (str): Result reason.
         updated_time (datetime): Updated Time.
         recent_attempt_time (datetime): The most recent attempt time.
         next_attempt_time (datetime): Next attempt time.
@@ -57,11 +57,11 @@ class V3DeviceStatus(object):
         if result_reason is not APIHelper.SKIP:
             self.result_reason = result_reason 
         if updated_time is not APIHelper.SKIP:
-            self.updated_time = APIHelper.RFC3339DateTime(updated_time) if updated_time else None 
+            self.updated_time = APIHelper.apply_datetime_converter(updated_time, APIHelper.RFC3339DateTime) if updated_time else None 
         if recent_attempt_time is not APIHelper.SKIP:
-            self.recent_attempt_time = APIHelper.RFC3339DateTime(recent_attempt_time) if recent_attempt_time else None 
+            self.recent_attempt_time = APIHelper.apply_datetime_converter(recent_attempt_time, APIHelper.RFC3339DateTime) if recent_attempt_time else None 
         if next_attempt_time is not APIHelper.SKIP:
-            self.next_attempt_time = APIHelper.RFC3339DateTime(next_attempt_time) if next_attempt_time else None 
+            self.next_attempt_time = APIHelper.apply_datetime_converter(next_attempt_time, APIHelper.RFC3339DateTime) if next_attempt_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -77,11 +77,11 @@ class V3DeviceStatus(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         status = dictionary.get("status") if dictionary.get("status") else None
         result_reason = dictionary.get("resultReason") if dictionary.get("resultReason") else APIHelper.SKIP

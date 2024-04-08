@@ -16,12 +16,10 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
-from verizon.models.list_service_profiles_result import ListServiceProfilesResult
 from verizon.models.create_service_profile_result import CreateServiceProfileResult
-from verizon.models.update_service_profile_result import UpdateServiceProfileResult
+from verizon.models.list_service_profiles_result import ListServiceProfilesResult
 from verizon.models.resources_service_profile_with_id import ResourcesServiceProfileWithId
+from verizon.models.update_service_profile_result import UpdateServiceProfileResult
 from verizon.models.delete_service_profile_result import DeleteServiceProfileResult
 from verizon.exceptions.edge_discovery_result_exception import EdgeDiscoveryResultException
 
@@ -31,43 +29,6 @@ class ServiceProfilesController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(ServiceProfilesController, self).__init__(config)
-
-    def list_service_profiles(self):
-        """Does a GET request to /serviceprofiles.
-
-        List all service profiles registered under your API key.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. A comma
-                delimited list of all the service profiles registered under
-                your API key.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.EDGE_DISCOVERY)
-            .path('/serviceprofiles')
-            .http_method(HttpMethodEnum.GET)
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ListServiceProfilesResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
-            .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
-            .local_error('default', 'HTTP 500 Internal Server Error.', EdgeDiscoveryResultException)
-        ).execute()
 
     def create_service_profile(self,
                                body):
@@ -111,11 +72,92 @@ class ServiceProfilesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreateServiceProfileResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
+            .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
+            .local_error('default', 'HTTP 500 Internal Server Error.', EdgeDiscoveryResultException)
+        ).execute()
+
+    def list_service_profiles(self):
+        """Does a GET request to /serviceprofiles.
+
+        List all service profiles registered under your API key.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. A comma
+                delimited list of all the service profiles registered under
+                your API key.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.EDGE_DISCOVERY)
+            .path('/serviceprofiles')
+            .http_method(HttpMethodEnum.GET)
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ListServiceProfilesResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
+            .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
+            .local_error('default', 'HTTP 500 Internal Server Error.', EdgeDiscoveryResultException)
+        ).execute()
+
+    def get_service_profile(self,
+                            service_profile_id):
+        """Does a GET request to /serviceprofiles/{serviceProfileId}.
+
+        Returns a specified service profile.
+
+        Args:
+            service_profile_id (str): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Requested
+                service profile.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.EDGE_DISCOVERY)
+            .path('/serviceprofiles/{serviceProfileId}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('serviceProfileId')
+                            .value(service_profile_id)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ResourcesServiceProfileWithId.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
             .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
@@ -130,7 +172,7 @@ class ServiceProfilesController(BaseController):
         Update the definition of a Service Profile.
 
         Args:
-            service_profile_id (string): TODO: type description here.
+            service_profile_id (str): TODO: type description here.
             body (ResourcesServiceProfile): The request body passes the rest
                 of the needed parameters to create a service profile. The
                 `maxLatencyMs` and `clientType` parameters are both required
@@ -169,55 +211,11 @@ class ServiceProfilesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UpdateServiceProfileResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
-            .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
-            .local_error('default', 'HTTP 500 Internal Server Error.', EdgeDiscoveryResultException)
-        ).execute()
-
-    def get_service_profile(self,
-                            service_profile_id):
-        """Does a GET request to /serviceprofiles/{serviceProfileId}.
-
-        Returns a specified service profile.
-
-        Args:
-            service_profile_id (string): TODO: type description here.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Requested
-                service profile.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.EDGE_DISCOVERY)
-            .path('/serviceprofiles/{serviceProfileId}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('serviceProfileId')
-                            .value(service_profile_id)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ResourcesServiceProfileWithId.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'HTTP 400 Bad Request.', EdgeDiscoveryResultException)
             .local_error('401', 'HTTP 401 Unauthorized.', EdgeDiscoveryResultException)
@@ -231,7 +229,7 @@ class ServiceProfilesController(BaseController):
         Delete Service Profile based on unique service profile ID.
 
         Args:
-            service_profile_id (string): TODO: type description here.
+            service_profile_id (str): TODO: type description here.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -257,7 +255,7 @@ class ServiceProfilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

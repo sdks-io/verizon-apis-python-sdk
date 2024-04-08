@@ -11,9 +11,9 @@ Device list information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account name. |
+| `account_name` | `str` | Required | Account name. |
 | `device_count` | `int` | Required | Total device count. |
-| `device_list` | [`List of V3Device`](../../doc/models/v3-device.md) | Required | List of devices with id in IMEI.<br>**Constraints**: *Maximum Items*: `1000` |
+| `device_list` | [`List[V3Device]`](../../doc/models/v3-device.md) | Required | List of devices with id in IMEI.<br>**Constraints**: *Maximum Items*: `1000` |
 
 ## Example (as JSON)
 
@@ -36,8 +36,8 @@ Device list information.
       "statusTime": "2021-06-03 00:03:56.079 +0000 UTC",
       "refreshTime": "2021-06-03 00:03:56.079 +0000 UTC",
       "lastConnectionTime": "2012-04-23T18:25:43.511Z",
-      "requestStatus": "requestStatus6",
-      "resultReason": "resultReason6"
+      "requestStatus": "requestStatus2",
+      "resultReason": "resultReason2"
     }
   ]
 }

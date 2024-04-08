@@ -18,13 +18,13 @@ class DeviceSoftwareUpgrade(object):
     Array of software upgrade objects with the specified status.
 
     Attributes:
-        device_id (string): Device identifier.
-        id (string): Upgrade identifier.
-        account_name (string): Account identifier.
-        software_name (string): Software name.
+        device_id (str): Device identifier.
+        id (str): Upgrade identifier.
+        account_name (str): Account identifier.
+        software_name (str): Software name.
         start_date (date): Software upgrade start date.
-        status (string): Software upgrade status.
-        reason (string): Software upgrade result reason.
+        status (str): Software upgrade status.
+        reason (str): Software upgrade result reason.
 
     """
 
@@ -77,11 +77,11 @@ class DeviceSoftwareUpgrade(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         id = dictionary.get("id") if dictionary.get("id") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None

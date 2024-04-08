@@ -24,11 +24,11 @@ def list_account_subscriptions(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`SecuritySubscriptionRequest`](../../doc/models/security-subscription-request.md) | Body, Required | Request for account subscription. |
-| `x_request_id` | `string` | Header, Optional | Transaction Id.<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[0-9]-[0-9]{3,32}$` |
+| `x_request_id` | `str` | Header, Optional | Transaction Id. |
 
 ## Response Type
 
-[`SecuritySubscriptionResult`](../../doc/models/security-subscription-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`SecuritySubscriptionResult`](../../doc/models/security-subscription-result.md).
 
 ## Example Usage
 

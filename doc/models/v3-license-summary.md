@@ -11,13 +11,13 @@ Information for FOTA licenses assigned to devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account identifier. |
+| `account_name` | `str` | Required | Account identifier. |
 | `total_licenses` | `int` | Optional | Total FOTA license count. |
 | `assigned_licenses` | `int` | Required | Assigned FOTA license count. |
 | `has_more_data` | `bool` | Required | True if there are more devices to retrieve. |
-| `last_seen_device_id` | `string` | Optional | Last seen device identifier. |
+| `last_seen_device_id` | `str` | Optional | Last seen device identifier. |
 | `max_page_size` | `int` | Required | Maximum page size. |
-| `device_list` | [`List of V3LicenseDevice`](../../doc/models/v3-license-device.md) | Optional | Device IMEI list. |
+| `device_list` | [`List[V3LicenseDevice]`](../../doc/models/v3-license-device.md) | Optional | Device IMEI list. |
 
 ## Example (as JSON)
 

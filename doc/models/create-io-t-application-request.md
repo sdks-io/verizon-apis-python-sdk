@@ -11,15 +11,15 @@ The request body must include the UUID of the subscription that you want to upda
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `app_name` | `string` | Optional | A user defined name for the application being deployed in Azure IoT Central. |
-| `billing_account_id` | `string` | Optional | The ThingSpace ID of the authenticating billing account |
-| `client_id` | `string` | Optional | The Azure ClientID of the associated Azure target account |
-| `client_secret` | `string` | Optional | The Azure Client Secret of the associated Azure target account |
-| `email_i_ds` | `string` | Optional | The “email IDs” to be added to/sent to with this API. |
-| `resourcegroup` | `string` | Optional | The Azure Resource group of the associated Azure target account |
-| `sample_io_tc_app` | `string` | Optional | This is the reference Azure IoT Central application developed by Verizon. |
-| `subscription_id` | `string` | Optional | The Azure Subscription ID of the associated Azure target account |
-| `tenant_id` | `string` | Optional | The Azure Tenant ID of the associated Azure target account |
+| `app_name` | `str` | Optional | A user defined name for the application being deployed in Azure IoT Central. |
+| `billing_account_id` | `str` | Optional | The ThingSpace ID of the authenticating billing account |
+| `client_id` | `str` | Optional | The Azure ClientID of the associated Azure target account |
+| `client_secret` | `str` | Optional | The Azure Client Secret of the associated Azure target account |
+| `email_i_ds` | `str` | Optional | The “email IDs” to be added to/sent to with this API. |
+| `resourcegroup` | `str` | Optional | The Azure Resource group of the associated Azure target account |
+| `sample_io_tc_app` | `str` | Optional | This is the reference Azure IoT Central application developed by Verizon. |
+| `subscription_id` | `str` | Optional | The Azure Subscription ID of the associated Azure target account |
+| `tenant_id` | `str` | Optional | The Azure Tenant ID of the associated Azure target account |
 
 ## Example (as JSON)
 

@@ -11,19 +11,19 @@ Device that exist in Verizon Mobile Device Management (MDM).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The billing account that the device is associated with. |
-| `billing_cycle_end_date` | `string` | Optional | The date that the device's current billing cycle ends. |
-| `carrier_informations` | [`List of CarrierInformation`](../../doc/models/carrier-information.md) | Optional | The carrier information associated with the device. |
+| `account_name` | `str` | Optional | The billing account that the device is associated with. |
+| `billing_cycle_end_date` | `str` | Optional | The date that the device's current billing cycle ends. |
+| `carrier_informations` | [`List[CarrierInformation]`](../../doc/models/carrier-information.md) | Optional | The carrier information associated with the device. |
 | `connected` | `bool` | Optional | True if the device is connected; false if it is not. |
-| `created_at` | `string` | Optional | The date and time that the device was added to the system. |
-| `custom_fields` | [`List of CustomFields`](../../doc/models/custom-fields.md) | Optional | The custom fields and values that have been set for the device. |
-| `device_ids` | [`List of DeviceId`](../../doc/models/device-id.md) | Optional | All identifiers for the device. |
-| `extended_attributes` | [`List of CustomFields`](../../doc/models/custom-fields.md) | Optional | Any extended attributes for the device, as Key and Value pairs. The pairs listed below are returned as part of the response for a single device, but are not included if the request was for information about multiple devices. |
-| `group_names` | `List of string` | Optional | The device groups that the device belongs to. |
-| `ip_address` | `string` | Optional | The IP address of the device. |
-| `last_activation_by` | `string` | Optional | The user who last activated the device. |
-| `last_activation_date` | `string` | Optional | The date and time that the device was last activated. |
-| `last_connection_date` | `string` | Optional | The most recent connection date and time. |
+| `created_at` | `str` | Optional | The date and time that the device was added to the system. |
+| `custom_fields` | [`List[CustomFields]`](../../doc/models/custom-fields.md) | Optional | The custom fields and values that have been set for the device. |
+| `device_ids` | [`List[DeviceId]`](../../doc/models/device-id.md) | Optional | All identifiers for the device. |
+| `extended_attributes` | [`List[CustomFields]`](../../doc/models/custom-fields.md) | Optional | Any extended attributes for the device, as Key and Value pairs. The pairs listed below are returned as part of the response for a single device, but are not included if the request was for information about multiple devices. |
+| `group_names` | `List[str]` | Optional | The device groups that the device belongs to. |
+| `ip_address` | `str` | Optional | The IP address of the device. |
+| `last_activation_by` | `str` | Optional | The user who last activated the device. |
+| `last_activation_date` | `str` | Optional | The date and time that the device was last activated. |
+| `last_connection_date` | `str` | Optional | The most recent connection date and time. |
 
 ## Example (as JSON)
 

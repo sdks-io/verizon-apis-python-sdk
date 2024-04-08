@@ -24,14 +24,13 @@ class V2ChangeCampaignDatesRequest(object):
         download_after_date (date): Specifies starting date client should
             download package. If null, client will download as soon as
             possible.
-        download_time_window_list (list of V2TimeWindow): List of allowed
+        download_time_window_list (List[V2TimeWindow]): List of allowed
             download time windows. Removing of existing windows is not
             allowed.
         install_after_date (date): Client will install package after date. If
             null, client will install as soon as possible.
-        install_time_window_list (list of V2TimeWindow): List of allowed
-            install time windows. Removing of existing windows is not
-            allowed.
+        install_time_window_list (List[V2TimeWindow]): List of allowed install
+            time windows. Removing of existing windows is not allowed.
 
     """
 
@@ -87,11 +86,11 @@ class V2ChangeCampaignDatesRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         start_date = dateutil.parser.parse(dictionary.get('startDate')).date() if dictionary.get('startDate') else None
         end_date = dateutil.parser.parse(dictionary.get('endDate')).date() if dictionary.get('endDate') else None
         download_after_date = dateutil.parser.parse(dictionary.get('downloadAfterDate')).date() if dictionary.get('downloadAfterDate') else APIHelper.SKIP

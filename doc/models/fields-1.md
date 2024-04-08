@@ -17,9 +17,9 @@
 {
   "item": {
     "acceleration": {
-      "x": "x2",
-      "y": "y6",
-      "z": "z2"
+      "x": "x6",
+      "y": "y4",
+      "z": "z6"
     },
     "battery": "battery0",
     "humidity": "humidity4",

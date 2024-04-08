@@ -16,19 +16,19 @@ class Target(object):
     Target resource definition.
 
     Attributes:
-        address (string): The endpoint for data streams.
-        addressscheme (string): The transport format.
-        billingaccountid (string): The billing account ID.
-        createdon (string): The date the resource was created.
-        externalid (string): Security identification string.
-        id (string): ThingSpace unique ID for the target that was created.
-        kind (string): Identifies the resource kind. Targets are ts.target.
-        lastupdated (string): The date the resource was last updated.
-        name (string): Name of the target.
-        region (string): AWS region value.
-        version (string): Version of the underlying schema resource.
-        versionid (string): The version of the resource.
-        description (string): Description of the target.
+        address (str): The endpoint for data streams.
+        addressscheme (str): The transport format.
+        billingaccountid (str): The billing account ID.
+        createdon (str): The date the resource was created.
+        externalid (str): Security identification string.
+        id (str): ThingSpace unique ID for the target that was created.
+        kind (str): Identifies the resource kind. Targets are ts.target.
+        lastupdated (str): The date the resource was last updated.
+        name (str): Name of the target.
+        region (str): AWS region value.
+        version (str): Version of the underlying schema resource.
+        versionid (str): The version of the resource.
+        description (str): Description of the target.
 
     """
 
@@ -123,11 +123,11 @@ class Target(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         address = dictionary.get("address") if dictionary.get("address") else APIHelper.SKIP
         addressscheme = dictionary.get("addressscheme") if dictionary.get("addressscheme") else APIHelper.SKIP
         billingaccountid = dictionary.get("billingaccountid") if dictionary.get("billingaccountid") else APIHelper.SKIP

@@ -22,11 +22,11 @@ def list_account_service_plans(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `aname` | `string` | Template, Required | Account name. |
+| `aname` | `str` | Template, Required | Account name. |
 
 ## Response Type
 
-[`List of ServicePlan`](../../doc/models/service-plan.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[ServicePlan]`](../../doc/models/service-plan.md).
 
 ## Example Usage
 

@@ -16,9 +16,9 @@ class HyperPreciseLocationFault(object):
     Fault occurred while responding.
 
     Attributes:
-        code (string): Hyper precise location fault code.
-        message (string): Hyper precise location fault message.
-        description (string): Hyper precise location fault description.
+        code (str): Hyper precise location fault code.
+        message (str): Hyper precise location fault message.
+        description (str): Hyper precise location fault description.
 
     """
 
@@ -63,11 +63,11 @@ class HyperPreciseLocationFault(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP

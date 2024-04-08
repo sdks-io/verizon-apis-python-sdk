@@ -19,8 +19,8 @@ class DeviceMismatchListResult(object):
     frame.
 
     Attributes:
-        devices (list of MismatchedDevice): A list of specific devices that
-            you want to check, specified by ICCID or MDN.
+        devices (List[MismatchedDevice]): A list of specific devices that you
+            want to check, specified by ICCID or MDN.
 
     """
 
@@ -55,11 +55,11 @@ class DeviceMismatchListResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         devices = None
         if dictionary.get('devices') is not None:
             devices = [MismatchedDevice.from_dictionary(x) for x in dictionary.get('devices')]

@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.security_success_result import SecuritySuccessResult
 from verizon.exceptions.security_result_exception import SecurityResultException
 
@@ -38,7 +36,7 @@ class SIMSecureForIoTLicensesController(BaseController):
         Args:
             body (AssignLicenseRequest): Request to assign license to
                 devices.
-            x_request_id (string, optional): Transaction Id.
+            x_request_id (str, optional): Transaction Id.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -69,7 +67,7 @@ class SIMSecureForIoTLicensesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -92,7 +90,7 @@ class SIMSecureForIoTLicensesController(BaseController):
         SIMs.
 
         Args:
-            x_request_id (string): Transaction Id.
+            x_request_id (str): Transaction Id.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -117,7 +115,7 @@ class SIMSecureForIoTLicensesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

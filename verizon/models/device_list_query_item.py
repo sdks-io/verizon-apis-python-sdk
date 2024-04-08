@@ -16,17 +16,17 @@ class DeviceListQueryItem(object):
     The list of devices in the account.
 
     Attributes:
-        device_id (string): Device IMEI.
-        mdn (string): The MDN (phone number) of the device.
-        model (string): The device model name.
-        make (string): The device make.
-        firmware (string): The name of the firmware image currently installed
-            on the device.
+        device_id (str): Device IMEI.
+        mdn (str): The MDN (phone number) of the device.
+        model (str): The device model name.
+        make (str): The device make.
+        firmware (str): The name of the firmware image currently installed on
+            the device.
         fota_eligible (bool): True if the device firmware can be upgraded over
             the air using the Software Management Services API.
         license_assigned (bool): True if an MRC license has been assigned to
             this device.
-        upgrade_time (string): The date and time that the device firmware was
+        upgrade_time (str): The date and time that the device firmware was
             last upgraded. If a device has never been upgraded, the
             upgradeTime will be 01/01/1900 0:0:0.
 
@@ -98,11 +98,11 @@ class DeviceListQueryItem(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else APIHelper.SKIP
         mdn = dictionary.get("mdn") if dictionary.get("mdn") else APIHelper.SKIP
         model = dictionary.get("model") if dictionary.get("model") else APIHelper.SKIP

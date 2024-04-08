@@ -16,8 +16,8 @@ class ManagedAccAddedList(object):
     TODO: type model description here.
 
     Attributes:
-        id (string): Account name
-        txid (string): Transaction identifier
+        id (str): Account name
+        txid (str): Transaction identifier
 
     """
 
@@ -57,11 +57,11 @@ class ManagedAccAddedList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         txid = dictionary.get("txid") if dictionary.get("txid") else APIHelper.SKIP
         # Return an object of this model

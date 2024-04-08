@@ -16,11 +16,11 @@ class PositionData(object):
     Position data.
 
     Attributes:
-        time (string): Time location obtained.
-        utcoffset (string): UTC offset of time.
-        x (string): X coordinate of location.
-        y (string): Y coordinate of location.
-        radius (string): Radius of the location in meters.
+        time (str): Time location obtained.
+        utcoffset (str): UTC offset of time.
+        x (str): X coordinate of location.
+        y (str): Y coordinate of location.
+        radius (str): Radius of the location in meters.
         qos (bool): Whether requested accurary is met or not.
 
     """
@@ -81,11 +81,11 @@ class PositionData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         time = dictionary.get("time") if dictionary.get("time") else APIHelper.SKIP
         utcoffset = dictionary.get("utcoffset") if dictionary.get("utcoffset") else APIHelper.SKIP
         x = dictionary.get("x") if dictionary.get("x") else APIHelper.SKIP

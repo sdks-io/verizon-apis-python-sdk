@@ -11,10 +11,10 @@ List of devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | Account identifier in "##########-#####". |
+| `account_name` | `str` | Optional | Account identifier in "##########-#####". |
 | `has_more_data` | `bool` | Optional | True if there are more devices to retrieve. |
 | `last_seen_device_id` | `long\|int` | Optional | If hasMoreData=true, the startIndex to use for the next request. 0 if hasMoreData=false. |
-| `device_list` | [`List of DeviceListQueryItem`](../../doc/models/device-list-query-item.md) | Optional | The list of devices in the account. |
+| `device_list` | [`List[DeviceListQueryItem]`](../../doc/models/device-list-query-item.md) | Optional | The list of devices in the account. |
 
 ## Example (as JSON)
 

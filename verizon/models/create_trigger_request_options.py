@@ -18,11 +18,11 @@ class CreateTriggerRequestOptions(object):
     TODO: type model description here.
 
     Attributes:
-        name (string): Trigger name.
-        trigger_category (string): This is the value to use in the request
-            body to detect anomalous behaivior. The values in this table will
-            only be relevant when this parameter is set to this value.
-        account_name (string): Account name.
+        name (str): Trigger name.
+        trigger_category (str): This is the value to use in the request body
+            to detect anomalous behaivior. The values in this table will only
+            be relevant when this parameter is set to this value.
+        account_name (str): Account name.
         anomaly_trigger_request (AnomalyTriggerRequest): The details of the
             UsageAnomaly trigger.
         notification (Notification): The notification details of the trigger.
@@ -88,11 +88,11 @@ class CreateTriggerRequestOptions(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         trigger_category = dictionary.get("triggerCategory") if dictionary.get("triggerCategory") else APIHelper.SKIP
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP

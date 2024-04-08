@@ -16,8 +16,8 @@ class ExtendedAttributes(object):
     Additional properties associated with data.
 
     Attributes:
-        key (string): TODO: type description here.
-        value (string): TODO: type description here.
+        key (str): TODO: type description here.
+        value (str): TODO: type description here.
 
     """
 
@@ -57,11 +57,11 @@ class ExtendedAttributes(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         key = dictionary.get("key") if dictionary.get("key") else APIHelper.SKIP
         value = dictionary.get("value") if dictionary.get("value") else APIHelper.SKIP
         # Return an object of this model

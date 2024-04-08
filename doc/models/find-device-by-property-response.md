@@ -11,20 +11,20 @@ Change Configuration resource definition.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `billingaccountid` | `string` | Optional | Billing account ID of the resource. |
-| `createdon` | `string` | Optional | The date the resource was created. |
-| `eventretention` | `string` | Optional | - |
-| `iccid` | `string` | Optional | Cellular SIM card identifier. |
-| `id` | `string` | Optional | ThingSpace unique ID for the device that was added. |
-| `imei` | `string` | Optional | 4G hardware device identifier. |
-| `kind` | `string` | Optional | Identifies the resource kind. |
-| `lastupdated` | `string` | Optional | The date the resource was last updated. |
-| `providerid` | `string` | Optional | The device’s service provider. |
-| `refid` | `string` | Optional | The value of the refidtype identifier. |
-| `refidtype` | `string` | Optional | The device identifier type used to refer to this device. |
-| `state` | `string` | Optional | Service state of the device. |
-| `version` | `string` | Optional | Version of the underlying schema resource. |
-| `versionid` | `string` | Optional | The version of the resource. |
+| `billingaccountid` | `str` | Optional | Billing account ID of the resource. |
+| `createdon` | `str` | Optional | The date the resource was created. |
+| `eventretention` | `str` | Optional | - |
+| `iccid` | `str` | Optional | Cellular SIM card identifier. |
+| `id` | `str` | Optional | ThingSpace unique ID for the device that was added. |
+| `imei` | `str` | Optional | 4G hardware device identifier. |
+| `kind` | `str` | Optional | Identifies the resource kind. |
+| `lastupdated` | `str` | Optional | The date the resource was last updated. |
+| `providerid` | `str` | Optional | The device’s service provider. |
+| `refid` | `str` | Optional | The value of the refidtype identifier. |
+| `refidtype` | `str` | Optional | The device identifier type used to refer to this device. |
+| `state` | `str` | Optional | Service state of the device. |
+| `version` | `str` | Optional | Version of the underlying schema resource. |
+| `versionid` | `str` | Optional | The version of the resource. |
 
 ## Example (as JSON)
 

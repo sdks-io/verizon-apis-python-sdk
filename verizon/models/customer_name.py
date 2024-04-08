@@ -16,13 +16,13 @@ class CustomerName(object):
     The customer name to be used for line usage taxation.
 
     Attributes:
-        title (string): An optional title for the customer, such as “Mr.” or
+        title (str): An optional title for the customer, such as “Mr.” or
             “Dr.”
-        first_name (string): The customer's first name.
-        middle_name (string): The customer's middle name.
-        last_name (string): The customer's last name.
-        suffix (string): An optional suffix for the customer name, such as
-            “Jr.” or “III.”
+        first_name (str): The customer's first name.
+        middle_name (str): The customer's middle name.
+        last_name (str): The customer's last name.
+        suffix (str): An optional suffix for the customer name, such as “Jr.”
+            or “III.”
 
     """
 
@@ -73,11 +73,11 @@ class CustomerName(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         first_name = dictionary.get("firstName") if dictionary.get("firstName") else None
         last_name = dictionary.get("lastName") if dictionary.get("lastName") else None
         title = dictionary.get("title") if dictionary.get("title") else APIHelper.SKIP

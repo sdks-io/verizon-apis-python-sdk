@@ -19,7 +19,7 @@ class ListMECPlatformsResult(object):
     equipment.
 
     Attributes:
-        mec_platforms (list of MECPlatformResource): A list of optimal MEC
+        mec_platforms (List[MECPlatformResource]): A list of optimal MEC
             Platforms where you can register your deployed application.
 
     """
@@ -55,11 +55,11 @@ class ListMECPlatformsResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         mec_platforms = None
         if dictionary.get('MECPlatforms') is not None:
             mec_platforms = [MECPlatformResource.from_dictionary(x) for x in dictionary.get('MECPlatforms')]

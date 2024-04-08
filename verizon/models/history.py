@@ -18,9 +18,9 @@ class History(object):
     History data for a selected device and its attributes at a specific time.
 
     Attributes:
-        account_name (string): The name of the billing account for which you
-            want retrieve history data. An account name is usually numeric,
-            and must include any leading zeros.
+        account_name (str): The name of the billing account for which you want
+            retrieve history data. An account name is usually numeric, and
+            must include any leading zeros.
         device (Device): Identifies a particular IoT device.
         attributes (HistoryAttributeValue): Streaming RF parameter for which
             you want to retrieve history data.
@@ -64,11 +64,11 @@ class History(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         device = Device.from_dictionary(dictionary.get('device')) if dictionary.get('device') else None
         attributes = HistoryAttributeValue.from_dictionary(dictionary.get('attributes')) if 'attributes' in dictionary.keys() else APIHelper.SKIP

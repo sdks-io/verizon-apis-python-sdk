@@ -11,10 +11,10 @@ Returns a list of all device groups in a specified account.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `description` | `string` | Optional | The description of the device group. |
-| `extended_attributes` | [`List of CustomFields`](../../doc/models/custom-fields.md) | Optional | Any extended attributes for the device group, as Key and Value pairs. |
+| `description` | `str` | Optional | The description of the device group. |
+| `extended_attributes` | [`List[CustomFields]`](../../doc/models/custom-fields.md) | Optional | Any extended attributes for the device group, as Key and Value pairs. |
 | `is_default_group` | `bool` | Optional | Identifies the default device group. |
-| `name` | `string` | Optional | The name of the device group. |
+| `name` | `str` | Optional | The name of the device group. |
 
 ## Example (as JSON)
 

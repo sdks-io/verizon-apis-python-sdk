@@ -12,7 +12,7 @@ Streaming RF parameter for which you want to retrieve history data.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | [`AttributeIdentifierEnum`](../../doc/models/attribute-identifier-enum.md) | Optional | Attribute identifier. |
-| `value` | `string` | Optional | Attribute value. |
+| `value` | `str` | Optional | Attribute value. |
 | `created_on` | `datetime` | Optional | Date and time the request was created. |
 
 ## Example (as JSON)

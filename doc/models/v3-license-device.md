@@ -11,8 +11,8 @@ Device IMEI.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device IMEI. |
-| `assignment_time` | `string` | Optional | License assignment time. |
+| `device_id` | `str` | Required | Device IMEI. |
+| `assignment_time` | `str` | Optional | License assignment time. |
 
 ## Example (as JSON)
 

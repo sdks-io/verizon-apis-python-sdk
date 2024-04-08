@@ -16,9 +16,9 @@ class ListServiceProfilesResult(object):
     Response on successful retrieval of service profiles.
 
     Attributes:
-        status (string): HTTP status code.
-        data (list of string): A comma delimited list of all the service
-            profiles registered under your API key.
+        status (str): HTTP status code.
+        data (List[str]): A comma delimited list of all the service profiles
+            registered under your API key.
 
     """
 
@@ -58,11 +58,11 @@ class ListServiceProfilesResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         data = dictionary.get("data") if dictionary.get("data") else APIHelper.SKIP
         # Return an object of this model

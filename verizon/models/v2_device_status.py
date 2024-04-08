@@ -16,9 +16,9 @@ class V2DeviceStatus(object):
     Device with id in IMEI.
 
     Attributes:
-        device_id (string): Device IMEI.
-        status (string): Success or failure.
-        result_reason (string): Result reason.
+        device_id (str): Device IMEI.
+        status (str): Success or failure.
+        result_reason (str): Result reason.
 
     """
 
@@ -59,11 +59,11 @@ class V2DeviceStatus(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         status = dictionary.get("status") if dictionary.get("status") else None
         result_reason = dictionary.get("resultReason") if dictionary.get("resultReason") else APIHelper.SKIP

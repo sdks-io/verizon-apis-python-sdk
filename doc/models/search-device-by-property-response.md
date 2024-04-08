@@ -11,21 +11,21 @@ The device identifier and fields to match in the search.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `billingaccountid` | `string` | Optional | Billing account ID of the resource. |
-| `createdon` | `string` | Optional | The date the resource was created. |
-| `eventretention` | `string` | Optional | - |
+| `billingaccountid` | `str` | Optional | Billing account ID of the resource. |
+| `createdon` | `str` | Optional | The date the resource was created. |
+| `eventretention` | `str` | Optional | - |
 | `fields` | [`Fields1`](../../doc/models/fields-1.md) | Optional | - |
-| `iccid` | `string` | Optional | Cellular SIM card identifier. |
-| `id` | `string` | Optional | ThingSpace unique ID for the device that was added. |
-| `imei` | `string` | Optional | 4G hardware device identifier. |
-| `kind` | `string` | Optional | Identifies the resource kind. |
-| `lastupdated` | `string` | Optional | The date the resource was last updated. |
-| `providerid` | `string` | Optional | The device’s service provider. |
-| `refid` | `string` | Optional | The value of the refidtype identifier. |
-| `refidtype` | `string` | Optional | The device identifier type used to refer to this device. |
-| `state` | `string` | Optional | Service state of the device. |
-| `version` | `string` | Optional | Version of the underlying schema resource. |
-| `versionid` | `string` | Optional | The version of the resource. |
+| `iccid` | `str` | Optional | Cellular SIM card identifier. |
+| `id` | `str` | Optional | ThingSpace unique ID for the device that was added. |
+| `imei` | `str` | Optional | 4G hardware device identifier. |
+| `kind` | `str` | Optional | Identifies the resource kind. |
+| `lastupdated` | `str` | Optional | The date the resource was last updated. |
+| `providerid` | `str` | Optional | The device’s service provider. |
+| `refid` | `str` | Optional | The value of the refidtype identifier. |
+| `refidtype` | `str` | Optional | The device identifier type used to refer to this device. |
+| `state` | `str` | Optional | Service state of the device. |
+| `version` | `str` | Optional | Version of the underlying schema resource. |
+| `versionid` | `str` | Optional | The version of the resource. |
 
 ## Example (as JSON)
 
@@ -52,10 +52,10 @@ The device identifier and fields to match in the search.
         "y": "y4",
         "z": "z6"
       },
-      "battery": "battery8",
-      "humidity": "humidity2",
-      "light": "light4",
-      "pressure": "pressure0"
+      "battery": "battery0",
+      "humidity": "humidity4",
+      "light": "light6",
+      "pressure": "pressure2"
     }
   }
 }

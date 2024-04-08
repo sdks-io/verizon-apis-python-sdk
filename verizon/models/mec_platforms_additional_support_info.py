@@ -17,7 +17,7 @@ class MECPlatformsAdditionalSupportInfo(object):
     Additional service support information for the MEC platform.
 
     Attributes:
-        mtype (string): Type of additional service support information for the
+        mtype (str): Type of additional service support information for the
             MEC platform.
         data (MECPlatformsAdditionalSupportInfoData): Data about additional
             service support information for the MEC platform.
@@ -60,11 +60,11 @@ class MECPlatformsAdditionalSupportInfo(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         data = MECPlatformsAdditionalSupportInfoData.from_dictionary(dictionary.get('data')) if 'data' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model

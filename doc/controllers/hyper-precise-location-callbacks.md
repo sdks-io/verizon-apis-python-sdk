@@ -28,11 +28,11 @@ def list_registered_callbacks(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_number` | `string` | Query, Required | A unique identifier for an account. |
+| `account_number` | `str` | Query, Required | A unique identifier for an account. |
 
 ## Response Type
 
-[`List of CallbackCreated`](../../doc/models/callback-created.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[CallbackCreated]`](../../doc/models/callback-created.md).
 
 ## Example Usage
 
@@ -81,12 +81,12 @@ def register_callback(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_number` | `string` | Query, Required | A unique identifier for an account. |
+| `account_number` | `str` | Query, Required | A unique identifier for an account. |
 | `body` | [`HyperPreciseLocationCallback`](../../doc/models/hyper-precise-location-callback.md) | Body, Required | - |
 
 ## Response Type
 
-[`CallbackRegistered`](../../doc/models/callback-registered.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`CallbackRegistered`](../../doc/models/callback-registered.md).
 
 ## Example Usage
 
@@ -140,12 +140,12 @@ def deregister_callback(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_number` | `string` | Query, Required | A unique identifier for a account. |
-| `service` | `string` | Query, Required | The name of the callback service that will be deleted. |
+| `account_number` | `str` | Query, Required | A unique identifier for a account. |
+| `service` | `str` | Query, Required | The name of the callback service that will be deleted. |
 
 ## Response Type
 
-`void`
+This method returns a `ApiResponse` instance.
 
 ## Example Usage
 

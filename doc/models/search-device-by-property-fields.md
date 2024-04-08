@@ -12,12 +12,12 @@ List of device sensors and their most recently reported values.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `acceleration` | [`Acceleration`](../../doc/models/acceleration.md) | Optional | - |
-| `battery` | `string` | Optional | - |
-| `humidity` | `string` | Optional | - |
-| `light` | `string` | Optional | - |
-| `pressure` | `string` | Optional | - |
-| `signal_strength` | `string` | Optional | - |
-| `temperature` | `string` | Optional | - |
+| `battery` | `str` | Optional | - |
+| `humidity` | `str` | Optional | - |
+| `light` | `str` | Optional | - |
+| `pressure` | `str` | Optional | - |
+| `signal_strength` | `str` | Optional | - |
+| `temperature` | `str` | Optional | - |
 | `device_propertylocation` | [`DevicePropertylocation`](../../doc/models/device-propertylocation.md) | Optional | - |
 
 ## Example (as JSON)

@@ -15,8 +15,8 @@ class StopMonitorRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): TODO: type description here.
-        monitor_ids (list of string): TODO: type description here.
+        account_name (str): TODO: type description here.
+        monitor_ids (List[str]): TODO: type description here.
 
     """
 
@@ -49,11 +49,11 @@ class StopMonitorRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         monitor_ids = dictionary.get("monitorIds") if dictionary.get("monitorIds") else None
         # Return an object of this model

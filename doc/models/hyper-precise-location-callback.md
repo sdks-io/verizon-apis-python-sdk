@@ -11,8 +11,8 @@ Callback registration request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Required | The name of the callback service that you want to subscribe to. |
-| `url` | `string` | Required | The address on your server where you have enabled a listening service for the specific type of callback messages. Specify a URL that is reachable from the Verizon data centers. If your service is running on HTTPS, you should use a one-way authentication certificate with a white-listed IP address. |
+| `name` | `str` | Required | The name of the callback service that you want to subscribe to. |
+| `url` | `str` | Required | The address on your server where you have enabled a listening service for the specific type of callback messages. Specify a URL that is reachable from the Verizon data centers. If your service is running on HTTPS, you should use a one-way authentication certificate with a white-listed IP address. |
 
 ## Example (as JSON)
 

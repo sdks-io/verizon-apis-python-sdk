@@ -11,16 +11,16 @@ Firmware upgrades information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device identifier. |
-| `campaign_id` | `string` | Required | Campaign identifier. |
-| `account_name` | `string` | Required | Account identifier. |
-| `firmware_name` | `string` | Optional | Firmware name. |
-| `firmware_from` | `string` | Optional | Old firmware version. |
-| `firmware_to` | `string` | Optional | New firmware version. |
+| `device_id` | `str` | Required | Device identifier. |
+| `campaign_id` | `str` | Required | Campaign identifier. |
+| `account_name` | `str` | Required | Account identifier. |
+| `firmware_name` | `str` | Optional | Firmware name. |
+| `firmware_from` | `str` | Optional | Old firmware version. |
+| `firmware_to` | `str` | Optional | New firmware version. |
 | `start_date` | `date` | Required | Firmware upgrade start date. |
-| `status` | `string` | Required | Firmware upgrade status. |
-| `reason` | `string` | Required | Software upgrade result reason. |
-| `report_updated_time` | `string` | Optional | Report updated time. |
+| `status` | `str` | Required | Firmware upgrade status. |
+| `reason` | `str` | Required | Software upgrade result reason. |
+| `report_updated_time` | `str` | Optional | Report updated time. |
 
 ## Example (as JSON)
 

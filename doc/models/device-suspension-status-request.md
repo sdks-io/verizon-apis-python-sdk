@@ -11,9 +11,9 @@ Request to return service suspension information about one or more devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_ids` | [`List of DeviceId`](../../doc/models/device-id.md) | Optional | The devices that you want to include in the request, specified by device identifier. You only need to provide one identifier per device. |
+| `device_ids` | [`List[DeviceId]`](../../doc/models/device-id.md) | Optional | The devices that you want to include in the request, specified by device identifier. You only need to provide one identifier per device. |
 | `filter` | [`DeviceFilterWithoutAccount`](../../doc/models/device-filter-without-account.md) | Optional | Filter for devices without account. |
-| `account_name` | `string` | Optional | The name of a billing account. |
+| `account_name` | `str` | Optional | The name of a billing account. |
 
 ## Example (as JSON)
 
@@ -24,16 +24,16 @@ Request to return service suspension information about one or more devices.
     "servicePlan": "servicePlan6",
     "customFields": [
       {
-        "key": "key4",
-        "value": "value6"
+        "key": "key0",
+        "value": "value2"
       },
       {
-        "key": "key5",
-        "value": "value7"
+        "key": "key0",
+        "value": "value2"
       },
       {
-        "key": "key6",
-        "value": "value8"
+        "key": "key0",
+        "value": "value2"
       }
     ]
   },
@@ -44,12 +44,8 @@ Request to return service suspension information about one or more devices.
       "kind": "kind8"
     },
     {
-      "id": "id1",
-      "kind": "kind9"
-    },
-    {
-      "id": "id2",
-      "kind": "kind0"
+      "id": "id0",
+      "kind": "kind8"
     }
   ]
 }

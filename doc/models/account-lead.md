@@ -12,8 +12,8 @@ A successful response returns an array of lead objects.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `address` | [`Address`](../../doc/models/address.md) | Optional | The customer address for the line's primary place of use, for line usage taxation. |
-| `lead_id` | `string` | Optional | Unique number for each lead. Use this value in the leadId parameter when activating devices to credit the activations to the lead. |
-| `lead_state` | `string` | Optional | The current state of the lead, such as “Qualified” or “Closed.” |
+| `lead_id` | `str` | Optional | Unique number for each lead. Use this value in the leadId parameter when activating devices to credit the activations to the lead. |
+| `lead_state` | `str` | Optional | The current state of the lead, such as “Qualified” or “Closed.” |
 
 ## Example (as JSON)
 

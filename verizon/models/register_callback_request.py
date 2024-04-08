@@ -16,13 +16,13 @@ class RegisterCallbackRequest(object):
     Request to register a callback.
 
     Attributes:
-        name (string): The name of the callback service that you want to
+        name (str): The name of the callback service that you want to
             subscribe to.
-        url (string): The address on your server where you have enabled a
+        url (str): The address on your server where you have enabled a
             listening service for callback messages.
-        username (string): The user name that the M2M Platform should return
-            in the callback messages.
-        password (string): The password that the M2M Platform should return in
+        username (str): The user name that the M2M Platform should return in
+            the callback messages.
+        password (str): The password that the M2M Platform should return in
             the callback messages.
 
     """
@@ -36,24 +36,20 @@ class RegisterCallbackRequest(object):
     }
 
     _optionals = [
-        'name',
-        'url',
         'username',
         'password',
     ]
 
     def __init__(self,
-                 name=APIHelper.SKIP,
-                 url=APIHelper.SKIP,
+                 name=None,
+                 url=None,
                  username=APIHelper.SKIP,
                  password=APIHelper.SKIP):
         """Constructor for the RegisterCallbackRequest class"""
 
         # Initialize members of the class
-        if name is not APIHelper.SKIP:
-            self.name = name 
-        if url is not APIHelper.SKIP:
-            self.url = url 
+        self.name = name 
+        self.url = url 
         if username is not APIHelper.SKIP:
             self.username = username 
         if password is not APIHelper.SKIP:
@@ -73,13 +69,13 @@ class RegisterCallbackRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
+        name = dictionary.get("name") if dictionary.get("name") else None
+        url = dictionary.get("url") if dictionary.get("url") else None
         username = dictionary.get("username") if dictionary.get("username") else APIHelper.SKIP
         password = dictionary.get("password") if dictionary.get("password") else APIHelper.SKIP
         # Return an object of this model

@@ -16,21 +16,21 @@ class FindDeviceByPropertyResponse(object):
     Change Configuration resource definition.
 
     Attributes:
-        billingaccountid (string): Billing account ID of the resource.
-        createdon (string): The date the resource was created.
-        eventretention (string): TODO: type description here.
-        iccid (string): Cellular SIM card identifier.
-        id (string): ThingSpace unique ID for the device that was added.
-        imei (string): 4G hardware device identifier.
-        kind (string): Identifies the resource kind.
-        lastupdated (string): The date the resource was last updated.
-        providerid (string): The device’s service provider.
-        refid (string): The value of the refidtype identifier.
-        refidtype (string): The device identifier type used to refer to this
+        billingaccountid (str): Billing account ID of the resource.
+        createdon (str): The date the resource was created.
+        eventretention (str): TODO: type description here.
+        iccid (str): Cellular SIM card identifier.
+        id (str): ThingSpace unique ID for the device that was added.
+        imei (str): 4G hardware device identifier.
+        kind (str): Identifies the resource kind.
+        lastupdated (str): The date the resource was last updated.
+        providerid (str): The device’s service provider.
+        refid (str): The value of the refidtype identifier.
+        refidtype (str): The device identifier type used to refer to this
             device.
-        state (string): Service state of the device.
-        version (string): Version of the underlying schema resource.
-        versionid (string): The version of the resource.
+        state (str): Service state of the device.
+        version (str): Version of the underlying schema resource.
+        versionid (str): The version of the resource.
 
     """
 
@@ -130,11 +130,11 @@ class FindDeviceByPropertyResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         billingaccountid = dictionary.get("billingaccountid") if dictionary.get("billingaccountid") else APIHelper.SKIP
         createdon = dictionary.get("createdon") if dictionary.get("createdon") else APIHelper.SKIP
         eventretention = dictionary.get("eventretention") if dictionary.get("eventretention") else APIHelper.SKIP

@@ -16,16 +16,16 @@ class RetrievesAvailableFilesResponse(object):
     TODO: type model description here.
 
     Attributes:
-        file_name (string): ThingSpace-generated name of the file. You will
-            use this name when listing or scheduling campaigns for the file.
-        file_version (string): Version of the file.
-        release_note (string): Software release note.
-        make (string): The software-applicable device make.
-        model (string): The software-applicable device model.
-        local_target_path (string): Local target path on the device.
-        distribution_type (string): Valid values
-        device_platform_id (string): The platform (Android, iOS, etc.,) that
-            the software can be applied to.
+        file_name (str): ThingSpace-generated name of the file. You will use
+            this name when listing or scheduling campaigns for the file.
+        file_version (str): Version of the file.
+        release_note (str): Software release note.
+        make (str): The software-applicable device make.
+        model (str): The software-applicable device model.
+        local_target_path (str): Local target path on the device.
+        distribution_type (str): Valid values
+        device_platform_id (str): The platform (Android, iOS, etc.,) that the
+            software can be applied to.
 
     """
 
@@ -95,11 +95,11 @@ class RetrievesAvailableFilesResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         file_name = dictionary.get("fileName") if dictionary.get("fileName") else APIHelper.SKIP
         file_version = dictionary.get("fileVersion") if dictionary.get("fileVersion") else APIHelper.SKIP
         release_note = dictionary.get("releaseNote") if dictionary.get("releaseNote") else APIHelper.SKIP

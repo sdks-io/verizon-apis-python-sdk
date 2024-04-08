@@ -17,7 +17,7 @@ class LabelsList(object):
     TODO: type model description here.
 
     Attributes:
-        device_ids (list of DeviceLabels): TODO: type description here.
+        device_ids (List[DeviceLabels]): TODO: type description here.
 
     """
 
@@ -52,11 +52,11 @@ class LabelsList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = None
         if dictionary.get('deviceIds') is not None:
             device_ids = [DeviceLabels.from_dictionary(x) for x in dictionary.get('deviceIds')]

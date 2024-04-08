@@ -11,9 +11,9 @@ Service associated with the account.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | The name of the service plan. |
-| `description` | `string` | Optional | The description of the service plan. |
-| `states` | [`List of State`](../../doc/models/state.md) | Optional | The state of the service plan. |
+| `name` | `str` | Optional | The name of the service plan. |
+| `description` | `str` | Optional | The description of the service plan. |
+| `states` | [`List[State]`](../../doc/models/state.md) | Optional | The state of the service plan. |
 
 ## Example (as JSON)
 

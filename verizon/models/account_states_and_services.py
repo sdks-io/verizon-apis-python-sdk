@@ -17,7 +17,7 @@ class AccountStatesAndServices(object):
     specified account.
 
     Attributes:
-        engagement (list of Engagement): The engagements associated with the
+        engagement (List[Engagement]): The engagements associated with the
             account.
 
     """
@@ -48,11 +48,11 @@ class AccountStatesAndServices(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         engagement = None
         if dictionary.get('engagement') is not None:
             engagement = [Engagement.from_dictionary(x) for x in dictionary.get('engagement')]

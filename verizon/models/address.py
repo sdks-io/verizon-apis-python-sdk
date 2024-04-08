@@ -17,21 +17,20 @@ class Address(object):
     taxation.
 
     Attributes:
-        address_line_1 (string): The street address for the line's primary
-            place of use. This must be a physical address for taxation; it
-            cannot be a P.O. box.
-        address_line_2 (string): Optional additional street address
-            information.
-        city (string): The city for the line's primary place of use.
-        state (string): The state for the line's primary place of use.
-        zip (string): The ZIP code for the line's primary place of use.
-        zip_4 (string): The ZIP+4 for the line's primary place of use.
-        country (string): Either “US” or “USA” for the country of the line's
+        address_line_1 (str): The street address for the line's primary place
+            of use. This must be a physical address for taxation; it cannot be
+            a P.O. box.
+        address_line_2 (str): Optional additional street address information.
+        city (str): The city for the line's primary place of use.
+        state (str): The state for the line's primary place of use.
+        zip (str): The ZIP code for the line's primary place of use.
+        zip_4 (str): The ZIP+4 for the line's primary place of use.
+        country (str): Either “US” or “USA” for the country of the line's
             primary place of use.
-        phone (string): A phone number where the customer can be reached.
-        phone_type (string): A single letter to indicate the customer phone
+        phone (str): A phone number where the customer can be reached.
+        phone_type (str): A single letter to indicate the customer phone
             type.
-        email_address (string): An email address for the customer.
+        email_address (str): An email address for the customer.
 
     """
 
@@ -101,11 +100,11 @@ class Address(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         address_line_1 = dictionary.get("addressLine1") if dictionary.get("addressLine1") else None
         city = dictionary.get("city") if dictionary.get("city") else None
         state = dictionary.get("state") if dictionary.get("state") else None

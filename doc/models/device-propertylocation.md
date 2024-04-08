@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `latitude` | `string` | Optional | - |
-| `longitude` | `string` | Optional | - |
+| `latitude` | `str` | Optional | - |
+| `longitude` | `str` | Optional | - |
 
 ## Example (as JSON)
 

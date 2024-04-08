@@ -11,8 +11,8 @@ Add or remove device to existing software upgrade information.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | `string` | Required | Operation either 'append' or 'remove'. |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `mtype` | `str` | Required | Operation either 'append' or 'remove'. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 

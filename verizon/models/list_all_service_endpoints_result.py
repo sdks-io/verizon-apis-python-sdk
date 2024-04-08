@@ -16,9 +16,9 @@ class ListAllServiceEndpointsResult(object):
     Response on successful retrieval of all registered service endpoints.
 
     Attributes:
-        status (string): HTTP status code.
-        data (list of string): A comma delimited list of all registered
-            service endpoints.
+        status (str): HTTP status code.
+        data (List[str]): A comma delimited list of all registered service
+            endpoints.
 
     """
 
@@ -57,11 +57,11 @@ class ListAllServiceEndpointsResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         status = dictionary.get("status") if dictionary.get("status") else 'success'
         data = dictionary.get("data") if dictionary.get("data") else APIHelper.SKIP
         # Return an object of this model

@@ -28,11 +28,11 @@ def list_registered_callbacks(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
 
 ## Response Type
 
-[`List of RegisteredCallbacks`](../../doc/models/registered-callbacks.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[RegisteredCallbacks]`](../../doc/models/registered-callbacks.md).
 
 ## Example Usage
 
@@ -76,12 +76,12 @@ def register_callback(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
 | `body` | [`FotaV1CallbackRegistrationRequest`](../../doc/models/fota-v1-callback-registration-request.md) | Body, Required | Callback details. |
 
 ## Response Type
 
-[`FotaV1CallbackRegistrationResult`](../../doc/models/fota-v1-callback-registration-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`FotaV1CallbackRegistrationResult`](../../doc/models/fota-v1-callback-registration-result.md).
 
 ## Example Usage
 
@@ -130,12 +130,12 @@ def deregister_callback(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account identifier in "##########-#####". |
+| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
 | `service` | [`CallbackServiceEnum`](../../doc/models/callback-service-enum.md) | Template, Required | Callback type. Must be 'Fota' for Software Management Services API. |
 
 ## Response Type
 
-[`FotaV1SuccessResult`](../../doc/models/fota-v1-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`FotaV1SuccessResult`](../../doc/models/fota-v1-success-result.md).
 
 ## Example Usage
 

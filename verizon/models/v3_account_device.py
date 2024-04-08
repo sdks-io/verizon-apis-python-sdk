@@ -17,26 +17,24 @@ class V3AccountDevice(object):
     Device information.
 
     Attributes:
-        device_id (string): Device identifier.
-        mdn (string): MDN.
-        model (string): Device model.
-        make (string): Device make.
-        firmware (string): Device firmware version.
+        device_id (str): Device identifier.
+        mdn (str): MDN.
+        model (str): Device model.
+        make (str): Device make.
+        firmware (str): Device firmware version.
         fota_eligible (bool): Value=true if the device software can be
             upgraded over the air using the Software Management Services API.
-        status (string): Device status.
+        status (str): Device status.
         license_assigned (bool): License assigned device.
-        protocol (string): Firmware protocol. Valid values include: LWM2M,
-            OMADM, HTTP or NONE.
-        software_list (list of V3SoftwareInfo): List of sofware.
-        file_list (list of V3SoftwareInfo): List of files.
-        create_time (string): The date and time of when the device is
-            created.
-        upgrade_time (string): The date and time of when the device firmware
-            or software is updated.
-        update_time (string): The date and time of when the device is
-            updated.
-        refresh_time (string): The date and time of when the device is
+        protocol (str): Firmware protocol. Valid values include: LWM2M, OMADM,
+            HTTP or NONE.
+        software_list (List[V3SoftwareInfo]): List of sofware.
+        file_list (List[V3SoftwareInfo]): List of files.
+        create_time (str): The date and time of when the device is created.
+        upgrade_time (str): The date and time of when the device firmware or
+            software is updated.
+        update_time (str): The date and time of when the device is updated.
+        refresh_time (str): The date and time of when the device is
             refreshed.
 
     """
@@ -122,11 +120,11 @@ class V3AccountDevice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         mdn = dictionary.get("mdn") if dictionary.get("mdn") else None
         model = dictionary.get("model") if dictionary.get("model") else None

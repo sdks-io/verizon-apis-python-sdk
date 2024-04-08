@@ -18,31 +18,30 @@ class Subscription(object):
     Attributes:
         configurationfailures (int): The number of streaming failures due to
             faulty configuration.
-        createdon (string): The number of streaming failures due to faulty
+        createdon (str): The number of streaming failures due to faulty
             configuration.
-        delegateid (string): Not currently used.
-        description (string): Description of the subscription.
+        delegateid (str): Not currently used.
+        description (str): Description of the subscription.
         disabled (bool): Whether the subscription is currently sending data.
-        email (string): The address to which any error reports should be
+        email (str): The address to which any error reports should be
             delivered.
-        filter (string): Filter for events.
-        id (string): ThingSpace unique ID for the subscription that was
-            created.
-        kind (string): Identifies the resource kind.
-        laststreamingstatus (string): Possible values: success or fail.
-        laststreamingtime (string): The date and time that the last stream
-            send was attempted.
-        lastupdated (string): The date the resource was last updated.
-        name (string): Name of the subscription.
+        filter (str): Filter for events.
+        id (str): ThingSpace unique ID for the subscription that was created.
+        kind (str): Identifies the resource kind.
+        laststreamingstatus (str): Possible values: success or fail.
+        laststreamingtime (str): The date and time that the last stream send
+            was attempted.
+        lastupdated (str): The date the resource was last updated.
+        name (str): Name of the subscription.
         networkfailures (int): The number of failures due to network
             problems.
         streamfailures (int): TODO: type description here.
-        streamkind (string): The event type that will be sent in the data
+        streamkind (str): The event type that will be sent in the data
             stream.
-        targetid (string): Target to be used for dispatching events.
-        targettype (string): TODO: type description here.
-        version (string): Version of the underlying schema resource.
-        versionid (string): The version of the resource.
+        targetid (str): Target to be used for dispatching events.
+        targettype (str): TODO: type description here.
+        version (str): Version of the underlying schema resource.
+        versionid (str): The version of the resource.
 
     """
 
@@ -172,11 +171,11 @@ class Subscription(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         configurationfailures = dictionary.get("configurationfailures") if dictionary.get("configurationfailures") else APIHelper.SKIP
         createdon = dictionary.get("createdon") if dictionary.get("createdon") else APIHelper.SKIP
         delegateid = dictionary.get("delegateid") if dictionary.get("delegateid") else APIHelper.SKIP

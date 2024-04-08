@@ -11,7 +11,7 @@ Device IMEI list.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 

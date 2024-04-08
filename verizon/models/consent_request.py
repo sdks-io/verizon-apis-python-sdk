@@ -16,10 +16,10 @@ class ConsentRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
+        account_name (str): Account identifier in "##########-#####".
         all_device (bool): Exclude all devices or not.
-        mtype (string): The change to make: append or replace.
-        exclusion (list of string): Device ID list.
+        mtype (str): The change to make: append or replace.
+        exclusion (List[str]): Device ID list.
 
     """
 
@@ -32,22 +32,20 @@ class ConsentRequest(object):
     }
 
     _optionals = [
-        'account_name',
         'all_device',
         'mtype',
         'exclusion',
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
+                 account_name=None,
                  all_device=APIHelper.SKIP,
                  mtype=APIHelper.SKIP,
                  exclusion=APIHelper.SKIP):
         """Constructor for the ConsentRequest class"""
 
         # Initialize members of the class
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.account_name = account_name 
         if all_device is not APIHelper.SKIP:
             self.all_device = all_device 
         if mtype is not APIHelper.SKIP:
@@ -69,12 +67,12 @@ class ConsentRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         all_device = dictionary.get("allDevice") if "allDevice" in dictionary.keys() else APIHelper.SKIP
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         exclusion = dictionary.get("exclusion") if dictionary.get("exclusion") else APIHelper.SKIP

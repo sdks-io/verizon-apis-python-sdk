@@ -12,16 +12,16 @@ Details of the target that you want to create.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `accountidentifier` | [`AccountIdentifier`](../../doc/models/account-identifier.md) | Optional | The ID of the authenticating billing account, in the format `{"billingaccountid":"1234567890-12345"}`. |
-| `billingaccountid` | `string` | Optional | The ID of the authenticating billing account. |
-| `kind` | `string` | Optional | Identifies the resource kind. Targets are ts.target. |
-| `address` | `string` | Optional | The endpoint for notifications or data streams. The format depends on the selected `addressscheme`.<br />`streamrest` requires a `host:port` value <br />`streamawsiot` requres a valid ARN. |
-| `addressscheme` | `string` | Optional | The transport format. Valid values are: <br />streamawsiot - streamed data to an AWS account <br />streamrest - streamed REST data to a defined endpoint. |
+| `billingaccountid` | `str` | Optional | The ID of the authenticating billing account. |
+| `kind` | `str` | Optional | Identifies the resource kind. Targets are ts.target. |
+| `address` | `str` | Optional | The endpoint for notifications or data streams. The format depends on the selected `addressscheme`.<br />`streamrest` requires a `host:port` value <br />`streamawsiot` requres a valid ARN. |
+| `addressscheme` | `str` | Optional | The transport format. Valid values are: <br />streamawsiot - streamed data to an AWS account <br />streamrest - streamed REST data to a defined endpoint. |
 | `fields` | [`CreateTargetRequestFields`](../../doc/models/create-target-request-fields.md) | Optional | - |
-| `description` | `string` | Optional | Descriptive information about the target. |
-| `externalid` | `string` | Optional | Security identification string created by a POST /targets/actions/newextid request. |
-| `name` | `string` | Optional | Name of the target. |
-| `region` | `string` | Optional | AWS region value. |
-| `key_1` | `string` | Optional | OAuth 2.0 bearer token. |
+| `description` | `str` | Optional | Descriptive information about the target. |
+| `externalid` | `str` | Optional | Security identification string created by a POST /targets/actions/newextid request. |
+| `name` | `str` | Optional | Name of the target. |
+| `region` | `str` | Optional | AWS region value. |
+| `key_1` | `str` | Optional | OAuth 2.0 bearer token. |
 | `oauth` | [`TargetAuthentication`](../../doc/models/target-authentication.md) | Optional | OAuth 2 token and refresh token for TS to stream events to Target. |
 
 ## Example (as JSON)

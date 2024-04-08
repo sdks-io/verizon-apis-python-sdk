@@ -11,9 +11,9 @@ Device changed.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Optional | Device IMEI. |
-| `status` | `string` | Optional | Success or failure. |
-| `reason` | `string` | Optional | Result reason. |
+| `device_id` | `str` | Optional | Device IMEI. |
+| `status` | `str` | Optional | Success or failure. |
+| `reason` | `str` | Optional | Result reason. |
 
 ## Example (as JSON)
 

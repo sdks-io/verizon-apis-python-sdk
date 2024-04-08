@@ -16,9 +16,9 @@ class Acceleration(object):
     TODO: type model description here.
 
     Attributes:
-        x (string): TODO: type description here.
-        y (string): TODO: type description here.
-        z (string): TODO: type description here.
+        x (str): TODO: type description here.
+        y (str): TODO: type description here.
+        z (str): TODO: type description here.
 
     """
 
@@ -63,11 +63,11 @@ class Acceleration(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         x = dictionary.get("x") if dictionary.get("x") else APIHelper.SKIP
         y = dictionary.get("y") if dictionary.get("y") else APIHelper.SKIP
         z = dictionary.get("z") if dictionary.get("z") else APIHelper.SKIP

@@ -18,13 +18,11 @@ class DeviceFilter(object):
     string that you want to match.
 
     Attributes:
-        account (string): The the billing account that the devices belong to.
-        group_name (string): Only include devices that are in this device
-            group.
-        service_plan (string): Only include devices that have this service
-            plan.
-        custom_fields (list of CustomFields): Custom field names and values,
-            if you want to only include devices that have matching values.
+        account (str): The the billing account that the devices belong to.
+        group_name (str): Only include devices that are in this device group.
+        service_plan (str): Only include devices that have this service plan.
+        custom_fields (List[CustomFields]): Custom field names and values, if
+            you want to only include devices that have matching values.
 
     """
 
@@ -74,11 +72,11 @@ class DeviceFilter(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account = dictionary.get("account") if dictionary.get("account") else APIHelper.SKIP
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         service_plan = dictionary.get("servicePlan") if dictionary.get("servicePlan") else APIHelper.SKIP

@@ -17,7 +17,7 @@ class RetrievesAvailableFilesResponseList(object):
     TODO: type model description here.
 
     Attributes:
-        available_files_response (list of RetrievesAvailableFilesResponse):
+        available_files_response (List[RetrievesAvailableFilesResponse]):
             TODO: type description here.
 
     """
@@ -53,11 +53,11 @@ class RetrievesAvailableFilesResponseList(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         available_files_response = None
         if dictionary.get('AvailableFilesResponse') is not None:
             available_files_response = [RetrievesAvailableFilesResponse.from_dictionary(x) for x in dictionary.get('AvailableFilesResponse')]

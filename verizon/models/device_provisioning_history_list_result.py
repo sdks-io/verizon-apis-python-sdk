@@ -21,7 +21,7 @@ class DeviceProvisioningHistoryListResult(object):
         has_more_data (bool): False for a status 200 response.True for a
             status 202 response, indicating that there is more data to be
             retrieved.
-        provisioning_history (list of ProvisioningHistory): The provisioning
+        provisioning_history (List[ProvisioningHistory]): The provisioning
             history of a specified device during a specified time period.
 
     """
@@ -62,11 +62,11 @@ class DeviceProvisioningHistoryListResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else APIHelper.SKIP
         provisioning_history = None
         if dictionary.get('provisioningHistory') is not None:

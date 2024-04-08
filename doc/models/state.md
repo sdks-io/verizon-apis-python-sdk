@@ -11,9 +11,9 @@ Each service includes custom states.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | The name of the state. |
+| `name` | `str` | Optional | The name of the state. |
 | `workflow_sequence_number` | `float` | Optional | The workflow sequence number of this state. |
-| `service_plans` | `List of string` | Optional | The service plans that can be used to charge for services for devices in this state. |
+| `service_plans` | `List[str]` | Optional | The service plans that can be used to charge for services for devices in this state. |
 
 ## Example (as JSON)
 

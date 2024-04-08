@@ -17,12 +17,12 @@ class CallbackRegistrationRequest(object):
     where the listening service is running.
 
     Attributes:
-        account_name (string): The name of the billing account for which
-            callback messages will be sent. Format: "##########-#####".
-        service_name (string): The name of the callback service, which
-            identifies the type and format of messages that will be sent to
-            the registered URL.
-        endpoint (string): The URL for your web server.
+        account_name (str): The name of the billing account for which callback
+            messages will be sent. Format: "##########-#####".
+        service_name (str): The name of the callback service, which identifies
+            the type and format of messages that will be sent to the
+            registered URL.
+        endpoint (str): The URL for your web server.
         http_headers (object): Your HTTP headers.
 
     """
@@ -67,11 +67,11 @@ class CallbackRegistrationRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else None
         endpoint = dictionary.get("endpoint") if dictionary.get("endpoint") else None

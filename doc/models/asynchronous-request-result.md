@@ -11,7 +11,7 @@ A successful request returns the request ID and the current status.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `request_id` | `string` | Optional | The unique ID of the asynchronous request. |
+| `request_id` | `str` | Optional | The unique ID of the asynchronous request. |
 | `status` | [`RequestStatusEnum`](../../doc/models/request-status-enum.md) | Optional | The current status of the callback response. |
 
 ## Example (as JSON)

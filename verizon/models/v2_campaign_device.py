@@ -19,10 +19,9 @@ class V2CampaignDevice(object):
     Attributes:
         total_device (int): Total device count.
         has_more_data (bool): Has more report flag.
-        last_seen_device_id (string): Device identifier.
+        last_seen_device_id (str): Device identifier.
         max_page_size (int): Maximum page size.
-        device_list (list of V2DeviceStatus): List of devices with id in
-            IMEI.
+        device_list (List[V2DeviceStatus]): List of devices with id in IMEI.
 
     """
 
@@ -71,11 +70,11 @@ class V2CampaignDevice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else None
         max_page_size = dictionary.get("maxPageSize") if dictionary.get("maxPageSize") else None
         device_list = None

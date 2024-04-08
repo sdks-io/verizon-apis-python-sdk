@@ -16,14 +16,12 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.location import Location
 from verizon.models.synchronous_location_request_result import SynchronousLocationRequestResult
 from verizon.models.transaction_id import TransactionID
+from verizon.models.asynchronous_location_request_result import AsynchronousLocationRequestResult
 from verizon.models.location_report import LocationReport
 from verizon.models.location_report_status import LocationReportStatus
-from verizon.models.asynchronous_location_request_result import AsynchronousLocationRequestResult
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
 
 
@@ -70,7 +68,7 @@ class DevicesLocationsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -119,7 +117,7 @@ class DevicesLocationsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -136,8 +134,8 @@ class DevicesLocationsController(BaseController):
         Cancel a queued or unfinished device location request.
 
         Args:
-            account_name (string): Account identifier in "##########-#####".
-            txid (string): Transaction ID of the request to cancel, from the
+            account_name (str): Account identifier in "##########-#####".
+            txid (str): Transaction ID of the request to cancel, from the
                 synchronous response to the original request.
 
         Returns:
@@ -167,115 +165,11 @@ class DevicesLocationsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(TransactionID.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
-        ).execute()
-
-    def retrieve_location_report(self,
-                                 account,
-                                 txid,
-                                 startindex):
-        """Does a GET request to /locationreports/{account}/report/{txid}/index/{startindex}.
-
-        Download a completed asynchronous device location report.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-            txid (string): Transaction ID from POST /locationreports
-                response.
-            startindex (int): Zero-based number of the first record to
-                return.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Location
-                information for up to 1,000 devices.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/locationreports/{account}/report/{txid}/index/{startindex}')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('txid')
-                            .value(txid)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('startindex')
-                            .value(startindex)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(LocationReport.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
-        ).execute()
-
-    def get_location_report_status(self,
-                                   account,
-                                   txid):
-        """Does a GET request to /locationreports/{account}/report/{txid}/status.
-
-        Returns the current status of a requested device location report.
-
-        Args:
-            account (string): Account identifier in "##########-#####".
-            txid (string): Transaction ID of the report.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Location
-                report status.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/locationreports/{account}/report/{txid}/status')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('account')
-                            .value(account)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('txid')
-                            .value(txid)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(LocationReportStatus.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'Unexpected error.', DeviceLocationResultException)
         ).execute()
@@ -315,11 +209,114 @@ class DevicesLocationsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AsynchronousLocationRequestResult.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
+    def retrieve_location_report(self,
+                                 account,
+                                 txid,
+                                 startindex):
+        """Does a GET request to /locationreports/{account}/report/{txid}/index/{startindex}.
+
+        Download a completed asynchronous device location report.
+
+        Args:
+            account (str): Account identifier in "##########-#####".
+            txid (str): Transaction ID from POST /locationreports response.
+            startindex (int): Zero-based number of the first record to
+                return.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Location
+                information for up to 1,000 devices.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/locationreports/{account}/report/{txid}/index/{startindex}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('txid')
+                            .value(txid)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('startindex')
+                            .value(startindex)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(LocationReport.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
+    def get_location_report_status(self,
+                                   account,
+                                   txid):
+        """Does a GET request to /locationreports/{account}/report/{txid}/status.
+
+        Returns the current status of a requested device location report.
+
+        Args:
+            account (str): Account identifier in "##########-#####".
+            txid (str): Transaction ID of the report.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Location
+                report status.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/locationreports/{account}/report/{txid}/status')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('account')
+                            .value(account)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('txid')
+                            .value(txid)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('oAuth2'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(LocationReportStatus.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'Unexpected error.', DeviceLocationResultException)
         ).execute()
@@ -332,8 +329,8 @@ class DevicesLocationsController(BaseController):
         Cancel a queued device location report.
 
         Args:
-            account (string): Account identifier in "##########-#####".
-            txid (string): Transaction ID of the report to cancel.
+            account (str): Account identifier in "##########-#####".
+            txid (str): Transaction ID of the report to cancel.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -363,7 +360,7 @@ class DevicesLocationsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

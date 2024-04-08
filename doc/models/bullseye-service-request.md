@@ -11,8 +11,8 @@ Account number and list of devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_list` | [`List of DeviceServiceRequest`](../../doc/models/device-service-request.md) | Required | A list of devices. |
-| `account_number` | `string` | Required | A unique identifier for an account. |
+| `device_list` | [`List[DeviceServiceRequest]`](../../doc/models/device-service-request.md) | Required | A list of devices. |
+| `account_number` | `str` | Required | A unique identifier for an account. |
 
 ## Example (as JSON)
 

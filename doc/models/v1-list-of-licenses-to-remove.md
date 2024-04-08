@@ -14,7 +14,7 @@ List of cancellation candidate devices.
 | `count` | `int` | Optional | The total number of devices on the list. |
 | `has_more_data` | `bool` | Optional | True if there are more devices to retrieve. |
 | `update_time` | `datetime` | Optional | The date and time that the list was last updated. |
-| `device_list` | `List of string` | Optional | The IMEIs of the devices. |
+| `device_list` | `List[str]` | Optional | The IMEIs of the devices. |
 
 ## Example (as JSON)
 

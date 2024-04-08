@@ -18,8 +18,8 @@ class BullseyeServiceResult(object):
     Status of Hyper Precise Location on the device.
 
     Attributes:
-        account_number (string): The account the device belongs to.
-        device_list (list of DeviceServiceInformation): List of devices.
+        account_number (str): The account the device belongs to.
+        device_list (List[DeviceServiceInformation]): List of devices.
         response_type (ApiResponseCode): ResponseCode and/or a message
             indicating success or failure of the request.
 
@@ -66,11 +66,11 @@ class BullseyeServiceResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_number = dictionary.get("accountNumber") if dictionary.get("accountNumber") else APIHelper.SKIP
         device_list = None
         if dictionary.get('deviceList') is not None:

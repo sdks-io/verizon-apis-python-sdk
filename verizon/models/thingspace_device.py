@@ -19,32 +19,31 @@ class ThingspaceDevice(object):
     Device that exist in Verizon Mobile Device Management (MDM).
 
     Attributes:
-        account_name (string): The billing account that the device is
-            associated with.
-        billing_cycle_end_date (string): The date that the device's current
+        account_name (str): The billing account that the device is associated
+            with.
+        billing_cycle_end_date (str): The date that the device's current
             billing cycle ends.
-        carrier_informations (list of CarrierInformation): The carrier
+        carrier_informations (List[CarrierInformation]): The carrier
             information associated with the device.
         connected (bool): True if the device is connected; false if it is
             not.
-        created_at (string): The date and time that the device was added to
-            the system.
-        custom_fields (list of CustomFields): The custom fields and values
-            that have been set for the device.
-        device_ids (list of DeviceId): All identifiers for the device.
-        extended_attributes (list of CustomFields): Any extended attributes
-            for the device, as Key and Value pairs. The pairs listed below are
+        created_at (str): The date and time that the device was added to the
+            system.
+        custom_fields (List[CustomFields]): The custom fields and values that
+            have been set for the device.
+        device_ids (List[DeviceId]): All identifiers for the device.
+        extended_attributes (List[CustomFields]): Any extended attributes for
+            the device, as Key and Value pairs. The pairs listed below are
             returned as part of the response for a single device, but are not
             included if the request was for information about multiple
             devices.
-        group_names (list of string): The device groups that the device
-            belongs to.
-        ip_address (string): The IP address of the device.
-        last_activation_by (string): The user who last activated the device.
-        last_activation_date (string): The date and time that the device was
-            last activated.
-        last_connection_date (string): The most recent connection date and
-            time.
+        group_names (List[str]): The device groups that the device belongs
+            to.
+        ip_address (str): The IP address of the device.
+        last_activation_by (str): The user who last activated the device.
+        last_activation_date (str): The date and time that the device was last
+            activated.
+        last_connection_date (str): The most recent connection date and time.
 
     """
 
@@ -139,11 +138,11 @@ class ThingspaceDevice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         billing_cycle_end_date = dictionary.get("billingCycleEndDate") if dictionary.get("billingCycleEndDate") else APIHelper.SKIP
         carrier_informations = None

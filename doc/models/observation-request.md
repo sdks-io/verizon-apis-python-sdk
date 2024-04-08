@@ -11,9 +11,9 @@ Used to define callbacks including the device identity, the attribute names, cor
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account identifier in "##########-#####". |
-| `devices` | [`List of Device`](../../doc/models/device.md) | Required | List of devices. |
-| `attributes` | [`List of ObservationRequestAttribute`](../../doc/models/observation-request-attribute.md) | Required | Attributes are streaming RF parameters that you want to observe. |
+| `account_name` | `str` | Required | Account identifier in "##########-#####". |
+| `devices` | [`List[Device]`](../../doc/models/device.md) | Required | List of devices. |
+| `attributes` | [`List[ObservationRequestAttribute]`](../../doc/models/observation-request-attribute.md) | Required | Attributes are streaming RF parameters that you want to observe. |
 | `frequency` | [`NumericalData`](../../doc/models/numerical-data.md) | Optional | Describes value and unit of time. |
 | `duration` | [`NumericalData`](../../doc/models/numerical-data.md) | Optional | Describes value and unit of time. |
 

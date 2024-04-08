@@ -11,11 +11,11 @@ List of device information for an account.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | Account name. |
+| `account_name` | `str` | Required | Account name. |
 | `has_more_data` | `bool` | Required | Has more device flag? |
-| `last_seen_device_id` | `string` | Optional | Last seen device identifier. |
+| `last_seen_device_id` | `str` | Optional | Last seen device identifier. |
 | `max_page_size` | `int` | Required | Maximum page size. |
-| `device_list` | [`List of V2AccountDevice`](../../doc/models/v2-account-device.md) | Required | Account device list. |
+| `device_list` | [`List[V2AccountDevice]`](../../doc/models/v2-account-device.md) | Required | Account device list. |
 
 ## Example (as JSON)
 

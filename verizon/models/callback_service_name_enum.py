@@ -19,7 +19,7 @@ class CallbackServiceNameEnum(object):
         DEVICELOCATION: TODO: type description here.
 
     """
-
     LOCATION = 'Location'
 
     DEVICELOCATION = 'DeviceLocation'
+

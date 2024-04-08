@@ -11,7 +11,7 @@ Notification group name trigger attribute.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `key` | `string` | Optional | If present, the NotificationGroupName will be listed here. |
+| `key` | `str` | Optional | If present, the NotificationGroupName will be listed here. |
 
 ## Example (as JSON)
 

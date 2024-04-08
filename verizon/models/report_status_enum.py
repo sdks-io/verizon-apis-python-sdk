@@ -20,9 +20,9 @@ class ReportStatusEnum(object):
         COMPLETED: TODO: type description here.
 
     """
-
     QUEUED = 'QUEUED'
 
     INPROGRESS = 'INPROGRESS'
 
     COMPLETED = 'COMPLETED'
+

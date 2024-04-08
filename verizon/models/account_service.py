@@ -17,9 +17,9 @@ class AccountService(object):
     Service associated with the account.
 
     Attributes:
-        name (string): The name of the service plan.
-        description (string): The description of the service plan.
-        states (list of State): The state of the service plan.
+        name (str): The name of the service plan.
+        description (str): The description of the service plan.
+        states (List[State]): The state of the service plan.
 
     """
 
@@ -64,11 +64,11 @@ class AccountService(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         states = None

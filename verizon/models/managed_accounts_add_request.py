@@ -15,10 +15,10 @@ class ManagedAccountsAddRequest(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account identifier
+        account_name (str): Account identifier
         service_name (ServiceNameEnum): Service name
-        mtype (string): SKU name
-        managed_acc_list (list of string): managed account list
+        mtype (str): SKU name
+        managed_acc_list (List[str]): managed account list
 
     """
 
@@ -57,11 +57,11 @@ class ManagedAccountsAddRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         service_name = dictionary.get("serviceName") if dictionary.get("serviceName") else 'Location'
         mtype = dictionary.get("type") if dictionary.get("type") else None

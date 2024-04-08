@@ -18,13 +18,13 @@ class AggregateSessionReport(object):
     Session and usage details for up to 10 devices.
 
     Attributes:
-        txid (string): A unique string that associates the request with the
+        txid (str): A unique string that associates the request with the
             location report information that is sent in asynchronous callback
             message.ThingSpace will send a separate callback message for each
             device that was in the request. All of the callback messages will
             have the same txid.
-        usage (list of AggregateUsageItem): Contains usage per device.
-        errors (list of AggregateUsageError): An object containing any errors
+        usage (List[AggregateUsageItem]): Contains usage per device.
+        errors (List[AggregateUsageError]): An object containing any errors
             reported by the device.
 
     """
@@ -72,11 +72,11 @@ class AggregateSessionReport(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else None
         usage = None
         if dictionary.get('usage') is not None:

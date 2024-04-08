@@ -17,10 +17,10 @@ class DeviceExtendedDiagnosticsResult(object):
     Result for a request to obtain device extended diagnostics.
 
     Attributes:
-        categories (list of DiagnosticsCategory): The response includes
-            various types of information about the device, grouped into
-            categories. Each category object contains the category name and a
-            list of Extended Attribute objects as key-value pairs.
+        categories (List[DiagnosticsCategory]): The response includes various
+            types of information about the device, grouped into categories.
+            Each category object contains the category name and a list of
+            Extended Attribute objects as key-value pairs.
 
     """
 
@@ -55,11 +55,11 @@ class DeviceExtendedDiagnosticsResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         categories = None
         if dictionary.get('categories') is not None:
             categories = [DiagnosticsCategory.from_dictionary(x) for x in dictionary.get('categories')]

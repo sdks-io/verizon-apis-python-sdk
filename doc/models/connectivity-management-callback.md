@@ -11,11 +11,11 @@ Includes callback listeners that were registered through the Connectivity Manage
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of the billing account for which callback messages will be sent. |
-| `password` | `string` | Optional | The password defined when a URL was registered for the callback service, or an empty string if no password was defined. |
-| `service_name` | `string` | Optional | The name of the callback service, which identifies the type and format of messages that will be sent to the registered URL. |
-| `url` | `string` | Optional | The address of the callback listening service where the ThingSpace Platform will send callback messages for the service type. |
-| `username` | `string` | Optional | The username defined when a URL was registered for the callback service, or an empty string if no username was defined. |
+| `account_name` | `str` | Optional | The name of the billing account for which callback messages will be sent. |
+| `password` | `str` | Optional | The password defined when a URL was registered for the callback service, or an empty string if no password was defined. |
+| `service_name` | `str` | Optional | The name of the callback service, which identifies the type and format of messages that will be sent to the registered URL. |
+| `url` | `str` | Optional | The address of the callback listening service where the ThingSpace Platform will send callback messages for the service type. |
+| `username` | `str` | Optional | The username defined when a URL was registered for the callback service, or an empty string if no username was defined. |
 
 ## Example (as JSON)
 

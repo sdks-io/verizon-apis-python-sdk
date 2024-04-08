@@ -11,18 +11,18 @@ Change Configuration resource definition.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `action` | `string` | Optional | The action requested in this event; “change” for device configuration changes. |
-| `createdon` | `string` | Optional | The date and time of the change request. |
-| `deviceid` | `string` | Optional | The device’s ThingSpace UUID. |
+| `action` | `str` | Optional | The action requested in this event; “change” for device configuration changes. |
+| `createdon` | `str` | Optional | The date and time of the change request. |
+| `deviceid` | `str` | Optional | The device’s ThingSpace UUID. |
 | `fields` | [`Fields`](../../doc/models/fields.md) | Optional | List of fields affected by the event. |
-| `foreignid` | `string` | Optional | foreign id |
-| `id` | `string` | Optional | The unique ID of this ts.event.configuration event. |
-| `kind` | `string` | Optional | The kind of the ThingSpace resource that is being reported |
-| `lastupdated` | `string` | Optional | The date and time that the event was last updated. |
-| `name` | `string` | Optional | The name of the event; “SetConfigurationReq” for device configuration changes. |
-| `state` | `string` | Optional | The current status of the request. The value will be “pending” until the device wakes up and ThingSpace can send the request to the device. |
-| `transactionid` | `string` | Optional | transaction id |
-| `version` | `string` | Optional | version |
+| `foreignid` | `str` | Optional | foreign id |
+| `id` | `str` | Optional | The unique ID of this ts.event.configuration event. |
+| `kind` | `str` | Optional | The kind of the ThingSpace resource that is being reported |
+| `lastupdated` | `str` | Optional | The date and time that the event was last updated. |
+| `name` | `str` | Optional | The name of the event; “SetConfigurationReq” for device configuration changes. |
+| `state` | `str` | Optional | The current status of the request. The value will be “pending” until the device wakes up and ThingSpace can send the request to the device. |
+| `transactionid` | `str` | Optional | transaction id |
+| `version` | `str` | Optional | version |
 
 ## Example (as JSON)
 

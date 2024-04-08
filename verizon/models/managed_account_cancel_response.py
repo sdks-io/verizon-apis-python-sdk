@@ -15,12 +15,12 @@ class ManagedAccountCancelResponse(object):
     TODO: type model description here.
 
     Attributes:
-        txid (string): Transaction identifier
-        account_name (string): Managed account identifier
-        paccount_name (string): Primary account identifier
+        txid (str): Transaction identifier
+        account_name (str): Managed account identifier
+        paccount_name (str): Primary account identifier
         service_name (ServiceNameEnum): Service name
-        status (string): Deactivate/cancel status, Success or Fail
-        reason (string): Detailed reason
+        status (str): Deactivate/cancel status, Success or Fail
+        reason (str): Detailed reason
 
     """
 
@@ -65,11 +65,11 @@ class ManagedAccountCancelResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         txid = dictionary.get("txid") if dictionary.get("txid") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         paccount_name = dictionary.get("paccountName") if dictionary.get("paccountName") else None

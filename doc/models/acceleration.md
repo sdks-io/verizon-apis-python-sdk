@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `x` | `string` | Optional | - |
-| `y` | `string` | Optional | - |
-| `z` | `string` | Optional | - |
+| `x` | `str` | Optional | - |
+| `y` | `str` | Optional | - |
+| `z` | `str` | Optional | - |
 
 ## Example (as JSON)
 

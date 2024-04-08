@@ -18,12 +18,12 @@ class TriggerType3(object):
     Trigger details.
 
     Attributes:
-        trigger_id (string): Trigger ID.
-        trigger_name (string): Trigger name.
-        trigger_category (string): This is the value to use in the request
-            body to detect anomalous behaivior. The values in this table will
-            only be relevant when this parameter is set to this value.
-        account_name (string): Account name.
+        trigger_id (str): Trigger ID.
+        trigger_name (str): Trigger name.
+        trigger_category (str): This is the value to use in the request body
+            to detect anomalous behaivior. The values in this table will only
+            be relevant when this parameter is set to this value.
+        account_name (str): Account name.
         anomaly_trigger_request (AnomalyTriggerRequest): The details of the
             UsageAnomaly trigger.
         notification (Notification): The notification details of the trigger.
@@ -86,11 +86,11 @@ class TriggerType3(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         trigger_id = dictionary.get("triggerId") if dictionary.get("triggerId") else APIHelper.SKIP
         trigger_name = dictionary.get("triggerName") if dictionary.get("triggerName") else APIHelper.SKIP
         trigger_category = dictionary.get("triggerCategory") if dictionary.get("triggerCategory") else APIHelper.SKIP

@@ -11,10 +11,10 @@ Position error.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `time` | `string` | Optional | Time location obtained. |
-| `utcoffset` | `string` | Optional | UTC offset of time. |
-| `mtype` | `string` | Optional | Error type returned from location server. |
-| `info` | `string` | Optional | Additional information about the error. |
+| `time` | `str` | Optional | Time location obtained. |
+| `utcoffset` | `str` | Optional | UTC offset of time. |
+| `mtype` | `str` | Optional | Error type returned from location server. |
+| `info` | `str` | Optional | Additional information about the error. |
 
 ## Example (as JSON)
 

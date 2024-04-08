@@ -18,9 +18,9 @@ class AddDevicesResult(object):
     device in the request.
 
     Attributes:
-        device_ids (list of DeviceId): Identifiers for the device.
-        response (string): The success message or error message for the
-            current device.
+        device_ids (List[DeviceId]): Identifiers for the device.
+        response (str): The success message or error message for the current
+            device.
 
     """
 
@@ -60,11 +60,11 @@ class AddDevicesResult(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_ids = None
         if dictionary.get('deviceIds') is not None:
             device_ids = [DeviceId.from_dictionary(x) for x in dictionary.get('deviceIds')]

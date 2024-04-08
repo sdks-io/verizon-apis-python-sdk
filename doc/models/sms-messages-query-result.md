@@ -12,7 +12,7 @@ Response to SMS messages sent by all M2M devices associated with a billing accou
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `has_more_data` | `bool` | Optional | False for a status 200 response.True for a status 202 response, indicating that there is more data to be retrieved. |
-| `messages` | [`List of SMSMessage`](../../doc/models/sms-message.md) | Optional | An array of up to 100 SMS messages that were sent by devices in the account. |
+| `messages` | [`List[SMSMessage]`](../../doc/models/sms-message.md) | Optional | An array of up to 100 SMS messages that were sent by devices in the account. |
 
 ## Example (as JSON)
 

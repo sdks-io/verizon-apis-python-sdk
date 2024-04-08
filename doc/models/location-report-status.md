@@ -11,7 +11,7 @@ Status of the report.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `txid` | `string` | Optional | The transaction ID of the report. |
+| `txid` | `str` | Optional | The transaction ID of the report. |
 | `status` | [`ReportStatusEnum`](../../doc/models/report-status-enum.md) | Optional | Status of the report. |
 
 ## Example (as JSON)

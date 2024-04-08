@@ -17,14 +17,14 @@ class ResourcesEdgeHostedService(object):
     Edge hosted service represented by Service Endpoint definition.
 
     Attributes:
-        ern (string): Edge Resource Name. A string identifier for a set of
-            edge resources.
+        ern (str): Edge Resource Name. A string identifier for a set of edge
+            resources.
         service_endpoint (ResourcesServiceEndpoint): Service Endpoint path,
             address, and port.
-        application_server_provider_id (string): Unique ID representing the
-            Edge Application Provider.
-        application_id (string): Unique ID representing the Edge Application.
-        service_description (string): TODO: type description here.
+        application_server_provider_id (str): Unique ID representing the Edge
+            Application Provider.
+        application_id (str): Unique ID representing the Edge Application.
+        service_description (str): TODO: type description here.
 
     """
 
@@ -79,11 +79,11 @@ class ResourcesEdgeHostedService(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         ern = dictionary.get("ern") if dictionary.get("ern") else APIHelper.SKIP
         service_endpoint = ResourcesServiceEndpoint.from_dictionary(dictionary.get('serviceEndpoint')) if 'serviceEndpoint' in dictionary.keys() else APIHelper.SKIP
         application_server_provider_id = dictionary.get("applicationServerProviderId") if dictionary.get("applicationServerProviderId") else APIHelper.SKIP

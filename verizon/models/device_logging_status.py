@@ -16,7 +16,7 @@ class DeviceLoggingStatus(object):
     Device logging status information.
 
     Attributes:
-        device_id (string): Device IMEI.
+        device_id (str): Device IMEI.
         expiry_date (date): The date when device logging expires.
 
     """
@@ -50,11 +50,11 @@ class DeviceLoggingStatus(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         device_id = dictionary.get("deviceId") if dictionary.get("deviceId") else None
         expiry_date = dateutil.parser.parse(dictionary.get('expiryDate')).date() if dictionary.get('expiryDate') else None
         # Return an object of this model

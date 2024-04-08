@@ -16,15 +16,15 @@ class OauthToken(object):
     OAuth 2 Authorization endpoint response
 
     Attributes:
-        access_token (string): Access token
-        token_type (string): Type of access token
+        access_token (str): Access token
+        token_type (str): Type of access token
         expires_in (long|int): Time in seconds before the access token
             expires
-        scope (string): List of scopes granted This is a space-delimited list
-            of strings.
+        scope (str): List of scopes granted This is a space-delimited list of
+            strings.
         expiry (long|int): Time of token expiry as unix timestamp (UTC)
-        refresh_token (string): Refresh token Used to get a new access token
-            when it expires.
+        refresh_token (str): Refresh token Used to get a new access token when
+            it expires.
 
     """
 
@@ -80,11 +80,11 @@ class OauthToken(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         access_token = dictionary.get("access_token") if dictionary.get("access_token") else None
         token_type = dictionary.get("token_type") if dictionary.get("token_type") else None
         expires_in = dictionary.get("expires_in") if dictionary.get("expires_in") else APIHelper.SKIP

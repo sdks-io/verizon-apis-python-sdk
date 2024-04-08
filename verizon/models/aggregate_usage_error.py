@@ -17,9 +17,9 @@ class AggregateUsageError(object):
     Error reported by a device.
 
     Attributes:
-        imei (string): International Mobile Equipment Identifier. This is the
-            ID of the device reporting errors.
-        error_message (string): A general error message.
+        imei (str): International Mobile Equipment Identifier. This is the ID
+            of the device reporting errors.
+        error_message (str): A general error message.
         error_response (IErrorMessage): Error message.
 
     """
@@ -65,11 +65,11 @@ class AggregateUsageError(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         imei = dictionary.get("imei") if dictionary.get("imei") else APIHelper.SKIP
         error_message = dictionary.get("errorMessage") if dictionary.get("errorMessage") else APIHelper.SKIP
         error_response = IErrorMessage.from_dictionary(dictionary.get('errorResponse')) if 'errorResponse' in dictionary.keys() else APIHelper.SKIP

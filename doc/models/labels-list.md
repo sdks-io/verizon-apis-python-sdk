@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_ids` | [`List of DeviceLabels`](../../doc/models/device-labels.md) | Optional | **Constraints**: *Maximum Items*: `100` |
+| `device_ids` | [`List[DeviceLabels]`](../../doc/models/device-labels.md) | Optional | **Constraints**: *Maximum Items*: `100` |
 
 ## Example (as JSON)
 
@@ -21,12 +21,8 @@
       "value": "value2"
     },
     {
-      "name": "name1",
-      "value": "value3"
-    },
-    {
-      "name": "name2",
-      "value": "value4"
+      "name": "name0",
+      "value": "value2"
     }
   ]
 }

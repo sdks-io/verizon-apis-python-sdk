@@ -20,9 +20,9 @@ class BilledusageListRequest(object):
     to retrieve billing.
 
     Attributes:
-        account_name (string): TODO: type description here.
+        account_name (str): TODO: type description here.
         labels (LabelsList): TODO: type description here.
-        devices (list of DeviceList): TODO: type description here.
+        device_ids (List[DeviceList]): TODO: type description here.
         billing_cycle (BillingCycle): TODO: type description here.
 
     """
@@ -31,31 +31,29 @@ class BilledusageListRequest(object):
     _names = {
         "account_name": 'accountName',
         "labels": 'labels',
-        "devices": 'devices',
-        "billing_cycle": 'BillingCycle'
+        "device_ids": 'deviceIds',
+        "billing_cycle": 'billingCycle'
     }
 
     _optionals = [
-        'account_name',
         'labels',
-        'devices',
+        'device_ids',
         'billing_cycle',
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
+                 account_name=None,
                  labels=APIHelper.SKIP,
-                 devices=APIHelper.SKIP,
+                 device_ids=APIHelper.SKIP,
                  billing_cycle=APIHelper.SKIP):
         """Constructor for the BilledusageListRequest class"""
 
         # Initialize members of the class
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.account_name = account_name 
         if labels is not APIHelper.SKIP:
             self.labels = labels 
-        if devices is not APIHelper.SKIP:
-            self.devices = devices 
+        if device_ids is not APIHelper.SKIP:
+            self.device_ids = device_ids 
         if billing_cycle is not APIHelper.SKIP:
             self.billing_cycle = billing_cycle 
 
@@ -73,21 +71,21 @@ class BilledusageListRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         labels = LabelsList.from_dictionary(dictionary.get('labels')) if 'labels' in dictionary.keys() else APIHelper.SKIP
-        devices = None
-        if dictionary.get('devices') is not None:
-            devices = [DeviceList.from_dictionary(x) for x in dictionary.get('devices')]
+        device_ids = None
+        if dictionary.get('deviceIds') is not None:
+            device_ids = [DeviceList.from_dictionary(x) for x in dictionary.get('deviceIds')]
         else:
-            devices = APIHelper.SKIP
-        billing_cycle = BillingCycle.from_dictionary(dictionary.get('BillingCycle')) if 'BillingCycle' in dictionary.keys() else APIHelper.SKIP
+            device_ids = APIHelper.SKIP
+        billing_cycle = BillingCycle.from_dictionary(dictionary.get('billingCycle')) if 'billingCycle' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(account_name,
                    labels,
-                   devices,
+                   device_ids,
                    billing_cycle)

@@ -28,11 +28,11 @@ def list_registered_callbacks(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account number. |
+| `account` | `str` | Template, Required | Account number. |
 
 ## Response Type
 
-[`List of DeviceLocationCallback`](../../doc/models/device-location-callback.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`List[DeviceLocationCallback]`](../../doc/models/device-location-callback.md).
 
 ## Example Usage
 
@@ -79,12 +79,12 @@ def register_callback(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account number. |
+| `account` | `str` | Template, Required | Account number. |
 | `body` | [`DeviceLocationCallback`](../../doc/models/device-location-callback.md) | Body, Required | Request to register a callback. |
 
 ## Response Type
 
-[`CallbackRegistrationResult`](../../doc/models/callback-registration-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`CallbackRegistrationResult`](../../doc/models/callback-registration-result.md).
 
 ## Example Usage
 
@@ -133,12 +133,12 @@ def deregister_callback(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `string` | Template, Required | Account number. |
+| `account` | `str` | Template, Required | Account number. |
 | `service` | [`CallbackServiceNameEnum`](../../doc/models/callback-service-name-enum.md) | Template, Required | Callback service name. |
 
 ## Response Type
 
-[`DeviceLocationSuccessResult`](../../doc/models/device-location-success-result.md)
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DeviceLocationSuccessResult`](../../doc/models/device-location-success-result.md).
 
 ## Example Usage
 

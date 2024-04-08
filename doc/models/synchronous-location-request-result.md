@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `txid` | `string` | Required | The transaction ID of the report. |
+| `txid` | `str` | Required | The transaction ID of the report. |
 | `status` | [`ReportStatusEnum`](../../doc/models/report-status-enum.md) | Required | Status of the report. |
 
 ## Example (as JSON)

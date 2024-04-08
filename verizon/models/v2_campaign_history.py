@@ -18,8 +18,8 @@ class V2CampaignHistory(object):
 
     Attributes:
         has_more_data (bool): Has more report flag.
-        last_seen_campaign_id (string): Campaign identifier.
-        campaign_list (list of V2CampaignMetaInfo): Software upgrade list.
+        last_seen_campaign_id (str): Campaign identifier.
+        campaign_list (List[V2CampaignMetaInfo]): Software upgrade list.
 
     """
 
@@ -64,11 +64,11 @@ class V2CampaignHistory(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         has_more_data = dictionary.get("hasMoreData") if "hasMoreData" in dictionary.keys() else None
         campaign_list = None
         if dictionary.get('campaignList') is not None:

@@ -16,8 +16,7 @@ class AnomalyDetectionTrigger(object):
     Trigger for anomaly detection.
 
     Attributes:
-        trigger_id (string): Trigger ID to identify the request in a
-            callback.
+        trigger_id (str): Trigger ID to identify the request in a callback.
 
     """
 
@@ -52,11 +51,11 @@ class AnomalyDetectionTrigger(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         trigger_id = dictionary.get("triggerId") if dictionary.get("triggerId") else APIHelper.SKIP
         # Return an object of this model
         return cls(trigger_id)

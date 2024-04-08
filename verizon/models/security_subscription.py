@@ -17,7 +17,7 @@ class SecuritySubscription(object):
     Subscription of the device.
 
     Attributes:
-        extended_attributes (list of ExtendedAttributes): Attributes of the
+        extended_attributes (List[ExtendedAttributes]): Attributes of the
             subscription.
         license_assigned (int): The total number of licenses for this license
             type that are assigned to device SIMs.
@@ -25,9 +25,8 @@ class SecuritySubscription(object):
             type that are available to assign to device SIMs.
         license_purchased (int): The total number of licenses purchased for
             the license type.
-        license_type (string): The license type associated with the
-            skuNumber.
-        sku_number (string): The skuNumber that identifies the license type.
+        license_type (str): The license type associated with the skuNumber.
+        sku_number (str): The skuNumber that identifies the license type.
 
     """
 
@@ -87,11 +86,11 @@ class SecuritySubscription(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         extended_attributes = None
         if dictionary.get('extendedAttributes') is not None:
             extended_attributes = [ExtendedAttributes.from_dictionary(x) for x in dictionary.get('extendedAttributes')]

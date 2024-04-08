@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ids` | [`List of Id`](../../doc/models/id.md) | Optional | **Constraints**: *Maximum Items*: `100` |
+| `ids` | [`List[ESIMDeviceId]`](../../doc/models/esim-device-id.md) | Optional | **Constraints**: *Maximum Items*: `100` |
 
 ## Example (as JSON)
 
@@ -17,12 +17,12 @@
 {
   "ids": [
     {
-      "id": "id1",
-      "kind": "iccid"
+      "id": "id4",
+      "kind": "kind2"
     },
     {
-      "id": "id2",
-      "kind": "imei"
+      "id": "id4",
+      "kind": "kind2"
     }
   ]
 }

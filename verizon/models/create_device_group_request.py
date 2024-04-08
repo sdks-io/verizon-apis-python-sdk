@@ -18,49 +18,43 @@ class CreateDeviceGroupRequest(object):
     group.
 
     Attributes:
-        account_name (string): The Verizon billing account that the device
-            group will belong to. An account name is usually numeric, and must
+        account_name (str): The Verizon billing account that the device group
+            will belong to. An account name is usually numeric, and must
             include any leading zeros.
-        devices_to_add (list of DeviceId): Zero or more devices to add to the
+        group_description (str): A description for the device group.
+        group_name (str): The name for the new device group. This name must be
+            unique within the specified account.
+        devices_to_add (List[DeviceId]): Zero or more devices to add to the
             device group. You can use POST /devices/actions/list to get a list
             of all devices in the account.
-        group_description (string): A description for the device group.
-        group_name (string): The name for the new device group. This name must
-            be unique within the specified account.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
         "account_name": 'accountName',
-        "devices_to_add": 'devicesToAdd',
         "group_description": 'groupDescription',
-        "group_name": 'groupName'
+        "group_name": 'groupName',
+        "devices_to_add": 'devicesToAdd'
     }
 
     _optionals = [
-        'account_name',
         'devices_to_add',
-        'group_description',
-        'group_name',
     ]
 
     def __init__(self,
-                 account_name=APIHelper.SKIP,
-                 devices_to_add=APIHelper.SKIP,
-                 group_description=APIHelper.SKIP,
-                 group_name=APIHelper.SKIP):
+                 account_name=None,
+                 group_description=None,
+                 group_name=None,
+                 devices_to_add=APIHelper.SKIP):
         """Constructor for the CreateDeviceGroupRequest class"""
 
         # Initialize members of the class
-        if account_name is not APIHelper.SKIP:
-            self.account_name = account_name 
+        self.account_name = account_name 
+        self.group_description = group_description 
+        self.group_name = group_name 
         if devices_to_add is not APIHelper.SKIP:
             self.devices_to_add = devices_to_add 
-        if group_description is not APIHelper.SKIP:
-            self.group_description = group_description 
-        if group_name is not APIHelper.SKIP:
-            self.group_name = group_name 
 
     @classmethod
     def from_dictionary(cls,
@@ -76,21 +70,21 @@ class CreateDeviceGroupRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
-        account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
+        account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
+        group_description = dictionary.get("groupDescription") if dictionary.get("groupDescription") else None
+        group_name = dictionary.get("groupName") if dictionary.get("groupName") else None
         devices_to_add = None
         if dictionary.get('devicesToAdd') is not None:
             devices_to_add = [DeviceId.from_dictionary(x) for x in dictionary.get('devicesToAdd')]
         else:
             devices_to_add = APIHelper.SKIP
-        group_description = dictionary.get("groupDescription") if dictionary.get("groupDescription") else APIHelper.SKIP
-        group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         # Return an object of this model
         return cls(account_name,
-                   devices_to_add,
                    group_description,
-                   group_name)
+                   group_name,
+                   devices_to_add)

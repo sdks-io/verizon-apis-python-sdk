@@ -16,8 +16,7 @@ class TriggerAttributesOptions(object):
     TODO: type model description here.
 
     Attributes:
-        key (string): If present, the NotificationGroupName will be listed
-            here.
+        key (str): If present, the NotificationGroupName will be listed here.
         value (bool): DataPercentage50<br />True - Trigger on Data percentage
             is over 50% used<br />False - Do not trigger when over 50% used.
 
@@ -59,11 +58,11 @@ class TriggerAttributesOptions(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         key = dictionary.get("key") if dictionary.get("key") else APIHelper.SKIP
         value = dictionary.get("value") if "value" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model

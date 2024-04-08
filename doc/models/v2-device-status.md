@@ -11,9 +11,9 @@ Device with id in IMEI.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `device_id` | `string` | Required | Device IMEI. |
-| `status` | `string` | Required | Success or failure. |
-| `result_reason` | `string` | Optional | Result reason. |
+| `device_id` | `str` | Required | Device IMEI. |
+| `status` | `str` | Required | Success or failure. |
+| `result_reason` | `str` | Optional | Result reason. |
 
 ## Example (as JSON)
 

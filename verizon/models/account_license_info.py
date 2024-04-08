@@ -17,7 +17,7 @@ class AccountLicenseInfo(object):
     Account license information.
 
     Attributes:
-        account_name (string): Account identifier in "##########-#####".
+        account_name (str): Account identifier in "##########-#####".
         total_licenses (int): Number of monthly licenses in an MRC
             subscription.
         assigned_licenses (int): Number of licenses currently assigned to
@@ -25,9 +25,9 @@ class AccountLicenseInfo(object):
         has_more_data (bool): True if there are more devices to retrieve.
         last_seen_device_id (int): If hasMoreData=true, the startIndex to use
             for the next request. 0 if hasMoreData=false.
-        device_list (list of AccountLicenseDeviceListItem): The list of
-            devices that have licenses assigned, including the date and time
-            of when each license was assigned.
+        device_list (List[AccountLicenseDeviceListItem]): The list of devices
+            that have licenses assigned, including the date and time of when
+            each license was assigned.
 
     """
 
@@ -87,11 +87,11 @@ class AccountLicenseInfo(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         total_licenses = dictionary.get("totalLicenses") if dictionary.get("totalLicenses") else APIHelper.SKIP
         assigned_licenses = dictionary.get("assignedLicenses") if dictionary.get("assignedLicenses") else APIHelper.SKIP

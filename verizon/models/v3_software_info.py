@@ -15,9 +15,9 @@ class V3SoftwareInfo(object):
     Software information.
 
     Attributes:
-        name (string): Software name.
-        version (string): Software version.
-        upgrade_time (string): Upgrade time.
+        name (str): Software name.
+        version (str): Software version.
+        upgrade_time (str): Upgrade time.
 
     """
 
@@ -53,11 +53,11 @@ class V3SoftwareInfo(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         name = dictionary.get("name") if dictionary.get("name") else None
         version = dictionary.get("version") if dictionary.get("version") else None
         upgrade_time = dictionary.get("upgradeTime") if dictionary.get("upgradeTime") else None

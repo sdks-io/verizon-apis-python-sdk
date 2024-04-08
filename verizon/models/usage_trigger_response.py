@@ -15,25 +15,24 @@ class UsageTriggerResponse(object):
     TODO: type model description here.
 
     Attributes:
-        trigger_id (string): Unique usage triggerId
-        trigger_name (string): Usage trigger name
-        account_name (string): Account name
+        trigger_id (str): Unique usage triggerId
+        trigger_name (str): Usage trigger name
+        account_name (str): Account name
         service_name (ServiceNameEnum): Service name
-        threshold_value (string): Percent of subscription at which trigger
-            will send an alert
+        threshold_value (str): Percent of subscription at which trigger will
+            send an alert
         allow_excess (bool): allowExcess determines whether to restrict usage
             after exceeds limits
         send_sms_notification (bool): Send SMS (text) alerts when the
             thresholdValue is reached.
-        sms_phone_numbers (string): comma seperated value of list of Phone
+        sms_phone_numbers (str): comma seperated value of list of Phone
             numbers for SMS notifications
         send_email_notification (bool): Send email alerts when the
             thresholdValue is reached.
-        email_addresses (string): comma seperated value of list of Email
+        email_addresses (str): comma seperated value of list of Email
             addresses for Email notifications
-        create_date (string): UTC Date when the usage trigger was created
-        update_date (string): UTC Date when the usage trigger was last
-            updated
+        create_date (str): UTC Date when the usage trigger was created
+        update_date (str): UTC Date when the usage trigger was last updated
 
     """
 
@@ -96,11 +95,11 @@ class UsageTriggerResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         trigger_id = dictionary.get("triggerId") if dictionary.get("triggerId") else None
         trigger_name = dictionary.get("triggerName") if dictionary.get("triggerName") else None
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None

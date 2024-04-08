@@ -17,10 +17,10 @@ class DeviceResetRequest(object):
     Request body to Performs a device reboot.
 
     Attributes:
-        account_name (string): The name of the account. An account name is
+        account_name (str): The name of the account. An account name is
             usually numeric, and must include any leading zeros.
-        action (string): The action you want to take on the device.
-        devices (list of Device): The devices for which you want to perform a
+        action (str): The action you want to take on the device.
+        devices (List[Device]): The devices for which you want to perform a
             factory reset or reboot.
 
     """
@@ -66,11 +66,11 @@ class DeviceResetRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         action = dictionary.get("action") if dictionary.get("action") else APIHelper.SKIP
         devices = None

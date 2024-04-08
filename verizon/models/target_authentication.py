@@ -18,7 +18,7 @@ class TargetAuthentication(object):
 
     Attributes:
         body (TargetAuthenticationBody): TODO: type description here.
-        version (string): TODO: type description here.
+        version (str): TODO: type description here.
 
     """
 
@@ -58,11 +58,11 @@ class TargetAuthentication(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         body = TargetAuthenticationBody.from_dictionary(dictionary.get('body')) if 'body' in dictionary.keys() else APIHelper.SKIP
         version = dictionary.get("version") if dictionary.get("version") else APIHelper.SKIP
         # Return an object of this model

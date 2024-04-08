@@ -17,15 +17,15 @@ class FirmwareUpgrade(object):
     Array of upgrade objects with the specified status.
 
     Attributes:
-        id (string): The unique identifier for this upgrade.
-        account_name (string): Account identifier in "##########-#####".
-        firmware_name (string): The name of the firmware image that will be
-            used for the upgrade.
-        firmware_to (string): The name of the firmware version that will be on
+        id (str): The unique identifier for this upgrade.
+        account_name (str): Account identifier in "##########-#####".
+        firmware_name (str): The name of the firmware image that will be used
+            for the upgrade.
+        firmware_to (str): The name of the firmware version that will be on
             the devices after a successful upgrade.
-        start_date (string): The intended start date for the upgrade.
-        status (string): The current status of the upgrade.
-        device_list (list of FirmwareUpgradeDeviceListItem): A JSON object for
+        start_date (str): The intended start date for the upgrade.
+        status (str): The current status of the upgrade.
+        device_list (List[FirmwareUpgradeDeviceListItem]): A JSON object for
             each device that was included in the upgrade, showing the device
             IMEI, the status of the upgrade, and additional information about
             the status.
@@ -93,11 +93,11 @@ class FirmwareUpgrade(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         firmware_name = dictionary.get("firmwareName") if dictionary.get("firmwareName") else APIHelper.SKIP

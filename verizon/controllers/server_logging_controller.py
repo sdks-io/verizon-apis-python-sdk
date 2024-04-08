@@ -16,8 +16,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from verizon.models.check_in_history_item import CheckInHistoryItem
 from verizon.exceptions.fota_v2_result_exception import FotaV2ResultException
 
@@ -37,8 +35,8 @@ class ServerLoggingController(BaseController):
         account, not necessarily with logging enabled.
 
         Args:
-            account (string): Account identifier.
-            device_id (string): Device IMEI identifier.
+            account (str): Account identifier.
+            device_id (str): Device IMEI identifier.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -68,7 +66,7 @@ class ServerLoggingController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('oAuth2'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

@@ -19,7 +19,7 @@ class HistorySearchFilter(object):
     data.
 
     Attributes:
-        account_name (string): Account name identifier.
+        account_name (str): Account name identifier.
         device (Device): Identifies a particular IoT device.
         attributes (HistorySearchFilterAttributes): Streaming RF parameters
             for which you want to retrieve history data.
@@ -63,11 +63,11 @@ class HistorySearchFilter(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else None
         device = Device.from_dictionary(dictionary.get('device')) if dictionary.get('device') else None
         attributes = HistorySearchFilterAttributes.from_dictionary(dictionary.get('attributes')) if 'attributes' in dictionary.keys() else APIHelper.SKIP

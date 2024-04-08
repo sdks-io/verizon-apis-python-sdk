@@ -11,8 +11,8 @@ Types of errors in response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `status` | `string` | Optional | HTTP status code. |
-| `message` | `string` | Optional | Error details. |
+| `status` | `str` | Optional | HTTP status code. |
+| `message` | `str` | Optional | Error details. |
 
 ## Example (as JSON)
 

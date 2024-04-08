@@ -16,16 +16,16 @@ class RegisteredCallbacks(object):
     List of registered callback endpoints.
 
     Attributes:
-        aname (string): The name of the billing account for which callback
+        aname (str): The name of the billing account for which callback
             messages will be sent.
-        name (string): The name of the callback service, which identifies the
+        name (str): The name of the callback service, which identifies the
             type and format of messages that will be sent to the registered
             URL. This will be 'Fota' for the Software Management Services
             callback.
-        url (string): The address to which callback messages will be sent.
-        username (string): The user name that ThingSpace will return in the
+        url (str): The address to which callback messages will be sent.
+        username (str): The user name that ThingSpace will return in the
             callback messages.
-        password (string): The password that ThingSpace will return in the
+        password (str): The password that ThingSpace will return in the
             callback messages.
 
     """
@@ -81,11 +81,11 @@ class RegisteredCallbacks(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         aname = dictionary.get("aname") if dictionary.get("aname") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP

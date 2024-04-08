@@ -26,8 +26,7 @@ class SearchSensorHistoryRequest(object):
             "dd1682d3-2d80-cefc-f3ee-25154800beff"}.
         limitnumber (int): The maximum number of events to include in the
             response.
-        page (string): The maximum number of events to include in the
-            response.
+        page (str): The maximum number of events to include in the response.
 
     """
 
@@ -73,11 +72,11 @@ class SearchSensorHistoryRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         accountidentifier = AccountIdentifier.from_dictionary(dictionary.get('accountidentifier')) if dictionary.get('accountidentifier') else None
         resourceidentifier = ResourceIdentifier.from_dictionary(dictionary.get('resourceidentifier')) if dictionary.get('resourceidentifier') else None
         limitnumber = dictionary.get("$limitnumber") if dictionary.get("$limitnumber") else APIHelper.SKIP

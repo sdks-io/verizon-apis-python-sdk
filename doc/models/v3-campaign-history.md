@@ -12,8 +12,8 @@ Campaign history.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `has_more_data` | `bool` | Required | Has more report flag? |
-| `last_seen_campaign_id` | `string` | Optional | Campaign identifier. |
-| `campaign_list` | [`List of V3CampaignMetaInfo`](../../doc/models/v3-campaign-meta-info.md) | Required | Firmware upgrade list. |
+| `last_seen_campaign_id` | `str` | Optional | Campaign identifier. |
+| `campaign_list` | [`List[V3CampaignMetaInfo]`](../../doc/models/v3-campaign-meta-info.md) | Required | Firmware upgrade list. |
 
 ## Example (as JSON)
 
@@ -37,9 +37,9 @@ Campaign history.
           "endTime": 21
         }
       ],
-      "firmwareName": "firmwareName0",
-      "firmwareFrom": "firmwareFrom0",
-      "firmwareTo": "firmwareTo0",
+      "firmwareName": "firmwareName6",
+      "firmwareFrom": "firmwareFrom6",
+      "firmwareTo": "firmwareTo6",
       "protocol": "LWM2M"
     }
   ]

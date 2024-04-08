@@ -11,8 +11,8 @@ Response to a callback action.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Optional | The name of the billing account. |
-| `service_name` | `string` | Optional | The name of the callback service that was registered/deregistered. |
+| `account_name` | `str` | Optional | The name of the billing account. |
+| `service_name` | `str` | Optional | The name of the callback service that was registered/deregistered. |
 
 ## Example (as JSON)
 

@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `string` | Required | - |
-| `request_type` | `string` | Required | - |
-| `devices` | [`List of DeviceList`](../../doc/models/device-list.md) | Required | - |
-| `monitor_expiration_time` | `string` | Required | - |
+| `account_name` | `str` | Required | - |
+| `request_type` | `str` | Required | - |
+| `devices` | [`List[DeviceList]`](../../doc/models/device-list.md) | Required | - |
+| `monitor_expiration_time` | `str` | Required | - |
 
 ## Example (as JSON)
 
@@ -24,16 +24,8 @@
     {
       "deviceIds": [
         {
-          "id": "id6",
-          "kind": "imei"
-        },
-        {
-          "id": "id7",
-          "kind": "eid"
-        },
-        {
-          "id": "id8",
-          "kind": "esn"
+          "id": "id0",
+          "kind": "kind8"
         }
       ]
     }

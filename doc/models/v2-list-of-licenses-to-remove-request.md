@@ -11,9 +11,9 @@ License cancellation candidate devices.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `mtype` | `string` | Optional | List creation option. |
+| `mtype` | `str` | Optional | List creation option. |
 | `count` | `int` | Optional | The number of devices. |
-| `device_list` | `List of string` | Required | Device IMEI list. |
+| `device_list` | `List[str]` | Required | Device IMEI list. |
 
 ## Example (as JSON)
 

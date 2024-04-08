@@ -11,8 +11,8 @@ Result of the query for obtaining MEC performance metrics.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `string` | Optional | Name of the parameter. |
-| `data` | `List of string` | Optional | Parameter values. |
+| `name` | `str` | Optional | Name of the parameter. |
+| `data` | `List[str]` | Optional | Parameter values. |
 
 ## Example (as JSON)
 

@@ -11,9 +11,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ern` | `string` | Optional | Edge Resource Name. A string identifier for a set of edge resources.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9-]{3,32}$` |
-| `zone` | `string` | Optional | Unique identifier representing a zone. *Note:* This will have a null value as a placeholder.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
-| `region` | `string` | Optional | MEC region name. Current valid values are US_WEST_2 and US_EAST_1. |
+| `ern` | `str` | Optional | Edge Resource Name. A string identifier for a set of edge resources.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9-]{3,32}$` |
+| `zone` | `str` | Optional | Unique identifier representing a zone. *Note:* This will have a null value as a placeholder.<br>**Constraints**: *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
+| `region` | `str` | Optional | MEC region name. Current valid values are US_WEST_2 and US_EAST_1. |
 | `status` | [`MECPlatformStatusEnum`](../../doc/models/mec-platform-status-enum.md) | Optional | Status of the MEC Platform (default is 'unknown')<br>**Default**: `'unknown'` |
 | `properties` | `object` | Optional | - |
 

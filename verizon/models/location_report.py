@@ -17,17 +17,17 @@ class LocationReport(object):
     Location information for up to 1,000 devices.
 
     Attributes:
-        dev_location_list (list of Location): Device location information.
+        dev_location_list (List[Location]): Device location information.
         has_more_data (bool): True if there are more device locations to
             retrieve.
-        start_index (string): The zero-based number of the first record to
+        start_index (str): The zero-based number of the first record to
             return. Set startIndex=0 for the first request. If there are more
             than 1,000 devices to be returned (hasMoreData=true), set
             startIndex=1000 for the second request, 2000 for the third
             request, etc.
         total_count (int): The total number of devices in the original request
             and in the report.
-        txid (string): The transaction ID of the report.
+        txid (str): The transaction ID of the report.
 
     """
 
@@ -82,11 +82,11 @@ class LocationReport(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         dev_location_list = None
         if dictionary.get('devLocationList') is not None:
             dev_location_list = [Location.from_dictionary(x) for x in dictionary.get('devLocationList')]

@@ -17,18 +17,17 @@ class BillableUsageReport(object):
     Bill usage report.
 
     Attributes:
-        account_name (string): Account identifier.
+        account_name (str): Account identifier.
         usage_for_all_accounts (bool): The usage is for a single or multiple
             accounts.
-        sku_name (string): SKU Name of the service subscription.
-        transactions_allowed (string): The number of location requests
-            included with the subscription type.
-        total_transaction_count (string): The total number of billable device
+        sku_name (str): SKU Name of the service subscription.
+        transactions_allowed (str): The number of location requests included
+            with the subscription type.
+        total_transaction_count (str): The total number of billable device
             location requests during the reporting period from all included
             accounts.
         primary_account (ServiceUsage): TODO: type description here.
-        managed_accounts (list of ServiceUsage): Zero or more managed
-            accounts.
+        managed_accounts (List[ServiceUsage]): Zero or more managed accounts.
 
     """
 
@@ -93,11 +92,11 @@ class BillableUsageReport(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         usage_for_all_accounts = dictionary.get("usageForAllAccounts") if "usageForAllAccounts" in dictionary.keys() else APIHelper.SKIP
         sku_name = dictionary.get("skuName") if dictionary.get("skuName") else APIHelper.SKIP

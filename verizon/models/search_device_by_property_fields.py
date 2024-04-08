@@ -19,12 +19,12 @@ class SearchDeviceByPropertyFields(object):
 
     Attributes:
         acceleration (Acceleration): TODO: type description here.
-        battery (string): TODO: type description here.
-        humidity (string): TODO: type description here.
-        light (string): TODO: type description here.
-        pressure (string): TODO: type description here.
-        signal_strength (string): TODO: type description here.
-        temperature (string): TODO: type description here.
+        battery (str): TODO: type description here.
+        humidity (str): TODO: type description here.
+        light (str): TODO: type description here.
+        pressure (str): TODO: type description here.
+        signal_strength (str): TODO: type description here.
+        temperature (str): TODO: type description here.
         device_propertylocation (DevicePropertylocation): TODO: type
             description here.
 
@@ -96,11 +96,11 @@ class SearchDeviceByPropertyFields(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         acceleration = Acceleration.from_dictionary(dictionary.get('acceleration')) if 'acceleration' in dictionary.keys() else APIHelper.SKIP
         battery = dictionary.get("battery") if dictionary.get("battery") else APIHelper.SKIP
         humidity = dictionary.get("humidity") if dictionary.get("humidity") else APIHelper.SKIP

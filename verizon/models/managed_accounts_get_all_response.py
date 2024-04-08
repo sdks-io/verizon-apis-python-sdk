@@ -18,11 +18,11 @@ class ManagedAccountsGetAllResponse(object):
     TODO: type model description here.
 
     Attributes:
-        account_name (string): Account Name
-        managed_acc_added_list (list of ManagedAccAddedList): TODO: type
+        account_name (str): Account Name
+        managed_acc_added_list (List[ManagedAccAddedList]): TODO: type
             description here.
-        managed_acc_provisioned_list (list of ManagedAccProvisionedList):
-            TODO: type description here.
+        managed_acc_provisioned_list (List[ManagedAccProvisionedList]): TODO:
+            type description here.
 
     """
 
@@ -67,11 +67,11 @@ class ManagedAccountsGetAllResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-
         account_name = dictionary.get("accountName") if dictionary.get("accountName") else APIHelper.SKIP
         managed_acc_added_list = None
         if dictionary.get('ManagedAccAddedList') is not None:

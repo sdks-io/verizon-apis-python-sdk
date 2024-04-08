@@ -11,7 +11,7 @@ List of the field names and values to set.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `frequency` | `string` | Optional | - |
+| `frequency` | `str` | Optional | - |
 
 ## Example (as JSON)
 
