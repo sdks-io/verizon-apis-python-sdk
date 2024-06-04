@@ -89,8 +89,8 @@ class OAuth2(HeaderAuth):
             bool: True if OAuth token has expired, False otherwise.
 
         """
-        return hasattr(self._o_auth_token, 'expiry') and AuthHelper.is_token_expired(
-            self._o_auth_token.expiry)
+        return hasattr(self._oauth_token, 'expiry') and AuthHelper.is_token_expired(
+            self._oauth_token.expiry)
 
 
 class ClientCredentialsAuthCredentials:
