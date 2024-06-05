@@ -87,34 +87,17 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = RetrieveMonitorsRequest(
-    account_name='0868924207-00001',
+    account_name='0242123520-00001',
     devices=[
         AccountDeviceList(
             device_ids=[
                 DeviceId(
-                    id='990013907835573',
-                    kind='imei'
-                ),
-                DeviceId(
-                    id='89141390780800784259',
-                    kind='iccid'
-                )
-            ]
-        ),
-        AccountDeviceList(
-            device_ids=[
-                DeviceId(
-                    id='990013907884259',
-                    kind='imei'
-                ),
-                DeviceId(
-                    id='89141390780800735573',
-                    kind='iccid'
+                    id='12016560696',
+                    kind='msisdn'
                 )
             ]
         )
-    ],
-    monitor_type='monitorType'
+    ]
 )
 
 result = device_diagnostics_controller.retrieve_active_monitors_using_post(body)

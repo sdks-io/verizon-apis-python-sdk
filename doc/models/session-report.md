@@ -14,6 +14,7 @@ Session report for a device.
 | `sessions` | [`List[DailyUsageItem]`](../../doc/models/daily-usage-item.md) | Optional | An object containing the start and end time of the session with the amount of data transferred. |
 | `id` | `str` | Required | The 10-digit ID of the device. |
 | `txid` | `str` | Required | A unique string that associates the request with the location report information that is sent in asynchronous callback message.ThingSpace will send a separate callback message for each device that was in the request. All of the callback messages will have the same txid. |
+| `example` | `object` | Optional | - |
 
 ## Example (as JSON)
 
@@ -32,7 +33,11 @@ Session report for a device.
       "endTime": "endTime8",
       "numBytes": 106
     }
-  ]
+  ],
+  "example": {
+    "key1": "val1",
+    "key2": "val2"
+  }
 }
 ```
 

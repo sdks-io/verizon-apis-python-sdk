@@ -15,32 +15,32 @@ from verizon.controllers.oauth_authorization_controller import\
     OauthAuthorizationController
 
 
-class OAuth2(HeaderAuth):
+class ThingspaceOauth(HeaderAuth):
 
     @property
     def error_message(self):
         """Display error message on occurrence of authentication failure
-        in ClientCredentialsAuth
+        in ThingspaceOauth
 
         """
-        return "ClientCredentialsAuth: OAuthToken is undefined or expired."
+        return "ThingspaceOauth: OAuthToken is undefined or expired."
 
-    def __init__(self, client_credentials_auth_credentials, config):
+    def __init__(self, thingspace_oauth_credentials, config):
         auth_params = {}
-        self._oauth_client_id = client_credentials_auth_credentials.oauth_client_id \
-            if client_credentials_auth_credentials is not None else None
-        self._oauth_client_secret = client_credentials_auth_credentials.oauth_client_secret \
-            if client_credentials_auth_credentials is not None else None
-        if client_credentials_auth_credentials is not None \
-                and isinstance(client_credentials_auth_credentials.oauth_token, OauthToken):
+        self._oauth_client_id = thingspace_oauth_credentials.oauth_client_id \
+            if thingspace_oauth_credentials is not None else None
+        self._oauth_client_secret = thingspace_oauth_credentials.oauth_client_secret \
+            if thingspace_oauth_credentials is not None else None
+        if thingspace_oauth_credentials is not None \
+                and isinstance(thingspace_oauth_credentials.oauth_token, OauthToken):
             self._oauth_token = OauthToken.from_dictionary(
-                APIHelper.to_dictionary(client_credentials_auth_credentials.oauth_token))
+                APIHelper.to_dictionary(thingspace_oauth_credentials.oauth_token))
         else:
-            self._oauth_token = client_credentials_auth_credentials.oauth_token \
-                if client_credentials_auth_credentials is not None else None
-        if client_credentials_auth_credentials is not None \
-                and isinstance(client_credentials_auth_credentials.oauth_scopes, list):
-            self._oauth_scopes = client_credentials_auth_credentials.oauth_scopes
+            self._oauth_token = thingspace_oauth_credentials.oauth_token \
+                if thingspace_oauth_credentials is not None else None
+        if thingspace_oauth_credentials is not None \
+                and isinstance(thingspace_oauth_credentials.oauth_scopes, list):
+            self._oauth_scopes = thingspace_oauth_credentials.oauth_scopes
         else:
             self._oauth_scopes = None
         self._o_auth_api = OauthAuthorizationController(config)
@@ -72,7 +72,7 @@ class OAuth2(HeaderAuth):
             OAuthToken: The OAuth token.
 
         """
-        token = self._o_auth_api.request_token(
+        token = self._o_auth_api.request_token_thingspace_oauth(
             self.build_basic_auth_header(),
             ' '.join(self._oauth_scopes) if self._oauth_scopes else None,
             _optional_form_parameters=additional_params
@@ -93,7 +93,7 @@ class OAuth2(HeaderAuth):
             self._oauth_token.expiry)
 
 
-class ClientCredentialsAuthCredentials:
+class ThingspaceOauthCredentials:
 
     @property
     def oauth_client_id(self):
@@ -124,7 +124,7 @@ class ClientCredentialsAuthCredentials:
 
     def clone_with(self, oauth_client_id=None, oauth_client_secret=None,
                    oauth_token=None, oauth_scopes=None):
-        return ClientCredentialsAuthCredentials(
+        return ThingspaceOauthCredentials(
             oauth_client_id or self.oauth_client_id,
             oauth_client_secret or self.oauth_client_secret,
             oauth_token or self.oauth_token, oauth_scopes or self.oauth_scopes)

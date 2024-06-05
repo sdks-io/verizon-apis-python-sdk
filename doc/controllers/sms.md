@@ -40,9 +40,14 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = SMSSendRequest(
-    account_name='accountName0',
-    sms_message='The rain in Spain stays mainly in the plain.',
-    service_plan='T Plan 2'
+    account_name='0000123456-00001',
+    sms_message='Can you hear me now?',
+    device_ids=[
+        DeviceId(
+            id='89148000000800139708',
+            kind='iccid'
+        )
+    ]
 )
 
 result = sms_controller.send_sms_to_device(body)

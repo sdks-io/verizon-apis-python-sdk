@@ -1,3 +1,4 @@
 __all__ = [
-    'oauth_2',
+    'thingspace_oauth',
+    'vz_m2m_token',
 ]

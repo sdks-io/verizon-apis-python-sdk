@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.log_in_result import LogInResult
 from verizon.models.log_out_request import LogOutRequest
 from verizon.models.session_reset_password_result import SessionResetPasswordResult
@@ -64,7 +65,7 @@ class SessionManagementController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -98,7 +99,7 @@ class SessionManagementController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -144,7 +145,7 @@ class SessionManagementController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

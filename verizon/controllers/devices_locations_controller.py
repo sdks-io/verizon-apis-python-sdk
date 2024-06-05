@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.location import Location
 from verizon.models.synchronous_location_request_result import SynchronousLocationRequestResult
 from verizon.models.transaction_id import TransactionID
@@ -68,7 +69,7 @@ class DevicesLocationsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -117,7 +118,7 @@ class DevicesLocationsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -165,7 +166,7 @@ class DevicesLocationsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -209,7 +210,7 @@ class DevicesLocationsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -264,7 +265,7 @@ class DevicesLocationsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -312,7 +313,7 @@ class DevicesLocationsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -360,7 +361,7 @@ class DevicesLocationsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

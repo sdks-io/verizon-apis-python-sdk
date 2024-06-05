@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.connectivity_management_success_result import ConnectivityManagementSuccessResult
 from verizon.models.device_group import DeviceGroup
 from verizon.models.device_group_devices_data import DeviceGroupDevicesData
@@ -66,7 +67,7 @@ class DeviceGroupsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -108,7 +109,7 @@ class DeviceGroupsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -164,7 +165,7 @@ class DeviceGroupsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -221,7 +222,7 @@ class DeviceGroupsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -271,7 +272,7 @@ class DeviceGroupsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

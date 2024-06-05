@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.v1_account_subscription import V1AccountSubscription
 from verizon.models.account_license_info import AccountLicenseInfo
 from verizon.exceptions.fota_v1_result_exception import FotaV1ResultException
@@ -61,7 +62,7 @@ class SoftwareManagementSubscriptionsV1Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -113,7 +114,7 @@ class SoftwareManagementSubscriptionsV1Controller(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

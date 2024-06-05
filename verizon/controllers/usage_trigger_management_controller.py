@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.usage_trigger_response import UsageTriggerResponse
 from verizon.models.device_location_success_result import DeviceLocationSuccessResult
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
@@ -64,7 +65,7 @@ class UsageTriggerManagementController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -114,7 +115,7 @@ class UsageTriggerManagementController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -162,7 +163,7 @@ class UsageTriggerManagementController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

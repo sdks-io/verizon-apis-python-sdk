@@ -49,7 +49,7 @@ body = [
             include_under_expected_usage=True,
             include_over_expected_usage=True
         ),
-        notification=Notification(
+        notification=TriggerNotification(
             notification_type='DailySummary',
             callback=True,
             email_notification=False,
@@ -124,7 +124,7 @@ body = [
             include_under_expected_usage=False,
             include_over_expected_usage=True
         ),
-        notification=Notification(
+        notification=TriggerNotification(
             notification_type='DailySummary',
             callback=True,
             email_notification=False,

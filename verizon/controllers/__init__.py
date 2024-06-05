@@ -71,5 +71,6 @@ __all__ = [
     'update_triggers_controller',
     'sim_actions_controller',
     'global_reporting_controller',
+    'm_v2_triggers_controller',
     'oauth_authorization_controller',
 ]

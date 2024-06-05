@@ -17,5 +17,6 @@ __all__ = [
     'default_response_exception',
     'ready_sim_rest_error_response_exception',
     'esim_rest_error_response_exception',
+    'rules_engine_rest_error_response_exception',
     'oauth_provider_exception',
 ]

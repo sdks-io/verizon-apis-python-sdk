@@ -69,16 +69,14 @@ print(result)
 
 ```python
 def stop_device_reachability(self,
-                            account_name,
-                            monitor_ids)
+                            body=None)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `str` | Query, Required | The numeric name of the account. |
-| `monitor_ids` | `List[str]` | Query, Required | The array contains the monitorIDs (UUID) for which the monitor is to be deleted. |
+| `body` | [`StopMonitorRequest`](../../doc/models/stop-monitor-request.md) | Body, Optional | - |
 
 ## Response Type
 
@@ -87,16 +85,15 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-account_name = '0242123520-00001'
-
-monitor_ids = [
-    '35596ca6-bab4-4333-a914-42b4fc2da54c',
-    '35596ca6-bab4-4333-a914-42b4fc2da54b'
-]
+body = StopMonitorRequest(
+    account_name='0242123520-00001',
+    monitor_ids=[
+        '35596ca6-bab4-4333-a914-42b4fc2da54c'
+    ]
+)
 
 result = device_monitoring_controller.stop_device_reachability(
-    account_name,
-    monitor_ids
+    body=body
 )
 print(result)
 ```

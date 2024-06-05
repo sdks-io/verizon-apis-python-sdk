@@ -12,7 +12,8 @@ from apimatic_core.decorators.lazy_property import LazyProperty
 from verizon.configuration import Configuration
 from verizon.controllers.base_controller import BaseController
 from verizon.configuration import Environment
-from verizon.http.auth.oauth_2 import Oauth2
+from verizon.http.auth.thingspace_oauth import ThingspaceOauth
+from verizon.http.auth.vz_m2m_token import VZM2mToken
 from verizon.controllers.m_5g_edge_platforms_controller\
     import M5gEdgePlatformsController
 from verizon.controllers.service_endpoints_controller\
@@ -142,6 +143,7 @@ from verizon.controllers.update_triggers_controller\
 from verizon.controllers.sim_actions_controller import SIMActionsController
 from verizon.controllers.global_reporting_controller\
     import GlobalReportingController
+from verizon.controllers.m_v2_triggers_controller import MV2TriggersController
 from verizon.controllers.oauth_authorization_controller\
     import OauthAuthorizationController
 
@@ -432,42 +434,44 @@ class VerizonClient(object):
         return GlobalReportingController(self.global_configuration)
 
     @LazyProperty
+    def m_v2_triggers(self):
+        return MV2TriggersController(self.global_configuration)
+
+    @LazyProperty
     def oauth_authorization(self):
         return OauthAuthorizationController(self.global_configuration)
 
     @property
-    def oauth_2(self):
-        return self.auth_managers['oAuth2']
+    def thingspace_oauth(self):
+        return self.auth_managers['thingspace_oauth']
 
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=60, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
-                 environment=Environment.PRODUCTION, oauth_client_id=None,
-                 oauth_client_secret=None, oauth_token=None, oauth_scopes=None,
-                 client_credentials_auth_credentials=None,
-                 vz_m2m_token='TODO: Replace', config=None):
+                 environment=Environment.PRODUCTION,
+                 thingspace_oauth_credentials=None,
+                 vz_m2m_token_credentials=None, config=None):
         self.config = config or Configuration(
             http_client_instance=http_client_instance,
             override_http_client_configuration=override_http_client_configuration,
             http_call_back=http_call_back, timeout=timeout,
             max_retries=max_retries, backoff_factor=backoff_factor,
             retry_statuses=retry_statuses, retry_methods=retry_methods,
-            environment=environment, oauth_client_id=oauth_client_id,
-            oauth_client_secret=oauth_client_secret, oauth_token=oauth_token,
-            oauth_scopes=oauth_scopes,
-            client_credentials_auth_credentials=client_credentials_auth_credentials,
-            vz_m2m_token=vz_m2m_token)
+            environment=environment,
+            thingspace_oauth_credentials=thingspace_oauth_credentials,
+            vz_m2m_token_credentials=vz_m2m_token_credentials)
 
         self.global_configuration = GlobalConfiguration(self.config)\
             .global_errors(BaseController.global_errors())\
             .base_uri_executor(self.config.get_base_uri)\
-            .user_agent(BaseController.user_agent(), BaseController.user_agent_parameters())\
-            .global_header('VZ-M2M-Token', self.config.vz_m2m_token)
+            .user_agent(BaseController.user_agent(), BaseController.user_agent_parameters())
 
-        self.auth_managers = {key: None for key in ['oAuth2']}
-        self.auth_managers['oAuth2'] = Oauth2(
-            self.config.client_credentials_auth_credentials,
-            self.global_configuration)
+        self.auth_managers = {key: None for key in ['thingspace_oauth',
+                                                    'VZ-M2M-Token']}
+        self.auth_managers['thingspace_oauth'] = ThingspaceOauth(
+            self.config.thingspace_oauth_credentials, self.global_configuration)
+        self.auth_managers['VZ-M2M-Token'] = VZM2mToken(
+            self.config.vz_m2m_token_credentials)
         self.global_configuration = self.global_configuration.auth_managers(self.auth_managers)
 

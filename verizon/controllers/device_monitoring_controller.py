@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.request_response import RequestResponse
 from verizon.exceptions.rest_error_response_exception import RestErrorResponseException
 
@@ -62,7 +63,7 @@ class DeviceMonitoringController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -72,16 +73,13 @@ class DeviceMonitoringController(BaseController):
         ).execute()
 
     def stop_device_reachability(self,
-                                 account_name,
-                                 monitor_ids):
+                                 body=None):
         """Does a DELETE request to /m2m/v1/diagnostics/basic/devicereachability.
 
         TODO: type endpoint description here.
 
         Args:
-            account_name (str): The numeric name of the account.
-            monitor_ids (List[str]): The array contains the monitorIDs (UUID)
-                for which the monitor is to be deleted.
+            body (StopMonitorRequest, optional): TODO: type description here.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -100,16 +98,16 @@ class DeviceMonitoringController(BaseController):
             RequestBuilder().server(Server.THINGSPACE)
             .path('/m2m/v1/diagnostics/basic/devicereachability')
             .http_method(HttpMethodEnum.DELETE)
-            .query_param(Parameter()
-                         .key('accountName')
-                         .value(account_name))
-            .query_param(Parameter()
-                         .key('monitorIds')
-                         .value(monitor_ids))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('oAuth2'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

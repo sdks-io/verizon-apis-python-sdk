@@ -25,10 +25,10 @@ class OauthAuthorizationController(BaseController):
     def __init__(self, config):
         super(OauthAuthorizationController, self).__init__(config)
 
-    def request_token(self,
-                      authorization,
-                      scope=None,
-                      _optional_form_parameters=None):
+    def request_token_thingspace_oauth(self,
+                                       authorization,
+                                       scope=None,
+                                       _optional_form_parameters=None):
         """Does a POST request to /oauth2/token.
 
         Create a new OAuth 2 token.

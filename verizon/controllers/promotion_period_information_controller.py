@@ -16,6 +16,7 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
+from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.response_to_usage_query import ResponseToUsageQuery
 from verizon.models.usage_request_response import UsageRequestResponse
 from verizon.exceptions.ready_sim_rest_error_response_exception import ReadySimRestErrorResponseException
@@ -34,7 +35,7 @@ class PromotionPeriodInformationController(BaseController):
         Retrieves the usage history of a device during the promotion period.
 
         Args:
-            body (RequestBodyForUsage): Retrieve Aggregate Usage
+            body (RequestBodyForUsage1): Retrieve Aggregate Usage
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -62,7 +63,7 @@ class PromotionPeriodInformationController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -79,7 +80,7 @@ class PromotionPeriodInformationController(BaseController):
         the promotional period using a callback.
 
         Args:
-            body (UsageRequestBody): Retrieve Aggregate Usage
+            body (RequestBodyForUsage): Retrieve Aggregate Usage
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -107,7 +108,7 @@ class PromotionPeriodInformationController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('oAuth2'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

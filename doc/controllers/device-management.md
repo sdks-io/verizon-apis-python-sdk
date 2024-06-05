@@ -75,7 +75,8 @@ body = CarrierActivateRequest(
                     id='89141390780800784259',
                     kind='iccid'
                 )
-            ]
+            ],
+            ip_address='1.2.3.456'
         ),
         AccountDeviceList(
             device_ids=[
@@ -87,10 +88,11 @@ body = CarrierActivateRequest(
                     id='89141390780800735573',
                     kind='iccid'
                 )
-            ]
+            ],
+            ip_address='1.2.3.456'
         )
     ],
-    service_plan='m2m_4G',
+    service_plan='the service plan name',
     mdn_zip_code='98801',
     account_name='0868924207-00001',
     custom_fields=[
@@ -398,18 +400,11 @@ body = CarrierDeactivateRequest(
                     kind='iccid'
                 )
             ]
-        ),
-        AccountDeviceList(
-            device_ids=[
-                DeviceId(
-                    id='20-digit ICCID',
-                    kind='iccid'
-                )
-            ]
         )
     ],
     reason_code='FF',
-    etf_waiver=True
+    etf_waiver=True,
+    delete_after_deactivation=True
 )
 
 result = device_management_controller.deactivate_service_for_devices(body)
@@ -850,7 +845,7 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = ServicePlanUpdateRequest(
-    service_plan='new_service_plan_code',
+    service_plan='Tablet5GB',
     devices=[
         AccountDeviceList(
             device_ids=[
@@ -860,7 +855,8 @@ body = ServicePlanUpdateRequest(
                 )
             ]
         )
-    ]
+    ],
+    carrier_ip_pool_name='IPPool'
 )
 
 result = device_management_controller.change_devices_service_plan(body)
@@ -905,26 +901,16 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = CarrierActionsRequest(
-    account_name='0000123456-00001',
-    custom_fields=[
-        CustomFields(
-            key='customField1',
-            value='key value'
-        )
-    ],
     devices=[
         AccountDeviceList(
             device_ids=[
                 DeviceId(
-                    id='20-digit ICCID',
+                    id='89148000000800139708',
                     kind='iccid'
                 )
             ]
         )
-    ],
-    with_billing=True,
-    group_name='name of the group',
-    service_plan='service plan name'
+    ]
 )
 
 result = device_management_controller.suspend_service_for_devices(body)
@@ -969,25 +955,16 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = CarrierActionsRequest(
-    account_name='0000123456-00001',
-    custom_fields=[
-        CustomFields(
-            key='customField1',
-            value='key value'
-        )
-    ],
     devices=[
         AccountDeviceList(
             device_ids=[
                 DeviceId(
-                    id='20-digit ICCID',
+                    id='89148000000800139708',
                     kind='iccid'
                 )
             ]
         )
-    ],
-    group_name='name of the group',
-    service_plan='service plan name'
+    ]
 )
 
 result = device_management_controller.restore_service_for_suspended_devices(body)
@@ -1351,9 +1328,16 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = DevicePrlListRequest(
-    account_name='101234-0001',
-    group_name='West Region',
-    service_plan='3G 2MB'
+    device_ids=[
+        DeviceId(
+            id='A10085E5003861',
+            kind='meid'
+        ),
+        DeviceId(
+            id='A10085E5003186',
+            kind='meid'
+        )
+    ]
 )
 
 result = device_management_controller.list_current_devices_prl_version(body)
@@ -1398,10 +1382,16 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 body = DeviceSuspensionStatusRequest(
-    filter=DeviceFilterWithoutAccount(
-        group_name='suspended devices'
-    ),
-    account_name='1223334444-00001'
+    device_ids=[
+        DeviceId(
+            id='A10085E5003861',
+            kind='meid'
+        ),
+        DeviceId(
+            id='A10085E5003186',
+            kind='meid'
+        )
+    ]
 )
 
 result = device_management_controller.get_device_service_suspension_status(body)
@@ -1447,7 +1437,11 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ```python
 body = DeviceUsageListRequest(
     earliest='2018-03-20T00:00:01Z',
-    latest='2020-12-31T00:00:01Z'
+    latest='2020-12-31T00:00:01Z',
+    device_id=DeviceId(
+        id='50684915885088839315521399821675',
+        kind='eid'
+    )
 )
 
 result = device_management_controller.list_devices_usage_history(body)
@@ -1631,7 +1625,7 @@ body = DeviceUploadRequest(
             device_ids=[
                 DeviceId(
                     id='15-digit IMEI',
-                    kind='imei'
+                    kind='IMEI'
                 )
             ]
         ),
@@ -1639,7 +1633,15 @@ body = DeviceUploadRequest(
             device_ids=[
                 DeviceId(
                     id='15-digit IMEI',
-                    kind='imei'
+                    kind='IMEI'
+                )
+            ]
+        ),
+        DeviceList(
+            device_ids=[
+                DeviceId(
+                    id='15-digit IMEI',
+                    kind='IMEI'
                 )
             ]
         )

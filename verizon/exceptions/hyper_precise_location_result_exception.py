@@ -39,3 +39,4 @@ class HyperPreciseLocationResultException(verizon.exceptions.api_exception.APIEx
         self.response_code = dictionary.get("responseCode") if dictionary.get("responseCode") else None
         self.message = dictionary.get("message") if dictionary.get("message") else None
         self.fault = HyperPreciseLocationFault.from_dictionary(dictionary.get('fault')) if 'fault' in dictionary.keys() else None
+        self.example = dictionary.get("example") if dictionary.get("example") else None

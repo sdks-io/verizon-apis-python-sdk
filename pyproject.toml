@@ -4,7 +4,7 @@ requires = ["setuptools>=61.0"]
 [project]
 name = "sdksio-verizon-apis-sdk"
 description = "Use the Verizon API for connectivity management, device diagnostics, device location, edge discovery service, edge performance, software management and much more."
-version = "1.4.0"
+version = "1.5.0"
 readme = "README.md"
 requires-python = ">=3.7"
 keywords = ["ThingSpace", "API", "SDKS", "Verizon"]

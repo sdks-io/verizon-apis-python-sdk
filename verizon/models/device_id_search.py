@@ -27,28 +27,26 @@ class DeviceIdSearch(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "kind": 'kind',
         "contains": 'contains',
+        "kind": 'kind',
         "startswith": 'startswith',
         "endswith": 'endswith'
     }
 
     _optionals = [
-        'contains',
         'startswith',
         'endswith',
     ]
 
     def __init__(self,
+                 contains=None,
                  kind=None,
-                 contains=APIHelper.SKIP,
                  startswith=APIHelper.SKIP,
                  endswith=APIHelper.SKIP):
         """Constructor for the DeviceIdSearch class"""
 
         # Initialize members of the class
-        if contains is not APIHelper.SKIP:
-            self.contains = contains 
+        self.contains = contains 
         if startswith is not APIHelper.SKIP:
             self.startswith = startswith 
         if endswith is not APIHelper.SKIP:
@@ -74,12 +72,12 @@ class DeviceIdSearch(object):
             return None
 
         # Extract variables from the dictionary
+        contains = dictionary.get("contains") if dictionary.get("contains") else None
         kind = dictionary.get("kind") if dictionary.get("kind") else None
-        contains = dictionary.get("contains") if dictionary.get("contains") else APIHelper.SKIP
         startswith = dictionary.get("startswith") if dictionary.get("startswith") else APIHelper.SKIP
         endswith = dictionary.get("endswith") if dictionary.get("endswith") else APIHelper.SKIP
         # Return an object of this model
-        return cls(kind,
-                   contains,
+        return cls(contains,
+                   kind,
                    startswith,
                    endswith)

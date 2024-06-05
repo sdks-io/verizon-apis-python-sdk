@@ -24,7 +24,11 @@ Session and usage details for up to 10 devices.
     {
       "imei": "709312034493372",
       "numberOfSessions": 1,
-      "bytesTransferred": 2057
+      "bytesTransferred": 2057,
+      "example": {
+        "key1": "val1",
+        "key2": "val2"
+      }
     }
   ],
   "errors": [

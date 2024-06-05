@@ -3,7 +3,7 @@
 
 
 
-Documentation for accessing and setting credentials for oAuth2.
+Documentation for accessing and setting credentials for thingspace_oauth.
 
 ## Auth Credentials
 
@@ -12,11 +12,11 @@ Documentation for accessing and setting credentials for oAuth2.
 | OAuthClientId | `str` | OAuth 2 Client ID | `oauth_client_id` |
 | OAuthClientSecret | `str` | OAuth 2 Client Secret | `oauth_client_secret` |
 | OAuthToken | `OauthToken` | Object for storing information about the OAuth token | `oauth_token` |
-| OAuthScopes | `List[OauthScopeEnum]` | List of scopes that apply to the OAuth token | `oauth_scopes` |
+| OAuthScopes | `List[OauthScopeThingspaceOauthEnum]` | List of scopes that apply to the OAuth token | `oauth_scopes` |
 
 
 
-**Note:** Auth credentials can be set using `ClientCredentialsAuthCredentials` object, passed in as named parameter `client_credentials_auth_credentials` in the client initialization.
+**Note:** Auth credentials can be set using `ThingspaceOauthCredentials` object, passed in as named parameter `thingspace_oauth_credentials` in the client initialization.
 
 ## Usage Example
 
@@ -26,12 +26,12 @@ You must initialize the client with *OAuth 2.0 Client Credentials Grant* credent
 
 ```python
 client = VerizonClient(
-    client_credentials_auth_credentials=ClientCredentialsAuthCredentials(
+    thingspace_oauth_credentials=ThingspaceOauthCredentials(
         oauth_client_id='OAuthClientId',
         oauth_client_secret='OAuthClientSecret',
         oauth_scopes=[
-            OauthScopeEnum.DISCOVERYREAD,
-            OauthScopeEnum.SERVICEPROFILEREAD
+            OauthScopeThingspaceOauthEnum.DISCOVERYREAD,
+            OauthScopeThingspaceOauthEnum.SERVICEPROFILEREAD
         ]
     )
 )
@@ -47,9 +47,9 @@ You must have initialized the client with scopes for which you need permission t
 
 ```python
 try:
-    token = client.oauth_2.fetch_token()
-    client_credentials_auth_credentials = client.config.client_credentials_auth_credentials.clone_with(oauth_token=token)
-    config = client.config.clone_with(client_credentials_auth_credentials=client_credentials_auth_credentials)
+    token = client.thingspace_oauth.fetch_token()
+    thingspace_oauth_credentials = client.config.thingspace_oauth_credentials.clone_with(oauth_token=token)
+    config = client.config.clone_with(thingspace_oauth_credentials=thingspace_oauth_credentials)
     client = VerizonClient(config)
 except OauthProviderException as ex:
     # handle exception
@@ -63,7 +63,7 @@ The client can now make authorized endpoint calls.
 
 ### Scopes
 
-Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the [`OauthScopeEnum`](../../doc/models/oauth-scope-enum.md) enumeration.
+Scopes enable your application to only request access to the resources it needs while enabling users to control the amount of access they grant to your application. Available scopes are defined in the [`OauthScopeThingspaceOauthEnum`](../../doc/models/oauth-scope-thingspace-oauth-enum.md) enumeration.
 
 | Scope Name | Description |
 |  --- | --- |
@@ -75,6 +75,11 @@ Scopes enable your application to only request access to the resources it needs 
 | `TS_MEC_FULLACCESS` | Full access for /serviceprofiles and /serviceendpoints. |
 | `TS_MEC_LIMITACCESS` | Limited access. Will not allow use of /serviceprofiles and /serviceendpoints but will allow discovery. |
 | `TS_APPLICATION_RO` |  |
+| `EDGEDISCOVERYREAD` |  |
+| `EDGESERVICEPROFILEREAD` |  |
+| `EDGESERVICEPROFILEWRITE` |  |
+| `EDGESERVICEREGISTRYREAD` |  |
+| `EDGESERVICEREGISTRYWRITE` |  |
 | `READ` | read access |
 | `WRITE` | read/write access |
 
@@ -84,7 +89,7 @@ It is recommended that you store the access token for reuse.
 
 ```python
 # store token
-save_token_to_database(client.config.client_credentials_auth_credentials.oauth_token)
+save_token_to_database(client.config.thingspace_oauth_credentials.oauth_token)
 ```
 
 ### Creating a client from a stored token
@@ -93,7 +98,7 @@ To authorize a client from a stored access token, just set the access token in C
 
 ```python
 client = VerizonClient(
-    client_credentials_auth_credentials=ClientCredentialsAuthCredentials(
+    thingspace_oauth_credentials=ThingspaceOauthCredentials(
         oauth_token=load_token_from_database()
     )
 )
@@ -105,18 +110,18 @@ client = VerizonClient(
 
 ```python
 from verizon.verizon_client import VerizonClient
-from verizon.models.oauth_scope_enum import OauthScopeEnum
+from verizon.models.oauth_scope_thingspace_oauth_enum import OauthScopeThingspaceOauthEnum
 from verizon.exceptions.oauth_provider_exception import OauthProviderException
 
 from verizon.exceptions.api_exception import APIException
 
 client = VerizonClient(
-    client_credentials_auth_credentials=ClientCredentialsAuthCredentials(
+    thingspace_oauth_credentials=ThingspaceOauthCredentials(
         oauth_client_id='OAuthClientId',
         oauth_client_secret='OAuthClientSecret',
         oauth_scopes=[
-            OauthScopeEnum.DISCOVERYREAD,
-            OauthScopeEnum.SERVICEPROFILEREAD
+            OauthScopeThingspaceOauthEnum.DISCOVERYREAD,
+            OauthScopeThingspaceOauthEnum.SERVICEPROFILEREAD
         ]
     )
 )
@@ -134,16 +139,16 @@ def load_token_from_database():
 previous_token = load_token_from_database()
 if previous_token:
     # restore previous access token
-    client_credentials_auth_credentials = client.config.client_credentials_auth_credentials.clone_with(oauth_token=previous_token)
-    config = client.config.clone_with(client_credentials_auth_credentials=client_credentials_auth_credentials)
+    thingspace_oauth_credentials = client.config.thingspace_oauth_credentials.clone_with(oauth_token=previous_token)
+    config = client.config.clone_with(thingspace_oauth_credentials=thingspace_oauth_credentials)
     client = VerizonClient(config)
 else:
     # obtain new access token
     try:
-        token = client.oauth_2.fetch_token()
+        token = client.thingspace_oauth.fetch_token()
         save_token_to_database(token)
-        client_credentials_auth_credentials = client.config.client_credentials_auth_credentials.clone_with(oauth_token=token)
-        config = client.config.clone_with(client_credentials_auth_credentials=client_credentials_auth_credentials)
+        thingspace_oauth_credentials = client.config.thingspace_oauth_credentials.clone_with(oauth_token=token)
+        config = client.config.clone_with(thingspace_oauth_credentials=thingspace_oauth_credentials)
         client = VerizonClient(config)
     except OauthProviderException as ex:
         # handle exception
