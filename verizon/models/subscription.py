@@ -33,11 +33,9 @@ class Subscription(object):
             was attempted.
         lastupdated (str): The date the resource was last updated.
         name (str): Name of the subscription.
-        networkfailures (int): The number of failures due to network
-            problems.
+        networkfailures (int): The number of failures due to network problems.
         streamfailures (int): TODO: type description here.
-        streamkind (str): The event type that will be sent in the data
-            stream.
+        streamkind (str): The event type that will be sent in the data stream.
         targetid (str): Target to be used for dispatching events.
         targettype (str): TODO: type description here.
         version (str): Version of the underlying schema resource.

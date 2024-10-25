@@ -19,11 +19,11 @@ OAuth 2 scopes supported by the API
 | `TS_MEC_FULLACCESS` | Full access for /serviceprofiles and /serviceendpoints. |
 | `TS_MEC_LIMITACCESS` | Limited access. Will not allow use of /serviceprofiles and /serviceendpoints but will allow discovery. |
 | `TS_APPLICATION_RO` |  |
-| `EDGEDISCOVERYREAD` |  |
-| `EDGESERVICEPROFILEREAD` |  |
-| `EDGESERVICEPROFILEWRITE` |  |
-| `EDGESERVICEREGISTRYREAD` |  |
-| `EDGESERVICEREGISTRYWRITE` |  |
+| `EDGEDISCOVERYREAD` | Read access to the discovery service |
+| `EDGESERVICEPROFILEREAD` | Read access to the service profile service |
+| `EDGESERVICEPROFILEWRITE` | Write access to the service profile service |
+| `EDGESERVICEREGISTRYREAD` | Read access to the service registry service |
+| `EDGESERVICEREGISTRYWRITE` | Write access to the service registry service |
 | `READ` | read access |
 | `WRITE` | read/write access |
 

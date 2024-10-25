@@ -19,10 +19,10 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.location import Location
 from verizon.models.synchronous_location_request_result import SynchronousLocationRequestResult
-from verizon.models.transaction_id import TransactionID
 from verizon.models.asynchronous_location_request_result import AsynchronousLocationRequestResult
 from verizon.models.location_report import LocationReport
 from verizon.models.location_report_status import LocationReportStatus
+from verizon.models.transaction_id import TransactionID
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
 
 
@@ -36,8 +36,7 @@ class DevicesLocationsController(BaseController):
                                            body):
         """Does a POST request to /locations.
 
-        This locations endpoint retrieves the locations for a list of
-        devices.
+        This locations endpoint retrieves the locations for a list of devices.
 
         Args:
             body (LocationRequest): Request to obtain location of devices.
@@ -85,8 +84,7 @@ class DevicesLocationsController(BaseController):
         Requests the current or cached location of up to 10,000 IoT or
         consumer devices (phones, tablets. etc.). This request returns a
         synchronous transaction ID, and the location information for each
-        device is returned asynchronously as a DeviceLocation callback
-        message.
+        device is returned asynchronously as a DeviceLocation callback message.
 
         Args:
             body (LocationRequest): An asynchronous request to obtain
@@ -123,54 +121,6 @@ class DevicesLocationsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SynchronousLocationRequestResult.from_dictionary)
-            .is_api_response(True)
-            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
-        ).execute()
-
-    def cancel_device_location_request(self,
-                                       account_name,
-                                       txid):
-        """Does a DELETE request to /devicelocations/{txid}.
-
-        Cancel a queued or unfinished device location request.
-
-        Args:
-            account_name (str): Account identifier in "##########-#####".
-            txid (str): Transaction ID of the request to cancel, from the
-                synchronous response to the original request.
-
-        Returns:
-            ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                canceled.
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/devicelocations/{txid}')
-            .http_method(HttpMethodEnum.DELETE)
-            .query_param(Parameter()
-                         .key('accountName')
-                         .value(account_name))
-            .template_param(Parameter()
-                            .key('txid')
-                            .value(txid)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(TransactionID.from_dictionary)
             .is_api_response(True)
             .local_error('default', 'Unexpected error.', DeviceLocationResultException)
         ).execute()
@@ -220,18 +170,17 @@ class DevicesLocationsController(BaseController):
         ).execute()
 
     def retrieve_location_report(self,
-                                 account,
+                                 account_name,
                                  txid,
                                  startindex):
-        """Does a GET request to /locationreports/{account}/report/{txid}/index/{startindex}.
+        """Does a GET request to /locationreports/{accountName}/report/{txid}/index/{startindex}.
 
         Download a completed asynchronous device location report.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
             txid (str): Transaction ID from POST /locationreports response.
-            startindex (int): Zero-based number of the first record to
-                return.
+            startindex (int): Zero-based number of the first record to return.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -248,11 +197,11 @@ class DevicesLocationsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/locationreports/{account}/report/{txid}/index/{startindex}')
+            .path('/locationreports/{accountName}/report/{txid}/index/{startindex}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('txid')
@@ -275,14 +224,14 @@ class DevicesLocationsController(BaseController):
         ).execute()
 
     def get_location_report_status(self,
-                                   account,
+                                   account_name,
                                    txid):
-        """Does a GET request to /locationreports/{account}/report/{txid}/status.
+        """Does a GET request to /locationreports/{accountName}/report/{txid}/status.
 
         Returns the current status of a requested device location report.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
             txid (str): Transaction ID of the report.
 
         Returns:
@@ -300,11 +249,11 @@ class DevicesLocationsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/locationreports/{account}/report/{txid}/status')
+            .path('/locationreports/{accountName}/report/{txid}/status')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('txid')
@@ -323,14 +272,14 @@ class DevicesLocationsController(BaseController):
         ).execute()
 
     def cancel_queued_location_report_generation(self,
-                                                 account,
+                                                 account_name,
                                                  txid):
-        """Does a DELETE request to /locationreports/{account}/report/{txid}.
+        """Does a DELETE request to /locationreports/{accountName}/report/{txid}.
 
         Cancel a queued device location report.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
             txid (str): Transaction ID of the report to cancel.
 
         Returns:
@@ -348,11 +297,11 @@ class DevicesLocationsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/locationreports/{account}/report/{txid}')
+            .path('/locationreports/{accountName}/report/{txid}')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('txid')

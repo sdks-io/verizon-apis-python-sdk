@@ -49,7 +49,6 @@ body = GIOSMSSendRequest(
 )
 
 result = device_sms_messaging_controller.send_an_sms_message(body)
-print(result)
 ```
 
 ## Errors
@@ -73,8 +72,8 @@ def get_sms_messages(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `str` | Template, Required | Numeric account name |
-| `next` | `str` | Query, Optional | Continue the previous query from the pageUrl in Location Header |
+| `account_name` | `str` | Template, Required | Numeric account name<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9\-]{3,32}$` |
+| `next` | `str` | Query, Optional | Continue the previous query from the pageUrl in Location Header<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `64`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
 
 ## Response Type
 
@@ -91,7 +90,6 @@ result = device_sms_messaging_controller.get_sms_messages(
     account_name,
     next=next
 )
-print(result)
 ```
 
 ## Errors
@@ -114,7 +112,7 @@ def start_sms_message_delivery(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `str` | Template, Required | Numeric account name |
+| `account_name` | `str` | Template, Required | Numeric account name<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9\-]{3,32}$` |
 
 ## Response Type
 
@@ -126,7 +124,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_name = '0000123456-00001'
 
 result = device_sms_messaging_controller.start_sms_message_delivery(account_name)
-print(result)
 ```
 
 ## Errors
@@ -166,7 +163,6 @@ body = SMSEventHistoryRequest(
 )
 
 result = device_sms_messaging_controller.list_sms_message_history(body)
-print(result)
 ```
 
 ## Errors

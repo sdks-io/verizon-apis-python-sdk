@@ -47,7 +47,6 @@ result = software_management_licenses_v3_controller.get_account_licenses_status(
     acc,
     last_seen_device_id=last_seen_device_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -116,7 +115,6 @@ result = software_management_licenses_v3_controller.assign_licenses_to_devices(
     acc,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -184,7 +182,6 @@ result = software_management_licenses_v3_controller.remove_licenses_from_devices
     acc,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

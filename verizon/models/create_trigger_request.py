@@ -23,8 +23,7 @@ class CreateTriggerRequest(object):
         account_name (str): TODO: type description here.
         anomaly_trigger_request (AnomalyTriggerRequest): The details of the
             UsageAnomaly trigger.
-        data_trigger_request (DataTriggerRequest): TODO: type description
-            here.
+        data_trigger_request (DataTriggerRequest): TODO: type description here.
         group_name (str): TODO: type description here.
         name (str): TODO: type description here.
         session_trigger_request (SessionTriggerRequest): TODO: type

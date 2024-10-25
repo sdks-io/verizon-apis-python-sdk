@@ -19,31 +19,31 @@ class LicenseDeviceList(object):
     Attributes:
         device_ids (List[LicenseDeviceId]): For 4G devices, IMEI (decimal, up
             to 15 digits).
-        ip_address (str): TODO: type description here.
+        ipaddress (str): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
         "device_ids": 'deviceIds',
-        "ip_address": 'ipAddress'
+        "ipaddress": 'ipAddress'
     }
 
     _optionals = [
         'device_ids',
-        'ip_address',
+        'ipaddress',
     ]
 
     def __init__(self,
                  device_ids=APIHelper.SKIP,
-                 ip_address=APIHelper.SKIP):
+                 ipaddress=APIHelper.SKIP):
         """Constructor for the LicenseDeviceList class"""
 
         # Initialize members of the class
         if device_ids is not APIHelper.SKIP:
             self.device_ids = device_ids 
-        if ip_address is not APIHelper.SKIP:
-            self.ip_address = ip_address 
+        if ipaddress is not APIHelper.SKIP:
+            self.ipaddress = ipaddress 
 
     @classmethod
     def from_dictionary(cls,
@@ -69,7 +69,7 @@ class LicenseDeviceList(object):
             device_ids = [LicenseDeviceId.from_dictionary(x) for x in dictionary.get('deviceIds')]
         else:
             device_ids = APIHelper.SKIP
-        ip_address = dictionary.get("ipAddress") if dictionary.get("ipAddress") else APIHelper.SKIP
+        ipaddress = dictionary.get("ipAddress") if dictionary.get("ipAddress") else APIHelper.SKIP
         # Return an object of this model
         return cls(device_ids,
-                   ip_address)
+                   ipaddress)

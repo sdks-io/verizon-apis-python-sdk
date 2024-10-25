@@ -42,7 +42,6 @@ body = RequestTrigger(
 result = update_triggers_controller.update_all_available_triggers(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

@@ -25,8 +25,7 @@ class ThingspaceDevice(object):
             billing cycle ends.
         carrier_informations (List[CarrierInformation]): The carrier
             information associated with the device.
-        connected (bool): True if the device is connected; false if it is
-            not.
+        connected (bool): True if the device is connected; false if it is not.
         created_at (str): The date and time that the device was added to the
             system.
         custom_fields (List[CustomFields]): The custom fields and values that
@@ -35,11 +34,9 @@ class ThingspaceDevice(object):
         extended_attributes (List[CustomFields]): Any extended attributes for
             the device, as Key and Value pairs. The pairs listed below are
             returned as part of the response for a single device, but are not
-            included if the request was for information about multiple
-            devices.
-        group_names (List[str]): The device groups that the device belongs
-            to.
-        ip_address (str): The IP address of the device.
+            included if the request was for information about multiple devices.
+        group_names (List[str]): The device groups that the device belongs to.
+        ipaddress (str): The IP address of the device.
         last_activation_by (str): The user who last activated the device.
         last_activation_date (str): The date and time that the device was last
             activated.
@@ -58,7 +55,7 @@ class ThingspaceDevice(object):
         "device_ids": 'deviceIds',
         "extended_attributes": 'extendedAttributes',
         "group_names": 'groupNames',
-        "ip_address": 'ipAddress',
+        "ipaddress": 'ipAddress',
         "last_activation_by": 'lastActivationBy',
         "last_activation_date": 'lastActivationDate',
         "last_connection_date": 'lastConnectionDate'
@@ -74,7 +71,7 @@ class ThingspaceDevice(object):
         'device_ids',
         'extended_attributes',
         'group_names',
-        'ip_address',
+        'ipaddress',
         'last_activation_by',
         'last_activation_date',
         'last_connection_date',
@@ -90,7 +87,7 @@ class ThingspaceDevice(object):
                  device_ids=APIHelper.SKIP,
                  extended_attributes=APIHelper.SKIP,
                  group_names=APIHelper.SKIP,
-                 ip_address=APIHelper.SKIP,
+                 ipaddress=APIHelper.SKIP,
                  last_activation_by=APIHelper.SKIP,
                  last_activation_date=APIHelper.SKIP,
                  last_connection_date=APIHelper.SKIP):
@@ -115,8 +112,8 @@ class ThingspaceDevice(object):
             self.extended_attributes = extended_attributes 
         if group_names is not APIHelper.SKIP:
             self.group_names = group_names 
-        if ip_address is not APIHelper.SKIP:
-            self.ip_address = ip_address 
+        if ipaddress is not APIHelper.SKIP:
+            self.ipaddress = ipaddress 
         if last_activation_by is not APIHelper.SKIP:
             self.last_activation_by = last_activation_by 
         if last_activation_date is not APIHelper.SKIP:
@@ -168,7 +165,7 @@ class ThingspaceDevice(object):
         else:
             extended_attributes = APIHelper.SKIP
         group_names = dictionary.get("groupNames") if dictionary.get("groupNames") else APIHelper.SKIP
-        ip_address = dictionary.get("ipAddress") if dictionary.get("ipAddress") else APIHelper.SKIP
+        ipaddress = dictionary.get("ipAddress") if dictionary.get("ipAddress") else APIHelper.SKIP
         last_activation_by = dictionary.get("lastActivationBy") if dictionary.get("lastActivationBy") else APIHelper.SKIP
         last_activation_date = dictionary.get("lastActivationDate") if dictionary.get("lastActivationDate") else APIHelper.SKIP
         last_connection_date = dictionary.get("lastConnectionDate") if dictionary.get("lastConnectionDate") else APIHelper.SKIP
@@ -182,7 +179,7 @@ class ThingspaceDevice(object):
                    device_ids,
                    extended_attributes,
                    group_names,
-                   ip_address,
+                   ipaddress,
                    last_activation_by,
                    last_activation_date,
                    last_connection_date)

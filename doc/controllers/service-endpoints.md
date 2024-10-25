@@ -36,7 +36,7 @@ def list_optimal_service_endpoints(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `region` | `str` | Query, Optional | MEC region name. Current valid values are US_WEST_2 and US_EAST_1. |
-| `subscriber_density` | `int` | Query, Optional | Minimum number of 4G/5G subscribers per square kilometer. |
+| `subscriber_density` | `int` | Query, Optional | Minimum number of 4G/5G subscribers per square kilometer.<br>**Constraints**: `>= 1`, `<= 100` |
 | `ue_identity_type` | [`UserEquipmentIdentityTypeEnum`](../../doc/models/user-equipment-identity-type-enum.md) | Query, Optional | Type of User Equipment identifier used in `UEIdentity`. |
 | `ue_identity` | `str` | Query, Optional | The identifier value for User Equipment. The type of identifier is defined by the 'UEIdentityType' parameter. The`IPAddress`format can be IPv4 or IPv6. |
 | `service_endpoints_ids` | `str` | Query, Optional | A system-defined string identifier representing one or more registered Service Endpoints. |
@@ -68,7 +68,6 @@ result = service_endpoints_controller.list_optimal_service_endpoints(
     ue_identity=ue_identity,
     service_endpoints_ids=service_endpoints_ids
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -115,7 +114,7 @@ def register_service_endpoints(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`List[ResourcesEdgeHostedServiceWithProfileId]`](../../doc/models/resources-edge-hosted-service-with-profile-id.md) | Body, Required | An array of Service Endpoint data for a deployed application. The request body passes all of the needed parameters to create a service endpoint. Parameters will be edited here rather than the **Parameters** section above. The `ern`,`applicationServerProviderId`, `applicationId` and `serviceProfileID` parameters are required. **Note:** Currently, the only valid value for `applicationServerProviderId`is **AWS**. Also, if you do not know one of the optional values (i.e. URI), you can erase the line from the query by back-spacing over it. |
+| `body` | [`List[ResourcesEdgeHostedServiceWithProfileId]`](../../doc/models/resources-edge-hosted-service-with-profile-id.md) | Body, Required | An array of Service Endpoint data for a deployed application. The request body passes all of the needed parameters to create a service endpoint. Parameters will be edited here rather than the **Parameters** section above. The `ern`,`applicationServerProviderId`, `applicationId` and `serviceProfileID` parameters are required. **Note:** Currently, the only valid value for `applicationServerProviderId`is **AWS**. Also, if you do not know one of the optional values (i.e. URI), you can erase the line from the query by back-spacing over it.<br>**Constraints**: *Maximum Items*: `100` |
 
 ## Requires scope
 
@@ -148,7 +147,6 @@ body = [
 ]
 
 result = service_endpoints_controller.register_service_endpoints(body)
-print(result)
 ```
 
 ## Errors
@@ -182,7 +180,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 result = service_endpoints_controller.list_all_service_endpoints()
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -236,7 +233,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 service_endpoints_id = '43f3f7bb-d6c5-4bad-b081-9a3a0df2db98'
 
 result = service_endpoints_controller.get_service_endpoint(service_endpoints_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -284,7 +280,7 @@ def update_service_endpoint(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `service_endpoints_id` | `str` | Template, Required | A system-defined string identifier representing one or more registered Service Endpoints. |
-| `body` | [`List[ResourcesEdgeHostedServiceWithProfileId]`](../../doc/models/resources-edge-hosted-service-with-profile-id.md) | Body, Required | Data needed for Service Endpoint information. The request body passes the rest of the needed parameters to create a service endpoint. Parameters other than `serviceEndpointsId` will be edited here rather than the **Parameters** section above. The `ern`,`applicationServerProviderId` and `applicationId` parameters are required. **Note:** Currently, the only valid value for `applicationServerProviderId`is **AWS**. |
+| `body` | [`List[ResourcesEdgeHostedServiceWithProfileId]`](../../doc/models/resources-edge-hosted-service-with-profile-id.md) | Body, Required | Data needed for Service Endpoint information. The request body passes the rest of the needed parameters to create a service endpoint. Parameters other than `serviceEndpointsId` will be edited here rather than the **Parameters** section above. The `ern`,`applicationServerProviderId` and `applicationId` parameters are required. **Note:** Currently, the only valid value for `applicationServerProviderId`is **AWS**.<br>**Constraints**: *Maximum Items*: `100` |
 
 ## Requires scope
 
@@ -322,7 +318,6 @@ result = service_endpoints_controller.update_service_endpoint(
     service_endpoints_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -374,7 +369,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 service_endpoints_id = '43f3f7bb-d6c5-4bad-b081-9a3a0df2db98'
 
 result = service_endpoints_controller.deregister_service_endpoint(service_endpoints_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

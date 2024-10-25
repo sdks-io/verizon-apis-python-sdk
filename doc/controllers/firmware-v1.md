@@ -42,7 +42,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account = '0242078689-00001'
 
 result = firmware_v1_controller.list_available_firmware(account)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -95,7 +94,8 @@ body = FirmwareUpgradeRequest(
     account_name='0402196254-00001',
     firmware_name='FOTA_Verizon_Model-A_01To02_HF',
     firmware_to='VerizonFirmwareVersion-02',
-    start_date=dateutil.parser.parse('2018-04-01T16:03:00.000Z'),
+    start_date=dateutil.parser.parse('2018-04-01').date(),
+    end_date=dateutil.parser.parse('2018-04-05').date(),
     device_list=[
         '990003425730535',
         '990000473475989'
@@ -103,7 +103,6 @@ body = FirmwareUpgradeRequest(
 )
 
 result = firmware_v1_controller.schedule_firmware_upgrade(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -142,7 +141,7 @@ Returns information about a specified upgrade, include the target date of the up
 
 ```python
 def list_firmware_upgrade_details(self,
-                                 account,
+                                 account_name,
                                  upgrade_id)
 ```
 
@@ -150,7 +149,7 @@ def list_firmware_upgrade_details(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+| `account_name` | `str` | Template, Required | Account identifier in "##########-#####". |
 | `upgrade_id` | `str` | Template, Required | The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled. |
 
 ## Response Type
@@ -160,15 +159,14 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-account = '0242078689-00001'
+account_name = '0242078689-00001'
 
 upgrade_id = 'e3a8d88a-04c6-4ef3-b039-89b62f91e962'
 
 result = firmware_v1_controller.list_firmware_upgrade_details(
-    account,
+    account_name,
     upgrade_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -192,7 +190,8 @@ print(result)
       "status": "Device Accepted",
       "resultReason": "success"
     }
-  ]
+  ],
+  "endDate": "2018-04-05"
 }
 ```
 
@@ -209,7 +208,7 @@ Add or remove devices from a scheduled upgrade.
 
 ```python
 def update_firmware_upgrade_devices(self,
-                                   account,
+                                   account_name,
                                    upgrade_id,
                                    body)
 ```
@@ -218,7 +217,7 @@ def update_firmware_upgrade_devices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+| `account_name` | `str` | Template, Required | Account identifier in "##########-#####". |
 | `upgrade_id` | `str` | Template, Required | The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled. |
 | `body` | [`FirmwareUpgradeChangeRequest`](../../doc/models/firmware-upgrade-change-request.md) | Body, Required | List of devices to add or remove. |
 
@@ -229,7 +228,7 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-account = '0242078689-00001'
+account_name = '0242078689-00001'
 
 upgrade_id = 'e3a8d88a-04c6-4ef3-b039-89b62f91e962'
 
@@ -242,11 +241,10 @@ body = FirmwareUpgradeChangeRequest(
 )
 
 result = firmware_v1_controller.update_firmware_upgrade_devices(
-    account,
+    account_name,
     upgrade_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -283,7 +281,7 @@ Cancel a scheduled firmware upgrade.
 
 ```python
 def cancel_scheduled_firmware_upgrade(self,
-                                     account,
+                                     account_name,
                                      upgrade_id)
 ```
 
@@ -291,7 +289,7 @@ def cancel_scheduled_firmware_upgrade(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+| `account_name` | `str` | Template, Required | Account identifier in "##########-#####". |
 | `upgrade_id` | `str` | Template, Required | The UUID of the scheduled upgrade that you want to cancel. |
 
 ## Response Type
@@ -301,15 +299,14 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-account = '0242078689-00001'
+account_name = '0242078689-00001'
 
 upgrade_id = 'e3a8d88a-04c6-4ef3-b039-89b62f91e962'
 
 result = firmware_v1_controller.cancel_scheduled_firmware_upgrade(
-    account,
+    account_name,
     upgrade_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

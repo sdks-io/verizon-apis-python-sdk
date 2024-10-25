@@ -20,8 +20,7 @@ class ConnectionEvent(object):
         connection_event_attributes (List[CustomFields]): The attributes that
             describe the connection event.
         extended_attributes (List[CustomFields]): Currently not used.
-        occurred_at (str): The date and time when the connection event
-            occured.
+        occurred_at (str): The date and time when the connection event occured.
 
     """
 

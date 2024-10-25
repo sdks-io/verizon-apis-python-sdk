@@ -10,9 +10,149 @@ device_actions_controller = client.device_actions
 
 ## Methods
 
+* [Aggregate Usage](../../doc/controllers/device-actions.md#aggregate-usage)
+* [Daily Usage](../../doc/controllers/device-actions.md#daily-usage)
+* [Service Plan List](../../doc/controllers/device-actions.md#service-plan-list)
+* [Account Information](../../doc/controllers/device-actions.md#account-information)
 * [Retrieve the Global Device List](../../doc/controllers/device-actions.md#retrieve-the-global-device-list)
 * [Retrieve Device Provisioning History](../../doc/controllers/device-actions.md#retrieve-device-provisioning-history)
 * [Get Asynchronous Request Status](../../doc/controllers/device-actions.md#get-asynchronous-request-status)
+
+
+# Aggregate Usage
+
+Retrieve the aggregate usage for a device or a number of devices.
+
+```python
+def aggregate_usage(self,
+                   body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`AggregateUsage`](../../doc/models/aggregate-usage.md) | Body, Required | - |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`GIORequestResponse`](../../doc/models/gio-request-response.md).
+
+## Example Usage
+
+```python
+body = AggregateUsage()
+
+result = device_actions_controller.aggregate_usage(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | Error response | [`GIORestErrorResponseException`](../../doc/models/gio-rest-error-response-exception.md) |
+
+
+# Daily Usage
+
+Retrieve the daily usage for a device, for a specified period of time, segmented by day
+
+```python
+def daily_usage(self,
+               body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`DailyUsage`](../../doc/models/daily-usage.md) | Body, Required | - |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`DailyUsageResponse`](../../doc/models/daily-usage-response.md).
+
+## Example Usage
+
+```python
+body = DailyUsage()
+
+result = device_actions_controller.daily_usage(body)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | Error response | [`GIORestErrorResponseException`](../../doc/models/gio-rest-error-response-exception.md) |
+
+
+# Service Plan List
+
+Retrieve all of the service plans, features and carriers associated with the account specified.
+
+```python
+def service_plan_list(self,
+                     account_name)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `str` | Template, Required | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`AccountDetails`](../../doc/models/account-details.md).
+
+## Example Usage
+
+```python
+account_name = 'accountName4'
+
+result = device_actions_controller.service_plan_list(account_name)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | Error response | [`GIORestErrorResponseException`](../../doc/models/gio-rest-error-response-exception.md) |
+
+
+# Account Information
+
+Retrieve all of the service plans, features and carriers associated with the account specified.
+
+```python
+def account_information(self,
+                       account_name)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `account_name` | `str` | Template, Required | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9]{3,32}$` |
+
+## Response Type
+
+This method returns a `ApiResponse` instance. The `body` property of this instance returns the response data which is of type [`AccountDetails`](../../doc/models/account-details.md).
+
+## Example Usage
+
+```python
+account_name = 'accountName4'
+
+result = device_actions_controller.account_information(account_name)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| Default | Error response | [`GIORestErrorResponseException`](../../doc/models/gio-rest-error-response-exception.md) |
 
 
 # Retrieve the Global Device List
@@ -44,7 +184,6 @@ body = GetDeviceListWithProfilesRequest(
 )
 
 result = device_actions_controller.retrieve_the_global_device_list(body)
-print(result)
 ```
 
 ## Errors
@@ -56,7 +195,7 @@ print(result)
 
 # Retrieve Device Provisioning History
 
-Retreive the provisioning history of a specific device or devices.
+Retrieve the provisioning history of a specific device or devices.
 
 ```python
 def retrieve_device_provisioning_history(self,
@@ -83,7 +222,6 @@ body = ProvhistoryRequest(
 )
 
 result = device_actions_controller.retrieve_device_provisioning_history(body)
-print(result)
 ```
 
 ## Errors
@@ -107,8 +245,8 @@ def get_asynchronous_request_status(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `str` | Template, Required | - |
-| `request_id` | `str` | Template, Required | - |
+| `account_name` | `str` | Template, Required | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `32`, *Pattern*: `^[A-Za-z0-9\-]{3,32}$` |
+| `request_id` | `str` | Template, Required | **Constraints**: *Minimum Length*: `3`, *Maximum Length*: `64`, *Pattern*: `^[A-Za-z0-9\-]{3,64}$` |
 
 ## Response Type
 
@@ -125,7 +263,6 @@ result = device_actions_controller.get_asynchronous_request_status(
     account_name,
     request_id
 )
-print(result)
 ```
 
 ## Errors

@@ -38,8 +38,7 @@ class MV2TriggersController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Trigger
-                ID
+                useful information such as status codes and headers. Trigger ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -86,8 +85,7 @@ class MV2TriggersController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Trigger
-                ID
+                useful information such as status codes and headers. Trigger ID
 
         Raises:
             APIException: When an error occurs while fetching the data from

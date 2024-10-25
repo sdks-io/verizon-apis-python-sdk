@@ -25,8 +25,7 @@ class V2ChangeCampaignDatesRequest(object):
             download package. If null, client will download as soon as
             possible.
         download_time_window_list (List[V2TimeWindow]): List of allowed
-            download time windows. Removing of existing windows is not
-            allowed.
+            download time windows. Removing of existing windows is not allowed.
         install_after_date (date): Client will install package after date. If
             null, client will install as soon as possible.
         install_time_window_list (List[V2TimeWindow]): List of allowed install

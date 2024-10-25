@@ -32,7 +32,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 result = retrieve_the_triggers_controller.get_all_available_triggers()
-print(result)
 ```
 
 ## Errors
@@ -67,7 +66,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_name = '0000123456-000001'
 
 result = retrieve_the_triggers_controller.get_all_triggers_by_account_name(account_name)
-print(result)
 ```
 
 ## Errors
@@ -93,7 +91,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 result = retrieve_the_triggers_controller.get_all_triggers_by_trigger_category()
-print(result)
 ```
 
 ## Errors
@@ -128,7 +125,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 trigger_id = '2874DEC7-26CF-4797-9C6A-B5A2AC72D526'
 
 result = retrieve_the_triggers_controller.get_triggers_by_id(trigger_id)
-print(result)
 ```
 
 ## Errors

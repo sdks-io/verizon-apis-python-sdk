@@ -29,6 +29,12 @@ class CampaignFirmwareUpgrade(object):
         campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
         device_list (List[str]): Device IMEI list.
+        auto_assign_license_flag (bool): This flag, when set to true, will
+            assign a FOTA license automatically if the device does not have
+            one already.
+        auto_add_devices_flag (bool): this flag, when set to true, will
+            automatically add a device of the same make and model to a
+            campaign.
 
     """
 
@@ -41,6 +47,8 @@ class CampaignFirmwareUpgrade(object):
         "start_date": 'startDate',
         "end_date": 'endDate',
         "device_list": 'deviceList',
+        "auto_assign_license_flag": 'autoAssignLicenseFlag',
+        "auto_add_devices_flag": 'autoAddDevicesFlag',
         "campaign_name": 'campaignName',
         "campaign_time_window_list": 'campaignTimeWindowList'
     }
@@ -58,6 +66,8 @@ class CampaignFirmwareUpgrade(object):
                  start_date=None,
                  end_date=None,
                  device_list=None,
+                 auto_assign_license_flag=None,
+                 auto_add_devices_flag=None,
                  campaign_name=APIHelper.SKIP,
                  campaign_time_window_list=APIHelper.SKIP):
         """Constructor for the CampaignFirmwareUpgrade class"""
@@ -74,6 +84,8 @@ class CampaignFirmwareUpgrade(object):
         if campaign_time_window_list is not APIHelper.SKIP:
             self.campaign_time_window_list = campaign_time_window_list 
         self.device_list = device_list 
+        self.auto_assign_license_flag = auto_assign_license_flag 
+        self.auto_add_devices_flag = auto_add_devices_flag 
 
     @classmethod
     def from_dictionary(cls,
@@ -101,6 +113,8 @@ class CampaignFirmwareUpgrade(object):
         start_date = dateutil.parser.parse(dictionary.get('startDate')).date() if dictionary.get('startDate') else None
         end_date = dateutil.parser.parse(dictionary.get('endDate')).date() if dictionary.get('endDate') else None
         device_list = dictionary.get("deviceList") if dictionary.get("deviceList") else None
+        auto_assign_license_flag = dictionary.get("autoAssignLicenseFlag") if "autoAssignLicenseFlag" in dictionary.keys() else None
+        auto_add_devices_flag = dictionary.get("autoAddDevicesFlag") if "autoAddDevicesFlag" in dictionary.keys() else None
         campaign_name = dictionary.get("campaignName") if dictionary.get("campaignName") else APIHelper.SKIP
         campaign_time_window_list = None
         if dictionary.get('campaignTimeWindowList') is not None:
@@ -115,5 +129,7 @@ class CampaignFirmwareUpgrade(object):
                    start_date,
                    end_date,
                    device_list,
+                   auto_assign_license_flag,
+                   auto_add_devices_flag,
                    campaign_name,
                    campaign_time_window_list)

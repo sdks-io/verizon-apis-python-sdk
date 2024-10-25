@@ -16,8 +16,7 @@ class CustomerName(object):
     The customer name to be used for line usage taxation.
 
     Attributes:
-        title (str): An optional title for the customer, such as “Mr.” or
-            “Dr.”
+        title (str): An optional title for the customer, such as “Mr.” or “Dr.”
         first_name (str): The customer's first name.
         middle_name (str): The customer's middle name.
         last_name (str): The customer's last name.

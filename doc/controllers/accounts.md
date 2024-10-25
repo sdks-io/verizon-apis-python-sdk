@@ -42,7 +42,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = 'Chintan_CPNStaticBulk'
 
 result = accounts_controller.get_account_information(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -124,7 +123,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = accounts_controller.list_account_states_and_services(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -240,7 +238,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = accounts_controller.list_account_leads(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

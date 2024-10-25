@@ -47,7 +47,6 @@ result = firmware_v3_controller.list_available_firmware(
     acc,
     protocol
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -110,7 +109,6 @@ result = firmware_v3_controller.synchronize_device_firmware(
     acc,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -167,7 +165,6 @@ result = firmware_v3_controller.report_device_firmware(
     acc,
     device_id
 )
-print(result)
 ```
 
 ## Errors

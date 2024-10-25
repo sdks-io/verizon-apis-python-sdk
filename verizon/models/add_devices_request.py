@@ -22,8 +22,7 @@ class AddDevicesRequest(object):
             state is “Preactive.”
         devices_to_add (List[AccountDeviceList]): The devices that you want to
             add.
-        account_name (str): The billing account to which the devices are
-            added.
+        account_name (str): The billing account to which the devices are added.
         custom_fields (List[CustomFields]): The names and values for any
             custom fields that you want set for the devices as they are added
             to the account.

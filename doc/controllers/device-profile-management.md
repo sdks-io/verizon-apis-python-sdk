@@ -59,7 +59,6 @@ body = ActivateDeviceProfileRequest(
 )
 
 result = device_profile_management_controller.activate_device_through_profile(body)
-print(result)
 ```
 
 ## Errors
@@ -102,7 +101,6 @@ body = ProfileRequest(
 )
 
 result = device_profile_management_controller.profile_to_activate_device(body)
-print(result)
 ```
 
 ## Errors
@@ -143,7 +141,6 @@ body = DeactivateDeviceProfileRequest(
 )
 
 result = device_profile_management_controller.profile_to_deactivate_device(body)
-print(result)
 ```
 
 ## Errors
@@ -184,7 +181,6 @@ body = SetFallbackAttributeRequest(
 )
 
 result = device_profile_management_controller.profile_to_set_fallback_attribute(body)
-print(result)
 ```
 
 ## Errors

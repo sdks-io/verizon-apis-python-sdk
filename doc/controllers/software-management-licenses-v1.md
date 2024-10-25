@@ -56,7 +56,6 @@ result = software_management_licenses_v1_controller.assign_licenses_to_devices(
     account,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -128,7 +127,6 @@ result = software_management_licenses_v1_controller.remove_licenses_from_devices
     account,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -205,7 +203,6 @@ result = software_management_licenses_v1_controller.create_list_of_licenses_to_r
     account,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -254,7 +251,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account = '0242078689-00001'
 
 result = software_management_licenses_v1_controller.delete_list_of_licenses_to_remove(account)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -306,7 +302,6 @@ result = software_management_licenses_v1_controller.list_licenses_to_remove(
     account,
     start_index
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

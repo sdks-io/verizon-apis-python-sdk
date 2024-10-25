@@ -49,7 +49,6 @@ result = software_management_reports_v2_controller.list_available_software(
     account,
     distribution_type=distribution_type
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -112,7 +111,6 @@ result = software_management_reports_v2_controller.list_account_devices(
     last_seen_device_id=last_seen_device_id,
     distribution_type=distribution_type
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -230,7 +228,6 @@ result = software_management_reports_v2_controller.get_device_firmware_upgrade_h
     account,
     device_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -302,7 +299,6 @@ result = software_management_reports_v2_controller.get_campaign_history_by_statu
     campaign_status,
     last_seen_campaign_id=last_seen_campaign_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -388,7 +384,6 @@ result = software_management_reports_v2_controller.get_campaign_device_status(
     campaign_id,
     last_seen_device_id=last_seen_device_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

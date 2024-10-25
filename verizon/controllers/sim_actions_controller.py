@@ -27,6 +27,57 @@ class SIMActionsController(BaseController):
     def __init__(self, config):
         super(SIMActionsController, self).__init__(config)
 
+    def newactivatecode(self,
+                        body):
+        """Does a POST request to /m2m/v1/devices/profile/actions/renew_activation_code.
+
+        System assign a new activation code to reactivate a deactivated
+        device. **Note:** the previously assigned ICCID must be used to
+        request a new activation code.
+
+        Args:
+            body (ESIMProfileRequest2): Device Profile Query
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/devices/profile/actions/renew_activation_code')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ESIMRequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('400', 'Bad request', ESIMRestErrorResponseException)
+            .local_error('401', 'Unauthorized', ESIMRestErrorResponseException)
+            .local_error('403', 'Forbidden', ESIMRestErrorResponseException)
+            .local_error('404', 'Not Found / Does not exist', ESIMRestErrorResponseException)
+            .local_error('406', 'Format / Request Unacceptable', ESIMRestErrorResponseException)
+            .local_error('429', 'Too many requests', ESIMRestErrorResponseException)
+            .local_error('default', 'Error response', ESIMRestErrorResponseException)
+        ).execute()
+
     def setactivate_using_post(self,
                                body):
         """Does a POST request to /m2m/v1/devices/profile/actions/activate.
@@ -38,8 +89,7 @@ class SIMActionsController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -88,8 +138,7 @@ class SIMActionsController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from

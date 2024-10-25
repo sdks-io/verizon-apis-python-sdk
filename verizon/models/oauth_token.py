@@ -18,8 +18,7 @@ class OauthToken(object):
     Attributes:
         access_token (str): Access token
         token_type (str): Type of access token
-        expires_in (long|int): Time in seconds before the access token
-            expires
+        expires_in (long|int): Time in seconds before the access token expires
         scope (str): List of scopes granted This is a space-delimited list of
             strings.
         expiry (long|int): Time of token expiry as unix timestamp (UTC)

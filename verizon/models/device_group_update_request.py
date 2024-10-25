@@ -21,8 +21,7 @@ class DeviceGroupUpdateRequest(object):
         devices_to_add (List[DeviceId]): Zero or more devices to add to the
             device group, specified by device ID. The devices will be removed
             from their current device groups. You can use POST
-            /devices/actions/list to get a list of all devices in the
-            account.
+            /devices/actions/list to get a list of all devices in the account.
         devices_to_remove (List[DeviceId]): Zero or more devices to remove
             from the device group, specified by device ID. The devices will be
             added to the default device group.

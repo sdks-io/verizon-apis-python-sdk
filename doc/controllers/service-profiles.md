@@ -70,7 +70,6 @@ body = ResourcesServiceProfile(
 )
 
 result = service_profiles_controller.create_service_profile(body)
-print(result)
 ```
 
 ## Errors
@@ -104,7 +103,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 result = service_profiles_controller.list_service_profiles()
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -140,7 +138,7 @@ def get_service_profile(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `service_profile_id` | `str` | Template, Required | - |
+| `service_profile_id` | `str` | Template, Required | **Constraints**: *Maximum Length*: `36`, *Pattern*: ``^[a-zA-Z0-9!@#$&()\-`.+,/"]{3,36}$`` |
 
 ## Requires scope
 
@@ -158,7 +156,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 service_profile_id = 'serviceProfileId2'
 
 result = service_profiles_controller.get_service_profile(service_profile_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -213,7 +210,7 @@ def update_service_profile(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `service_profile_id` | `str` | Template, Required | - |
+| `service_profile_id` | `str` | Template, Required | **Constraints**: *Maximum Length*: `36`, *Pattern*: ``^[a-zA-Z0-9!@#$&()\-`.+,/"]{3,36}$`` |
 | `body` | [`ResourcesServiceProfile`](../../doc/models/resources-service-profile.md) | Body, Required | The request body passes the rest of the needed parameters to create a service profile. The `maxLatencyMs` and `clientType` parameters are both required in the request body. **Note:** The `maxLatencyMs` value must be submitted in multiples of 5. Additionally, "GPU" is future functionality and the values are not captured. Default values to use are shown. |
 
 ## Requires scope
@@ -256,7 +253,6 @@ result = service_profiles_controller.update_service_profile(
     service_profile_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -290,7 +286,7 @@ def delete_service_profile(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `service_profile_id` | `str` | Template, Required | - |
+| `service_profile_id` | `str` | Template, Required | **Constraints**: *Maximum Length*: `36`, *Pattern*: ``^[a-zA-Z0-9!@#$&()\-`.+,/"]{3,36}$`` |
 
 ## Requires scope
 
@@ -308,7 +304,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 service_profile_id = 'serviceProfileId2'
 
 result = service_profiles_controller.delete_service_profile(service_profile_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

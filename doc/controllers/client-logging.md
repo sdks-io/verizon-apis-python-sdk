@@ -43,7 +43,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account = '0000123456-00001'
 
 result = client_logging_controller.list_devices_with_logging_enabled(account)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -120,7 +119,6 @@ result = client_logging_controller.enable_logging_for_devices(
     account,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -189,7 +187,6 @@ result = client_logging_controller.disable_logging_for_devices(
     account,
     device_ids
 )
-print(result)
 ```
 
 ## Errors
@@ -231,7 +228,6 @@ result = client_logging_controller.enable_device_logging(
     account,
     device_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -282,7 +278,6 @@ result = client_logging_controller.disable_device_logging(
     account,
     device_id
 )
-print(result)
 ```
 
 ## Errors
@@ -324,7 +319,6 @@ result = client_logging_controller.list_device_logs(
     account,
     device_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

@@ -20,7 +20,7 @@ Device that exist in Verizon Mobile Device Management (MDM).
 | `device_ids` | [`List[DeviceId]`](../../doc/models/device-id.md) | Optional | All identifiers for the device. |
 | `extended_attributes` | [`List[CustomFields]`](../../doc/models/custom-fields.md) | Optional | Any extended attributes for the device, as Key and Value pairs. The pairs listed below are returned as part of the response for a single device, but are not included if the request was for information about multiple devices. |
 | `group_names` | `List[str]` | Optional | The device groups that the device belongs to. |
-| `ip_address` | `str` | Optional | The IP address of the device. |
+| `ipaddress` | `str` | Optional | The IP address of the device. |
 | `last_activation_by` | `str` | Optional | The user who last activated the device. |
 | `last_activation_date` | `str` | Optional | The date and time that the device was last activated. |
 | `last_connection_date` | `str` | Optional | The most recent connection date and time. |

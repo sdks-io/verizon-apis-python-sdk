@@ -119,16 +119,16 @@ class FirmwareV1Controller(BaseController):
         ).execute()
 
     def list_firmware_upgrade_details(self,
-                                      account,
+                                      account_name,
                                       upgrade_id):
-        """Does a GET request to /upgrades/{account}/upgrade/{upgradeId}.
+        """Does a GET request to /upgrades/{accountName}/upgrade/{upgradeId}.
 
         Returns information about a specified upgrade, include the target date
         of the upgrade, the list of devices in the upgrade, and the status of
         the upgrade for each device.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
             upgrade_id (str): The UUID of the upgrade, returned by POST
                 /upgrades when the upgrade was scheduled.
 
@@ -147,11 +147,11 @@ class FirmwareV1Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades/{account}/upgrade/{upgradeId}')
+            .path('/upgrades/{accountName}/upgrade/{upgradeId}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('upgradeId')
@@ -170,15 +170,15 @@ class FirmwareV1Controller(BaseController):
         ).execute()
 
     def update_firmware_upgrade_devices(self,
-                                        account,
+                                        account_name,
                                         upgrade_id,
                                         body):
-        """Does a PUT request to /upgrades/{account}/upgrade/{upgradeId}.
+        """Does a PUT request to /upgrades/{accountName}/upgrade/{upgradeId}.
 
         Add or remove devices from a scheduled upgrade.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
             upgrade_id (str): The UUID of the upgrade, returned by POST
                 /upgrades when the upgrade was scheduled.
             body (FirmwareUpgradeChangeRequest): List of devices to add or
@@ -199,11 +199,11 @@ class FirmwareV1Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades/{account}/upgrade/{upgradeId}')
+            .path('/upgrades/{accountName}/upgrade/{upgradeId}')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('upgradeId')
@@ -228,14 +228,14 @@ class FirmwareV1Controller(BaseController):
         ).execute()
 
     def cancel_scheduled_firmware_upgrade(self,
-                                          account,
+                                          account_name,
                                           upgrade_id):
-        """Does a DELETE request to /upgrades/{account}/upgrade/{upgradeId}.
+        """Does a DELETE request to /upgrades/{accountName}/upgrade/{upgradeId}.
 
         Cancel a scheduled firmware upgrade.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
             upgrade_id (str): The UUID of the scheduled upgrade that you want
                 to cancel.
 
@@ -254,11 +254,11 @@ class FirmwareV1Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V1)
-            .path('/upgrades/{account}/upgrade/{upgradeId}')
+            .path('/upgrades/{accountName}/upgrade/{upgradeId}')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('upgradeId')

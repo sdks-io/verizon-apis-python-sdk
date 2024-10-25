@@ -39,8 +39,7 @@ class WirelessNetworkPerformanceController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -77,8 +76,8 @@ class WirelessNetworkPerformanceController(BaseController):
         """Does a POST request to /m2m/v1/intelligence/wireless-coverage.
 
         Run a report to determine network types available and available
-        coverage. Network types covered include: CAT-M, NB-IOT, LTE, LTE-AWS
-        and 5GNW.
+        coverage. Network types covered include: CAT-M, NB-IOT, LTE, LTE-AWS,
+        5GNW and C-BAND.
 
         Args:
             body (GetWirelessCoverageRequest): Request for network coverage
@@ -86,8 +85,7 @@ class WirelessNetworkPerformanceController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -132,8 +130,7 @@ class WirelessNetworkPerformanceController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -177,8 +174,7 @@ class WirelessNetworkPerformanceController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -223,8 +219,7 @@ class WirelessNetworkPerformanceController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from

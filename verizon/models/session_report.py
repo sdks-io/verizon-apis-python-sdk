@@ -25,7 +25,6 @@ class SessionReport(object):
             message.ThingSpace will send a separate callback message for each
             device that was in the request. All of the callback messages will
             have the same txid.
-        example (object): TODO: type description here.
 
     """
 
@@ -33,13 +32,11 @@ class SessionReport(object):
     _names = {
         "id": 'id',
         "txid": 'txid',
-        "sessions": 'sessions',
-        "example": 'example'
+        "sessions": 'sessions'
     }
 
     _optionals = [
         'sessions',
-        'example',
     ]
 
     _nullables = [
@@ -49,8 +46,7 @@ class SessionReport(object):
     def __init__(self,
                  id=None,
                  txid=None,
-                 sessions=APIHelper.SKIP,
-                 example=APIHelper.SKIP):
+                 sessions=APIHelper.SKIP):
         """Constructor for the SessionReport class"""
 
         # Initialize members of the class
@@ -58,8 +54,6 @@ class SessionReport(object):
             self.sessions = sessions 
         self.id = id 
         self.txid = txid 
-        if example is not APIHelper.SKIP:
-            self.example = example 
 
     @classmethod
     def from_dictionary(cls,
@@ -87,9 +81,7 @@ class SessionReport(object):
             sessions = [DailyUsageItem.from_dictionary(x) for x in dictionary.get('sessions')]
         else:
             sessions = APIHelper.SKIP
-        example = dictionary.get("example") if dictionary.get("example") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    txid,
-                   sessions,
-                   example)
+                   sessions)

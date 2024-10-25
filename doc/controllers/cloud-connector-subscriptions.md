@@ -50,7 +50,6 @@ body = CreateSubscriptionRequest(
 )
 
 result = cloud_connector_subscriptions_controller.create_subscription(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -107,7 +106,6 @@ body = QuerySubscriptionRequest(
 )
 
 result = cloud_connector_subscriptions_controller.query_subscription(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -169,6 +167,5 @@ body = DeleteSubscriptionRequest(
 )
 
 result = cloud_connector_subscriptions_controller.delete_subscription(body)
-print(result)
 ```
 

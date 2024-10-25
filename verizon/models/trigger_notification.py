@@ -17,15 +17,13 @@ class TriggerNotification(object):
     The notification details of the trigger.
 
     Attributes:
-        notification_type (str): The type of notification, i.e.
-            'DailySummary'.
+        notification_type (str): The type of notification, i.e. 'DailySummary'.
         callback (bool): Whether or not the notification should be sent via
             callback.<br />true<br />false.
         email_notification (bool): Whether or not the notification should be
             sent via e-mail.<br />true<br />false.
         notification_group_name (str): Name for the notification group.
-        notification_frequency_factor (int): Frequency factor for
-            notification.
+        notification_frequency_factor (int): Frequency factor for notification.
         notification_frequency_interval (str): Frequency interval for
             notification.
         external_email_recipients (str): E-mail address(es) where the

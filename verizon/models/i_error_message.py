@@ -19,8 +19,7 @@ class IErrorMessage(object):
         error_code (ErrorResponseCodeEnum): Error Code.
         error_message (str): Details and additional information about the
             error code.
-        http_status_code (HttpStatusCodeEnum): HTML error code and
-            description.
+        http_status_code (HttpStatusCodeEnum): HTML error code and description.
         detail_error_message (str): More detail and information about the HTML
             error code.
 

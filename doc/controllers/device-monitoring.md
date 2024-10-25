@@ -55,7 +55,6 @@ body = NotificationReportRequest(
 )
 
 result = device_monitoring_controller.device_reachability(body)
-print(result)
 ```
 
 ## Errors
@@ -95,7 +94,6 @@ body = StopMonitorRequest(
 result = device_monitoring_controller.stop_device_reachability(
     body=body
 )
-print(result)
 ```
 
 ## Errors

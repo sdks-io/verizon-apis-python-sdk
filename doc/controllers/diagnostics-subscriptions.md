@@ -34,7 +34,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_name = '0000123456-00001'
 
 result = diagnostics_subscriptions_controller.get_diagnostics_subscription(account_name)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

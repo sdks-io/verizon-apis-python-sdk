@@ -45,7 +45,6 @@ body = QueryMECPerformanceMetricsRequest(
 result = performance_metrics_controller.query_mec_performance_metrics(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

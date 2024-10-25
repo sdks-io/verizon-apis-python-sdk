@@ -35,7 +35,7 @@ class PromotionPeriodInformationController(BaseController):
         Retrieves the usage history of a device during the promotion period.
 
         Args:
-            body (RequestBodyForUsage1): Retrieve Aggregate Usage
+            body (ARequestBodyForUsage): Retrieve Aggregate Usage
 
         Returns:
             ApiResponse: An object with the response value as well as other

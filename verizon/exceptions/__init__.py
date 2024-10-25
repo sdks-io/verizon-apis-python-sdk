@@ -18,5 +18,6 @@ __all__ = [
     'ready_sim_rest_error_response_exception',
     'esim_rest_error_response_exception',
     'rules_engine_rest_error_response_exception',
+    'm_5g_bi_rest_error_response_exception',
     'oauth_provider_exception',
 ]

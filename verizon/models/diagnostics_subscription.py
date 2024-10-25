@@ -23,8 +23,7 @@ class DiagnosticsSubscription(object):
             created.
         last_updated (datetime): The date and time of when the subscription
             was last updated.
-        total_allowed (int): Number of licenses currently assigned to
-            devices.
+        total_allowed (int): Number of licenses currently assigned to devices.
         total_used (int): Number of licenses currently used by the devices.
         sku_name (str): Name of the SKU for the account.
 

@@ -34,6 +34,15 @@ class Campaign(object):
         campaign_time_window_list (List[V3TimeWindow]): List of allowed
             campaign time windows.
         status (str): Firmware upgrade status.
+        auto_assign_license_flag (bool): Any device included in the device
+            list which does not have a license will automatically be assigned
+            a FOTA license, assuming there are enough FOTA licenses available,
+            when set to true.
+        auto_add_devices_flag (bool): Beyond the devices included on the
+            device list, any other device(s) which matches the eligibility
+            criteria (same make, model, current firmware, protocol, billing
+            account) will automatically be added to the campaign list during
+            the life of the campaign when set to true.
 
     """
 
@@ -47,6 +56,8 @@ class Campaign(object):
         "start_date": 'startDate',
         "end_date": 'endDate',
         "status": 'status',
+        "auto_assign_license_flag": 'autoAssignLicenseFlag',
+        "auto_add_devices_flag": 'autoAddDevicesFlag',
         "campaign_name": 'campaignName',
         "firmware_name": 'firmwareName',
         "firmware_from": 'firmwareFrom',
@@ -71,6 +82,8 @@ class Campaign(object):
                  start_date=None,
                  end_date=None,
                  status=None,
+                 auto_assign_license_flag=None,
+                 auto_add_devices_flag=None,
                  campaign_name=APIHelper.SKIP,
                  firmware_name=APIHelper.SKIP,
                  firmware_from=APIHelper.SKIP,
@@ -97,6 +110,8 @@ class Campaign(object):
         if campaign_time_window_list is not APIHelper.SKIP:
             self.campaign_time_window_list = campaign_time_window_list 
         self.status = status 
+        self.auto_assign_license_flag = auto_assign_license_flag 
+        self.auto_add_devices_flag = auto_add_devices_flag 
 
     @classmethod
     def from_dictionary(cls,
@@ -125,6 +140,8 @@ class Campaign(object):
         start_date = dateutil.parser.parse(dictionary.get('startDate')).date() if dictionary.get('startDate') else None
         end_date = dateutil.parser.parse(dictionary.get('endDate')).date() if dictionary.get('endDate') else None
         status = dictionary.get("status") if dictionary.get("status") else None
+        auto_assign_license_flag = dictionary.get("autoAssignLicenseFlag") if "autoAssignLicenseFlag" in dictionary.keys() else None
+        auto_add_devices_flag = dictionary.get("autoAddDevicesFlag") if "autoAddDevicesFlag" in dictionary.keys() else None
         campaign_name = dictionary.get("campaignName") if dictionary.get("campaignName") else APIHelper.SKIP
         firmware_name = dictionary.get("firmwareName") if dictionary.get("firmwareName") else APIHelper.SKIP
         firmware_from = dictionary.get("firmwareFrom") if dictionary.get("firmwareFrom") else APIHelper.SKIP
@@ -143,6 +160,8 @@ class Campaign(object):
                    start_date,
                    end_date,
                    status,
+                   auto_assign_license_flag,
+                   auto_add_devices_flag,
                    campaign_name,
                    firmware_name,
                    firmware_from,

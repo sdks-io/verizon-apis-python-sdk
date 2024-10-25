@@ -26,8 +26,7 @@ class UpdateTriggerRequest(object):
         anomaly_trigger_request (AnomalyTriggerRequest): The details of the
             UsageAnomaly trigger.
         cycle_type (CycleTypeEnum): TODO: type description here.
-        data_trigger_request (DataTriggerRequest): TODO: type description
-            here.
+        data_trigger_request (DataTriggerRequest): TODO: type description here.
         group_name (str): TODO: type description here.
         promo_alert_trigger_request (PromoAlertTriggerRequest): TODO: type
             description here.

@@ -24,8 +24,7 @@ class ProvisioningHistory(object):
         event_by (str): The user who performed the provisioning event.
         event_type (str): The provisioning
             action:Activate,Suspend,Restore,Deactivate,Device Move.
-        mdn (str): The MDN assigned to the device after the provisioning
-            event.
+        mdn (str): The MDN assigned to the device after the provisioning event.
         msisdn (str): The MSISDN assigned to the device after the provisioning
             event.
         service_plan (str): The service plan of the device after the

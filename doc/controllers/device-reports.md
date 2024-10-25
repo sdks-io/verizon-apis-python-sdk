@@ -48,7 +48,6 @@ body = AggregateSessionReportRequest(
 )
 
 result = device_reports_controller.calculate_aggregated_report_synchronous(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -111,7 +110,6 @@ body = AggregateSessionReportRequest(
 )
 
 result = device_reports_controller.calculate_aggregated_report_asynchronous(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -165,7 +163,6 @@ body = SessionReportRequest(
 )
 
 result = device_reports_controller.get_sessions_report(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

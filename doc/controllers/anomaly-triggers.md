@@ -33,7 +33,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 result = anomaly_triggers_controller.list_anomaly_detection_triggers()
-print(result)
 ```
 
 ## Errors
@@ -82,7 +81,6 @@ body = UpdateTriggerRequest(
 )
 
 result = anomaly_triggers_controller.update_anomaly_detection_trigger(body)
-print(result)
 ```
 
 ## Errors
@@ -131,7 +129,6 @@ body = CreateTriggerRequest(
 )
 
 result = anomaly_triggers_controller.create_anomaly_detection_trigger(body)
-print(result)
 ```
 
 ## Errors
@@ -172,7 +169,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 trigger_id = 'be1b5958-3e11-41db-9abd-b1b7618c0035'
 
 result = anomaly_triggers_controller.list_anomaly_detection_trigger_settings(trigger_id)
-print(result)
 ```
 
 ## Errors
@@ -213,7 +209,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 trigger_id = 'be1b5958-3e11-41db-9abd-b1b7618c0035'
 
 result = anomaly_triggers_controller.delete_anomaly_detection_trigger(trigger_id)
-print(result)
 ```
 
 ## Errors

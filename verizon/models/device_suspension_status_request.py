@@ -15,8 +15,7 @@ class DeviceSuspensionStatusRequest(object):
 
     """Implementation of the 'DeviceSuspensionStatusRequest' model.
 
-    Request to return service suspension information about one or more
-    devices.
+    Request to return service suspension information about one or more devices.
 
     Attributes:
         device_ids (List[DeviceId]): The devices that you want to include in

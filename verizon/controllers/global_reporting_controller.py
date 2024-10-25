@@ -18,7 +18,6 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.esim_request_response import ESIMRequestResponse
-from verizon.models.esim_status_response import ESIMStatusResponse
 from verizon.exceptions.esim_rest_error_response_exception import ESIMRestErrorResponseException
 
 
@@ -32,15 +31,14 @@ class GlobalReportingController(BaseController):
                                      body):
         """Does a POST request to /m2m/v2/devices/history/actions/list.
 
-        Retreive the provisioning history of a specific device or devices.
+        Retrieve the provisioning history of a specific device or devices.
 
         Args:
             body (ESIMProvhistoryRequest): Device Provisioning History
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -78,21 +76,18 @@ class GlobalReportingController(BaseController):
             .local_error('default', 'Error response', ESIMRestErrorResponseException)
         ).execute()
 
-    def requeststatususing_get(self,
-                               accountname,
-                               request_id):
-        """Does a GET request to /m2m/v2/accounts/{accountname}/requests/{requestID}/status.
+    def retrieve_global_list(self,
+                             body):
+        """Does a POST request to /m2m/v2/devices/actions/list.
 
-        Get the status of a request made with the Device Actions.
+        Retrieve a list of all devices associated with an account.
 
         Args:
-            accountname (str): TODO: type description here.
-            request_id (str): TODO: type description here.
+            body (ESIMGlobalDeviceList): Device List
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -104,24 +99,22 @@ class GlobalReportingController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.THINGSPACE)
-            .path('/m2m/v2/accounts/{accountname}/requests/{requestID}/status')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('accountname')
-                            .value(accountname)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('requestID')
-                            .value(request_id)
-                            .should_encode(True))
+            .path('/m2m/v2/devices/actions/list')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
             .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ESIMStatusResponse.from_dictionary)
+            .deserialize_into(ESIMRequestResponse.from_dictionary)
             .is_api_response(True)
             .local_error('400', 'Bad request', ESIMRestErrorResponseException)
             .local_error('401', 'Unauthorized', ESIMRestErrorResponseException)

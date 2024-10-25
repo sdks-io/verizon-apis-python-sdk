@@ -77,7 +77,6 @@ result = campaigns_v2_controller.schedule_campaign_firmware_upgrade(
     account,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -152,7 +151,6 @@ result = campaigns_v2_controller.get_campaign_information(
     account,
     campaign_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -239,7 +237,6 @@ result = campaigns_v2_controller.update_campaign_firmware_devices(
     campaign_id,
     body
 )
-print(result)
 ```
 
 ## Errors
@@ -281,7 +278,6 @@ result = campaigns_v2_controller.cancel_campaign(
     account,
     campaign_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -353,7 +349,6 @@ result = campaigns_v2_controller.update_campaign_dates(
     campaign_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -444,7 +439,6 @@ result = campaigns_v2_controller.schedule_file_upgrade(
     acc,
     body
 )
-print(result)
 ```
 
 ## Errors
@@ -512,7 +506,6 @@ result = campaigns_v2_controller.schedule_sw_upgrade_http_devices(
     acc,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

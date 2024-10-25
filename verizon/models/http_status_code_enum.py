@@ -56,8 +56,7 @@ class HttpStatusCodeEnum(object):
         ENUM_414 URI_TOO_LONG: TODO: type description here.
         ENUM_414 REQUEST_URI_TOO_LONG: TODO: type description here.
         ENUM_415 UNSUPPORTED_MEDIA_TYPE: TODO: type description here.
-        ENUM_416 REQUESTED_RANGE_NOT_SATISFIABLE: TODO: type description
-            here.
+        ENUM_416 REQUESTED_RANGE_NOT_SATISFIABLE: TODO: type description here.
         ENUM_417 EXPECTATION_FAILED: TODO: type description here.
         ENUM_418 I_AM_A_TEAPOT: TODO: type description here.
         ENUM_419 INSUFFICIENT_SPACE_ON_RESOURCE: TODO: type description here.
@@ -70,8 +69,7 @@ class HttpStatusCodeEnum(object):
         ENUM_426 UPGRADE_REQUIRED: TODO: type description here.
         ENUM_428 PRECONDITION_REQUIRED: TODO: type description here.
         ENUM_429 TOO_MANY_REQUESTS: TODO: type description here.
-        ENUM_431 REQUEST_HEADER_FIELDS_TOO_LARGE: TODO: type description
-            here.
+        ENUM_431 REQUEST_HEADER_FIELDS_TOO_LARGE: TODO: type description here.
         ENUM_451 UNAVAILABLE_FOR_LEGAL_REASONS: TODO: type description here.
         ENUM_500 INTERNAL_SERVER_ERROR: TODO: type description here.
         ENUM_501 NOT_IMPLEMENTED: TODO: type description here.
@@ -84,8 +82,7 @@ class HttpStatusCodeEnum(object):
         ENUM_508 LOOP_DETECTED: TODO: type description here.
         ENUM_509 BANDWIDTH_LIMIT_EXCEEDED: TODO: type description here.
         ENUM_510 NOT_EXTENDED: TODO: type description here.
-        ENUM_511 NETWORK_AUTHENTICATION_REQUIRED: TODO: type description
-            here.
+        ENUM_511 NETWORK_AUTHENTICATION_REQUIRED: TODO: type description here.
 
     """
     ENUM_100_CONTINUE = '100 CONTINUE'

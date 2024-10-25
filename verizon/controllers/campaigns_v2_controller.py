@@ -354,8 +354,7 @@ class CampaignsV2Controller(BaseController):
 
         Args:
             acc (str): Account identifier.
-            body (SchedulesSoftwareUpgradeRequest): Device logging
-                information.
+            body (SchedulesSoftwareUpgradeRequest): Device logging information.
 
         Returns:
             ApiResponse: An object with the response value as well as other

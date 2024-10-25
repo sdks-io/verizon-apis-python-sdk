@@ -25,8 +25,7 @@ class QueryTargetRequest(object):
             comparator values to match against subscriptions in the ThingSpace
             account. See Working with Query Filters for more information. If
             the request does not include `$selection`, the response will
-            include all subscriptions to which the requesting user has
-            access.
+            include all subscriptions to which the requesting user has access.
         resourceidentifier (ResourceIdentifier): The ID of the target to
             delete, in the format {"id":
             "dd1682d3-2d80-cefc-f3ee-25154800beff"}.

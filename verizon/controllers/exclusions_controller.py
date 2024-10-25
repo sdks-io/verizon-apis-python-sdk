@@ -17,6 +17,8 @@ from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
+from verizon.models.get_account_device_consent import GetAccountDeviceConsent
+from verizon.models.consent_transaction_id import ConsentTransactionID
 from verizon.models.device_location_success_result import DeviceLocationSuccessResult
 from verizon.models.devices_consent_result import DevicesConsentResult
 from verizon.exceptions.device_location_result_exception import DeviceLocationResultException
@@ -27,6 +29,147 @@ class ExclusionsController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(ExclusionsController, self).__init__(config)
+
+    def devices_location_get_consent_async(self,
+                                           account_name,
+                                           device_id=None):
+        """Does a GET request to /devicelocations/action/consents.
+
+        Get the consent settings for the entire account or device list in an
+        account.
+
+        Args:
+            account_name (str): The numeric name of the account.
+            device_id (str, optional): The IMEI of the device being queried
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                JSON objects, each containing the position data or an error
+                for a device in the request.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/devicelocations/action/consents')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('accountName')
+                         .value(account_name))
+            .query_param(Parameter()
+                         .key('deviceId')
+                         .value(device_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GetAccountDeviceConsent.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
+    def devices_location_give_consent_async(self,
+                                            body=None):
+        """Does a POST request to /devicelocations/action/consents.
+
+        Create a consent record to use location services as an asynchronous
+        request.
+
+        Args:
+            body (AccountConsentCreate, optional): Account details to create a
+                consent record.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                JSON objects, each containing the position data or an error
+                for a device in the request.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/devicelocations/action/consents')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ConsentTransactionID.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
+    def devices_location_update_consent(self,
+                                        body=None):
+        """Does a PUT request to /devicelocations/action/consents.
+
+        Update the location services consent record for an entire account.
+
+        Args:
+            body (AccountConsentUpdate, optional): Account details to update a
+                consent record.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. List of
+                JSON objects, each containing the position data or an error
+                for a device in the request.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/devicelocations/action/consents')
+            .http_method(HttpMethodEnum.PUT)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ConsentTransactionID.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
 
     def exclude_devices(self,
                         body):
@@ -122,17 +265,16 @@ class ExclusionsController(BaseController):
         ).execute()
 
     def list_excluded_devices(self,
-                              account,
+                              account_name,
                               start_index):
-        """Does a GET request to /consents/{account}/index/{startIndex}.
+        """Does a GET request to /consents/{accountName}/index/{startIndex}.
 
         This consents endpoint retrieves a list of excluded devices in an
         account.
 
         Args:
-            account (str): Account identifier in "##########-#####".
-            start_index (str): Zero-based number of the first record to
-                return.
+            account_name (str): Account identifier in "##########-#####".
+            start_index (str): Zero-based number of the first record to return.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -149,11 +291,11 @@ class ExclusionsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/consents/{account}/index/{startIndex}')
+            .path('/consents/{accountName}/index/{startIndex}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('startIndex')

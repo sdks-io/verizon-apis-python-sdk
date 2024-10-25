@@ -27,6 +27,180 @@ class ManagingESIMProfilesController(BaseController):
     def __init__(self, config):
         super(ManagingESIMProfilesController, self).__init__(config)
 
+    def resume_profile(self,
+                       body):
+        """Does a POST request to /m2m/v1/devices/profile/actions/profile_resume.
+
+        Resume service to a device with either a lead or local profile.
+
+        Args:
+            body (GIOProfileRequest): Device Profile Query
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/devices/profile/actions/profile_resume')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GIORequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
+    def profile_suspend(self,
+                        body):
+        """Does a POST request to /m2m/v1/devices/profile/actions/profile_suspend.
+
+        Suspend a device's Global profile.
+
+        Args:
+            body (GIOProfileRequest): Device Profile Query
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/devices/profile/actions/profile_suspend')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GIORequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
+    def device_suspend(self,
+                       body):
+        """Does a POST request to /m2m/v1/devices/profile/actions/device_suspend.
+
+        Suspend all service to an eUICC device, including the lead and local
+        profile.
+
+        Args:
+            body (GIOProfileRequest): Device Profile Query
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/m2m/v1/devices/profile/actions/device_suspend')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GIORequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
+    def set_fallback(self,
+                     body):
+        """Does a POST request to /v1/devices/profile/actions/setfallbackattribute.
+
+        Enable a fallback profile to be set.
+
+        Args:
+            body (FallBack): Set the fallback attributes to allow a fallback
+                profile to be activated.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/v1/devices/profile/actions/setfallbackattribute')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GIORequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
     def activate_a_device_profile(self,
                                   body):
         """Does a POST request to /m2m/v1/devices/profile/actions/activate.
@@ -38,8 +212,7 @@ class ManagingESIMProfilesController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -82,8 +255,7 @@ class ManagingESIMProfilesController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -127,8 +299,7 @@ class ManagingESIMProfilesController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -171,8 +342,7 @@ class ManagingESIMProfilesController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -215,8 +385,7 @@ class ManagingESIMProfilesController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -260,8 +429,7 @@ class ManagingESIMProfilesController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from

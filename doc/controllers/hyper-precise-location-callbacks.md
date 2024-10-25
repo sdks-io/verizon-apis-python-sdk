@@ -40,7 +40,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_number = '0844021539-00001'
 
 result = hyper_precise_location_callbacks_controller.list_registered_callbacks(account_number)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -102,7 +101,6 @@ result = hyper_precise_location_callbacks_controller.register_callback(
     account_number,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -158,7 +156,6 @@ result = hyper_precise_location_callbacks_controller.deregister_callback(
     account_number,
     service
 )
-print(result)
 ```
 
 ## Errors

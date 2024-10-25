@@ -40,7 +40,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account = '0242078689-00001'
 
 result = software_management_callbacks_v1_controller.list_registered_callbacks(account)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -97,7 +96,6 @@ result = software_management_callbacks_v1_controller.register_callback(
     account,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -148,7 +146,6 @@ result = software_management_callbacks_v1_controller.deregister_callback(
     account,
     service
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

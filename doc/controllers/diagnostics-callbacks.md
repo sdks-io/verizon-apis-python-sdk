@@ -40,7 +40,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_name = '0000123456-00001'
 
 result = diagnostics_callbacks_controller.get_diagnostics_subscription_callback_info(account_name)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -94,7 +93,6 @@ body = CallbackRegistrationRequest(
 )
 
 result = diagnostics_callbacks_controller.register_diagnostics_callback_url(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -148,7 +146,6 @@ result = diagnostics_callbacks_controller.unregister_diagnostics_callback(
     account_name,
     service_name
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

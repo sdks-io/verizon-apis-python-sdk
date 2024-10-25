@@ -13,6 +13,9 @@ Documentation for accessing and setting credentials for thingspace_oauth.
 | OAuthClientSecret | `str` | OAuth 2 Client Secret | `oauth_client_secret` |
 | OAuthToken | `OauthToken` | Object for storing information about the OAuth token | `oauth_token` |
 | OAuthScopes | `List[OauthScopeThingspaceOauthEnum]` | List of scopes that apply to the OAuth token | `oauth_scopes` |
+| OAuthTokenProvider | `Callable[[OAuthToken, OAuth2], OAuthToken]` | Registers a callback for oAuth Token Provider used for automatic token fetching/refreshing. | `oauth_token_provider` |
+| OAuthOnTokenUpdate | `Callable[[OAuthToken], None]` | Registers a callback for token update event. | `oauth_on_token_update` |
+| OAuthClockSkew | `int` | Clock skew time in seconds applied while checking the OAuth Token expiry. | `oauth_clock_skew` |
 
 
 
@@ -22,7 +25,7 @@ Documentation for accessing and setting credentials for thingspace_oauth.
 
 ### Client Initialization
 
-You must initialize the client with *OAuth 2.0 Client Credentials Grant* credentials as shown in the following code snippet.
+You must initialize the client with *OAuth 2.0 Client Credentials Grant* credentials as shown in the following code snippet. This will fetch the OAuth token automatically when any of the endpoints, requiring *OAuth 2.0 Client Credentials Grant* autentication, are called.
 
 ```python
 client = VerizonClient(
@@ -39,27 +42,9 @@ client = VerizonClient(
 
 
 
-Your application must obtain user authorization before it can execute an endpoint call in case this SDK chooses to use *OAuth 2.0 Client Credentials Grant*. This authorization includes the following steps.
-
-The `fetch_token()` method will exchange the OAuth client credentials for an *access token*. The access token is an object containing information for authorizing client requests and refreshing the token itself.
+Your application can also manually provide an OAuthToken using the setter `oauth_token` in `ThingspaceOauthCredentials` object. This function takes in an instance of OAuthToken containing information for authorizing client requests and refreshing the token itself.
 
 You must have initialized the client with scopes for which you need permission to access.
-
-```python
-try:
-    token = client.thingspace_oauth.fetch_token()
-    thingspace_oauth_credentials = client.config.thingspace_oauth_credentials.clone_with(oauth_token=token)
-    config = client.config.clone_with(thingspace_oauth_credentials=thingspace_oauth_credentials)
-    client = VerizonClient(config)
-except OauthProviderException as ex:
-    # handle exception
-    pass
-except APIException as ex:
-    # handle exception
-    pass
-```
-
-The client can now make authorized endpoint calls.
 
 ### Scopes
 
@@ -75,45 +60,48 @@ Scopes enable your application to only request access to the resources it needs 
 | `TS_MEC_FULLACCESS` | Full access for /serviceprofiles and /serviceendpoints. |
 | `TS_MEC_LIMITACCESS` | Limited access. Will not allow use of /serviceprofiles and /serviceendpoints but will allow discovery. |
 | `TS_APPLICATION_RO` |  |
-| `EDGEDISCOVERYREAD` |  |
-| `EDGESERVICEPROFILEREAD` |  |
-| `EDGESERVICEPROFILEWRITE` |  |
-| `EDGESERVICEREGISTRYREAD` |  |
-| `EDGESERVICEREGISTRYWRITE` |  |
+| `EDGEDISCOVERYREAD` | Read access to the discovery service |
+| `EDGESERVICEPROFILEREAD` | Read access to the service profile service |
+| `EDGESERVICEPROFILEWRITE` | Write access to the service profile service |
+| `EDGESERVICEREGISTRYREAD` | Read access to the service registry service |
+| `EDGESERVICEREGISTRYWRITE` | Write access to the service registry service |
 | `READ` | read access |
 | `WRITE` | read/write access |
 
-### Storing an access token for reuse
+### Adding OAuth Token Update Callback
 
-It is recommended that you store the access token for reuse.
-
-```python
-# store token
-save_token_to_database(client.config.thingspace_oauth_credentials.oauth_token)
-```
-
-### Creating a client from a stored token
-
-To authorize a client from a stored access token, just set the access token in Configuration along with the other configuration parameters before creating the client:
+Whenever the OAuth Token gets updated, the provided callback implementation will be executed. For instance, you may use it to store your access token whenever it gets updated.
 
 ```python
 client = VerizonClient(
     thingspace_oauth_credentials=ThingspaceOauthCredentials(
-        oauth_token=load_token_from_database()
+        oauth_client_id='OAuthClientId',
+        oauth_client_secret='OAuthClientSecret',
+        oauth_scopes=[
+            OauthScopeThingspaceOauthEnum.DISCOVERYREAD,
+            OauthScopeThingspaceOauthEnum.SERVICEPROFILEREAD
+        ],
+        oauth_on_token_update=(lambda oauth_token:
+                                # Add the callback handler to perform operations like save to DB or file etc.
+                                # It will be triggered whenever the token gets updated
+                                save_token_to_database(oauth_token))
     )
 )
 ```
 
-### Complete example
+### Adding Custom OAuth Token Provider
 
-
+To authorize a client using a stored access token, set up the `oauth_token_provider` in `ThingspaceOauthCredentials` along with the other auth parameters before creating the client:
 
 ```python
-from verizon.verizon_client import VerizonClient
-from verizon.models.oauth_scope_thingspace_oauth_enum import OauthScopeThingspaceOauthEnum
-from verizon.exceptions.oauth_provider_exception import OauthProviderException
+def _oauth_token_provider(last_oauth_token, auth_manager):
+    # Add the callback handler to provide a new OAuth token
+    # It will be triggered whenever the last provided o_auth_token is null or expired
+    oauth_token = load_token_from_database()
+    if oauth_token is None:
+        oauth_token = auth_manager.fetch_token()
+    return oauth_token
 
-from verizon.exceptions.api_exception import APIException
 
 client = VerizonClient(
     thingspace_oauth_credentials=ThingspaceOauthCredentials(
@@ -122,42 +110,10 @@ client = VerizonClient(
         oauth_scopes=[
             OauthScopeThingspaceOauthEnum.DISCOVERYREAD,
             OauthScopeThingspaceOauthEnum.SERVICEPROFILEREAD
-        ]
+        ],
+        oauth_token_provider=_oauth_token_provider
     )
 )
-# function for storing token to database
-def save_token_to_database(oauth_token):
-    # code to save the token to database
-    pass
-
-# function for loading token from database
-def load_token_from_database():
-    # load token from database and return it (return None if no token exists)
-    pass
-
-# obtain access token, needed for client to be authorized
-previous_token = load_token_from_database()
-if previous_token:
-    # restore previous access token
-    thingspace_oauth_credentials = client.config.thingspace_oauth_credentials.clone_with(oauth_token=previous_token)
-    config = client.config.clone_with(thingspace_oauth_credentials=thingspace_oauth_credentials)
-    client = VerizonClient(config)
-else:
-    # obtain new access token
-    try:
-        token = client.thingspace_oauth.fetch_token()
-        save_token_to_database(token)
-        thingspace_oauth_credentials = client.config.thingspace_oauth_credentials.clone_with(oauth_token=token)
-        config = client.config.clone_with(thingspace_oauth_credentials=thingspace_oauth_credentials)
-        client = VerizonClient(config)
-    except OauthProviderException as ex:
-        # handle exception
-        pass
-    except APIException as ex:
-        # handle exception
-        pass
-
-# the client is now authorized and you can use controllers to make endpoint calls
 ```
 
 

@@ -13,6 +13,7 @@ from verizon.models.oauth_token import OauthToken
 from apimatic_core.utilities.auth_helper import AuthHelper
 from verizon.controllers.oauth_authorization_controller import\
     OauthAuthorizationController
+from verizon.exceptions.api_exception import APIException
 
 
 class ThingspaceOauth(HeaderAuth):
@@ -26,7 +27,6 @@ class ThingspaceOauth(HeaderAuth):
         return "ThingspaceOauth: OAuthToken is undefined or expired."
 
     def __init__(self, thingspace_oauth_credentials, config):
-        auth_params = {}
         self._oauth_client_id = thingspace_oauth_credentials.oauth_client_id \
             if thingspace_oauth_credentials is not None else None
         self._oauth_client_secret = thingspace_oauth_credentials.oauth_client_secret \
@@ -43,13 +43,19 @@ class ThingspaceOauth(HeaderAuth):
             self._oauth_scopes = thingspace_oauth_credentials.oauth_scopes
         else:
             self._oauth_scopes = None
+        self._oauth_clock_skew = thingspace_oauth_credentials.oauth_clock_skew \
+            if thingspace_oauth_credentials is not None else None
+        self._oauth_token_provider = thingspace_oauth_credentials.oauth_token_provider \
+            if thingspace_oauth_credentials is not None else None
+        self._oauth_on_token_update = thingspace_oauth_credentials.oauth_on_token_update \
+            if thingspace_oauth_credentials is not None else None
         self._o_auth_api = OauthAuthorizationController(config)
-        if isinstance(self._oauth_token, OauthToken) and hasattr(self._oauth_token, 'access_token'):
-            auth_params["Authorization"] = "Bearer {}".format(self._oauth_token.access_token)
-        super().__init__(auth_params=auth_params)
+        super().__init__(auth_params={})
 
     def is_valid(self):
-        return self._oauth_token and not self.is_token_expired()
+        self._oauth_token = self._get_token_from_provider()
+        return (self._oauth_token and isinstance(self._oauth_token, OauthToken)
+                and not self.is_token_expired(self._oauth_token))
 
     def build_basic_auth_header(self):
         """ Builds the basic auth header for endpoints in the
@@ -82,15 +88,52 @@ class ThingspaceOauth(HeaderAuth):
             token.expiry = AuthHelper.get_token_expiry(current_utc_timestamp, token.expires_in)
         return token
 
-    def is_token_expired(self):
+    def is_token_expired(self, oauth_token=None):
         """ Checks if OAuth token has expired.
+
+        Args:
+            oauth_token (OauthToken): The OAuth token whose expiry is to be checked.
 
         Returns:
             bool: True if OAuth token has expired, False otherwise.
 
         """
-        return hasattr(self._oauth_token, 'expiry') and AuthHelper.is_token_expired(
-            self._oauth_token.expiry)
+        if oauth_token is None:
+            return (hasattr(self._oauth_token, 'expiry')
+                    and AuthHelper.is_token_expired(self._oauth_token.expiry, self._oauth_clock_skew))
+
+        return (hasattr(oauth_token, 'expiry')
+                and AuthHelper.is_token_expired(oauth_token.expiry, self._oauth_clock_skew))
+
+    def apply(self, http_request):
+        auth_params = {"Authorization": "Bearer {}".format(self._oauth_token.access_token)}
+        AuthHelper.apply(auth_params, http_request.add_header)
+
+    def _get_token_from_provider(self):
+        """ This provides the OAuth Token from either the user configured callbacks or from default provider.
+        Returns:
+            OAuthToken: The fetched OAuth token.
+        """
+        if self._oauth_token is not None and not self.is_token_expired(self._oauth_token):
+            return self._oauth_token
+
+        if self._oauth_token_provider is not None:
+            oauth_token = self._oauth_token_provider(self._oauth_token, self)
+            self._apply_on_token_update_callback(oauth_token)
+            return oauth_token
+
+        try:
+            oauth_token = self.fetch_token()
+            self._apply_on_token_update_callback(oauth_token)
+            return oauth_token
+        except APIException:
+            return self._oauth_token
+
+    def _apply_on_token_update_callback(self, oauth_token):
+        """ This function applies the OAuth token update callback provided by the user.
+        """
+        if self._oauth_on_token_update is not None:
+            self._oauth_on_token_update(oauth_token)
 
 
 class ThingspaceOauthCredentials:
@@ -111,20 +154,41 @@ class ThingspaceOauthCredentials:
     def oauth_scopes(self):
         return self._oauth_scopes
 
+    @property
+    def oauth_token_provider(self):
+        return self._oauth_token_provider
+
+    @property
+    def oauth_on_token_update(self):
+        return self._oauth_on_token_update
+
+    @property
+    def oauth_clock_skew(self):
+        return self._oauth_clock_skew
+
     def __init__(self, oauth_client_id, oauth_client_secret, oauth_token=None,
-                 oauth_scopes=None):
+                 oauth_scopes=None, oauth_token_provider=None,
+                 oauth_on_token_update=None, oauth_clock_skew=None):
         if oauth_client_id is None:
             raise ValueError('oauth_client_id cannot be None')
-        self._oauth_client_id = oauth_client_id
         if oauth_client_secret is None:
             raise ValueError('oauth_client_secret cannot be None')
+        self._oauth_client_id = oauth_client_id
         self._oauth_client_secret = oauth_client_secret
         self._oauth_token = oauth_token
         self._oauth_scopes = oauth_scopes
+        self._oauth_token_provider = oauth_token_provider
+        self._oauth_on_token_update = oauth_on_token_update
+        self._oauth_clock_skew = oauth_clock_skew
 
     def clone_with(self, oauth_client_id=None, oauth_client_secret=None,
-                   oauth_token=None, oauth_scopes=None):
+                   oauth_token=None, oauth_scopes=None,
+                   oauth_token_provider=None, oauth_on_token_update=None,
+                   oauth_clock_skew=None):
         return ThingspaceOauthCredentials(
             oauth_client_id or self.oauth_client_id,
             oauth_client_secret or self.oauth_client_secret,
-            oauth_token or self.oauth_token, oauth_scopes or self.oauth_scopes)
+            oauth_token or self.oauth_token, oauth_scopes or self.oauth_scopes,
+            oauth_token_provider or self.oauth_token_provider,
+            oauth_on_token_update or self.oauth_on_token_update,
+            oauth_clock_skew or self.oauth_clock_skew)

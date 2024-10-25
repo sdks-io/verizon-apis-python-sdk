@@ -15,8 +15,7 @@ class FirmwareUpgradeChangeRequest(object):
     List of devices to add or remove.
 
     Attributes:
-        mtype (FirmwareTypeListEnum): Possible values are `append` or
-            `remove`
+        mtype (FirmwareTypeListEnum): Possible values are `append` or `remove`
         device_list (List[str]): The IMEIs of the devices.
 
     """

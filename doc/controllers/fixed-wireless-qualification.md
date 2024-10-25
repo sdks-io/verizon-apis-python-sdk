@@ -54,7 +54,6 @@ body = GetWirelessCoverageRequestFWA(
 )
 
 result = fixed_wireless_qualification_controller.domestic_4_g_and_5g_fixed_wireless_qualification(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

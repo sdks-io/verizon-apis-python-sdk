@@ -27,7 +27,7 @@ def get_promo_device_usage_history(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`RequestBodyForUsage1`](../../doc/models/request-body-for-usage-1.md) | Body, Required | Retrieve Aggregate Usage |
+| `body` | [`ARequestBodyForUsage`](../../doc/models/a-request-body-for-usage.md) | Body, Required | Retrieve Aggregate Usage |
 
 ## Response Type
 
@@ -36,13 +36,12 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-body = RequestBodyForUsage1(
+body = ARequestBodyForUsage(
     start_time=dateutil.parser.parse('08/15/2021 00:00:00'),
     end_time=dateutil.parser.parse('08/16/2021 00:00:00')
 )
 
 result = promotion_period_information_controller.get_promo_device_usage_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -104,7 +103,6 @@ body = RequestBodyForUsage(
 )
 
 result = promotion_period_information_controller.get_promo_device_aggregate_usage_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

@@ -34,8 +34,7 @@ class BillingController(BaseController):
                     body):
         """Does a POST request to /managedaccounts/actions/add.
 
-        This endpoint allows user to add managed accounts to a primary
-        account.
+        This endpoint allows user to add managed accounts to a primary account.
 
         Args:
             body (ManagedAccountsAddRequest): Service name and list of

@@ -54,7 +54,7 @@ class GoToStateRequest(object):
         devices_with_service_address (List[object]): This is an array that
             associates an IP address with a device identifier. This variable
             is only relevant for Business Internet/Fixed Wireless Access
-        ip_address (str): The IP address of the device.
+        ipaddress (str): The IP address of the device.
         group_name (str): The name of a device group that the devices should
             be added to.
         primary_place_of_use (PlaceOfUse): The customer name and the address
@@ -80,7 +80,7 @@ class GoToStateRequest(object):
         "sku_number": 'skuNumber',
         "custom_fields": 'customFields',
         "devices_with_service_address": 'devicesWithServiceAddress',
-        "ip_address": 'ipAddress',
+        "ipaddress": 'ipAddress',
         "group_name": 'groupName',
         "primary_place_of_use": 'primaryPlaceOfUse'
     }
@@ -93,7 +93,7 @@ class GoToStateRequest(object):
         'sku_number',
         'custom_fields',
         'devices_with_service_address',
-        'ip_address',
+        'ipaddress',
         'group_name',
         'primary_place_of_use',
     ]
@@ -110,7 +110,7 @@ class GoToStateRequest(object):
                  sku_number=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
                  devices_with_service_address=APIHelper.SKIP,
-                 ip_address=APIHelper.SKIP,
+                 ipaddress=APIHelper.SKIP,
                  group_name=APIHelper.SKIP,
                  primary_place_of_use=APIHelper.SKIP):
         """Constructor for the GoToStateRequest class"""
@@ -134,8 +134,8 @@ class GoToStateRequest(object):
             self.custom_fields = custom_fields 
         if devices_with_service_address is not APIHelper.SKIP:
             self.devices_with_service_address = devices_with_service_address 
-        if ip_address is not APIHelper.SKIP:
-            self.ip_address = ip_address 
+        if ipaddress is not APIHelper.SKIP:
+            self.ipaddress = ipaddress 
         if group_name is not APIHelper.SKIP:
             self.group_name = group_name 
         if primary_place_of_use is not APIHelper.SKIP:
@@ -179,7 +179,7 @@ class GoToStateRequest(object):
         else:
             custom_fields = APIHelper.SKIP
         devices_with_service_address = dictionary.get("devicesWithServiceAddress") if dictionary.get("devicesWithServiceAddress") else APIHelper.SKIP
-        ip_address = dictionary.get("ipAddress") if dictionary.get("ipAddress") else APIHelper.SKIP
+        ipaddress = dictionary.get("ipAddress") if dictionary.get("ipAddress") else APIHelper.SKIP
         group_name = dictionary.get("groupName") if dictionary.get("groupName") else APIHelper.SKIP
         primary_place_of_use = PlaceOfUse.from_dictionary(dictionary.get('primaryPlaceOfUse')) if 'primaryPlaceOfUse' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
@@ -194,6 +194,6 @@ class GoToStateRequest(object):
                    sku_number,
                    custom_fields,
                    devices_with_service_address,
-                   ip_address,
+                   ipaddress,
                    group_name,
                    primary_place_of_use)

@@ -88,8 +88,7 @@ class ConfigurationFilesController(BaseController):
         """Does a POST request to /files/{acc}.
 
         Uploads a configuration/supplementary file for an account. ThingSpace
-        generates a fileName after the upload and is returned in the
-        response.
+        generates a fileName after the upload and is returned in the response.
 
         Args:
             acc (str): Account identifier.
@@ -97,8 +96,7 @@ class ConfigurationFilesController(BaseController):
             file_version (str, optional): Version of the file.
             make (str, optional): The software-applicable device make.
             model (str, optional): The software-applicable device model.
-            local_target_path (str, optional): Local target path on the
-                device.
+            local_target_path (str, optional): Local target path on the device.
 
         Returns:
             ApiResponse: An object with the response value as well as other

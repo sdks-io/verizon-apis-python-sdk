@@ -17,6 +17,7 @@ from apimatic_core.types.parameter import Parameter
 from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
+from verizon.models.transaction_id import TransactionID
 from verizon.models.device_location_callback import DeviceLocationCallback
 from verizon.models.callback_registration_result import CallbackRegistrationResult
 from verizon.models.device_location_success_result import DeviceLocationSuccessResult
@@ -29,14 +30,61 @@ class DeviceLocationCallbacksController(BaseController):
     def __init__(self, config):
         super(DeviceLocationCallbacksController, self).__init__(config)
 
+    def cancel_async_report(self,
+                            account_name,
+                            txid):
+        """Does a DELETE request to /devicelocations/{txid}.
+
+        Cancel an asynchronous report request.
+
+        Args:
+            account_name (str): Account identifier in "##########-#####".
+            txid (str): The `transactionId` value.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request
+                canceled.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEVICE_LOCATION)
+            .path('/devicelocations/{txid}')
+            .http_method(HttpMethodEnum.DELETE)
+            .query_param(Parameter()
+                         .key('accountName')
+                         .value(account_name))
+            .template_param(Parameter()
+                            .key('txid')
+                            .value(txid)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(TransactionID.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Unexpected error.', DeviceLocationResultException)
+        ).execute()
+
     def list_registered_callbacks(self,
-                                  account):
-        """Does a GET request to /callbacks/{account}.
+                                  account_name):
+        """Does a GET request to /callbacks/{accountName}.
 
         Returns a list of all registered callback URLs for the account.
 
         Args:
-            account (str): Account number.
+            account_name (str): Account number.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -53,11 +101,11 @@ class DeviceLocationCallbacksController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/callbacks/{account}')
+            .path('/callbacks/{accountName}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .header_param(Parameter()
                           .key('accept')
@@ -72,14 +120,14 @@ class DeviceLocationCallbacksController(BaseController):
         ).execute()
 
     def register_callback(self,
-                          account,
+                          account_name,
                           body):
-        """Does a POST request to /callbacks/{account}.
+        """Does a POST request to /callbacks/{accountName}.
 
         Provide a URL to receive messages from a ThingSpace callback service.
 
         Args:
-            account (str): Account number.
+            account_name (str): Account number.
             body (DeviceLocationCallback): Request to register a callback.
 
         Returns:
@@ -97,11 +145,11 @@ class DeviceLocationCallbacksController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/callbacks/{account}')
+            .path('/callbacks/{accountName}')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .header_param(Parameter()
                           .key('Content-Type')
@@ -122,14 +170,14 @@ class DeviceLocationCallbacksController(BaseController):
         ).execute()
 
     def deregister_callback(self,
-                            account,
+                            account_name,
                             service):
-        """Does a DELETE request to /callbacks/{account}/name/{service}.
+        """Does a DELETE request to /callbacks/{accountName}/name/{service}.
 
         Deregister a URL to stop receiving callback messages.
 
         Args:
-            account (str): Account number.
+            account_name (str): Account number.
             service (CallbackServiceNameEnum): Callback service name.
 
         Returns:
@@ -147,11 +195,11 @@ class DeviceLocationCallbacksController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/callbacks/{account}/name/{service}')
+            .path('/callbacks/{accountName}/name/{service}')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('service')

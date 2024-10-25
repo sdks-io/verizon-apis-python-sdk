@@ -34,7 +34,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = service_plans_controller.list_account_service_plans(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

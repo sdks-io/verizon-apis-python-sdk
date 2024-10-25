@@ -23,8 +23,7 @@ class FirmwareCampaign(object):
         account_name (str): Account identifier.
         campaign_name (str): Campaign name.
         firmware_name (str): Firmware name (for firmware upgrade only).
-        firmware_from (str): Old firmware version (for firmware upgrade
-            only).
+        firmware_from (str): Old firmware version (for firmware upgrade only).
         firmware_to (str): New firmware version (for firmware upgrade only).
         protocol (str): Available values: LWM2M.
         make (str): TODO: type description here.

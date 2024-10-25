@@ -25,8 +25,7 @@ class CreateIoTApplicationRequest(object):
             account
         client_secret (str): The Azure Client Secret of the associated Azure
             target account
-        email_i_ds (str): The “email IDs” to be added to/sent to with this
-            API.
+        email_i_ds (str): The “email IDs” to be added to/sent to with this API.
         resourcegroup (str): The Azure Resource group of the associated Azure
             target account
         sample_io_tc_app (str): This is the reference Azure IoT Central

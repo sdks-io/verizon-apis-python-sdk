@@ -30,8 +30,7 @@ class V2AccountDevice(object):
         upgrade_time (str): The date and time of when the device firmware or
             software is upgraded.
         update_time (str): The date and time of when the device is updated.
-        refresh_time (str): The date and time of when the device is
-            refreshed.
+        refresh_time (str): The date and time of when the device is refreshed.
 
     """
 

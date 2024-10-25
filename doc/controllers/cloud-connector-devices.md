@@ -53,7 +53,6 @@ body = ChangeConfigurationRequest(
 )
 
 result = cloud_connector_devices_controller.update_devices_configuration_value(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -112,7 +111,6 @@ body = QuerySubscriptionRequest(
 )
 
 result = cloud_connector_devices_controller.find_device_by_property_values(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -189,7 +187,6 @@ body = QuerySubscriptionRequest(
 )
 
 result = cloud_connector_devices_controller.search_devices_resources_by_property_values(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -254,7 +251,6 @@ body = SearchDeviceEventHistoryRequest(
 )
 
 result = cloud_connector_devices_controller.search_device_event_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -340,7 +336,6 @@ result = cloud_connector_devices_controller.search_sensor_readings(
     fieldname,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -423,6 +418,5 @@ body = RemoveDeviceRequest(
 )
 
 result = cloud_connector_devices_controller.delete_device_from_account(body)
-print(result)
 ```
 

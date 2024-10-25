@@ -50,14 +50,13 @@ body = ManagedAccountsAddRequest(
 )
 
 result = billing_controller.add_account(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
 
 ```json
 {
-  "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33",
+  "txid": "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33",
   "statusList": [
     {
       "id": "1223334444-00001",
@@ -112,18 +111,17 @@ body = ManagedAccountsProvisionRequest(
     paccount_name='1234567890-00001',
     service_name=ServiceNameEnum.LOCATION,
     mtype='TS-LOC-COARSE-CellID-5K',
-    txid='d4fbff33-ece4-9f02-42ef-2c90bd287e3b'
+    txid='d4fbff33-eeee-ffff-gggg-2c90bd287e3b'
 )
 
 result = billing_controller.managed_account_action(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
 
 ```json
 {
-  "txid": "4fbff332-ece4-42ef-9f02-7e3bdc90bd28",
+  "txid": "4fbff332-eeee-ffff-gggg-7e3bdc90bd28",
   "accountName": "1223334444-00001",
   "paccountName": "1234567890-00001",
   "serviceName": "Location",
@@ -166,18 +164,17 @@ body = ManagedAccountCancelRequest(
     paccount_name='1234567890-00001',
     service_name=ServiceNameEnum.LOCATION,
     mtype='TS-LOC-COARSE-CellID-5K',
-    txid='d4fbff33-ece4-9f02-42ef-2c90bd287e3b'
+    txid='d4fbff33-eeee-ffff-gggg-2c90bd287e3b'
 )
 
 result = billing_controller.cancel_managed_account_action(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
 
 ```json
 {
-  "txid": "4fbff332-ece4-42ef-9f02-7e3bdc90bd28",
+  "txid": "4fbff332-eeee-ffff-gggg-7e3bdc90bd28",
   "accountName": "1223334444-00001",
   "paccountName": "1234567890-00001",
   "serviceName": "Location",
@@ -225,7 +222,6 @@ result = billing_controller.list_managed_account(
     account_name,
     service_name
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -236,11 +232,11 @@ print(result)
   "ManagedAccAddedList": [
     {
       "id": "1223334444-00001",
-      "txid": "2c90bd28-ece4-42ef-9f02-7e3bd4fbff33"
+      "txid": "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33"
     },
     {
       "id": "2334445555-00001",
-      "txid": "d4fbff33-ece4-9f02-42ef-2c90bd287e3b"
+      "txid": "d4fbff33-eeee-ffff-gggg-2c90bd287e3b"
     }
   ]
 }

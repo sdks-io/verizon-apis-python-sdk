@@ -43,7 +43,6 @@ body = DeviceResetRequest(
 )
 
 result = diagnostics_factory_reset_controller.decives_restart(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

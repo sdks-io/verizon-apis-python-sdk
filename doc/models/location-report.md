@@ -22,7 +22,7 @@ Location information for up to 1,000 devices.
 ```json
 {
   "startIndex": "0",
-  "txid": "2017-12-11Te8b47da2-3a45-46cf-9903-61815e1e97e9",
+  "txid": "2017-12-11Te8b47da2-eeee-ffff-gggg-61815e1e97e9",
   "totalCount": 3,
   "hasMoreData": false,
   "devLocationList": [

@@ -69,7 +69,6 @@ body = ObservationRequest(
 )
 
 result = diagnostics_observations_controller.start_diagnostics_observation(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -121,7 +120,6 @@ result = diagnostics_observations_controller.stop_diagnostics_observation(
     transaction_id,
     account_name
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

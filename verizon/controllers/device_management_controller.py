@@ -131,7 +131,7 @@ class DeviceManagementController(BaseController):
 
     def update_devices_contact_information(self,
                                            body):
-        """Does a PUT request to /m2m/v1/devices/actions/contactinfo.
+        """Does a PUT request to /m2m/v1/devices/actions/contactInfo.
 
         Sends a CarrierService callback message for each device in the request
         when the contact information has been changed, or if there was a
@@ -156,7 +156,7 @@ class DeviceManagementController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.THINGSPACE)
-            .path('/m2m/v1/devices/actions/contactinfo')
+            .path('/m2m/v1/devices/actions/contactInfo')
             .http_method(HttpMethodEnum.PUT)
             .header_param(Parameter()
                           .key('Content-Type')
@@ -419,8 +419,7 @@ class DeviceManagementController(BaseController):
         customer profile.
 
         Args:
-            body (MoveDeviceRequest): Request to move devices between
-                accounts.
+            body (MoveDeviceRequest): Request to move devices between accounts.
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -1121,8 +1120,7 @@ class DeviceManagementController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from

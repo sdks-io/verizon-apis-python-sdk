@@ -51,7 +51,6 @@ body = SMSSendRequest(
 )
 
 result = sms_controller.send_sms_to_device(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -96,7 +95,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = sms_controller.list_devices_sms_messages(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -161,7 +159,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = sms_controller.start_queued_sms_delivery(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

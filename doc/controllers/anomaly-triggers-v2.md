@@ -71,7 +71,6 @@ body = [
 ]
 
 result = anomaly_triggers_v2_controller.create_anomaly_detection_trigger_v2(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -146,7 +145,6 @@ body = [
 ]
 
 result = anomaly_triggers_v2_controller.update_anomaly_detection_trigger_v2(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -189,7 +187,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 trigger_id = 'be1b5958-3e11-41db-9abd-b1b7618c0035'
 
 result = anomaly_triggers_v2_controller.list_anomaly_detection_trigger_settings_v2(trigger_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

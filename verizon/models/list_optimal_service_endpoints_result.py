@@ -14,8 +14,7 @@ class ListOptimalServiceEndpointsResult(object):
 
     """Implementation of the 'ListOptimalServiceEndpointsResult' model.
 
-    Response on successful retrieval of optimal service endpoints for
-    clients.
+    Response on successful retrieval of optimal service endpoints for clients.
 
     Attributes:
         service_endpoints (List[ResourcesEdgeHostedService]): An array of

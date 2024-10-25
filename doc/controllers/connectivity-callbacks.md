@@ -40,7 +40,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = connectivity_callbacks_controller.list_registered_callbacks(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -104,7 +103,6 @@ result = connectivity_callbacks_controller.register_callback(
     aname,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -155,7 +153,6 @@ result = connectivity_callbacks_controller.deregister_callback(
     aname,
     sname
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

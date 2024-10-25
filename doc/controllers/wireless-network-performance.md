@@ -49,7 +49,6 @@ body = GetNetworkConditionsRequest(
 )
 
 result = wireless_network_performance_controller.near_real_time_network_conditions(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -69,7 +68,7 @@ print(result)
 
 # Domestic 4 G and 5G Nationwide Network Coverage
 
-Run a report to determine network types available and available coverage. Network types covered include: CAT-M, NB-IOT, LTE, LTE-AWS and 5GNW.
+Run a report to determine network types available and available coverage. Network types covered include: CAT-M, NB-IOT, LTE, LTE-AWS, 5GNW and C-BAND.
 
 ```python
 def domestic_4_g_and_5g_nationwide_network_coverage(self,
@@ -109,7 +108,6 @@ body = GetWirelessCoverageRequest(
 )
 
 result = wireless_network_performance_controller.domestic_4_g_and_5g_nationwide_network_coverage(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -159,7 +157,6 @@ body = GetNetworkConditionsRequest(
 )
 
 result = wireless_network_performance_controller.site_proximity(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -209,7 +206,6 @@ body = GetDeviceExperienceScoreHistoryRequest(
 )
 
 result = wireless_network_performance_controller.device_experience_30_days_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -261,7 +257,6 @@ body = GetDeviceExperienceScoreBulkRequest(
 )
 
 result = wireless_network_performance_controller.device_experience_bulk_latest(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

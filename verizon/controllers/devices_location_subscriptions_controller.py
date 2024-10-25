@@ -28,14 +28,14 @@ class DevicesLocationSubscriptionsController(BaseController):
         super(DevicesLocationSubscriptionsController, self).__init__(config)
 
     def get_location_service_subscription_status(self,
-                                                 account):
-        """Does a GET request to /subscriptions/{account}.
+                                                 account_name):
+        """Does a GET request to /subscriptions/{accountName}.
 
         This subscriptions endpoint retrieves an account's current location
         subscription status.
 
         Args:
-            account (str): Account identifier in "##########-#####".
+            account_name (str): Account identifier in "##########-#####".
 
         Returns:
             ApiResponse: An object with the response value as well as other
@@ -52,11 +52,11 @@ class DevicesLocationSubscriptionsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEVICE_LOCATION)
-            .path('/subscriptions/{account}')
+            .path('/subscriptions/{accountName}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('account')
-                            .value(account)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .header_param(Parameter()
                           .key('accept')

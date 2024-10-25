@@ -19,8 +19,7 @@ class SecuritySubscriptionResult(object):
     Attributes:
         account_name (str): The name of a billing account.
         subscription_list (List[SecuritySubscription]): The list of SKU
-            numbers and counts for each license type specified in the
-            request.
+            numbers and counts for each license type specified in the request.
 
     """
 

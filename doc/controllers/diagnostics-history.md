@@ -45,7 +45,6 @@ body = HistorySearchRequest(
 )
 
 result = diagnostics_history_controller.get_diagnostics_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

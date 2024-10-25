@@ -46,7 +46,6 @@ result = device_service_management_controller.get_device_hyper_precise_status(
     imei,
     account_number
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -108,7 +107,6 @@ body = BullseyeServiceRequest(
 )
 
 result = device_service_management_controller.update_device_hyper_precise_status(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

@@ -36,8 +36,7 @@ class SoftwareManagementReportsV1Controller(BaseController):
 
         Returns an array of all devices in the specified account. Each device
         object includes information needed for managing firmware, including
-        the device make and model, MDN and IMEI, and current firmware
-        version.
+        the device make and model, MDN and IMEI, and current firmware version.
 
         Args:
             account (str): Account identifier in "##########-#####".

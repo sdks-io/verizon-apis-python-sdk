@@ -23,7 +23,7 @@ This endpoint allows a user to schedule a firmware upgrade for a list of devices
 
 ```python
 def schedule_campaign_firmware_upgrade(self,
-                                      acc,
+                                      account_name,
                                       body)
 ```
 
@@ -31,7 +31,7 @@ def schedule_campaign_firmware_upgrade(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `str` | Template, Required | Account identifier. |
+| `account_name` | `str` | Template, Required | Account identifier. |
 | `body` | [`CampaignFirmwareUpgrade`](../../doc/models/campaign-firmware-upgrade.md) | Body, Required | Firmware upgrade information. |
 
 ## Response Type
@@ -41,7 +41,7 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-acc = '0000123456-00001'
+account_name = '0000123456-00001'
 
 body = CampaignFirmwareUpgrade(
     firmware_name='SEQUANSCommunications_GM01Q_SR1.2.0.0-10512_SR1.2.0.0-10657',
@@ -53,6 +53,8 @@ body = CampaignFirmwareUpgrade(
     device_list=[
         '15-digit IMEI'
     ],
+    auto_assign_license_flag=False,
+    auto_add_devices_flag=False,
     campaign_name='Smart FOTA - test 4',
     campaign_time_window_list=[
         V3TimeWindow(
@@ -63,10 +65,9 @@ body = CampaignFirmwareUpgrade(
 )
 
 result = campaigns_v3_controller.schedule_campaign_firmware_upgrade(
-    acc,
+    account_name,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -143,7 +144,6 @@ result = campaigns_v3_controller.update_campaign_firmware_devices(
     campaign_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -215,7 +215,6 @@ result = campaigns_v3_controller.update_campaign_dates(
     campaign_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -256,7 +255,7 @@ This endpoint allows the user to retrieve campaign level information for a speci
 
 ```python
 def get_campaign_information(self,
-                            acc,
+                            account_name,
                             campaign_id)
 ```
 
@@ -264,7 +263,7 @@ def get_campaign_information(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `str` | Template, Required | Account identifier. |
+| `account_name` | `str` | Template, Required | Account identifier. |
 | `campaign_id` | `str` | Template, Required | Firmware upgrade identifier. |
 
 ## Response Type
@@ -274,15 +273,14 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-acc = '0000123456-00001'
+account_name = '0000123456-00001'
 
 campaign_id = 'f858b8c4-2153-11ec-8c44-aeb16d1aa652'
 
 result = campaigns_v3_controller.get_campaign_information(
-    acc,
+    account_name,
     campaign_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -306,7 +304,9 @@ print(result)
       "startTime": 18,
       "endTime": 22
     }
-  ]
+  ],
+  "autoAssignLicenseFlag": false,
+  "autoAddDevicesFlag": false
 }
 ```
 
@@ -323,7 +323,7 @@ This endpoint allows user to cancel a firmware campaign. A firmware campaign alr
 
 ```python
 def cancel_campaign(self,
-                   acc,
+                   account_name,
                    campaign_id)
 ```
 
@@ -331,7 +331,7 @@ def cancel_campaign(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `acc` | `str` | Template, Required | Account identifier. |
+| `account_name` | `str` | Template, Required | Account identifier. |
 | `campaign_id` | `str` | Template, Required | Firmware upgrade information. |
 
 ## Response Type
@@ -341,15 +341,14 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-acc = '0000123456-00001'
+account_name = '0000123456-00001'
 
 campaign_id = 'f858b8c4-2153-11ec-8c44-aeb16d1aa652'
 
 result = campaigns_v3_controller.cancel_campaign(
-    acc,
+    account_name,
     campaign_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

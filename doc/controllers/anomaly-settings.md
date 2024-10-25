@@ -49,7 +49,6 @@ body = AnomalyDetectionRequest(
 )
 
 result = anomaly_settings_controller.activate_anomaly_detection(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -92,7 +91,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_name = '0000123456-00001'
 
 result = anomaly_settings_controller.list_anomaly_detection_settings(account_name)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -142,7 +140,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 account_name = '0000123456-00001'
 
 result = anomaly_settings_controller.reset_anomaly_detection_parameters(account_name)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

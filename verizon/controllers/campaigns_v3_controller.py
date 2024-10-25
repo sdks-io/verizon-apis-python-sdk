@@ -31,15 +31,15 @@ class CampaignsV3Controller(BaseController):
         super(CampaignsV3Controller, self).__init__(config)
 
     def schedule_campaign_firmware_upgrade(self,
-                                           acc,
+                                           account_name,
                                            body):
-        """Does a POST request to /campaigns/firmware/{acc}.
+        """Does a POST request to /campaigns/firmware/{accountName}.
 
         This endpoint allows a user to schedule a firmware upgrade for a list
         of devices.
 
         Args:
-            acc (str): Account identifier.
+            account_name (str): Account identifier.
             body (CampaignFirmwareUpgrade): Firmware upgrade information.
 
         Returns:
@@ -57,11 +57,11 @@ class CampaignsV3Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
-            .path('/campaigns/firmware/{acc}')
+            .path('/campaigns/firmware/{accountName}')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .header_param(Parameter()
                           .key('Content-Type')
@@ -197,15 +197,15 @@ class CampaignsV3Controller(BaseController):
         ).execute()
 
     def get_campaign_information(self,
-                                 acc,
+                                 account_name,
                                  campaign_id):
-        """Does a GET request to /campaigns/{acc}/{campaignId}.
+        """Does a GET request to /campaigns/{accountName}/{campaignId}.
 
         This endpoint allows the user to retrieve campaign level information
         for a specified campaign.
 
         Args:
-            acc (str): Account identifier.
+            account_name (str): Account identifier.
             campaign_id (str): Firmware upgrade identifier.
 
         Returns:
@@ -223,11 +223,11 @@ class CampaignsV3Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
-            .path('/campaigns/{acc}/{campaignId}')
+            .path('/campaigns/{accountName}/{campaignId}')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('campaignId')
@@ -246,15 +246,15 @@ class CampaignsV3Controller(BaseController):
         ).execute()
 
     def cancel_campaign(self,
-                        acc,
+                        account_name,
                         campaign_id):
-        """Does a DELETE request to /campaigns/{acc}/{campaignId}.
+        """Does a DELETE request to /campaigns/{accountName}/{campaignId}.
 
         This endpoint allows user to cancel a firmware campaign. A firmware
         campaign already started can not be cancelled.
 
         Args:
-            acc (str): Account identifier.
+            account_name (str): Account identifier.
             campaign_id (str): Firmware upgrade information.
 
         Returns:
@@ -272,11 +272,11 @@ class CampaignsV3Controller(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.SOFTWARE_MANAGEMENT_V3)
-            .path('/campaigns/{acc}/{campaignId}')
+            .path('/campaigns/{accountName}/{campaignId}')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('acc')
-                            .value(acc)
+                            .key('accountName')
+                            .value(account_name)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('campaignId')

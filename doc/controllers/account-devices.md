@@ -31,7 +31,7 @@ def get_account_device_information(self,
 |  --- | --- | --- | --- |
 | `acc` | `str` | Template, Required | Account identifier. |
 | `last_seen_device_id` | `str` | Query, Optional | Last seen device identifier. |
-| `protocol` | [`DevicesProtocolEnum`](../../doc/models/devices-protocol-enum.md) | Query, Optional | Filter to retrieve a specific protocol type used. |
+| `protocol` | [`DevicesProtocolEnum`](../../doc/models/devices-protocol-enum.md) | Query, Optional | Filter to retrieve a specific protocol type used.<br>**Default**: `'LWM2M'` |
 
 ## Response Type
 
@@ -51,7 +51,6 @@ result = account_devices_controller.get_account_device_information(
     last_seen_device_id=last_seen_device_id,
     protocol=protocol
 )
-print(result)
 ```
 
 ## Errors
@@ -97,7 +96,6 @@ result = account_devices_controller.list_account_devices_information(
     acc,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

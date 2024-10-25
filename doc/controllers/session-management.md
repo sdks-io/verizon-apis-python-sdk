@@ -45,7 +45,6 @@ body = LogInRequest(
 result = session_management_controller.start_connectivity_management_session(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -79,7 +78,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 
 ```python
 result = session_management_controller.end_connectivity_management_session()
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -124,7 +122,6 @@ body = SessionResetPasswordRequest(
 )
 
 result = session_management_controller.reset_connectivity_management_password(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

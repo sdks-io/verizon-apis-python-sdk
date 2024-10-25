@@ -12,8 +12,7 @@ class ApiResponseCode(object):
 
     """Implementation of the 'ApiResponseCode' model.
 
-    ResponseCode and/or a message indicating success or failure of the
-    request.
+    ResponseCode and/or a message indicating success or failure of the request.
 
     Attributes:
         response_code (ResponseCodeEnum): Possible response codes.

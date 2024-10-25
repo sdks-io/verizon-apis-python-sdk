@@ -80,8 +80,7 @@ class DiagnosticsObservationsController(BaseController):
         This endpoint allows the user to stop or reset observe diagnostics.
 
         Args:
-            transaction_id (str): The ID value associated with the
-                transaction.
+            transaction_id (str): The ID value associated with the transaction.
             account_name (str): The numeric account name.
 
         Returns:

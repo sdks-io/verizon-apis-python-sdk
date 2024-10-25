@@ -31,8 +31,7 @@ class ThingSpaceQualityOfServiceAPIActionsController(BaseController):
                                                                  body):
         """Does a POST request to /m2m/v1/devices/actions/enhanceQoS.
 
-        Creates a QoS elevation subscription ID and activates the
-        subscription.
+        Creates a QoS elevation subscription ID and activates the subscription.
 
         Args:
             body (SubscribeRequest): The request details to create a

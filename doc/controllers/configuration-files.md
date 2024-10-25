@@ -46,7 +46,6 @@ result = configuration_files_controller.get_list_of_files(
     acc,
     distribution_type
 )
-print(result)
 ```
 
 ## Errors
@@ -105,7 +104,6 @@ result = configuration_files_controller.upload_config_file(
     model=model,
     local_target_path=local_target_path
 )
-print(result)
 ```
 
 ## Errors

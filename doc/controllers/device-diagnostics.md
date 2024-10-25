@@ -46,7 +46,6 @@ body = NotificationReportStatusRequest(
 )
 
 result = device_diagnostics_controller.device_reachability_status_using_post(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -101,7 +100,6 @@ body = RetrieveMonitorsRequest(
 )
 
 result = device_diagnostics_controller.retrieve_active_monitors_using_post(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

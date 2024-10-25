@@ -20,14 +20,14 @@ This subscriptions endpoint retrieves an account's current location subscription
 
 ```python
 def get_location_service_subscription_status(self,
-                                            account)
+                                            account_name)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account` | `str` | Template, Required | Account identifier in "##########-#####". |
+| `account_name` | `str` | Template, Required | Account identifier in "##########-#####". |
 
 ## Response Type
 
@@ -36,10 +36,9 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 ## Example Usage
 
 ```python
-account = '0000123456-00001'
+account_name = '0000123456-00001'
 
-result = devices_location_subscriptions_controller.get_location_service_subscription_status(account)
-print(result)
+result = devices_location_subscriptions_controller.get_location_service_subscription_status(account_name)
 ```
 
 ## Example Response *(as JSON)*
@@ -90,7 +89,6 @@ body = BillUsageRequest(
 )
 
 result = devices_location_subscriptions_controller.get_location_service_usage(body)
-print(result)
 ```
 
 ## Example Response

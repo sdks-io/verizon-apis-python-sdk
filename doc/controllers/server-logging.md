@@ -41,7 +41,6 @@ result = server_logging_controller.get_device_check_in_history(
     account,
     device_id
 )
-print(result)
 ```
 
 ## Errors

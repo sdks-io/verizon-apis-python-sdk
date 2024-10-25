@@ -49,7 +49,6 @@ body = QueryTargetRequest(
 )
 
 result = targets_controller.query_target(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -116,7 +115,6 @@ body = DeleteTargetRequest(
 )
 
 result = targets_controller.delete_target(body)
-print(result)
 ```
 
 
@@ -164,7 +162,6 @@ body = CreateTargetRequest(
 )
 
 result = targets_controller.create_target(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -191,8 +188,6 @@ print(result)
 
 Create a unique string that ThingSpace will pass to AWS for increased security.
 
-:information_source: **Note** This endpoint does not require authentication.
-
 ```python
 def generate_target_external_id(self,
                                body)
@@ -218,7 +213,6 @@ body = GenerateExternalIDRequest(
 )
 
 result = targets_controller.generate_target_external_id(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -272,7 +266,6 @@ result = targets_controller.create_azure_central_io_t_application(
     billingaccount_id,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

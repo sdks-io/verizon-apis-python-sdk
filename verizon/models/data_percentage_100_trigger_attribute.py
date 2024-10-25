@@ -18,8 +18,7 @@ class DataPercentage100TriggerAttribute(object):
     Attributes:
         key (str): Key data percentage 100.
         value (bool): DataPercentage100<br />True - Trigger on Data percentage
-            is over 100% used<br />False - Do not trigger when over 100%
-            used.
+            is over 100% used<br />False - Do not trigger when over 100% used.
 
     """
 

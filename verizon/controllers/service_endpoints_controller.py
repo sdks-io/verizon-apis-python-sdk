@@ -216,8 +216,7 @@ class ServiceEndpointsController(BaseController):
         Returns:
             ApiResponse: An object with the response value as well as other
                 useful information such as status codes and headers.
-                Registered service endpoint information for a 5G Edge
-                service.
+                Registered service endpoint information for a 5G Edge service.
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -313,8 +312,7 @@ class ServiceEndpointsController(BaseController):
                                     service_endpoints_id):
         """Does a DELETE request to /serviceendpoints/{serviceEndpointsId}.
 
-        Deregister an application's Service Endpoint from the MEC
-        Platform(s).
+        Deregister an application's Service Endpoint from the MEC Platform(s).
 
         Args:
             service_endpoints_id (str): A system-defined string identifier

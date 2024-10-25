@@ -35,8 +35,7 @@ class SIMSecureForIoTLicensesController(BaseController):
         Assigns SIM-Secure for IoT licenses to SIMs.
 
         Args:
-            body (AssignLicenseRequest): Request to assign license to
-                devices.
+            body (AssignLicenseRequest): Request to assign license to devices.
             x_request_id (str, optional): Transaction Id.
 
         Returns:

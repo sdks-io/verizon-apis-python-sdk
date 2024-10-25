@@ -52,7 +52,6 @@ body = CreateDeviceGroupRequest(
 )
 
 result = device_groups_controller.create_device_group(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -95,7 +94,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 aname = '0252012345-00001'
 
 result = device_groups_controller.list_device_groups(aname)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -158,7 +156,6 @@ result = device_groups_controller.get_device_group_information(
     aname,
     gname
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -238,7 +235,6 @@ result = device_groups_controller.update_device_group(
     gname,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -288,7 +284,6 @@ result = device_groups_controller.delete_device_group(
     aname,
     gname
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

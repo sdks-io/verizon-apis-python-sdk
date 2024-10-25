@@ -18,8 +18,7 @@ class V1AccountSubscription(object):
     Attributes:
         account_name (str): Account identifier in "##########-#####".
         purchase_type (str): Subscription models used by the account.
-        license_count (int): Number of monthly licenses in an MRC
-            subscription.
+        license_count (int): Number of monthly licenses in an MRC subscription.
         license_used_count (int): Number of licenses currently assigned to
             devices.
         update_time (str): The date and time of when the subscription was last

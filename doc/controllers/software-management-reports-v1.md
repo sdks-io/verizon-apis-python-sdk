@@ -47,7 +47,6 @@ result = software_management_reports_v1_controller.list_account_devices(
     account,
     start_index
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -136,7 +135,6 @@ result = software_management_reports_v1_controller.list_upgrades_for_specified_s
     upgrade_status,
     start_index
 )
-print(result)
 ```
 
 ## Errors
@@ -178,7 +176,6 @@ result = software_management_reports_v1_controller.get_device_firmware_upgrade_h
     account,
     device_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

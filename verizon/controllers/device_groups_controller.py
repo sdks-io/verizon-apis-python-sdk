@@ -237,8 +237,7 @@ class DeviceGroupsController(BaseController):
         """Does a DELETE request to /m2m/v1/groups/{aname}/name/{gname}.
 
         Deletes a device group from the account. Devices in the group are
-        moved to the default device group and are not deleted from the
-        account.
+        moved to the default device group and are not deleted from the account.
 
         Args:
             aname (str): Account name.

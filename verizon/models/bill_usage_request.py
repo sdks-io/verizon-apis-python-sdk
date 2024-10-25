@@ -17,8 +17,7 @@ class BillUsageRequest(object):
 
     Attributes:
         account_name (str): Account identifier.
-        start_date (str): Start date to search for billable usage,
-            mm-dd-yyyy.
+        start_date (str): Start date to search for billable usage, mm-dd-yyyy.
         end_date (str): End date to search for billable usage, mm-dd-yyyy.
         usage_for_all_accounts (bool): Request usage for single or multiple
             accounts.

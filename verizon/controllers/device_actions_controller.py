@@ -18,6 +18,8 @@ from verizon.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from verizon.models.gio_request_response import GIORequestResponse
+from verizon.models.daily_usage_response import DailyUsageResponse
+from verizon.models.account_details import AccountDetails
 from verizon.models.status_response import StatusResponse
 from verizon.exceptions.gio_rest_error_response_exception import GIORestErrorResponseException
 
@@ -27,6 +29,184 @@ class DeviceActionsController(BaseController):
     """A Controller to access Endpoints in the verizon API."""
     def __init__(self, config):
         super(DeviceActionsController, self).__init__(config)
+
+    def aggregate_usage(self,
+                        body):
+        """Does a POST request to /v1/devices/usage/actions/list/aggregate.
+
+        Retrieve the aggregate usage for a device or a number of devices.
+
+        Args:
+            body (AggregateUsage): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Request ID
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/v1/devices/usage/actions/list/aggregate')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GIORequestResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
+    def daily_usage(self,
+                    body):
+        """Does a POST request to /v1/devices/usage/actions/list.
+
+        Retrieve the daily usage for a device, for a specified period of time,
+        segmented by day
+
+        Args:
+            body (DailyUsage): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers.
+                Syncronous response of device usage
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/v1/devices/usage/actions/list')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DailyUsageResponse.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
+    def service_plan_list(self,
+                          account_name):
+        """Does a GET request to /v1/plans/{accountName}.
+
+        Retrieve all of the service plans, features and carriers associated
+        with the account specified.
+
+        Args:
+            account_name (str): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Account
+                details **Note:** The response will have placeholders. You can
+                identify the placeholders by `"sizeKb":0` and that the record
+                will only have `name` and `sizeKb` values.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/v1/plans/{accountName}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('accountName')
+                            .value(account_name)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(AccountDetails.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
+
+    def account_information(self,
+                            account_name):
+        """Does a GET request to /v1/accounts/{accountName}.
+
+        Retrieve all of the service plans, features and carriers associated
+        with the account specified.
+
+        Args:
+            account_name (str): TODO: type description here.
+
+        Returns:
+            ApiResponse: An object with the response value as well as other
+                useful information such as status codes and headers. Account
+                details **Note:** The response will have placeholders. You can
+                identify the placeholders by `"sizeKb":0` and that the record
+                will only have `name` and `sizeKb` values.
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.THINGSPACE)
+            .path('/v1/accounts/{accountName}')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('accountName')
+                            .value(account_name)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(And(Single('thingspace_oauth'), Single('VZ-M2M-Token')))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(AccountDetails.from_dictionary)
+            .is_api_response(True)
+            .local_error('default', 'Error response', GIORestErrorResponseException)
+        ).execute()
 
     def retrieve_the_global_device_list(self,
                                         body):
@@ -40,8 +220,7 @@ class DeviceActionsController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -77,15 +256,14 @@ class DeviceActionsController(BaseController):
                                              body):
         """Does a POST request to /m2m/v2/devices/history/actions/list.
 
-        Retreive the provisioning history of a specific device or devices.
+        Retrieve the provisioning history of a specific device or devices.
 
         Args:
             body (ProvhistoryRequest): Device Provisioning History
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -122,8 +300,7 @@ class DeviceActionsController(BaseController):
                                         request_id):
         """Does a GET request to /m2m/v2/accounts/{accountName}/requests/{requestID}/status.
 
-        Get the status of an asynchronous request made with the Device
-        Actions.
+        Get the status of an asynchronous request made with the Device Actions.
 
         Args:
             account_name (str): TODO: type description here.
@@ -131,8 +308,7 @@ class DeviceActionsController(BaseController):
 
         Returns:
             ApiResponse: An object with the response value as well as other
-                useful information such as status codes and headers. Request
-                ID
+                useful information such as status codes and headers. Request ID
 
         Raises:
             APIException: When an error occurs while fetching the data from

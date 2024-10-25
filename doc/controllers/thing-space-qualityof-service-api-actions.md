@@ -59,7 +59,6 @@ body = SubscribeRequest(
 )
 
 result = thing_space_quality_of_service_api_actions_controller.create_a_thing_space_quality_of_service_api_subscription(body)
-print(result)
 ```
 
 ## Errors
@@ -101,7 +100,6 @@ result = thing_space_quality_of_service_api_actions_controller.stop_a_thing_spac
     account_name,
     qos_subscription_id
 )
-print(result)
 ```
 
 ## Errors

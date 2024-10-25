@@ -31,8 +31,7 @@ class ContactInfoUpdateRequest(object):
         devices (List[AccountDeviceList]): A list of the devices that you want
             to change, specified by device identifier. You only need to
             provide one identifier per device. Do not include accountName,
-            groupName, customFields, or servicePlan if you use this
-            parameter.
+            groupName, customFields, or servicePlan if you use this parameter.
 
     """
 

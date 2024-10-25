@@ -41,7 +41,6 @@ result = diagnostics_settings_controller.list_diagnostics_settings(
     account_name,
     devices
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

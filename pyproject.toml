@@ -4,13 +4,13 @@ requires = ["setuptools>=61.0"]
 [project]
 name = "sdksio-verizon-apis-sdk"
 description = "Use the Verizon API for connectivity management, device diagnostics, device location, edge discovery service, edge performance, software management and much more."
-version = "1.5.0"
+version = "1.5.1"
 readme = "README.md"
 requires-python = ">=3.7"
-keywords = ["ThingSpace", "API", "SDKS", "Verizon"]
-authors = []
-urls = {Documentation = "https://www.verizon.com/business/5g-edge-portal/api-documentation.html#/http", Issues = "https://github.com/sdks-io/verizon-apis-python-sdk/issues"}
-dependencies = ["apimatic-core~=0.2.0", "apimatic-core-interfaces~=0.1.0", "apimatic-requests-client-adapter~=0.1.0", "deprecation~=2.1", "python-dateutil~=2.8.1"]
+keywords = ["API", "SDK", "Verizon", "Thingspace"]
+authors = [{name = "developer-sdksio", email = "developer+sdksio@apimatic.io"}]
+urls = {Documentation = "https://www.verizon.com/business/5g-edge-portal/api-documentation.html"}
+dependencies = ["apimatic-core~=0.2.0, >= 0.2.15", "apimatic-core-interfaces~=0.1.0, >= 0.1.5", "apimatic-requests-client-adapter~=0.1.0, >= 0.1.6", "deprecation~=2.1", "python-dateutil~=2.8.1"]
 classifiers = []
 [project.optional-dependencies]
 testutils = ["pytest>=7.2.2"]

@@ -86,8 +86,7 @@ class FirmwareV3Controller(BaseController):
 
         Args:
             acc (str): Account identifier.
-            body (FirmwareIMEI): DeviceIds to get firmware info
-                synchronously.
+            body (FirmwareIMEI): DeviceIds to get firmware info synchronously.
 
         Returns:
             ApiResponse: An object with the response value as well as other

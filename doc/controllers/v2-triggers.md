@@ -41,7 +41,6 @@ This method returns a `ApiResponse` instance. The `body` property of this instan
 body = CreateTriggerV2Request()
 
 result = m_v2_triggers_controller.create_trigger(body)
-print(result)
 ```
 
 ## Errors
@@ -85,7 +84,6 @@ result = m_v2_triggers_controller.update_trigger(
     vz_m2m_token,
     body
 )
-print(result)
 ```
 
 ## Errors

@@ -36,8 +36,7 @@ class V3Device(object):
         status_time (str): The date and time of when the device firmware or
             software is updated.
         update_time (str): The date and time of when the device is updated.
-        refresh_time (str): The date and time of when the device is
-            refreshed.
+        refresh_time (str): The date and time of when the device is refreshed.
         last_connection_time (datetime): The date and time of when the device
             reachability is checked.
 

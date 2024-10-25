@@ -28,8 +28,7 @@ class Address(object):
         country (str): Either “US” or “USA” for the country of the line's
             primary place of use.
         phone (str): A phone number where the customer can be reached.
-        phone_type (str): A single letter to indicate the customer phone
-            type.
+        phone_type (str): A single letter to indicate the customer phone type.
         email_address (str): An email address for the customer.
 
     """

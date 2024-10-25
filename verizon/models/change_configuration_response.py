@@ -24,8 +24,7 @@ class ChangeConfigurationResponse(object):
         fields (Fields): List of fields affected by the event.
         foreignid (str): foreign id
         id (str): The unique ID of this ts.event.configuration event.
-        kind (str): The kind of the ThingSpace resource that is being
-            reported
+        kind (str): The kind of the ThingSpace resource that is being reported
         lastupdated (str): The date and time that the event was last updated.
         name (str): The name of the event; “SetConfigurationReq” for device
             configuration changes.

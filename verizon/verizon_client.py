@@ -133,7 +133,7 @@ from verizon.controllers.device_actions_controller\
     import DeviceActionsController
 from verizon.controllers.thing_space_quality_of_service_api_actions_controller\
     import ThingSpaceQualityOfServiceAPIActionsController
-from verizon.controllers.mec_controller import MECController
+from verizon.controllers.pwn_controller import PWNController
 from verizon.controllers.promotion_period_information_controller\
     import PromotionPeriodInformationController
 from verizon.controllers.retrieve_the_triggers_controller\
@@ -144,6 +144,8 @@ from verizon.controllers.sim_actions_controller import SIMActionsController
 from verizon.controllers.global_reporting_controller\
     import GlobalReportingController
 from verizon.controllers.m_v2_triggers_controller import MV2TriggersController
+from verizon.controllers.m_5g_bi_device_actions_controller\
+    import M5gBIDeviceActionsController
 from verizon.controllers.oauth_authorization_controller\
     import OauthAuthorizationController
 
@@ -410,8 +412,8 @@ class VerizonClient(object):
         return ThingSpaceQualityOfServiceAPIActionsController(self.global_configuration)
 
     @LazyProperty
-    def mec(self):
-        return MECController(self.global_configuration)
+    def pwn(self):
+        return PWNController(self.global_configuration)
 
     @LazyProperty
     def promotion_period_information(self):
@@ -436,6 +438,10 @@ class VerizonClient(object):
     @LazyProperty
     def m_v2_triggers(self):
         return MV2TriggersController(self.global_configuration)
+
+    @LazyProperty
+    def m_5g_bi_device_actions(self):
+        return M5gBIDeviceActionsController(self.global_configuration)
 
     @LazyProperty
     def oauth_authorization(self):

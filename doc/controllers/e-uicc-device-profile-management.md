@@ -59,7 +59,6 @@ body = ProfileChangeStateRequest(
 )
 
 result = e_uicc_device_profile_management_controller.download_local_profile_to_enable(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -119,7 +118,6 @@ body = ProfileChangeStateRequest(
 )
 
 result = e_uicc_device_profile_management_controller.download_local_profile_to_disable(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -179,7 +177,6 @@ body = ProfileChangeStateRequest(
 )
 
 result = e_uicc_device_profile_management_controller.enable_local_profile(body)
-print(result)
 ```
 
 ## Errors
@@ -231,7 +228,6 @@ body = ProfileChangeStateRequest(
 )
 
 result = e_uicc_device_profile_management_controller.disable_local_profile(body)
-print(result)
 ```
 
 ## Errors
@@ -283,7 +279,6 @@ body = ProfileChangeStateRequest(
 )
 
 result = e_uicc_device_profile_management_controller.delete_local_profile(body)
-print(result)
 ```
 
 ## Errors

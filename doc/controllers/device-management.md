@@ -76,7 +76,7 @@ body = CarrierActivateRequest(
                     kind='iccid'
                 )
             ],
-            ip_address='1.2.3.456'
+            ipaddress='1.2.3.456'
         ),
         AccountDeviceList(
             device_ids=[
@@ -89,7 +89,7 @@ body = CarrierActivateRequest(
                     kind='iccid'
                 )
             ],
-            ip_address='1.2.3.456'
+            ipaddress='1.2.3.456'
         )
     ],
     service_plan='the service plan name',
@@ -119,7 +119,6 @@ body = CarrierActivateRequest(
 )
 
 result = device_management_controller.activate_service_for_devices(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -198,7 +197,6 @@ body = AddDevicesRequest(
 )
 
 result = device_management_controller.add_devices(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -268,7 +266,7 @@ body = ContactInfoUpdateRequest(
             suffix='I'
         )
     ),
-    account_name='0212345678-00001',
+    account_name='0000123456-00001',
     devices=[
         AccountDeviceList(
             device_ids=[
@@ -286,7 +284,6 @@ body = ContactInfoUpdateRequest(
 )
 
 result = device_management_controller.update_devices_contact_information(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -350,7 +347,6 @@ body = CustomFieldsUpdateRequest(
 )
 
 result = device_management_controller.update_devices_custom_fields(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -408,7 +404,6 @@ body = CarrierDeactivateRequest(
 )
 
 result = device_management_controller.deactivate_service_for_devices(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -478,7 +473,6 @@ body = DeleteDevicesRequest(
 )
 
 result = device_management_controller.delete_deactivated_devices(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -553,7 +547,6 @@ body = AccountDeviceListRequest(
 )
 
 result = device_management_controller.list_devices_information(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -648,7 +641,6 @@ body = DeviceMismatchListRequest(
 )
 
 result = device_management_controller.list_devices_with_imei_iccid_mismatch(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -714,7 +706,6 @@ body = MoveDeviceRequest(
 )
 
 result = device_management_controller.move_devices_within_accounts_of_profile(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -804,7 +795,6 @@ body = GoToStateRequest(
 )
 
 result = device_management_controller.update_devices_state(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -860,7 +850,6 @@ body = ServicePlanUpdateRequest(
 )
 
 result = device_management_controller.change_devices_service_plan(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -914,7 +903,6 @@ body = CarrierActionsRequest(
 )
 
 result = device_management_controller.suspend_service_for_devices(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -968,7 +956,6 @@ body = CarrierActionsRequest(
 )
 
 result = device_management_controller.restore_service_for_suspended_devices(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1023,7 +1010,6 @@ body = DeviceActivationRequest(
 )
 
 result = device_management_controller.check_devices_availability_for_activation(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1073,7 +1059,6 @@ body = DeviceConnectionListRequest(
 )
 
 result = device_management_controller.retrieve_device_connection_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1162,7 +1147,6 @@ body = DeviceCostCenterRequest(
 )
 
 result = device_management_controller.update_devices_cost_center_code(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1213,7 +1197,6 @@ body = DeviceExtendedDiagnosticsRequest(
 )
 
 result = device_management_controller.get_device_extended_diagnostic_information(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1273,7 +1256,6 @@ body = DeviceProvisioningHistoryListRequest(
 )
 
 result = device_management_controller.list_devices_provisioning_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1341,7 +1323,6 @@ body = DevicePrlListRequest(
 )
 
 result = device_management_controller.list_current_devices_prl_version(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1395,7 +1376,6 @@ body = DeviceSuspensionStatusRequest(
 )
 
 result = device_management_controller.get_device_service_suspension_status(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1445,7 +1425,6 @@ body = DeviceUsageListRequest(
 )
 
 result = device_management_controller.list_devices_usage_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1512,7 +1491,6 @@ body = DeviceAggregateUsageListRequest(
 )
 
 result = device_management_controller.retrieve_aggregate_device_usage_history(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1578,7 +1556,6 @@ result = device_management_controller.update_device_id(
     service_type,
     body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1652,7 +1629,6 @@ body = DeviceUploadRequest(
 )
 
 result = device_management_controller.device_upload(body)
-print(result)
 ```
 
 ## Errors
@@ -1689,7 +1665,6 @@ body = BilledusageListRequest(
 )
 
 result = device_management_controller.billed_usage_info(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1739,7 +1714,6 @@ body = AssociateLabelRequest(
 )
 
 result = device_management_controller.usage_segmentation_label_association(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1789,7 +1763,6 @@ result = device_management_controller.usage_segmentation_label_deletion(
     account_name,
     label_list
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1854,7 +1827,6 @@ body = UploadsActivatesDeviceRequest(
 )
 
 result = device_management_controller.activation_order_status(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1910,7 +1882,6 @@ body = CheckOrderStatusRequest(
 )
 
 result = device_management_controller.upload_device_identifier(body)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

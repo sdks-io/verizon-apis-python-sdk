@@ -52,7 +52,6 @@ body = UsageTriggerAddRequest(
 result = usage_trigger_management_controller.create_new_trigger(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -116,7 +115,6 @@ result = usage_trigger_management_controller.update_trigger(
     trigger_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -177,7 +175,6 @@ result = usage_trigger_management_controller.delete_trigger(
     account_name,
     trigger_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

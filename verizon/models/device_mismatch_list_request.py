@@ -16,8 +16,7 @@ class DeviceMismatchListRequest(object):
     """Implementation of the 'DeviceMismatchListRequest' model.
 
     Request to list of all 4G devices with an ICCID (SIM) that was not
-    activated with the expected IMEI (hardware) during a specified time
-    frame.
+    activated with the expected IMEI (hardware) during a specified time frame.
 
     Attributes:
         filter (DateFilter): Filter out the dates.

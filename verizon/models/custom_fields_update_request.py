@@ -26,8 +26,7 @@ class CustomFieldsUpdateRequest(object):
             you want to only include devices that have matching values.
         custom_fields_to_update (List[CustomFields]): The names and new values
             of any custom fields that you want to change.
-        devices (List[AccountDeviceList]): The devices that you want to
-            change.
+        devices (List[AccountDeviceList]): The devices that you want to change.
         group_name (str): The name of a device group, if you want to only
             include devices in that group.
         service_plan (str): The name of a service plan, if you want to only

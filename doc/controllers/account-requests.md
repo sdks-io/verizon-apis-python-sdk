@@ -41,7 +41,6 @@ result = account_requests_controller.get_current_asynchronous_request_status(
     aname,
     request_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
