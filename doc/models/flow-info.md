@@ -9,11 +9,11 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `flow_server` | `str` | Optional | - |
-| `flow_device` | `str` | Optional | - |
-| `flow_direction` | `str` | Optional | - |
-| `flow_protocol` | `str` | Optional | - |
-| `qci_option` | `str` | Optional | - |
+| `flow_server` | `str` | Optional | The IPv6 IP address and port used to connect to the server |
+| `flow_device` | `str` | Optional | The IPv6 IP address and port used by the device |
+| `flow_direction` | `str` | Optional | The direction the data is flowing. UPLINK if from the device, DOWNLINK is to the device |
+| `flow_protocol` | `str` | Optional | The data protocol used for the connection |
+| `qci_option` | `str` | Optional | The QoS level of the connection. This will be Standard or Premium |
 
 ## Example (as JSON)
 

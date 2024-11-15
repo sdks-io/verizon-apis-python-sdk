@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `account_name` | `str` | Required | - |
-| `device_info` | [`List[QosDeviceInfo]`](../../doc/models/qos-device-info.md) | Required | - |
+| `account_name` | `str` | Optional | The numeric name of an account |
+| `device_info` | [`List[DeviceInfo]`](../../doc/models/device-info.md) | Optional | An array of device identifiers (deviceId values) |
 
 ## Example (as JSON)
 
@@ -20,17 +20,33 @@
   "deviceInfo": [
     {
       "deviceId": {
-        "id": "10-digit phone number",
-        "kind": "mdn"
+        "id": "id0",
+        "kind": "kind8"
       },
-      "deviceIPv6Addr": "IPv6 address",
+      "deviceIPv6Addr": "deviceIPv6Addr4",
       "flowInfo": [
         {
-          "flowServer": "[IPv6 address]:port",
-          "flowDevice": "[IPv6 address]:port",
-          "flowDirection": "UPLINK",
-          "flowProtocol": "UDP",
-          "qciOption": "Premium"
+          "flowServer": "flowServer4",
+          "flowDevice": "flowDevice2",
+          "flowDirection": "flowDirection6",
+          "flowProtocol": "flowProtocol4",
+          "qciOption": "qciOption0"
+        }
+      ]
+    },
+    {
+      "deviceId": {
+        "id": "id0",
+        "kind": "kind8"
+      },
+      "deviceIPv6Addr": "deviceIPv6Addr4",
+      "flowInfo": [
+        {
+          "flowServer": "flowServer4",
+          "flowDevice": "flowDevice2",
+          "flowDirection": "flowDirection6",
+          "flowProtocol": "flowProtocol4",
+          "qciOption": "qciOption0"
         }
       ]
     }
