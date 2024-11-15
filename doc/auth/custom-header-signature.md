@@ -3,17 +3,17 @@
 
 
 
-Documentation for accessing and setting credentials for vz-m2m-session_token.
+Documentation for accessing and setting credentials for VZ-M2M-Token.
 
 ## Auth Credentials
 
 | Name | Type | Description | Getter |
 |  --- | --- | --- | --- |
-| VZ-M2M-Token | `str` | The VZ-M2M session token from [Getting Started](/content/thingspace-portal/documentation/apis/connectivity-management/get-started.html) | `vz_m_2_m_token` |
+| VZ-M2M-Token | `str` | M2M Session Token ([How to generate an M2M session token?]($e/Session%20Management/StartConnectivityManagementSession)) | `vz_m2m_token` |
 
 
 
-**Note:** Auth credentials can be set using `VzM2mSessionTokenCredentials` object, passed in as named parameter `vz_m_2_m_session_token_credentials` in the client initialization.
+**Note:** Auth credentials can be set using `VZM2mTokenCredentials` object, passed in as named parameter `vz_m2m_token_credentials` in the client initialization.
 
 ## Usage Example
 
@@ -22,9 +22,9 @@ Documentation for accessing and setting credentials for vz-m2m-session_token.
 You must provide credentials in the client as shown in the following code snippet.
 
 ```python
-client = VerizonthingspacequalityofserviceapiendpointsClient(
-    vz_m_2_m_session_token_credentials=VzM2mSessionTokenCredentials(
-        vz_m_2_m_token='VZ-M2M-Token'
+client = VerizonClient(
+    vz_m2m_token_credentials=VZM2mTokenCredentials(
+        vz_m2m_token='VZ-M2M-Token'
     )
 )
 ```

@@ -1,7 +1,7 @@
 
 # Consent Transaction ID
 
-The transaction ID of the request, from the POST /devicelocations synchronous response.
+The transaction ID of the request that you want to cancel, from the POST /devicelocations synchronus response.
 
 ## Structure
 
